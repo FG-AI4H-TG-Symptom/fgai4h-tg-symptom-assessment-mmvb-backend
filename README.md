@@ -16,6 +16,14 @@ python run_all.py
 ```
 and then go to http://127.0.0.1:5005/
 
+You also can access individual end-points:
+* Case generator: http://127.0.0.1:5001/case-generator/v1/ui/
+* Toy AI implementations: http://127.0.0.1:5002/toy-ai/v1/ui/
+* Evaluator of AI results against cases: http://127.0.0.1:5003/evaluator/v1/ui/
+* Metric calculators: http://127.0.0.1:5004/metric-calculator/v1/ui/
+
+API specification can be found in `/swagger/` folder.
+
 
 # Copyright and Licence
 
