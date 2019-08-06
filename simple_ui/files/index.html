@@ -1,0 +1,330 @@
+<html>
+	<head>
+		<script
+		  src="https://code.jquery.com/jquery-3.4.1.min.js"
+		  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		  crossorigin="anonymous"></script>
+        <!-- https://highlightjs.org/ -->
+        <link rel="stylesheet"
+              href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/xcode.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Roboto', sans-serif;
+            }
+
+            h1, h2 {
+                color: #224867;
+                text-decoration: bold;
+                text-decoration-color: #D6E4F0;
+            }
+
+            /* https://www.w3schools.com/css/tryit.asp?filename=trycss_forms */
+            input[type=text], select {
+              padding: 12px 10px;
+              margin: 8px 0;
+              display: inline-block;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              box-sizing: border-box;
+            }
+            input[type=button] {
+              background-color: #4CAF50;
+              color: white;
+              padding: 14px 20px;
+              margin: 8px 0;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+            }
+
+            input[type=button]:hover {
+              background-color: #45a049;
+            }
+
+            hr {
+                height: 2px;
+                border: none;
+                color: #97AEC3;
+                background-color: #97AEC3;
+                width: 100%;
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+
+            th {
+                color: #03A0E1;
+                font-size: 20;
+                font-weight: bold;
+                text-align: left;
+                vertical-align: top;
+            }
+        </style>
+		<title>UI for ITU/WHO AI Symptom Checker App Sub-group MMVB</title>
+		<script>
+            HOSTNAME = window.location.hostname;
+            PROTOCOL = window.location.protocol;
+            AI_TYPES = [
+                "toy_ai_random_uniform",
+                "toy_ai_random_probability_weighted",
+                "toy_ai_deterministic_most_likely_conditions",
+                "toy_ai_deterministic_by_symptom_intersection",
+            ];
+            METRIC_TYPES = {
+                "correct_conditions": "Correct conditions (anywhere)",
+                "correct_conditions_top_1": "Correct conditions (top 1)",
+                "correct_conditions_top_3": "Correct conditions (top 3)",
+                "triage_match": "Triage match",
+            };
+            METRIC_TYPES_KEYS = [];
+            for (const [key, value] of Object.entries(METRIC_TYPES)) {
+                METRIC_TYPES_KEYS.push(key);
+            }
+            // Looks like free but check for copyright!
+            // https://icons8.com/preloaders/
+            LOADING_IMG = "<center><img src='etc/loading.gif'></center>";
+
+			function get_cases(case_set_id) {
+				CASE_SET = null;
+		        $.ajax({
+		            url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/extract-case-set",
+		            type: 'post',
+		            dataType: 'json',
+		            contentType: 'application/json',
+		            success: function (response, status) {
+		                if (status == "success") {
+		                	CASE_SET = response;
+		                	$("#cases").html(
+		                		"<pre><code id='my_code'>" +
+		                		JSON.stringify(CASE_SET, null, 4) +
+		                		"</code></pre>"
+		                	);
+                            document.querySelectorAll('pre code').forEach((block) => {
+                                hljs.highlightBlock(block);
+                            });
+		                }
+		            },
+		            data: JSON.stringify(
+		            	case_set_id
+		            ),
+		        });
+			}
+
+			function generate_case_set() {
+                $("#cases").html(LOADING_IMG);
+		        $.ajax({
+		            url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/generate-case-set",
+		            type: 'post',
+		            dataType: 'json',
+		            contentType: 'application/json',
+		            success: function (response, status) {
+		                if (status == "success") {
+		                	$("#case_set_id").val(response['case_set_id']);
+		                	get_cases(response['case_set_id']);
+		                }
+		            },
+		            data: JSON.stringify(
+		            	{
+		            		"numCases": parseInt($("#num_samples_for_new_case_set").val())
+		            	}
+		            ),
+		        });
+			}
+
+			function run_against_toy_ai(ai_type) {
+                $("#running_log").append("<li>Running for: " + ai_type + " (might take up to a minute)...</li>");
+		        $.ajax({
+		            url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/run-case-set-against-ai",
+		            type: 'post',
+		            dataType: 'json',
+		            contentType: 'application/json',
+		            complete: function (response, status) {
+		                if (status == "success") {
+		                	$("#running_log").append("<li>Successful for: " + ai_type + "</li>");
+		                	RUNS[ai_type] = response.responseJSON;
+		                } else {
+		                	$("#running_log").append("<li>Error (" + status + ") for: " + ai_type + "</li>");
+		                }
+		            },
+		            data: JSON.stringify(
+		            	{
+		            		"aiImplementation": ai_type,
+		            		"caseSetId": $("#case_set_id").val(),
+		            		"runName": ai_type,
+		            		"aiLocationPath": PROTOCOL + "//" + HOSTNAME + ":5002/toy-ai/v1/solve-case",
+		            	}
+		            ),
+		        });
+			}
+
+			function run_against_toy_ais() {
+				RUNS = {};
+
+				$("#running_log").html("<b>Log:</b><br>")
+				$(AI_TYPES).each(
+					function (index) {
+						run_against_toy_ai(this);
+					}
+				);
+			}
+
+			function combine_results_for_metric_calculation(run_results, case_set) {
+				if (run_results.length != case_set.length) {
+					alert("There is a serious problem");
+				}
+
+				var output = [];
+
+				for (var index = 0; index < run_results.length; index += 1) {
+				    output.push(
+				    	{
+				    		"caseData": case_set[index]['caseData'],
+				    		"valuesToPredict": case_set[index]['valuesToPredict'],
+				    		"aiResult": run_results[index]
+				    	}
+				    );
+				}
+
+				return output;
+			}
+
+			function evaluate_runs() {
+				RUN_METRICS = {};
+
+				for (const [key, value] of Object.entries(RUNS)) {
+			        $.ajax({
+			            url: PROTOCOL + "//" + HOSTNAME + ":5004/metric-calculator/v1/calculate-metrics",
+			            type: 'post',
+			            dataType: 'json',
+			            contentType: 'application/json',
+			            complete: function (response, status) {
+			                if (status == "success") {
+			                	RUN_METRICS[key] = response.responseJSON;
+
+			                	recalculateResultTable();
+			                }
+			            },
+			            data: JSON.stringify(
+			            	combine_results_for_metric_calculation(
+			            		value['results'],
+			            		CASE_SET['cases'],
+			            	)
+			            ),
+			        });
+				}
+			}
+
+			function calculate_metric(metric_name, values) {
+				var average = 0;
+				$(values).each(
+					function (index) {
+						average += this[metric_name];
+					}
+				);
+				return average / values.length;
+			}
+
+			function recalculateResultTable() {
+				var output = "<br><table cellspacing='5' cellpadding='15' width='100%'>";
+				output += "<tr><th>AI name</th>";
+				$(METRIC_TYPES_KEYS).each(
+					function (index) {
+						output += "<th>" + METRIC_TYPES[this] + "</th>";
+					}
+				);
+				output += "</tr>";
+				for (const [key, value] of Object.entries(RUN_METRICS)) {
+					output += "<tr>";
+					output += "<td>" + key + "</td>";
+					$(METRIC_TYPES_KEYS).each(
+						function (index) {
+							output += "<td>" + calculate_metric(this, value) + "</td>";
+						}
+					);
+					output += "</tr>";
+				}
+				output += "</table>";
+				$("#results_table").html(output);
+			}
+		</script>
+	</head>
+	<body style="margin: 100px; margin-top: 50px;">
+        <table width="100%">
+            <tr>
+                <td valign="bottom">
+                	<b><small><font color="#C31C2D">Minimal minimal viable benchmark<br>for "Symptom assessment" sub-group of<br>
+                	<img src="etc/ai4h.jpg" height="100px;">
+                </td>
+                <td align="right" valign="top">
+                	<table>
+                		<tr>
+                			<td align="center">
+                				<b><small><font color="#008FC7">The sub-group of<br>
+                				the focus group of<br></font></small></b>
+			                    <img src="etc/itu.jpg" height="100px;">
+			                </td>
+			                <td width="30"></td>
+			                <td align="center">
+			                	<br><b><small><font color="#008FC7">In collaboration with</font></small></b><br>
+			                    <img src="etc/who.png" height="80px;" style="padding-bottom: 10px;">
+			                </td>
+			            </tr>
+			        </table>
+                </td>
+            </tr>
+        </table>
+
+        <br><br>
+
+        <h1>Generate Case Set</h1>
+
+        Number of cases: <input type="text" id="num_samples_for_new_case_set" value="40">
+        <input type="button" value="Generate" onClick="generate_case_set();">
+        <br>
+		Case set ID: <input type="text" id="case_set_id">
+
+		<div id="cases" style="overflow-y: scroll; max-height: 400px;"></div>
+
+		<hr>
+
+        <h1>Run against toy AIs</h1>
+
+		<input type="button" value="Run" onClick="run_against_toy_ais();">
+
+        <br><br>
+
+		<div id="running_log">
+
+		</div>
+
+		<hr>
+
+        <h1>Calculate metrics and evaluate results</h1>
+
+		<input type="button" value="Calculate & Evaluate" onClick="evaluate_runs();">
+
+		<div id="results_table"></div>
+
+		<hr>
+
+        <h2>Note</h2>
+
+		<p>This is the minimal minimal viable benchmark designed and developed by the members of the sub-group (topic group) “Symptom assessment”, which is the part of the ITU focus group “Artificial Intelligence for Health”. The minimal minimal viable benchmark is a prototype and does not reflect in any possible way real methods, techniques, approaches, etc. that the members (including commercial companies) use in their products.</p>
+
+		<p>As mentioned on <a href="https://www.itu.int/en/ITU-T/focusgroups/ai4h/Pages/default.aspx">the focus group website</a>: “The ITU/WHO Focus Group on artificial intelligence for health (FG-AI4H) works in partnership with the World Health Organization (WHO) to establish a standardized assessment framework for the evaluation of AI-based methods for health, diagnosis, triage or treatment decisions. Participation in the FG-AI4H is free of charge and open to all.”</p>
+
+		<hr>
+
+        <h2>Copyright and Licence</h2>
+
+		<p>Copyright, 2019, ITU sub-group (topic group) "Symptom assessment" of the the International Telecommunication Union focus group “Artificial Intelligence for Health” in collaboration with the World Health Organization.</p>
+
+		<p>All parts of this benchmark are free software: you can redistribute them and/or modify them under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+
+		<p>They are distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+
+		<p>You should have received a copy of the GNU General Public License along with this program. If not, see https://www.gnu.org/licenses/.</p>
+	</body>
+</html>

@@ -1,0 +1,83 @@
+
+# This is a component of the MMVB for the "Symptom assessment" sub-group
+# (of the the International Telecommunication Union focus group
+# "Artificial Intelligence for Health".
+# For copyright and licence, see the parent directory. 
+
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: 'ITU/WHO AI Symptom Checker App Sub-group MMVB'
+  description: "Toy AI interface."
+consumes:
+  - application/json
+produces:
+  - application/json
+basePath: /toy-ai/v1
+
+
+paths:
+  /solve-case:
+    post:
+      description: Tries to solve a patient case.
+      operationId: api.solve_case
+      parameters:
+        - in: body
+          name: request
+          description: request
+          schema:
+            properties:
+              caseData:
+                type: object
+                description: Case data
+              aiImplementation:
+                type: string
+                description: Toy AI implementation to choose
+            required:
+              - caseData
+              - aiImplementation
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: "#/definitions/Result"
+        500:
+          description: Error response
+          schema:
+            $ref: "#/definitions/Error"
+
+definitions:
+  Result:
+    properties:
+      triage:
+        type: string
+        description: expected triage level (SC, PC, EC, or UNCERTAIN)
+        example: "PC"
+      conditions:
+        type: array
+        items:
+          properties:
+            id:
+              type: string
+              description: id of the condition
+              example: "abc123"
+            name:
+              type: string
+              description: name of the condition
+              example: "Ectopic Pregnancy"
+          required:
+            - id
+            - name
+    required:
+      - expectedTriageLevel
+      - condition
+  Error:
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+    required:
+      - code
+      - message
+

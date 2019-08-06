@@ -1,0 +1,7 @@
+.git
+*.pyc
+.ipynb_checkpoints/
+*config.ini
+.DS_store
+._DS_store
+._.DS_Store

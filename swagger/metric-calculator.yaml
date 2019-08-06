@@ -1,0 +1,80 @@
+
+# This is a component of the MMVB for the "Symptom assessment" sub-group
+# (of the the International Telecommunication Union focus group
+# "Artificial Intelligence for Health".
+# For copyright and licence, see the parent directory. 
+
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: 'ITU/WHO AI Symptom Checker App Sub-group MMVB'
+  description: "Metric calculator interface."
+consumes:
+  - application/json
+produces:
+  - application/json
+basePath: /metric-calculator/v1
+
+
+paths:
+  /calculate-metrics:
+    post:
+      description: Calculate metrics.
+      operationId: api.calculate_metrics
+      parameters:
+        - in: body
+          name: request
+          description: request
+          schema:
+            type: array
+            description: multiple cases info and results
+            items:
+              properties:
+                caseData:
+                  type: object
+                  description: Case data
+                valuesToPredict:
+                  type: object
+                  description: ground gruth or other data to test against
+                aiResult:
+                  type: object
+                  description: result from an AI
+              required:
+                - caseData
+                - valuesToPredict
+                - aiResult
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: array
+            description: metrics per each case
+            items:
+              type: array
+              description: calculated metrics for this case
+              items:
+                properties:
+                  metricName:
+                    type: string
+                    description: metric name
+                  metricValue:
+                    type: number
+                    description: computed metric value
+                required:
+                  - metricName
+                  - metricValue
+        500:
+          description: Error response
+          schema:
+            $ref: "#/definitions/Error"
+
+definitions:
+  Error:
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+    required:
+      - code
+      - message

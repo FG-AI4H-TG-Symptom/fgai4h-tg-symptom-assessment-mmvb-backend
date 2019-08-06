@@ -1,0 +1,149 @@
+
+# This is a component of the MMVB for the "Symptom assessment" sub-group
+# (of the the International Telecommunication Union focus group
+# "Artificial Intelligence for Health".
+# For copyright and licence, see the parent directory. 
+
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: 'ITU/WHO AI Symptom Checker App Sub-group MMVB'
+  description: "Evaluator interface."
+consumes:
+  - application/json
+produces:
+  - application/json
+basePath: /evaluator/v1
+
+
+paths:
+  /generate-case-set:
+    post:
+      description: Generates a set of synthetic cases.
+      operationId: api.generate_case_set
+      parameters:
+        - in: body
+          name: request
+          required: true
+          schema:
+            properties:
+              numCases:
+                type: number
+                description: number of cases to generate for this set
+                example: 10
+            required:
+              - numCases
+      responses:
+        200:
+          description: Successful response
+          schema:
+            properties:
+              case_set_id:
+                type: string
+                description: an ID of a new set of cases generated
+                example: "123"
+        500:
+          description: Error response
+          schema:
+            $ref: "#/definitions/Error"
+  /list-case-sets:
+    get:
+      description: List all sets of existing generated case sets.
+      operationId: api.list_case_sets
+      responses:
+        200:
+          description: Successful response
+          schema:
+            properties:
+              existing_case_sets:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: string
+                      description: id of a case set
+                      example: "123"
+                  required:
+                    - id
+        500:
+          description: Error response
+          schema:
+            $ref: "#/definitions/Error"
+  /extract-case-set:
+    post:
+      description: Returns a case set.
+      operationId: api.extract_case_set
+      parameters:
+        - in: body
+          name: caseSetId
+          required: true
+          description: a case set id
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+          schema:
+            properties:
+              cases:
+                type: array
+                items:
+                  type: object
+        500:
+          description: Error response
+          schema:
+            $ref: "#/definitions/Error"
+  /run-case-set-against-ai:
+    post:
+      description: Runs a case set against AI.
+      operationId: api.run_case_set_against_ai
+      parameters:
+        - in: body
+          name: request
+          description: request
+          schema:
+            properties:
+              caseSetId:
+                type: string
+                description: a case set id
+              aiLocationPath:
+                type: string
+                description: path to the AI implementation
+              aiImplementation:
+                type: string
+                description: an AI implementation type to choose, if multiple
+              runName:
+                type: string
+                description: a name for this run
+            required:
+              - caseSetId
+              - aiLocationPath
+              - aiImplementation
+      responses:
+        200:
+          description: Successful response
+          schema:
+            properties:
+              runId:
+                type: string
+                description: id of the run
+              results:
+                type: array
+            required:
+              - runId
+              - results
+        500:
+          description: Error response
+          schema:
+            $ref: "#/definitions/Error"
+
+definitions:
+  Error:
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+    required:
+      - code
+      - message
