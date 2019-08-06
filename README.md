@@ -12,9 +12,9 @@ As mentioned on [the focus group website](https://www.itu.int/en/ITU-T/focusgrou
 ```python
 mkvirtualenv your-name-for-a-python-virtual-environment
 pip install -r requirements.txt
-python run_all.py
+python3 run_all.py
 ```
-and then go to http://127.0.0.1:5005/
+and then go to http://127.0.0.1:5005/ for the main web interface.
 
 You also can access individual end-points:
 * Case generator: http://127.0.0.1:5001/case-generator/v1/ui/
