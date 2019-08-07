@@ -25,6 +25,19 @@ You also can access individual end-points:
 API specification can be found in `/swagger/` folder.
 
 
+# Tests
+
+There are several tests included to verify the functionality of the
+different components of the MMVB. To set up your environment for testing,
+activate your virtual environment and run:
+```
+pip install -r tests/requirements.txt
+```
+To run the tests, run:
+```
+pytest
+```
+
 # Copyright and Licence
 
 Copyright, 2019, ITU sub-group (topic group) "Symptom assessment" of the the International Telecommunication Union focus group “Artificial Intelligence for Health” in collaboration with the World Health Organization.
