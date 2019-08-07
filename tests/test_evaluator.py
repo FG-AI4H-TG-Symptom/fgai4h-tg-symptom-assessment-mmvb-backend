@@ -6,9 +6,9 @@ import time
 from multiprocessing import Process
 
 import numpy as np
+from deepdiff import DeepDiff
 
 from config import CONFIG_DEFAULT_HOST
-from deepdiff import DeepDiff
 from evaluator import api
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

@@ -1,4 +1,5 @@
 from deepdiff import DeepDiff
+
 from metric_calculator import api
 
 TEST_CASES = [

@@ -1,9 +1,9 @@
 import random
 
 import numpy as np
+from deepdiff import DeepDiff
 
 from case_generator import api
-from deepdiff import DeepDiff
 
 
 def test_generate_case():
