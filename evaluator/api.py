@@ -1,15 +1,15 @@
-
 # This is a component of the MMVB for the "Symptom assessment" sub-group
 # (of the the International Telecommunication Union focus group
 # "Artificial Intelligence for Health".
-# For copyright and licence, see the parent directory. 
+# For copyright and licence, see the parent directory.
 
-import json
-import requests
-import time
-import os
 import glob
 import hashlib
+import json
+import os
+import time
+
+import requests
 
 SERVER_HOST_FOR_CASE_GENERATION = "http://0.0.0.0:5001"
 
@@ -39,14 +39,16 @@ def md5(value):
 
 
 def generate_case_set(request):
-    num_cases = int(request['numCases'])
+    num_cases = int(request["numCases"])
     # TODO: Gracefully fail for >1000 cases
     assert num_cases > 0 and num_cases <= 1000
 
     cases = []
 
     for case_id in range(num_cases):
-        request = requests.get(SERVER_HOST_FOR_CASE_GENERATION + "/case-generator/v1/generate-case")
+        request = requests.get(
+            SERVER_HOST_FOR_CASE_GENERATION + "/case-generator/v1/generate-case"
+        )
         assert request.status_code == 200
         cases.append(request.json())
 
@@ -55,15 +57,9 @@ def generate_case_set(request):
 
     create_dirs(path)
 
-    json.dump(
-        cases,
-        open(os.path.join(path, "cases.json"), "w"),
-        indent=2,
-    )
+    json.dump(cases, open(os.path.join(path, "cases.json"), "w"), indent=2)
 
-    return {
-        "case_set_id": case_set_id,
-    }
+    return {"case_set_id": case_set_id}
 
 
 def list_case_sets():
@@ -71,9 +67,7 @@ def list_case_sets():
 
     return {
         "existing_case_sets": [
-            element.replace(path, "")
-            for element in
-            glob.glob(path + "*")
+            element.replace(path, "") for element in glob.glob(path + "*")
         ]
     }
 
@@ -82,25 +76,23 @@ def extract_case_set(caseSetId):
     case_set_id = parse_validate_caseSetId(caseSetId)
 
     return {
-        "cases": json.load(open(
-            os.path.join(FILE_DIR, "data", case_set_id, "cases.json")
-        ))
+        "cases": json.load(
+            open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json"))
+        )
     }
 
 
 def run_case_set_against_ai(request):
-    case_set_id = parse_validate_caseSetId(request['caseSetId'])
-    ai_location_path = request['aiLocationPath']
-    ai_implementation = request['aiImplementation']
-    run_name = request['runName']
+    case_set_id = parse_validate_caseSetId(request["caseSetId"])
+    ai_location_path = request["aiLocationPath"]
+    ai_implementation = request["aiImplementation"]
+    run_name = request["runName"]
 
     run_hash = get_unique_id()
 
     path = os.path.join(FILE_DIR, "data", case_set_id, run_hash)
 
-    cases = json.load(open(
-        os.path.join(FILE_DIR, "data", case_set_id, "cases.json")
-    ))
+    cases = json.load(open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json")))
 
     results = []
 
@@ -110,7 +102,7 @@ def run_case_set_against_ai(request):
                 ai_location_path,
                 json={
                     "aiImplementation": ai_implementation,
-                    "caseData": case['caseData'],
+                    "caseData": case["caseData"],
                 },
                 timeout=TIMEOUT,
             )
@@ -134,14 +126,6 @@ def run_case_set_against_ai(request):
         indent=2,
     )
 
-    json.dump(
-        results,
-        open(os.path.join(path, "results.json"), "w"),
-        indent=2,
-    )
+    json.dump(results, open(os.path.join(path, "results.json"), "w"), indent=2)
 
-    return {
-        "runId": run_hash,
-        "results": results,
-    }
-
+    return {"runId": run_hash, "results": results}

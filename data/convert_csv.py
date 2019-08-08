@@ -1,4 +1,3 @@
-
 # This is a component of the MMVB for the "Symptom assessment" sub-group
 # (of the the International Telecommunication Union focus group
 # "Artificial Intelligence for Health".
@@ -11,27 +10,24 @@ into a JSON file.
 """
 
 import csv
-import json
 import hashlib
+import json
 
-GENDERS = ('male', 'female')
+GENDERS = ("male", "female")
 
-LIKELIHOOD_MAP = {
-    'x': 0.3,
-    'xx': 0.6,
-    'xxx': 0.9
-}
+LIKELIHOOD_MAP = {"x": 0.3, "xx": 0.6, "xxx": 0.9}
 
 
 def extract_condition_probability(value):
 
     if value == "x, only females":
-        return {"male": 0.0, "female": LIKELIHOOD_MAP['x']}
+        return {"male": 0.0, "female": LIKELIHOOD_MAP["x"]}
     elif value in LIKELIHOOD_MAP.keys():
         return {gender: LIKELIHOOD_MAP[value] for gender in GENDERS}
     else:
-        raise ValueError('Data loader: Condition likeliness cannot be handled: '
-                         f'{value}')
+        raise ValueError(
+            "Data loader: Condition likeliness cannot be handled: " f"{value}"
+        )
 
 
 def map_likelihood(value):
@@ -40,8 +36,9 @@ def map_likelihood(value):
     elif value in LIKELIHOOD_MAP.keys():
         return LIKELIHOOD_MAP[value]
     else:
-        raise ValueError('Data loader: Condition likeliness cannot be handled: '
-                         f'{value}')
+        raise ValueError(
+            "Data loader: Condition likeliness cannot be handled: " f"{value}"
+        )
 
 
 def map_expected_triage_level(value):
@@ -50,8 +47,9 @@ def map_expected_triage_level(value):
     elif value == "SC/PC":
         return "SC"
     else:
-        raise ValueError('Data loader: Expected triage level cannot be '
-                         f'handled: {value}')
+        raise ValueError(
+            "Data loader: Expected triage level cannot be " f"handled: {value}"
+        )
 
 
 def md5(value):
@@ -66,8 +64,8 @@ condition_to_expected_triage_level = {}
 condition_symptom_probability = []
 
 
-with open('symptom condition mapping - Matrix official.csv', newline='') as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=',', quotechar='"')
+with open("symptom condition mapping - Matrix official.csv", newline="") as csvfile:
+    csvreader = csv.reader(csvfile, delimiter=",", quotechar='"')
     for row_id, row in enumerate(csvreader):
         if row_id == 0:
             for column_id, column_value in enumerate(row):
@@ -79,17 +77,17 @@ with open('symptom condition mapping - Matrix official.csv', newline='') as csvf
             for column_id, column_value in enumerate(row):
                 if column_id > 1:
                     condition_name = column_id_to_condition_map[column_id]
-                    condition_probability[condition_name] = extract_condition_probability(
-                        column_value
-                    )
+                    condition_probability[
+                        condition_name
+                    ] = extract_condition_probability(column_value)
         elif row_id > 2:
             if row[0] == "Expected triage level":
                 for column_id, column_value in enumerate(row):
                     if column_id > 1:
                         condition_name = column_id_to_condition_map[column_id]
-                        condition_to_expected_triage_level[condition_name] = (
-                            map_expected_triage_level(column_value)
-                        )
+                        condition_to_expected_triage_level[
+                            condition_name
+                        ] = map_expected_triage_level(column_value)
             else:
                 symptom_name = row[0]
                 assert symptom_name not in symptoms
@@ -109,13 +107,7 @@ with open('symptom condition mapping - Matrix official.csv', newline='') as csvf
                                 ]
                             )
 
-data_symptoms = [
-    {
-        "id": md5(symptom),
-        "name": symptom,
-    }
-    for symptom in symptoms
-]
+data_symptoms = [{"id": md5(symptom), "name": symptom} for symptom in symptoms]
 
 data_conditions = [
     {
@@ -133,10 +125,4 @@ data = {
     "condition_symptom_probability": condition_symptom_probability,
 }
 
-json.dump(
-    data,
-    open("data.json", "w"),
-    indent=2,
-    sort_keys=True,
-)
-
+json.dump(data, open("data.json", "w"), indent=2, sort_keys=True)

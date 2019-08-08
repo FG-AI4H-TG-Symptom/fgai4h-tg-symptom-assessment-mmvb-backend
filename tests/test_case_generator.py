@@ -1,6 +1,7 @@
-from deepdiff import DeepDiff
-import numpy as np
 import random
+
+import numpy as np
+from deepdiff import DeepDiff
 
 from case_generator import api
 
@@ -13,29 +14,21 @@ def test_generate_case():
     comp = {
         "caseData": {
             "caseId": "case_mmvb_0_0_1_a_85822412",
-            "metaData": {
-                "description": "a synthetic case for the MMVB"
-            },
-            "profileInformation": {
-                "biologicalSex": "male",
-                "age": 23
-            },
+            "metaData": {"description": "a synthetic case for the MMVB"},
+            "profileInformation": {"biologicalSex": "male", "age": 23},
             "presentingComplaints": [
                 {
                     "id": "94b2b09c9194b316738dfc56b526e124",
                     "name": "heartburn",
-                    "state": "present"
+                    "state": "present",
                 }
             ],
-            "otherComplaints": []
+            "otherComplaints": [],
         },
         "valuesToPredict": {
             "expectedTriageLevel": "PC",
-            "condition": {
-                "id": "ed9e333b5cf04cb91068bbcde643076e",
-                "name": "GERD"
-            }
-        }
+            "condition": {"id": "ed9e333b5cf04cb91068bbcde643076e", "name": "GERD"},
+        },
     }
 
     assert DeepDiff(res, comp) == {}
