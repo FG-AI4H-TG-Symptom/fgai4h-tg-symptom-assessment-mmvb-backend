@@ -40,7 +40,7 @@ pytest
 
 # Copyright and Licence
 
-Copyright, 2019, ITU sub-group (topic group) "Symptom assessment" of the the International Telecommunication Union focus group “Artificial Intelligence for Health” in collaboration with the World Health Organization.
+Copyright, 2019, created jointly by the members of the ITU sub-group (topic group) "Symptom assessment" of the International Telecommunication Union focus group “Artificial Intelligence for Health”, which works in partnership with the World Health Organisation.
 
 All parts of this benchmark are free software: you can redistribute them and/or modify them under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
