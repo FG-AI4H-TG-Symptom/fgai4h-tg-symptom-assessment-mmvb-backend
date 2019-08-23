@@ -106,9 +106,6 @@ paths:
               caseSetId:
                 type: string
                 description: a case set id
-              aiLocationPath:
-                type: string
-                description: path to the AI implementation
               aiImplementation:
                 type: string
                 description: an AI implementation type to choose, if multiple
@@ -117,7 +114,6 @@ paths:
                 description: a name for this run
             required:
               - caseSetId
-              - aiLocationPath
               - aiImplementation
       responses:
         200:
