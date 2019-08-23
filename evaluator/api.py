@@ -17,6 +17,15 @@ TIMEOUT = 0.5  # in seconds
 
 FILE_DIR = os.path.dirname((os.path.abspath(__file__)))
 
+AI_LOCATION_ALPHA = "http://127.0.0.1:5002/toy-ai/v1/solve-case"
+
+AI_TYPES_TO_LOCATIONS = {
+    "toy_ai_random_uniform": AI_LOCATION_ALPHA,
+    "toy_ai_random_probability_weighted": AI_LOCATION_ALPHA,
+    "toy_ai_deterministic_most_likely_conditions": AI_LOCATION_ALPHA,
+    "toy_ai_deterministic_by_symptom_intersection": AI_LOCATION_ALPHA,
+}
+
 
 def create_dirs(directory):
     if not os.path.exists(directory):
@@ -84,9 +93,11 @@ def extract_case_set(caseSetId):
 
 def run_case_set_against_ai(request):
     case_set_id = parse_validate_caseSetId(request["caseSetId"])
-    ai_location_path = request["aiLocationPath"]
     ai_implementation = request["aiImplementation"]
     run_name = request["runName"]
+
+    assert ai_implementation in AI_TYPES_TO_LOCATIONS
+    ai_location_path = AI_TYPES_TO_LOCATIONS[ai_implementation]
 
     run_hash = get_unique_id()
 
