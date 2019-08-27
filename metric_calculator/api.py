@@ -4,6 +4,23 @@
 # For copyright and licence, see the parent directory.
 
 
+SUPPORTED_METRICS = {
+    "correct_conditions": "Correct conditions (anywhere)",
+    "correct_conditions_top_1": "Correct conditions (top 1)",
+    "correct_conditions_top_3": "Correct conditions (top 3)",
+    "triage_match": "Triage match",
+}
+
+
+def list_all_metrics():
+    return {
+        "metrics": [
+            {"name": key, "human_name": value}
+            for key, value in SUPPORTED_METRICS.items()
+        ]
+    }
+
+
 def calculate_recall(ai_result_conditions, correct_condition, top_n=None):
     return float(
         correct_condition["id"]

@@ -25,6 +25,15 @@ You also can access individual end-points:
 API specification can be found in `/swagger/` folder.
 
 
+# Adding your own AI implementation
+
+To add your own AI implementation to the MMVB, you need to:
+1. Decide what port to use (e.g. from 5006 inclusive).
+2. Either have it in a separate repo or add it to this repo via a pull request.
+3. If you are adding it to this repo, you can make it starting automatically by modifying `/run_all.py`.
+4. Add your implementation into the dictionary `AI_TYPES_TO_LOCATIONS` in `/evaluator/api.py`, where the key is a name of your choice and the value is the URL to your implementation's `solve-case` method.
+
+
 # Tests
 
 There are several tests included to verify the functionality of the

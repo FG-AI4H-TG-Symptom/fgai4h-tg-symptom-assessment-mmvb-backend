@@ -91,6 +91,15 @@ def extract_case_set(caseSetId):
     }
 
 
+def list_all_ai_implementations():
+    return {
+        "ai_implementations": [
+            {"name": ai_implementation_name}
+            for ai_implementation_name in AI_TYPES_TO_LOCATIONS.keys()
+        ]
+    }
+
+
 def run_case_set_against_ai(request):
     case_set_id = parse_validate_caseSetId(request["caseSetId"])
     ai_implementation = request["aiImplementation"]

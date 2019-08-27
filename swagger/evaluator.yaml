@@ -93,6 +93,29 @@ paths:
           description: Error response
           schema:
             $ref: "#/definitions/Error"
+  /list-all-ai-implementations:
+    get:
+      description: List all AI implementations that can be used.
+      operationId: api.list_all_ai_implementations
+      responses:
+        200:
+          description: Successful response
+          schema:
+            properties:
+              ai_implementations:
+                type: array
+                items:
+                  properties:
+                    name:
+                      type: string
+                      description: a name of an AI implementation
+                      example: "toy_ai_simple"
+                  required:
+                    - name
+        500:
+          description: Error response
+          schema:
+            $ref: "#/definitions/Error"
   /run-case-set-against-ai:
     post:
       description: Runs a case set against AI.
