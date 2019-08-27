@@ -61,7 +61,7 @@ definitions:
             type: array
             items:
               $ref: "#/definitions/ComplaintPiece"
-          otherComplaints:
+          otherFeatures:
             type: array
             items:
               $ref: "#/definitions/ComplaintPiece"
@@ -70,7 +70,7 @@ definitions:
           - metaData
           - profileInformation
           - presentingComplaints
-          - otherComplaints
+          - otherFeatures
       valuesToPredict:
         description: ground gruth or other data to test against
         properties:

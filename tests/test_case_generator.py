@@ -23,7 +23,7 @@ def test_generate_case():
                     "state": "present",
                 }
             ],
-            "otherComplaints": [],
+            "otherFeatures": [],
         },
         "valuesToPredict": {
             "expectedTriageLevel": "PC",

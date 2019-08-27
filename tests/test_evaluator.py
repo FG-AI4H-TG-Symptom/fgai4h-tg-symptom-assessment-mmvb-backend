@@ -18,7 +18,7 @@ TEST_CASES = [
         "caseData": {
             "caseId": "case_mmvb_0_0_1_a_85822412",
             "metaData": {"description": "a synthetic case for the MMVB"},
-            "otherComplaints": [],
+            "otherFeatures": [],
             "presentingComplaints": [
                 {
                     "id": "94b2b09c9194b316738dfc56b526e124",
@@ -37,7 +37,7 @@ TEST_CASES = [
         "caseData": {
             "caseId": "case_mmvb_0_0_1_a_73197857",
             "metaData": {"description": "a synthetic case for the MMVB"},
-            "otherComplaints": [
+            "otherFeatures": [
                 {
                     "id": "c643bff833aaa9a47e3421a8c8f35445",
                     "name": "Vomiting",

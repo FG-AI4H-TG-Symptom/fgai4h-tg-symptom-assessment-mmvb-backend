@@ -102,7 +102,7 @@ def generate_case():
             "metaData": meta_data,
             "profileInformation": {"biologicalSex": biological_sex, "age": age},
             "presentingComplaints": [presenting_symptom],
-            "otherComplaints": symptoms,
+            "otherFeatures": symptoms,
         },
         "valuesToPredict": {
             "expectedTriageLevel": sampled_condition["expected_triage_level"],
