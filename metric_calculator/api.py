@@ -9,7 +9,10 @@ SUPPORTED_METRICS = {
     "correct_conditions_top_3": "Correct conditions (top 3)",
     "correct_conditions_top_10": "Correct conditions (top 10)",
     "triage_match": "Triage match",
+    "triage_similarity": "Triage similarity",
 }
+
+EXPECTED_TRIAGES = ["SC", "PC", "EC"]
 
 
 def list_all_metrics():
@@ -28,6 +31,17 @@ def calculate_recall(ai_result_conditions, correct_condition, top_n=None):
     )
 
 
+def calculate_triage_similarity(expected_triage, ai_triage):
+    assert expected_triage in EXPECTED_TRIAGES
+    if ai_triage not in EXPECTED_TRIAGES:
+        return 0.0
+
+    expected_triage = EXPECTED_TRIAGES.index(expected_triage)
+    ai_triage = EXPECTED_TRIAGES.index(ai_triage)
+
+    return 1.0 - (abs(expected_triage - ai_triage) / (len(EXPECTED_TRIAGES) - 1.0))
+
+
 def calculate_metrics(request):
     metric_results = []
 
@@ -37,6 +51,7 @@ def calculate_metrics(request):
 
         if ai_result is None:
             triage_match = 0.0
+            triage_similarity = 0.0
             recall_top_1 = 0.0
             recall_top_3 = 0.0
             recall_top_10 = 0.0
@@ -55,12 +70,17 @@ def calculate_metrics(request):
                 values_to_predict["expectedTriageLevel"] == ai_result["triage"]
             )
 
+            triage_similarity = calculate_triage_similarity(
+                values_to_predict["expectedTriageLevel"], ai_result["triage"]
+            )
+
         metric_results.append(
             {
                 "correct_conditions_top_1": recall_top_1,
                 "correct_conditions_top_3": recall_top_3,
                 "correct_conditions_top_10": recall_top_10,
                 "triage_match": triage_match,
+                "triage_similarity": triage_similarity,
             }
         )
 

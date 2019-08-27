@@ -16,6 +16,7 @@ TEST_CASES = [
             "correct_conditions_top_3": 1.0,
             "correct_conditions_top_10": 1.0,
             "triage_match": 0.0,
+            "triage_similarity": 0.5,
         },
     },
     {
@@ -31,6 +32,7 @@ TEST_CASES = [
             "correct_conditions_top_3": 1.0,
             "correct_conditions_top_10": 1.0,
             "triage_match": 1.0,
+            "triage_similarity": 1.0,
         },
     },
     {
@@ -46,6 +48,7 @@ TEST_CASES = [
             "correct_conditions_top_3": 0.0,
             "correct_conditions_top_10": 0.0,
             "triage_match": 0.0,
+            "triage_similarity": 0.5,
         },
     },
 ]
