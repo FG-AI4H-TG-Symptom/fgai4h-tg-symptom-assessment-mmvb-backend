@@ -101,7 +101,7 @@ def solve_case_by_symptom_intersection(case_data):
     ]
     complaints += [
         element["id"]
-        for element in case_data["otherComplaints"]
+        for element in case_data["otherFeatures"]
         if element["state"] == "true"
     ]
     complaints = set(complaints)
