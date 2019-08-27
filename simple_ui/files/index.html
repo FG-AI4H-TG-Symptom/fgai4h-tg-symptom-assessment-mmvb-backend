@@ -66,25 +66,58 @@
         <script>
             HOSTNAME = window.location.hostname;
             PROTOCOL = window.location.protocol;
-            AI_TYPES = [
-                "toy_ai_random_uniform",
-                "toy_ai_random_probability_weighted",
-                "toy_ai_deterministic_most_likely_conditions",
-                "toy_ai_deterministic_by_symptom_intersection",
-            ];
-            METRIC_TYPES = {
-                "correct_conditions": "Correct conditions (anywhere)",
-                "correct_conditions_top_1": "Correct conditions (top 1)",
-                "correct_conditions_top_3": "Correct conditions (top 3)",
-                "triage_match": "Triage match",
-            };
-            METRIC_TYPES_KEYS = [];
-            for (const [key, value] of Object.entries(METRIC_TYPES)) {
-                METRIC_TYPES_KEYS.push(key);
-            }
+            AI_TYPES = [];
+            METRIC_TYPES = {};
+
+            $.ajax({
+                url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/list-all-ai-implementations",
+                type: 'get',
+                success: function (response, status) {
+                    if (status == "success") {
+                        var html_output = "<i>Supported AI implementations:</i>"
+
+                        $(response["ai_implementations"]).each(
+                            function (index) {
+                                AI_TYPES.push(this['name']);
+                                html_output += " " + this['name'] + ";"
+                            }
+                        );
+
+                        $("#supported_ai_implementations").html(html_output);
+                    }
+                },
+            });
+
+            $.ajax({
+                url: PROTOCOL + "//" + HOSTNAME + ":5004/metric-calculator/v1/list-all-metrics",
+                type: 'get',
+                success: function (response, status) {
+                    if (status == "success") {
+                        var html_output = "<i>Supported metrics:</i>"
+
+                        $(response["metrics"]).each(
+                            function (index) {
+                                METRIC_TYPES[this['name']] = this['human_name'];
+                                html_output += " " + this['name'] + ";"
+                            }
+                        );
+                        fill_in_METRIC_TYPES_KEYS();
+
+                        $("#supported_metrics").html(html_output);
+                    }
+                },
+            });
+
             // Looks like free but check for copyright!
             // https://icons8.com/preloaders/
             LOADING_IMG = "<center><img src='etc/loading.gif'></center>";
+
+            function fill_in_METRIC_TYPES_KEYS() {
+                METRIC_TYPES_KEYS = [];
+                for (const [key, value] of Object.entries(METRIC_TYPES)) {
+                    METRIC_TYPES_KEYS.push(key);
+                }
+            }
 
             function get_cases(case_set_id) {
                 CASE_SET = null;
@@ -277,6 +310,20 @@
         </table>
 
         <br><br>
+
+        <h1>Supported AI implementations and metrics</h1>
+
+        <div id="supported_ai_implementations">
+            Loading the list of supported AI implementations... <img src='etc/loading.gif' width="20px" height="20px">
+        </div>
+
+        <br>
+
+        <div id="supported_metrics">
+            Loading the list of supported metrics... <img src='etc/loading.gif' width="20px" height="20px">
+        </div>
+
+        <hr>
 
         <h1>Generate Case Set</h1>
 
