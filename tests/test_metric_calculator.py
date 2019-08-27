@@ -12,9 +12,9 @@ TEST_CASES = [
             },
         },
         "output": {
-            "correct_conditions": 1.0,
             "correct_conditions_top_1": 0.0,
             "correct_conditions_top_3": 1.0,
+            "correct_conditions_top_10": 1.0,
             "triage_match": 0.0,
         },
     },
@@ -27,9 +27,9 @@ TEST_CASES = [
             },
         },
         "output": {
-            "correct_conditions": 1.0,
             "correct_conditions_top_1": 1.0,
             "correct_conditions_top_3": 1.0,
+            "correct_conditions_top_10": 1.0,
             "triage_match": 1.0,
         },
     },
@@ -42,9 +42,9 @@ TEST_CASES = [
             },
         },
         "output": {
-            "correct_conditions": 0.0,
             "correct_conditions_top_1": 0.0,
             "correct_conditions_top_3": 0.0,
+            "correct_conditions_top_10": 0.0,
             "triage_match": 0.0,
         },
     },
