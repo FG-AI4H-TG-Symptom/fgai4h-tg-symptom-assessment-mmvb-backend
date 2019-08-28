@@ -76,10 +76,11 @@
                     if (status == "success") {
                         var html_output = "<i>Supported AI implementations:</i>"
 
-                        $(response["ai_implementations"]).each(
-                            function (index) {
-                                AI_TYPES.push(this['name']);
-                                html_output += " " + this['name'] + ";"
+                        $.each(
+                            response["ai_implementations"],
+                            function (index, value) {
+                                AI_TYPES.push(value['name']);
+                                html_output += " " + value['name'] + ";"
                             }
                         );
 
@@ -95,10 +96,11 @@
                     if (status == "success") {
                         var html_output = "<i>Supported metrics:</i>"
 
-                        $(response["metrics"]).each(
-                            function (index) {
-                                METRIC_TYPES[this['name']] = this['human_name'];
-                                html_output += " " + this['name'] + ";"
+                        $.each(
+                            response["metrics"],
+                            function (index, value) {
+                                METRIC_TYPES[value['name']] = value['human_name'];
+                                html_output += " " + value['name'] + ";"
                             }
                         );
                         fill_in_METRIC_TYPES_KEYS();
@@ -195,9 +197,10 @@
                 RUNS = {};
 
                 $("#running_log").html("<b>Log:</b><br>")
-                $(AI_TYPES).each(
-                    function (index) {
-                        run_against_toy_ai(this);
+                $.each(
+                    AI_TYPES,
+                    function (index, value) {
+                        run_against_toy_ai(value);
                     }
                 );
             }
@@ -235,7 +238,7 @@
                             if (status == "success") {
                                 RUN_METRICS[key] = response.responseJSON;
 
-                                recalculateResultTable();
+                                show_results($("#results_table_buttons__all_cases"), "all_cases");
                             }
                         },
                         data: JSON.stringify(
@@ -248,37 +251,84 @@
                 }
             }
 
-            function calculate_metric(metric_name, values) {
-                var average = 0;
-                $(values).each(
-                    function (index) {
-                        average += this[metric_name];
-                    }
-                );
-                return average / values.length;
+            CASE_GROUP_ID_TO_AGE = {
+                "all_cases": [-1, 1000],
+                "group_a": [-1, 40],
+                "group_b": [41, 60],
+                "group_c": [71, 1000],
             }
 
-            function recalculateResultTable() {
+            function case_age_matches_case_group(case_index, case_group_id) {
+                var case_age = CASE_SET['cases'][case_index]['caseData']['profileInformation']['age'];
+                var case_group_min_age = CASE_GROUP_ID_TO_AGE[case_group_id][0];
+                var case_group_max_age = CASE_GROUP_ID_TO_AGE[case_group_id][1];
+
+                return case_age >= case_group_min_age && case_age <= case_group_max_age;
+            }
+
+            function calculate_metric(metric_name, values, case_group_id) {
+                var average = 0;
+                var group_size = 0;
+                $.each(
+                    values,
+                    function (index, value) {
+                        if (case_age_matches_case_group(index, case_group_id)) {
+                            average += value[metric_name];
+                            group_size++;
+                        }
+                    }
+                );
+                return average / group_size;
+            }
+
+            function calculate_group_size(case_group_id) {
+                var group_size = 0;
+                $.each(
+                    CASE_SET['cases'],
+                    function (index, value) {
+                        if (case_age_matches_case_group(index, case_group_id)) {
+                            group_size++;
+                        }
+                    }
+                );
+                return group_size;
+            }
+
+            function recalculateResultTable(case_group_id) {
                 var output = "<br><table cellspacing='5' cellpadding='15' width='100%'>";
-                output += "<tr><th>AI name</th>";
-                $(METRIC_TYPES_KEYS).each(
-                    function (index) {
-                        output += "<th>" + METRIC_TYPES[this] + "</th>";
+                output += "<tr><th>AI name</th><th>Number of cases run</th>";
+                $.each(
+                    METRIC_TYPES_KEYS,
+                    function (index, value) {
+                        output += "<th>" + METRIC_TYPES[value] + "</th>";
                     }
                 );
                 output += "</tr>";
                 for (const [key, value] of Object.entries(RUN_METRICS)) {
                     output += "<tr>";
                     output += "<td>" + key + "</td>";
-                    $(METRIC_TYPES_KEYS).each(
-                        function (index) {
-                            output += "<td>" + calculate_metric(this, value) + "</td>";
+                    output += "<td>" + calculate_group_size(case_group_id) + "</td>";
+                    $.each(
+                        METRIC_TYPES_KEYS,
+                        function (index, metric_type_key) {
+                            output += "<td>" + calculate_metric(metric_type_key, value, case_group_id).toFixed(3) + "</td>";
                         }
                     );
                     output += "</tr>";
                 }
                 output += "</table>";
                 $("#results_table").html(output);
+            }
+
+            function show_results(button, case_group_id) {
+                $("#results_table_buttons").css("display", "");
+
+                $('.select_case_buttons').css('font-weight', '');
+                $('.select_case_buttons').css('background-color', '#0000aa');
+                $(button).css('font-weight', 'bold');
+                $(button).css('background-color', '#0000dd');
+
+                recalculateResultTable(case_group_id);
             }
         </script>
     </head>
@@ -351,6 +401,18 @@
         <h1>Calculate metrics and evaluate results</h1>
 
         <input type="button" value="Calculate & Evaluate" onClick="evaluate_runs();">
+
+        <br><br>
+
+        <div id="results_table_buttons" style="display: none;">
+            <input id="results_table_buttons__all_cases" type="button" class="select_case_buttons" value="All Cases" onClick="show_results(this, 'all_cases');">
+            &nbsp;
+            <input type="button" class="select_case_buttons" value="Only Group A" onClick="show_results(this, 'group_a');">
+            &nbsp;
+            <input type="button" class="select_case_buttons" value="Only Group B" onClick="show_results(this, 'group_b');">
+            &nbsp;
+            <input type="button" class="select_case_buttons" value="Only Group C" onClick="show_results(this, 'group_c');">
+        </div>
 
         <div id="results_table"></div>
 
