@@ -16,7 +16,7 @@ SYMPTOM_ID_TO_SYMPTOMS = {symptom["id"]: symptom for symptom in DATA["symptoms"]
 
 OBSERVATION_PROBABILITY = 0.8
 UNSURE_PROBABILITY = 0.1
-MIN_AGE, MAX_AGE = 20, 50
+MIN_AGE, MAX_AGE = 18, 80
 
 
 def sample_symptoms(symptom_probabilities):
