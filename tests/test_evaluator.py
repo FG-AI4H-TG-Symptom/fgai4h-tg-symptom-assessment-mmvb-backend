@@ -26,7 +26,7 @@ TEST_CASES = [
                     "state": "present",
                 }
             ],
-            "profileInformation": {"age": 23, "biologicalSex": "male"},
+            "profileInformation": {"age": 25, "biologicalSex": "male"},
         },
         "valuesToPredict": {
             "condition": {"id": "ed9e333b5cf04cb91068bbcde643076e", "name": "GERD"},
@@ -51,7 +51,7 @@ TEST_CASES = [
                     "state": "present",
                 }
             ],
-            "profileInformation": {"age": 22, "biologicalSex": "female"},
+            "profileInformation": {"age": 23, "biologicalSex": "female"},
         },
         "valuesToPredict": {
             "condition": {

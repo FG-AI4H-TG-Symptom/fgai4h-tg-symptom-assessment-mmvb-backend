@@ -15,7 +15,7 @@ def test_generate_case():
         "caseData": {
             "caseId": "case_mmvb_0_0_1_a_85822412",
             "metaData": {"description": "a synthetic case for the MMVB"},
-            "profileInformation": {"biologicalSex": "male", "age": 23},
+            "profileInformation": {"biologicalSex": "male", "age": 25},
             "presentingComplaints": [
                 {
                     "id": "94b2b09c9194b316738dfc56b526e124",
