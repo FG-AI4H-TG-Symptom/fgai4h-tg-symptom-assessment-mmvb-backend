@@ -109,8 +109,8 @@ definitions:
         example: "Abdominal pain"
       state:
         type: string
-        description: state of the concept (can be true, false, dontknow)
-        example: "true"
+        description: state of the concept (can be present, absent, unsure)
+        example: "present"
     required:
       - id
       - name
