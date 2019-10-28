@@ -2,7 +2,7 @@
 # This is a component of the MMVB for the "Symptom assessment" sub-group
 # (of the the International Telecommunication Union focus group
 # "Artificial Intelligence for Health".
-# For copyright and licence, see the parent directory. 
+# For copyright and licence, see the parent directory.
 
 swagger: '2.0'
 info:
@@ -17,6 +17,36 @@ basePath: /evaluator/v1
 
 
 paths:
+  /report-update:
+    get:
+      description: Gets updated data on the benchmark currently running
+      operationId: api.report_update
+      responses:
+        200:
+          description: Successful response
+          schema:
+            properties:
+              report:
+                type: object
+        500:
+          description: Error response
+          schema:
+            $ref: "#/definitions/Error"
+  /benchmark-status:
+    get:
+      description: Gets current status of benchmark manager
+      operationId: api.benchmark_status
+      responses:
+        200:
+          description: Successful response
+          schema:
+            properties:
+              status:
+                type: boolean
+        500:
+          description: Error response
+          schema:
+            $ref: "#/definitions/Error"
   /generate-case-set:
     post:
       description: Generates a set of synthetic cases.
@@ -138,6 +168,42 @@ paths:
             required:
               - caseSetId
               - aiImplementation
+      responses:
+        200:
+          description: Successful response
+          schema:
+            properties:
+              runId:
+                type: string
+                description: id of the run
+              results:
+                type: array
+            required:
+              - runId
+              - results
+        500:
+          description: Error response
+          schema:
+            $ref: "#/definitions/Error"
+  /run-case-set-against-all-ais:
+    post:
+      description: Runs a case set against a given set of AIs.
+      operationId: api.run_case_set_against_ais
+      parameters:
+        - in: body
+          name: request
+          description: request
+          schema:
+            properties:
+              caseSetId:
+                type: string
+                description: a case set id
+              aiImplementations:
+                type: array
+                description: a list of AI implementation names
+            required:
+              - caseSetId
+              - aiImplementations
       responses:
         200:
           description: Successful response

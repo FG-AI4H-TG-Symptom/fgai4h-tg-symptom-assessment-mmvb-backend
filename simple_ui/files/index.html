@@ -58,9 +58,26 @@
                 color: #03A0E1;
                 font-size: 20;
                 font-weight: bold;
-                text-align: left;
+                text-align: center;
                 vertical-align: top;
             }
+
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            th[scope=row] {
+                position: sticky;
+                left: 0;
+                background-color: #EBEEFB;
+            }
+
+            td {
+                text-align: center;
+            }
+
         </style>
         <title>UI for ITU/WHO AI Symptom Checker App Sub-group MMVB</title>
         <script>
@@ -68,6 +85,10 @@
             PROTOCOL = window.location.protocol;
             AI_TYPES = [];
             METRIC_TYPES = {};
+            RUNS = {};
+            CASE_SET = null;
+            RUNNING = false;
+            var POLLING_INTERVAL = null;
 
             $.ajax({
                 url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/list-all-ai-implementations",
@@ -110,6 +131,22 @@
                 },
             });
 
+            $.ajax({
+                url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/benchmark-status",
+                type: 'get',
+                success: function (response, status) {
+                    if (status == "success") {
+                        // if manager is already running, show alert and start to collect/show progress
+                        if(response.status) {
+                            RUNNING = true;
+                            alert('A benchmark is already running. Collecting data and showing progress...');
+                            run_against_available_ais();
+                            document.querySelector("#current_status").scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                },
+            });
+
             // Looks like free but check for copyright!
             // https://icons8.com/preloaders/
             LOADING_IMG = "<center><img src='etc/loading.gif'></center>";
@@ -119,6 +156,20 @@
                 for (const [key, value] of Object.entries(METRIC_TYPES)) {
                     METRIC_TYPES_KEYS.push(key);
                 }
+            }
+
+            function populate_cases(case_set) {
+                let cases_container = $("#cases");
+
+                $(cases_container).empty();
+                $(cases_container).html(
+                    "<pre><code id='my_code'>" +
+                    JSON.stringify(case_set, null, 4) +
+                    "</code></pre>"
+                );
+                document.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightBlock(block);
+                });
             }
 
             function get_cases(case_set_id) {
@@ -131,14 +182,7 @@
                     success: function (response, status) {
                         if (status == "success") {
                             CASE_SET = response;
-                            $("#cases").html(
-                                "<pre><code id='my_code'>" +
-                                JSON.stringify(CASE_SET, null, 4) +
-                                "</code></pre>"
-                            );
-                            document.querySelectorAll('pre code').forEach((block) => {
-                                hljs.highlightBlock(block);
-                            });
+                            populate_cases(CASE_SET);
                         }
                     },
                     data: JSON.stringify(
@@ -148,6 +192,20 @@
             }
 
             function generate_case_set() {
+                let live_table = $('#live_results_table');
+                let live_legend = $('#live_results_legend');
+                let live_logging = $('#live_logging');
+                let live_logging_title = $('#live_logging_title');
+
+                clear_live_logging();
+
+                $(live_table).empty();
+                $(live_table).hide();
+                $(live_legend).hide();
+                $(live_logging).hide();
+                $(live_logging_title).hide();
+                $('#current_status').children().hide();
+
                 $("#cases").html(LOADING_IMG);
                 $.ajax({
                     url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/generate-case-set",
@@ -190,6 +248,275 @@
                             "runName": ai_type,
                         }
                     ),
+                });
+            }
+
+            function reset_report() {
+                clearInterval(POLLING_INTERVAL);
+                build_live_results_table();
+                clear_live_logging();
+                start_polling_for_report();
+            }
+
+            function run_against_available_ais() {
+
+                let case_set_id = $("#case_set_id").val();
+                let cases_length = $("#cases").children().length;
+
+                if((RUNNING) || ((case_set_id !== "") && (cases_length !== 0))) {
+                    $('#current_status').children().hide();
+                    build_live_results_table();
+                    clear_live_logging();
+                    start_polling_for_report();
+                    RUNNING = true;
+
+                    $.ajax({
+                        url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/run-case-set-against-all-ais",
+                        type: 'post',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        complete: function (response, status) {
+                            if (status == "success") {
+                                let data = response.responseJSON;
+                                // checks if manager finished running or if it is still running
+                                manager_status = data['status'];
+                                // if manager is idle, this should be the screen that fired up the benchmark
+
+                                if(manager_status == 0) {
+                                    // so we need to finish up the polling and update the progress on the UI
+                                    setTimeout(function() {
+                                        clearInterval(POLLING_INTERVAL);
+                                        update_finished_progress(data['run_id'], data['case_set_id']);
+                                    }, 2000);
+
+                                    // and also collect the results
+                                    let results_by_ai = data['results_by_ai'];
+                                    for(var ai_name in results_by_ai) {
+                                        RUNS[ai_name] = results_by_ai[ai_name];
+                                    }
+                                    RUNNING = false;
+                                }
+                                // if the manager is running, this should be another screen checking the benchmark
+                                else if(manager_status == 1) {
+                                    let case_set_id = data['case_set_id'];
+                                    let case_set = data['case_set'];
+                                    // fill in the case set id and amount of cases onto the UI
+                                    $("#case_set_id").val(case_set_id);
+                                    $("#num_samples_for_new_case_set").val(case_set['cases'].length);
+                                    // then populate the cases data into the proper container on the UI
+                                    CASE_SET = case_set;
+                                    populate_cases(case_set);
+                                    reset_report();
+                                }
+                                else{
+                                    alert('Unkown benchmark manager status. Please, check the logs.');
+                                }
+                            }
+                            else {
+                                console.log('ERROR');
+                            }
+                        },
+                        data: JSON.stringify(
+                            {
+                                "aiImplementations": AI_TYPES,
+                                "caseSetId": $("#case_set_id").val()
+                            }
+                        ),
+                    });
+                }
+                else {
+                    alert('Please generate a case set before trying to run a benchmark.');
+                }
+            }
+
+            function build_live_results_table() {
+                let live_table = $('#live_results_table');
+                let live_legend = $('#live_results_legend');
+                $(live_table).empty();
+
+                let ai_names = AI_TYPES;
+                let num_cases = parseInt($("#num_samples_for_new_case_set").val());
+
+                let headers = '<tr><td style="background-color: #FFFFFF; position: sticky; left: 0"></td>';
+                headers = headers + '<th scope="col" id="header-errors">Errors</th><th scope="col" id="header-timeouts">Timeouts</th>';
+                headers = headers + '<th scope="col" id="header-healthcheck">Health Checks</th>';
+
+                for(var i=0; i<num_cases; i++) {
+                    let current_case_index = i + 1;
+                    headers = headers + '<th scope="col" id="header-case-' + current_case_index + '"> Case #' + current_case_index + '</th>';
+                }
+                headers = headers + '</tr>';
+
+                $(live_table).append(headers);
+
+                ai_rows = '';
+                for(var ai_index=0; ai_index<ai_names.length; ai_index++) {
+                    let ai_name = ai_names[ai_index];
+                    ai_rows = ai_rows + '<tr> <th scope="row">' + ai_name + '</th>';
+                    ai_rows = ai_rows + '<td id="col-' + ai_name + '-errors"></td><td id="col-' + ai_name + '-timeouts"></td>';
+                    ai_rows = ai_rows + '<td id="col-' + ai_name + '-healthcheck""><span class="counter"> </span> <span class="status" style="font-size: 30px;"> </span> </td>'
+                    for(var col=0; col<num_cases; col++) {
+                        let current_case_index = col + 1;
+                        ai_rows = ai_rows + '<td id="col-' + ai_name + '-' + current_case_index + '" style="font-size: 30px;"></td>';
+                    }
+                }
+                ai_rows = ai_rows + '</tr>';
+                $(live_table).append(ai_rows);
+                $(live_table).show();
+                $(live_legend).show();
+
+                let header_errors = $('#header-errors');
+                let header_timeouts = $('#header-timeouts');
+
+                let ai_container_width = $('th[scope=row]').width() + 2;
+                let error_containers = $('[id ^=col-][id $=-errors]');
+                let timeout_containers = $('[id ^=col-][id $=-timeouts]');
+
+                let error_container_width = $(header_errors).width() + ai_container_width;
+
+                $(header_errors).css('position', 'sticky');
+                $(header_errors).css('left', ai_container_width.toString() + 'px');
+                $(header_errors).css('background-color', '#FFFFFF');
+
+                $(header_timeouts).css('position', 'sticky');
+                $(header_timeouts).css('left', error_container_width.toString() + 'px');
+                $(header_timeouts).css('background-color', '#FFFFFF');
+
+                $(error_containers).css('position', 'sticky');
+                $(error_containers).css('left', ai_container_width.toString() + 'px');
+                $(error_containers).css('background-color', '#FFFFFF');
+
+                $(timeout_containers).css('position', 'sticky');
+                $(timeout_containers).css('left', error_container_width.toString() + 'px');
+                $(timeout_containers).css('background-color', '#FFFFFF');
+            }
+
+            function start_polling_for_report() {
+                POLLING_INTERVAL = setInterval(poll_for_updates, 500);
+            }
+
+            function update_finished_progress(benchmark_id, case_set_id) {
+                $('#running_status').hide();
+                $('#finished_status').html('Finished running benchmark with ID ' + benchmark_id + ' for case set with ID ' + case_set_id);
+                $('#finished_status').show();
+            }
+
+            function update_running_progress(case_id, case_index, total_cases) {
+                $('#current_case_id').html(case_id);
+                $('#current_case_index').html(case_index);
+                $('#total_cases').html(total_cases);
+                $('#running_status').show();
+
+            }
+
+            function update_live_table(ai_reports, total_cases, current_case_index) {
+                for(ai_name in ai_reports) {
+                    let error_target = '#col-' + ai_name + '-errors';
+                    let timeouts_target = '#col-' + ai_name + '-timeouts';
+
+                    let selected_cases = ai_reports[ai_name].slice(0, current_case_index);
+                    let selected_errors = [];
+                    let selected_timeouts =[]
+                    for(case_index in selected_cases) {
+                        selected_errors.push(parseInt(selected_cases[case_index]['errors']));
+                        selected_timeouts.push(parseInt(selected_cases[case_index]['timeouts']));
+                    }
+
+                    let errors_value = selected_errors.reduce(
+                        (first_elem, second_elem) => first_elem + second_elem);
+
+                    let timeouts_value = selected_timeouts.reduce(
+                        (first_elem, second_elem) => first_elem + second_elem);
+
+                    $(error_target).html(errors_value);
+                    $(timeouts_target).html(timeouts_value);
+
+                    for(var index=0; index<ai_reports[ai_name].length; index++) {
+                        let data = ai_reports[ai_name][index];
+                        let current_index = index + 1;
+
+                        let healthcheck_target = '#col-' + ai_name + '-healthcheck';
+                        let case_target = '#col-' + ai_name + '-' + current_index;
+
+                        if(parseInt(data['case_status']) == 1) {
+                            //if success place ok marker
+                            $(case_target).html('&#x2611;');
+                        }
+                        else if(parseInt(data['case_status']) == -1) {
+                            //if failure place cross marker
+                            $(case_target).html('&#x2612;');
+                        }
+                        else {
+                            //if running place empty marker
+                            $(case_target).html('&#x2610;');
+                        }
+
+                        let health_checks = parseInt(data['health_checks']);
+                        let healthcheck_status = parseInt(data['healthcheck_status']);
+
+                        let health_check_symbol = '&#x2610;';
+
+                        if(healthcheck_status == -1) {
+                            health_check_symbol = '&#x2612;';
+                        }
+                        else if (healthcheck_status == 1){
+                            health_check_symbol = '&#x2611;';
+                        }
+
+                        $(healthcheck_target).find('.counter').html(health_checks.toString());
+                        $(healthcheck_target).find('.status').html(health_check_symbol);
+                    }
+                }
+
+            }
+
+            function update_live_logging(logged_messages) {
+                let live_logging = $('#live_logging');
+                let live_logging_title = $('#live_logging_title');
+
+                $(live_logging_title).show();
+                $(live_logging).show();
+
+                clear_live_logging();
+
+                for(var i=0; i<logged_messages.length; i++) {
+                    $(live_logging).append('<p>' + logged_messages[i] + '</p>');
+                }
+            }
+
+            function clear_live_logging() {
+                $('#live_logging').empty();
+            }
+
+            function poll_for_updates() {
+                $.ajax({
+                    url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/report-update",
+                    type: 'get',
+                    complete: function (response, status) {
+                        let data = response.responseJSON;
+                        let current_case_id = data['current_case_id'];
+                        let current_case_index = data['current_case_index'];
+                        let total_cases = data['total_cases'];
+                        let ai_reports = data['ai_reports'];
+                        let logs = data['logs'];
+                        let results = data['results_by_ai'];
+                        update_live_table(ai_reports, total_cases, current_case_index);
+                        update_running_progress(current_case_id, current_case_index, total_cases);
+                        update_live_logging(logs);
+                        if(results.constructor === Object && Object.entries(results).length !== 0) {
+                            setTimeout(function() {
+                                clearInterval(POLLING_INTERVAL);
+                                update_finished_progress(data['run_id'], data['case_set_id']);
+                            }, 2000);
+
+                            let results_by_ai = data['results_by_ai'];
+                            for(var ai_name in results_by_ai) {
+                                RUNS[ai_name] = results_by_ai[ai_name];
+                            }
+                            RUNNING = false;
+                        }
+
+                    }
                 });
             }
 
@@ -243,7 +570,7 @@
                         },
                         data: JSON.stringify(
                             combine_results_for_metric_calculation(
-                                value['results'],
+                                value,
                                 CASE_SET['cases'],
                             )
                         ),
@@ -377,7 +704,7 @@
 
         <h1>Generate Case Set</h1>
 
-        Number of cases: <input type="text" id="num_samples_for_new_case_set" value="40">
+        Number of cases: <input type="text" id="num_samples_for_new_case_set" value="10">
         <input type="button" value="Generate" onClick="generate_case_set();">
         <br>
         Case set ID: <input type="text" id="case_set_id">
@@ -388,12 +715,39 @@
 
         <h1>Run against toy AIs</h1>
 
-        <input type="button" value="Run" onClick="run_against_toy_ais();">
+        <!-- <input type="button" value="Run" onClick="run_against_toy_ais();"> -->
+        <input type="button" value="Run" onClick="run_against_available_ais();">
+
+        <div id="current_status">
+            <p id="running_status" style="display: none;"> Currently running <span id="current_case_id" style="font-weight: bolder;"> </span>, #<span id="current_case_index" style="font-weight: bolder;"></span> of <span id="total_cases" style="font-weight: bolder;"></span> cases... <img src="etc/loading.gif" width="20px" height="20px"></p>
+            <p id="finished_status" style="display: none;"> </p>
+        </div>
 
         <br><br>
 
-        <div id="running_log">
+        <table id="live_results_table" style="display: none;">
+        </table>
 
+        <br><br>
+
+        <div id="live_results_legend" style="display: none;">
+            <p> Table legend: </p>
+            <ul>
+                <li> <span style="font-size: 30px">&#x2610;</span>: Running </li>
+                <li> <span style="font-size: 30px">&#x2611;</span>: Succeeded </li>
+                <li> <span style="font-size: 30px">&#x2612;</span>: Failed </li>
+            </ul>
+            <p> For the health checks, and integer is shown indicating the number of health check attempts for the
+                current case being evaluated and a symbol from the previous list indicating the health check status </p>
+        </div>
+
+        <br><br>
+
+        <h4 id="live_logging_title" style="text-decoration: underline; display: none;"> Live logging: </h4>
+        <div id="live_logging" style="display: none; overflow-y: scroll; max-height: 300px;">
+        </div>
+
+        <div id="running_log">
         </div>
 
         <hr>

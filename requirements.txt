@@ -32,3 +32,5 @@ swagger-ui-bundle==0.0.5
 toml==0.10.0
 urllib3==1.25.3
 Werkzeug==0.15.5
+retrying==1.3.3
+peewee==3.11.2

@@ -2,7 +2,7 @@
 # This is a component of the MMVB for the "Symptom assessment" sub-group
 # (of the the International Telecommunication Union focus group
 # "Artificial Intelligence for Health".
-# For copyright and licence, see the parent directory. 
+# For copyright and licence, see the parent directory.
 
 swagger: '2.0'
 info:
@@ -17,6 +17,35 @@ basePath: /toy-ai/v1
 
 
 paths:
+  /health-check:
+    post:
+      description: Tries to check if AI API is up and running.
+      operationId: api.health_check
+      parameters:
+        - in: body
+          name: request
+          description: request
+          schema:
+            properties:
+              aiImplementation:
+                type: string
+                description: Toy AI implementation to choose
+            required:
+              - aiImplementation
+      responses:
+        200:
+          description: Successful response
+          schema:
+            properties:
+              status:
+                type: string
+                description: status message
+            required:
+              - status
+        500:
+          description: Error response
+          schema:
+            $ref: "#/definitions/Error"
   /solve-case:
     post:
       description: Tries to solve a patient case.
