@@ -47,7 +47,7 @@ def calculate_metrics(request):
 
     for request_element in request:
         values_to_predict = request_element["valuesToPredict"]
-        ai_result = request_element["aiResult"]
+        ai_result = request_element["aiResult"] or None
 
         if ai_result is None:
             triage_match = 0.0

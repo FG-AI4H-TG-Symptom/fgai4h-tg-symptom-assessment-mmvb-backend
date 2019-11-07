@@ -9,6 +9,11 @@ import random
 
 import numpy
 
+from toy_ai.utils import (solve_case_error_type_one,
+                          solve_case_error_type_two,
+                          solve_case_soft_timeout,
+                          solve_case_hard_timeout)
+
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 MAX_RETURNED_CONDITIONS = 3
@@ -70,6 +75,19 @@ def solve_case_random_conditions(case_data, randomisation_type):
     triage = random.choice(["SC", "PC", "EC", "UNCERTAIN"])
 
     return {"triage": triage, "conditions": conditions}
+
+
+def solve_case_faulty_random_conditions(case_data, randomisation_type):
+    callable_choice = random.choices([
+            solve_case_error_type_one,
+            solve_case_error_type_two,
+            solve_case_soft_timeout,
+            solve_case_hard_timeout,
+            solve_case_random_conditions
+        ],
+        [0.2, 0.2, 0.2, 0.2, 0.2])[0]
+
+    return callable_choice(case_data, randomisation_type)
 
 
 def solve_case_deterministic_most_likely_conditions(case_data):
@@ -136,22 +154,42 @@ def solve_case_by_symptom_intersection(case_data):
     return {"triage": triage, "conditions": conditions}
 
 
+def health_check(request):
+    """Emulates endpoint for health-checking an AI API"""
+    ai_implementation = request["aiImplementation"]
+    if ai_implementation == "toy_ai_faulty_random_uniform":
+        response = random.choices([
+                {"status": "OK"},
+                {"status": "Error"}
+            ],
+            [0.5, 0.5])[0]
+    else:
+        response = {"status": "OK"}
+
+    return response
+
+
 def solve_case(request):
     case_data = request["caseData"]
     ai_implementation = request["aiImplementation"]
 
     if ai_implementation == "toy_ai_random_uniform":
         return solve_case_random_conditions(
-            case_data=case_data, randomisation_type="uniform"
-        )
+            case_data=case_data, randomisation_type="uniform")
+
     elif ai_implementation == "toy_ai_random_probability_weighted":
         return solve_case_random_conditions(
-            case_data=case_data, randomisation_type="probability_weighted"
-        )
+            case_data=case_data, randomisation_type="probability_weighted")
+
     elif ai_implementation == "toy_ai_deterministic_most_likely_conditions":
         return solve_case_deterministic_most_likely_conditions(case_data=case_data)
+
     elif ai_implementation == "toy_ai_deterministic_by_symptom_intersection":
         return solve_case_by_symptom_intersection(case_data=case_data)
+
+    elif ai_implementation == "toy_ai_faulty_random_uniform":
+        return solve_case_faulty_random_conditions(
+            case_data=case_data, randomisation_type="uniform")
     else:
         raise ValueError(
             "AI Module: Selected AI implementation cannot be "

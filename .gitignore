@@ -1,4 +1,6 @@
 .git
+.venv
+.vscode
 *.pyc
 .ipynb_checkpoints/
 *config.ini
