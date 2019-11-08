@@ -13,7 +13,7 @@ import requests
 
 SERVER_HOST_FOR_CASE_GENERATION = "http://0.0.0.0:5001"
 
-TIMEOUT = 0.5  # in seconds
+TIMEOUT = 5.0  # in seconds
 
 FILE_DIR = os.path.dirname((os.path.abspath(__file__)))
 
