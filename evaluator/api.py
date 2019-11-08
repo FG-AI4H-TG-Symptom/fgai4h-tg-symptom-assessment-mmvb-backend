@@ -26,6 +26,13 @@ AI_TYPES_TO_LOCATIONS = {
     "toy_ai_deterministic_by_symptom_intersection": AI_LOCATION_ALPHA,
 }
 
+try:
+    from extra_ai_links import EXTRA_LINKS
+    for key, value in EXTRA_LINKS.items():
+        AI_TYPES_TO_LOCATIONS[key] = value
+except:
+    pass
+
 
 def create_dirs(directory):
     if not os.path.exists(directory):
