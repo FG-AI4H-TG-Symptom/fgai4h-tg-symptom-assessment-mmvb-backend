@@ -131,21 +131,21 @@
                 },
             });
 
-            $.ajax({
-                url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/benchmark-status",
-                type: 'get',
-                success: function (response, status) {
-                    if (status == "success") {
-                        // if manager is already running, show alert and start to collect/show progress
-                        if(response.status) {
-                            RUNNING = true;
-                            alert('A benchmark is already running. Collecting data and showing progress...');
-                            run_against_available_ais();
-                            document.querySelector("#current_status").scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }
-                },
-            });
+            // $.ajax({
+            //     url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/benchmark-status",
+            //     type: 'get',
+            //     success: function (response, status) {
+            //         if (status == "success") {
+            //             // if manager is already running, show alert and start to collect/show progress
+            //             if(response.status) {
+            //                 RUNNING = true;
+            //                 alert('A benchmark is already running. Collecting data and showing progress...');
+            //                 run_against_available_ais();
+            //                 document.querySelector("#current_status").scrollIntoView({ behavior: 'smooth' });
+            //             }
+            //         }
+            //     },
+            // });
 
             // Looks like free but check for copyright!
             // https://icons8.com/preloaders/
@@ -298,6 +298,7 @@
                                 }
                                 // if the manager is running, this should be another screen checking the benchmark
                                 else if(manager_status == 1) {
+                                    alert("Another case set " + case_set_id + " is already running and we can't run case set " + $("#case_set_id").val() + " as requested. We are showing updates on case set " + case_set_id + " instead.");
                                     let case_set_id = data['case_set_id'];
                                     let case_set = data['case_set'];
                                     // fill in the case set id and amount of cases onto the UI

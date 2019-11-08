@@ -62,7 +62,9 @@ AI_TYPES_ENDPOINTS = {
     }
 }
 
-BENCHMARK_MANAGER = BenchmarkManager()
+# TODO: delete all benchmarks from this dictionary
+# and from the database
+BENCHMARK_MANAGERS = {}
 
 
 def get_unique_id():
@@ -136,115 +138,111 @@ def list_all_ai_implementations():
 def run_case_set_against_ais(request):
     """Runs a given case set against a given set of AIs"""
 
-    if BENCHMARK_MANAGER.state == ManagerStatuses.IDLE:
-        case_set_id = parse_validate_caseSetId(request["caseSetId"])
-        ai_implementations = request["aiImplementations"]
-        results = []
+    unique_id = get_unique_id()
+    benchmark_manager = BenchmarkManager()
+    BENCHMARK_MANAGERS[unique_id] = benchmark_manager
 
-        for ai in ai_implementations:
-            assert ai in AI_TYPES_ENDPOINTS, f'AI {ai} not recognised/configured'
+    assert benchmark_manager.state == ManagerStatuses.IDLE
 
-        unique_id = get_unique_id()
-        benchmarked_ais = {
-            ai: AI_TYPES_ENDPOINTS[ai]
-            for ai in ai_implementations
-        }
-
-        cases = json.load(
-            open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json"))
-        )
-
-        try:
-            BENCHMARK_MANAGER.setup(unique_id, case_set_id, cases, benchmarked_ais)
-        except SetupError:
-            unique_id = BENCHMARK_MANAGER.benchmark_id
-            # at this point we might also like to take the case set being run and
-            # load it into the UI proper container
-            return {'run_id': unique_id, 'status': int(ManagerStatuses.RUNNING)}
-        else:
-            output = BENCHMARK_MANAGER.run_benchmark()
-            results = output['results']
-            json.dump(
-                results,
-                open(os.path.join(FILE_DIR, "data", case_set_id, "results.json"), "w"),
-                indent=2)
-
-        results_by_ai = {}
-        if results:
-            for _, ais_results in results.items():
-                for ai_name, ai_result in ais_results.items():
-                    results_by_ai.setdefault(ai_name, []).append(ai_result['result'])
-
-        return {
-            'run_id': unique_id,
-            'case_set_id': case_set_id,
-            'case_set': cases,
-            'status': int(ManagerStatuses.IDLE),
-            'results_by_ai': results_by_ai
-            }
-    else:
-        return {
-            'run_id': BENCHMARK_MANAGER.benchmark_id,
-            'case_set_id': BENCHMARK_MANAGER.case_set_id,
-            'case_set': {'cases': BENCHMARK_MANAGER.case_set},
-            'status': int(ManagerStatuses.RUNNING),
-            'results_by_ai': {}
-            }
-
-
-def run_case_set_against_ai(request):
     case_set_id = parse_validate_caseSetId(request["caseSetId"])
-    ai_implementation = request["aiImplementation"]
-    run_name = request["runName"]
-
-    assert ai_implementation in AI_TYPES_TO_LOCATIONS
-    ai_location_path = AI_TYPES_TO_LOCATIONS[ai_implementation]
-
-    run_hash = get_unique_id()
-
-    path = os.path.join(FILE_DIR, "data", case_set_id, run_hash)
-
-    cases = json.load(open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json")))
-
+    ai_implementations = request["aiImplementations"]
     results = []
 
-    for case in cases:
-        try:
-            request = requests.post(
-                ai_location_path,
-                json={
-                    "aiImplementation": ai_implementation,
-                    "caseData": case["caseData"],
-                },
-                timeout=TIMEOUT,
-            )
+    for ai in ai_implementations:
+        assert ai in AI_TYPES_ENDPOINTS, f'AI {ai} not recognised/configured'
 
-            assert request.status_code == 200
-            response = request.json()
-        except AssertionError:
-            response = None
+    benchmarked_ais = {
+        ai: AI_TYPES_ENDPOINTS[ai]
+        for ai in ai_implementations
+    }
 
-        results.append(response)
-
-    create_dirs(path)
-
-    json.dump(
-        {
-            "ai_location_path": ai_location_path,
-            "ai_implementation": ai_implementation,
-            "run_name": run_name,
-        },
-        open(os.path.join(path, "meta.json"), "w"),
-        indent=2,
+    cases = json.load(
+        open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json"))
     )
 
-    json.dump(results, open(os.path.join(path, "results.json"), "w"), indent=2)
+    try:
+        benchmark_manager.setup(unique_id, case_set_id, cases, benchmarked_ais)
+    except SetupError:
+        unique_id = benchmark_manager.benchmark_id
+        # at this point we might also like to take the case set being run and
+        # load it into the UI proper container
+        return {'run_id': unique_id, 'status': int(ManagerStatuses.RUNNING)}
+    else:
+        output = benchmark_manager.run_benchmark()
+        results = output['results']
+        json.dump(
+            results,
+            open(os.path.join(FILE_DIR, "data", case_set_id, "results.json"), "w"),
+            indent=2)
 
-    return {"runId": run_hash, "results": results}
+    results_by_ai = {}
+    if results:
+        for _, ais_results in results.items():
+            for ai_name, ai_result in ais_results.items():
+                results_by_ai.setdefault(ai_name, []).append(ai_result['result'])
+
+    return {
+        'run_id': unique_id,
+        'case_set_id': case_set_id,
+        'case_set': cases,
+        'status': int(ManagerStatuses.IDLE),
+        'results_by_ai': results_by_ai
+        }
 
 
-def report_update():
-    manager = BENCHMARK_MANAGER
+# def run_case_set_against_ai(request):
+#     case_set_id = parse_validate_caseSetId(request["caseSetId"])
+#     ai_implementation = request["aiImplementation"]
+#     run_name = request["runName"]
+
+#     assert ai_implementation in AI_TYPES_TO_LOCATIONS
+#     ai_location_path = AI_TYPES_TO_LOCATIONS[ai_implementation]
+
+#     run_hash = get_unique_id()
+
+#     path = os.path.join(FILE_DIR, "data", case_set_id, run_hash)
+
+#     cases = json.load(open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json")))
+
+#     results = []
+
+#     for case in cases:
+#         try:
+#             request = requests.post(
+#                 ai_location_path,
+#                 json={
+#                     "aiImplementation": ai_implementation,
+#                     "caseData": case["caseData"],
+#                 },
+#                 timeout=TIMEOUT,
+#             )
+
+#             assert request.status_code == 200
+#             response = request.json()
+#         except AssertionError:
+#             response = None
+
+#         results.append(response)
+
+#     create_dirs(path)
+
+#     json.dump(
+#         {
+#             "ai_location_path": ai_location_path,
+#             "ai_implementation": ai_implementation,
+#             "run_name": run_name,
+#         },
+#         open(os.path.join(path, "meta.json"), "w"),
+#         indent=2,
+#     )
+
+#     json.dump(results, open(os.path.join(path, "results.json"), "w"), indent=2)
+
+#     return {"runId": run_hash, "results": results}
+
+
+def report_update(benchmarkId):
+    manager = BENCHMARK_MANAGERS[benchmarkId]
     report = manager.db_client.select_manager_report(
         benchmark_id=manager.benchmark_id, prefetch=True)
 
@@ -287,5 +285,5 @@ def report_update():
     }
 
 
-def benchmark_status():
-    return {'status': bool(int(BENCHMARK_MANAGER.state))}
+# def benchmark_status():
+#     return {'status': bool(int(BENCHMARK_MANAGER.state))}

@@ -18,9 +18,16 @@ basePath: /evaluator/v1
 
 paths:
   /report-update:
-    get:
-      description: Gets updated data on the benchmark currently running
+    post:
+      description: Gets updated data on a benchmark
       operationId: api.report_update
+      parameters:
+        - in: body
+          name: benchmarkId
+          required: true
+          description: a benchmark id
+          schema:
+            type: string
       responses:
         200:
           description: Successful response
@@ -32,21 +39,21 @@ paths:
           description: Error response
           schema:
             $ref: "#/definitions/Error"
-  /benchmark-status:
-    get:
-      description: Gets current status of benchmark manager
-      operationId: api.benchmark_status
-      responses:
-        200:
-          description: Successful response
-          schema:
-            properties:
-              status:
-                type: boolean
-        500:
-          description: Error response
-          schema:
-            $ref: "#/definitions/Error"
+  # /benchmark-status:
+  #   get:
+  #     description: Gets current status of benchmark manager
+  #     operationId: api.benchmark_status
+  #     responses:
+  #       200:
+  #         description: Successful response
+  #         schema:
+  #           properties:
+  #             status:
+  #               type: boolean
+  #       500:
+  #         description: Error response
+  #         schema:
+  #           $ref: "#/definitions/Error"
   /generate-case-set:
     post:
       description: Generates a set of synthetic cases.
@@ -146,45 +153,45 @@ paths:
           description: Error response
           schema:
             $ref: "#/definitions/Error"
-  /run-case-set-against-ai:
-    post:
-      description: Runs a case set against AI.
-      operationId: api.run_case_set_against_ai
-      parameters:
-        - in: body
-          name: request
-          description: request
-          schema:
-            properties:
-              caseSetId:
-                type: string
-                description: a case set id
-              aiImplementation:
-                type: string
-                description: an AI implementation type to choose, if multiple
-              runName:
-                type: string
-                description: a name for this run
-            required:
-              - caseSetId
-              - aiImplementation
-      responses:
-        200:
-          description: Successful response
-          schema:
-            properties:
-              runId:
-                type: string
-                description: id of the run
-              results:
-                type: array
-            required:
-              - runId
-              - results
-        500:
-          description: Error response
-          schema:
-            $ref: "#/definitions/Error"
+  # /run-case-set-against-ai:
+  #   post:
+  #     description: Runs a case set against AI.
+  #     operationId: api.run_case_set_against_ai
+  #     parameters:
+  #       - in: body
+  #         name: request
+  #         description: request
+  #         schema:
+  #           properties:
+  #             caseSetId:
+  #               type: string
+  #               description: a case set id
+  #             aiImplementation:
+  #               type: string
+  #               description: an AI implementation type to choose, if multiple
+  #             runName:
+  #               type: string
+  #               description: a name for this run
+  #           required:
+  #             - caseSetId
+  #             - aiImplementation
+  #     responses:
+  #       200:
+  #         description: Successful response
+  #         schema:
+  #           properties:
+  #             runId:
+  #               type: string
+  #               description: id of the run
+  #             results:
+  #               type: array
+  #           required:
+  #             - runId
+  #             - results
+  #       500:
+  #         description: Error response
+  #         schema:
+  #           $ref: "#/definitions/Error"
   /run-case-set-against-all-ais:
     post:
       description: Runs a case set against a given set of AIs.
