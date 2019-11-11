@@ -23,11 +23,16 @@ paths:
       operationId: api.report_update
       parameters:
         - in: body
-          name: benchmarkId
+          name: request
           required: true
-          description: a benchmark id
           schema:
-            type: string
+            properties:
+              benchmarkId:
+                type: string
+                description: a benchmark id
+                example: 532523
+            required:
+              - benchmarkId
       responses:
         200:
           description: Successful response
@@ -192,6 +197,25 @@ paths:
   #         description: Error response
   #         schema:
   #           $ref: "#/definitions/Error"
+  /create-benchmark-manager:
+    get:
+      description: Create a benchmark manager to run a case set
+      operationId: api.create_benchmark_manager
+      responses:
+        200:
+          description: Successful response
+          schema:
+            properties:
+              benchmarkManagerId:
+                type: string
+                description: a benchmark manager id
+            required:
+              - runId
+              - results
+        500:
+          description: Error response
+          schema:
+            $ref: "#/definitions/Error"
   /run-case-set-against-all-ais:
     post:
       description: Runs a case set against a given set of AIs.
@@ -202,6 +226,9 @@ paths:
           description: request
           schema:
             properties:
+              benchmarkManagerId:
+                type: string
+                description: a benchmark manager id
               caseSetId:
                 type: string
                 description: a case set id

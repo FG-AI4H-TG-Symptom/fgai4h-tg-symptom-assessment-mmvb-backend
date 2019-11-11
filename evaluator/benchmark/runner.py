@@ -147,8 +147,7 @@ class BenchmarkRunner(Process):
             'log': []
         }
 
-        healthcheck_endpoint = os.path.join(
-            self.ai_config['root'], self.ai_config['health_check'])
+        healthcheck_endpoint = self.ai_config['health_check']
 
         try:
             response = self._perform_request(
@@ -253,8 +252,7 @@ class BenchmarkRunner(Process):
 
         case_data = case['caseData']
 
-        solve_case_endpoint = os.path.join(
-            self.ai_config['root'], self.ai_config['solve_case'])
+        solve_case_endpoint = self.ai_config['solve_case']
 
         data = {
             'caseData': case_data,

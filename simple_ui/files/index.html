@@ -260,74 +260,93 @@
 
             function run_against_available_ais() {
 
-                let case_set_id = $("#case_set_id").val();
-                let cases_length = $("#cases").children().length;
+                $.ajax({
+                    url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/create-benchmark-manager",
+                    type: 'get',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    complete: function (response, status) {
+                        if (status == "success") {
+                            benchmark_manager_id = response.responseJSON['benchmarkManagerId'];
+                            let case_set_id = $("#case_set_id").val();
+                            let cases_length = $("#cases").children().length;
 
-                if((RUNNING) || ((case_set_id !== "") && (cases_length !== 0))) {
-                    $('#current_status').children().hide();
-                    build_live_results_table();
-                    clear_live_logging();
-                    start_polling_for_report();
-                    RUNNING = true;
+                            if((RUNNING) || ((case_set_id !== "") && (cases_length !== 0))) {
+                                $('#current_status').children().hide();
+                                build_live_results_table();
+                                clear_live_logging();
+                                start_polling_for_report();
+                                RUNNING = true;
 
-                    $.ajax({
-                        url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/run-case-set-against-all-ais",
-                        type: 'post',
-                        dataType: 'json',
-                        contentType: 'application/json',
-                        complete: function (response, status) {
-                            if (status == "success") {
-                                let data = response.responseJSON;
-                                // checks if manager finished running or if it is still running
-                                manager_status = data['status'];
-                                // if manager is idle, this should be the screen that fired up the benchmark
-
-                                if(manager_status == 0) {
-                                    // so we need to finish up the polling and update the progress on the UI
-                                    setTimeout(function() {
-                                        clearInterval(POLLING_INTERVAL);
-                                        update_finished_progress(data['run_id'], data['case_set_id']);
-                                    }, 2000);
-
-                                    // and also collect the results
-                                    let results_by_ai = data['results_by_ai'];
-                                    for(var ai_name in results_by_ai) {
-                                        RUNS[ai_name] = results_by_ai[ai_name];
+                                let ai_types_to_use = Array.from(AI_TYPES);
+                                if (!$('#include_faulty_ai').prop('checked')) {
+                                    if (ai_types_to_use.indexOf("toy_ai_faulty_random_uniform") != -1) {
+                                        ai_types_to_use.splice(ai_types_to_use.indexOf("toy_ai_faulty_random_uniform"), 1);
                                     }
-                                    RUNNING = false;
                                 }
-                                // if the manager is running, this should be another screen checking the benchmark
-                                else if(manager_status == 1) {
-                                    alert("Another case set " + case_set_id + " is already running and we can't run case set " + $("#case_set_id").val() + " as requested. We are showing updates on case set " + case_set_id + " instead.");
-                                    let case_set_id = data['case_set_id'];
-                                    let case_set = data['case_set'];
-                                    // fill in the case set id and amount of cases onto the UI
-                                    $("#case_set_id").val(case_set_id);
-                                    $("#num_samples_for_new_case_set").val(case_set['cases'].length);
-                                    // then populate the cases data into the proper container on the UI
-                                    CASE_SET = case_set;
-                                    populate_cases(case_set);
-                                    reset_report();
-                                }
-                                else{
-                                    alert('Unkown benchmark manager status. Please, check the logs.');
-                                }
+
+                                $.ajax({
+                                    url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/run-case-set-against-all-ais",
+                                    type: 'post',
+                                    dataType: 'json',
+                                    contentType: 'application/json',
+                                    complete: function (response, status) {
+                                        if (status == "success") {
+                                            let data = response.responseJSON;
+                                            // checks if manager finished running or if it is still running
+                                            manager_status = data['status'];
+                                            // if manager is idle, this should be the screen that fired up the benchmark
+
+                                            if(manager_status == 0) {
+                                                // so we need to finish up the polling and update the progress on the UI
+                                                setTimeout(function() {
+                                                    clearInterval(POLLING_INTERVAL);
+                                                    update_finished_progress(data['run_id'], data['case_set_id']);
+                                                }, 2000);
+
+                                                // and also collect the results
+                                                let results_by_ai = data['results_by_ai'];
+                                                for(var ai_name in results_by_ai) {
+                                                    RUNS[ai_name] = results_by_ai[ai_name];
+                                                }
+                                                RUNNING = false;
+                                            }
+                                            // if the manager is running, this should be another screen checking the benchmark
+                                            else if(manager_status == 1) {
+                                                alert("Another case set " + case_set_id + " is already running and we can't run case set " + $("#case_set_id").val() + " as requested. We are showing updates on case set " + case_set_id + " instead.");
+                                                let case_set_id = data['case_set_id'];
+                                                let case_set = data['case_set'];
+                                                // fill in the case set id and amount of cases onto the UI
+                                                $("#case_set_id").val(case_set_id);
+                                                $("#num_samples_for_new_case_set").val(case_set['cases'].length);
+                                                // then populate the cases data into the proper container on the UI
+                                                CASE_SET = case_set;
+                                                populate_cases(case_set);
+                                                reset_report();
+                                            }
+                                            else{
+                                                alert('Unkown benchmark manager status. Please, check the logs.');
+                                            }
+                                        }
+                                        else {
+                                            console.log('ERROR');
+                                        }
+                                    },
+                                    data: JSON.stringify(
+                                        {
+                                            "aiImplementations": ai_types_to_use,
+                                            "caseSetId": $("#case_set_id").val(),
+                                            "benchmarkManagerId": benchmark_manager_id,
+                                        }
+                                    ),
+                                });
                             }
                             else {
-                                console.log('ERROR');
+                                alert('Please generate a case set before trying to run a benchmark.');
                             }
-                        },
-                        data: JSON.stringify(
-                            {
-                                "aiImplementations": AI_TYPES,
-                                "caseSetId": $("#case_set_id").val()
-                            }
-                        ),
-                    });
-                }
-                else {
-                    alert('Please generate a case set before trying to run a benchmark.');
-                }
+                        }
+                    },
+                });
             }
 
             function build_live_results_table() {
@@ -492,7 +511,9 @@
             function poll_for_updates() {
                 $.ajax({
                     url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/report-update",
-                    type: 'get',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
                     complete: function (response, status) {
                         let data = response.responseJSON;
                         let current_case_id = data['current_case_id'];
@@ -517,7 +538,12 @@
                             RUNNING = false;
                         }
 
-                    }
+                    },
+                    data: JSON.stringify(
+                        {
+                            "benchmarkId": benchmark_manager_id,
+                        }
+                    ),
                 });
             }
 
@@ -706,7 +732,7 @@
         <h1>Generate Case Set</h1>
 
         Number of cases: <input type="text" id="num_samples_for_new_case_set" value="10">
-        <input type="button" value="Generate" onClick="generate_case_set();">
+        <input type="button" value="Generate" onClick="generate_case_set();"> (for now, max 200)
         <br>
         Case set ID: <input type="text" id="case_set_id">
 
@@ -715,6 +741,9 @@
         <hr>
 
         <h1>Run against toy AIs</h1>
+
+        <input type="checkbox" id="include_faulty_ai" name="include_faulty_id" value="true" checked> <label for="include_faulty_ai">Include "toy_ai_faulty_random_uniform" AI (that is an AI that times out and produces errors with some probability).</label>
+        <br>
 
         <!-- <input type="button" value="Run" onClick="run_against_toy_ais();"> -->
         <input type="button" value="Run" onClick="run_against_available_ais();">
@@ -745,7 +774,7 @@
         <br><br>
 
         <h4 id="live_logging_title" style="text-decoration: underline; display: none;"> Live logging: </h4>
-        <div id="live_logging" style="display: none; overflow-y: scroll; max-height: 300px;">
+        <div id="live_logging" style="display: none; overflow-y: scroll; max-height: 300px; background-color: #dddddd;">
         </div>
 
         <div id="running_log">

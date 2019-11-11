@@ -17,17 +17,17 @@ DATA_DIR = os.path.join(
     'data')
 
 
-class Borg(object):
-    __shared_state = {}
+# class Borg(object):
+#     __shared_state = {}
 
-    def __init__(self):
-        self.__dict__ = self.__shared_state
+#     def __init__(self):
+#         self.__dict__ = self.__shared_state
 
 
-class BenchmarkManager(Borg):
+class BenchmarkManager(object):
     """Helper class for managing benchmark executions"""
     def __init__(self):
-        super().__init__()
+        # super().__init__()
         try:
             self.benchmark_id
         except AttributeError:
@@ -197,7 +197,7 @@ class BenchmarkManager(Borg):
                 logger.info(message)
 
                 # 'marks' case as 'burnt'
-                case_burnt_path = os.path.join(burnt_cases_path, case_id)
+                case_burnt_path = os.path.join(burnt_cases_path, case_id + "_" + str(case_num))
                 open(case_burnt_path, 'w').close()
 
             else:

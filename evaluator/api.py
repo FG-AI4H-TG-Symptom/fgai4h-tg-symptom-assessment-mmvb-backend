@@ -18,52 +18,59 @@ from evaluator.benchmark.definitions import ManagerStatuses
 
 SERVER_HOST_FOR_CASE_GENERATION = "http://0.0.0.0:5001"
 
-TIMEOUT = 0.5  # in seconds
+TIMEOUT = 5.0  # in seconds
 
 FILE_DIR = os.path.dirname((os.path.abspath(__file__)))
 
-AI_LOCATION_ALPHA = "http://127.0.0.1:5002/toy-ai/v1/solve-case"
-
-AI_TYPES_TO_LOCATIONS = {
-    "toy_ai_random_uniform": AI_LOCATION_ALPHA,
-    "toy_ai_random_probability_weighted": AI_LOCATION_ALPHA,
-    "toy_ai_deterministic_most_likely_conditions": AI_LOCATION_ALPHA,
-    "toy_ai_deterministic_by_symptom_intersection": AI_LOCATION_ALPHA,
-    "toy_ai_faulty_random_uniform": AI_LOCATION_ALPHA
-}
+AI_LOCATION_ALPHA = "http://127.0.0.1:5002/toy-ai/v1/"
+DEFAULT_HEALTH_CHECK_ENDPOINT_NAME = 'health-check'
+DEFAULT_SOLVE_CASE_ENDPOINT_NAME = 'solve-case'
 
 # TODO: make this configurable each ai can implement and have its own root url
 # TODO: as well as its own health check and solve case endpoints
 AI_TYPES_ENDPOINTS = {
     'toy_ai_random_uniform': {
-        'root': 'http://127.0.0.1:5002/toy-ai/v1/',
-        'health_check': 'health-check',
-        'solve_case': 'solve-case',
+        'health_check': AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
+        'solve_case': AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
     },
     'toy_ai_random_probability_weighted': {
-        'root': 'http://127.0.0.1:5002/toy-ai/v1/',
-        'health_check': 'health-check',
-        'solve_case': 'solve-case',
+        'health_check': AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
+        'solve_case': AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
     },
     'toy_ai_deterministic_most_likely_conditions': {
-        'root': 'http://127.0.0.1:5002/toy-ai/v1/',
-        'health_check': 'health-check',
-        'solve_case': 'solve-case',
+        'health_check': AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
+        'solve_case': AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
     },
     'toy_ai_deterministic_by_symptom_intersection': {
-        'root': 'http://127.0.0.1:5002/toy-ai/v1/',
-        'health_check': 'health-check',
-        'solve_case': 'solve-case',
+        'health_check': AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
+        'solve_case': AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
     },
     'toy_ai_faulty_random_uniform': {
-        'root': 'http://127.0.0.1:5002/toy-ai/v1/',
-        'health_check': 'health-check',
-        'solve_case': 'solve-case',
+        'health_check': AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
+        'solve_case': AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
     }
 }
 
+try:
+    from extra_ai_links import EXTRA_LINKS
+    for key, value in EXTRA_LINKS.items():
+        AI_TYPES_ENDPOINTS[key] = {
+            'solve_case': value,
+            # just for now:
+            'health_check': AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
+        }
+except:
+    pass
+
+# DEPRECATE THIS:
+AI_TYPES_TO_LOCATIONS = {}
+for key, value in AI_TYPES_ENDPOINTS.items():
+    AI_TYPES_TO_LOCATIONS[key] = (
+        value['solve_case']
+    )
+
 # TODO: delete all benchmarks from this dictionary
-# and from the database
+# and from the database after some timeout
 BENCHMARK_MANAGERS = {}
 
 
@@ -84,8 +91,8 @@ def md5(value):
 
 def generate_case_set(request):
     num_cases = int(request["numCases"])
-    # TODO: Gracefully fail for >1000 cases
-    assert num_cases > 0 and num_cases <= 1000
+    # TODO: Gracefully fail for >200 cases
+    assert num_cases > 0 and num_cases <= 200
 
     cases = []
 
@@ -135,12 +142,20 @@ def list_all_ai_implementations():
     }
 
 
+def create_benchmark_manager():
+    unique_id = get_unique_id()
+    BENCHMARK_MANAGERS[unique_id] = BenchmarkManager()
+    return {
+        'benchmarkManagerId': unique_id,
+    }
+
+
 def run_case_set_against_ais(request):
     """Runs a given case set against a given set of AIs"""
 
-    unique_id = get_unique_id()
-    benchmark_manager = BenchmarkManager()
-    BENCHMARK_MANAGERS[unique_id] = benchmark_manager
+    unique_id = request['benchmarkManagerId']
+
+    benchmark_manager = BENCHMARK_MANAGERS[unique_id]
 
     assert benchmark_manager.state == ManagerStatuses.IDLE
 
@@ -241,7 +256,8 @@ def run_case_set_against_ais(request):
 #     return {"runId": run_hash, "results": results}
 
 
-def report_update(benchmarkId):
+def report_update(request):
+    benchmarkId = request['benchmarkId']
     manager = BENCHMARK_MANAGERS[benchmarkId]
     report = manager.db_client.select_manager_report(
         benchmark_id=manager.benchmark_id, prefetch=True)
@@ -273,7 +289,7 @@ def report_update(benchmarkId):
     else:
         results_by_ai = {}
 
-    return {
+    output = {
         'run_id': manager.benchmark_id,
         'case_set_id': manager.case_set_id,
         'total_cases': report.total_cases,
@@ -283,6 +299,8 @@ def report_update(benchmarkId):
         'results_by_ai': results_by_ai,
         'logs': manager.accumulated_logs
     }
+
+    return output
 
 
 # def benchmark_status():
