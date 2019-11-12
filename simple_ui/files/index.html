@@ -276,6 +276,12 @@
                     complete: function (response, status) {
                         if (status == "success") {
                             benchmark_manager_id = response.responseJSON['benchmarkManagerId'];
+
+                            if (benchmark_manager_id == "CantCreateBecauseTooBusy") {
+                                alert("There are too many benchmarks being run right now. Please, try to start a new benchmark run a bit later.");
+                                return;
+                            }
+
                             let case_set_id = $("#case_set_id").val();
                             let cases_length = $("#cases").children().length;
 
@@ -304,6 +310,8 @@
                                                 // Some other run was started.
                                                 return;
                                             }
+
+                                            return;
 
                                             let data = response.responseJSON;
                                             // checks if manager finished running or if it is still running
@@ -540,16 +548,15 @@
                         update_running_progress(current_case_id, current_case_index, total_cases);
                         update_live_logging(logs);
                         if(results.constructor === Object && Object.entries(results).length !== 0) {
-                            setTimeout(function() {
-                                clearInterval(POLLING_INTERVAL);
-                                update_finished_progress(data['run_id'], data['case_set_id']);
-                            }, 2000);
+                            clearInterval(POLLING_INTERVAL);
 
                             let results_by_ai = data['results_by_ai'];
                             for(var ai_name in results_by_ai) {
                                 RUNS[ai_name] = results_by_ai[ai_name];
                             }
                             RUNNING = false;
+
+                            update_finished_progress(data['run_id'], data['case_set_id']);
                         }
 
                     },

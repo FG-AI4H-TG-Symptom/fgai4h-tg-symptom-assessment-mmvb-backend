@@ -4,7 +4,7 @@ from multiprocessing import Queue, Pipe
 
 from evaluator.benchmark.definitions import ManagerStatuses
 from evaluator.benchmark.runner import BenchmarkRunner
-from evaluator.benchmark.reporter import DatabaseClient
+from evaluator.benchmark.reporter import create_database_client
 from evaluator.benchmark.exceptions import SetupError
 from evaluator.benchmark.utils import create_dirs
 from evaluator.benchmark.signals import ProcessSignal
@@ -32,7 +32,7 @@ class BenchmarkManager(object):
             self.benchmark_id
         except AttributeError:
             self.__state = ManagerStatuses.IDLE
-            self.db_client = DatabaseClient()
+            self.db_client = create_database_client()()
 
     def setup(self, unique_id, case_set_id, case_set, benchmarked_ais):
         if self.__state == ManagerStatuses.IDLE:
@@ -50,11 +50,7 @@ class BenchmarkManager(object):
                 f'Successfully set up benchmark manager with id {self.benchmark_id} '
                 f'for case set with id {self.case_set_id}')
         else:
-            message = (
-                f'There is already a benchmark running with id {self.benchmark_id} '
-                f'for case set with id {self.case_set_id}')
-            logger.info(message)
-            raise SetupError(message)
+            raise ValueError
 
     @property
     def state(self):

@@ -16,9 +16,14 @@ from evaluator.benchmark.exceptions import SetupError
 from evaluator.benchmark.utils import create_dirs
 from evaluator.benchmark.definitions import ManagerStatuses
 
+from multiprocessing import Queue, Process
+from threading import Thread
+
 SERVER_HOST_FOR_CASE_GENERATION = "http://0.0.0.0:5001"
 
 TIMEOUT = 5.0  # in seconds
+
+LIMIT_MAX_NUM_RUNNING_BENCHMARKS = 10
 
 FILE_DIR = os.path.dirname((os.path.abspath(__file__)))
 
@@ -146,9 +151,142 @@ def list_all_ai_implementations():
     }
 
 
+# Idea based on 
+# https://stackoverflow.com/questions/54091439/how-to-run-python-custom-objects-in-separate-processes-all-working-on-a-shared
+class BenchmarkManagerWorker:
+    def __init__(self, commands: Queue, results: Queue):
+        self.commands = commands
+        self.results = results
+
+    def main(self):
+        while True:
+            value = self.commands.get()
+
+            print("Value is ", value, value[0] == "GetUpdate")
+
+            if value is None:
+                self.results.put(None)
+                print("Breaking because of None")
+                break
+
+            if value[0] == "Start":
+                self.benchmark_manager = BenchmarkManager()
+
+                benchmark_manager = self.benchmark_manager
+                request = value[1]
+                unique_id = value[2]
+
+                assert benchmark_manager.state == ManagerStatuses.IDLE
+
+                case_set_id = parse_validate_caseSetId(request["caseSetId"])
+                ai_implementations = request["aiImplementations"]
+                results = []
+
+                for ai in ai_implementations:
+                    assert ai in AI_TYPES_ENDPOINTS, f'AI {ai} not recognised/configured'
+
+                benchmarked_ais = {
+                    ai: AI_TYPES_ENDPOINTS[ai]
+                    for ai in ai_implementations
+                }
+
+                cases = json.load(
+                    open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json"))
+                )
+
+                try:
+                    benchmark_manager.setup(unique_id, case_set_id, cases, benchmarked_ais)
+                except ValueError:
+                    raise ValueError
+                else:
+                    def run_me():
+                        output = benchmark_manager.run_benchmark()
+                        results = output['results']
+                        json.dump(
+                            results,
+                            open(os.path.join(FILE_DIR, "data", case_set_id, "results.json"), "w"),
+                            indent=2)
+                    Thread(target=run_me).start()
+
+                self.results.put("Started")
+
+            if value[0] == "GetStatus":
+                manager = self.benchmark_manager
+
+                self.results.put(manager.state)
+
+            if value[0] == "GetUpdate":
+                print("  Preparing the update...")
+
+                manager = self.benchmark_manager
+
+                report = manager.db_client.select_manager_report(
+                    benchmark_id=manager.benchmark_id, prefetch=True)
+
+                collected_reports = {}
+                for ai_report in report.ai_reports:
+                    collected_reports.setdefault(ai_report.ai_name, []).append(
+                        {
+                            'case_status': ai_report.case_status,
+                            'healthcheck_status': ai_report.healthcheck_status,
+                            'health_checks': ai_report.health_checks,
+                            'errors': ai_report.errors,
+                            'timeouts': ai_report.hard_timeouts
+                        }
+                    )
+
+                results_file_path = os.path.join(
+                    FILE_DIR, "data", manager.case_set_id, "results.json")
+
+                if manager.state == ManagerStatuses.IDLE and os.path.isfile(results_file_path):
+                    results = json.load(open(
+                        os.path.join(FILE_DIR, "data", manager.case_set_id, "results.json"), "r")
+                    )
+                    results_by_ai = {}
+                    if results:
+                        for _, ais_results in results.items():
+                            for ai_name, ai_result in ais_results.items():
+                                results_by_ai.setdefault(ai_name, []).append(ai_result['result'])
+                else:
+                    results_by_ai = {}
+
+                output = {
+                    'run_id': manager.benchmark_id,
+                    'case_set_id': manager.case_set_id,
+                    'total_cases': report.total_cases,
+                    'current_case_index': report.current_case_index,
+                    'current_case_id': report.current_case_id,
+                    'ai_reports': collected_reports,
+                    'results_by_ai': results_by_ai,
+                    'logs': manager.accumulated_logs
+                }
+
+                self.results.put(output)
+
+
+
 def create_benchmark_manager():
+    num_running_benchmarks = 0
+    for benchmark_iterator in BENCHMARK_MANAGERS.values():  
+        if benchmark_iterator == "PLACEHOLDER":
+            continue
+
+        benchmark_iterator[1].put(
+            ("GetStatus", 0)
+        )
+        result = benchmark_iterator[2].get()
+        if result != ManagerStatuses.IDLE:
+            num_running_benchmarks += 1
+
+    if num_running_benchmarks > LIMIT_MAX_NUM_RUNNING_BENCHMARKS:
+        return {
+            'benchmarkManagerId': 'CantCreateBecauseTooBusy'
+        }
+
     unique_id = get_unique_id()
-    BENCHMARK_MANAGERS[unique_id] = BenchmarkManager()
+
+    BENCHMARK_MANAGERS[unique_id] = "PLACEHOLDER"
+
     return {
         'benchmarkManagerId': unique_id,
     }
@@ -159,55 +297,25 @@ def run_case_set_against_ais(request):
 
     unique_id = request['benchmarkManagerId']
 
-    benchmark_manager = BENCHMARK_MANAGERS[unique_id]
+    commands_queue = Queue()
+    results_queue = Queue()
+    instance = BenchmarkManagerWorker(commands_queue, results_queue)
 
-    assert benchmark_manager.state == ManagerStatuses.IDLE
-
-    case_set_id = parse_validate_caseSetId(request["caseSetId"])
-    ai_implementations = request["aiImplementations"]
-    results = []
-
-    for ai in ai_implementations:
-        assert ai in AI_TYPES_ENDPOINTS, f'AI {ai} not recognised/configured'
-
-    benchmarked_ais = {
-        ai: AI_TYPES_ENDPOINTS[ai]
-        for ai in ai_implementations
-    }
-
-    cases = json.load(
-        open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json"))
+    BENCHMARK_MANAGERS[unique_id] = (
+        Process(target=instance.main),
+        commands_queue,
+        results_queue,
     )
 
-    try:
-        benchmark_manager.setup(unique_id, case_set_id, cases, benchmarked_ais)
-    except SetupError:
-        unique_id = benchmark_manager.benchmark_id
-        # at this point we might also like to take the case set being run and
-        # load it into the UI proper container
-        return {'run_id': unique_id, 'status': int(ManagerStatuses.RUNNING)}
-    else:
-        output = benchmark_manager.run_benchmark()
-        results = output['results']
-        json.dump(
-            results,
-            open(os.path.join(FILE_DIR, "data", case_set_id, "results.json"), "w"),
-            indent=2)
+    BENCHMARK_MANAGERS[unique_id][0].start()
 
-    results_by_ai = {}
-    if results:
-        for _, ais_results in results.items():
-            for ai_name, ai_result in ais_results.items():
-                results_by_ai.setdefault(ai_name, []).append(ai_result['result'])
+    BENCHMARK_MANAGERS[unique_id][1].put(
+        ("Start", request, unique_id)
+    )
 
-    return {
-        'run_id': unique_id,
-        'case_set_id': case_set_id,
-        'case_set': cases,
-        'status': int(ManagerStatuses.IDLE),
-        'results_by_ai': results_by_ai
-        }
+    result = BENCHMARK_MANAGERS[unique_id][2].get()
 
+    return result
 
 # def run_case_set_against_ai(request):
 #     case_set_id = parse_validate_caseSetId(request["caseSetId"])
@@ -262,49 +370,22 @@ def run_case_set_against_ais(request):
 
 def report_update(request):
     benchmarkId = request['benchmarkId']
-    manager = BENCHMARK_MANAGERS[benchmarkId]
-    report = manager.db_client.select_manager_report(
-        benchmark_id=manager.benchmark_id, prefetch=True)
 
-    collected_reports = {}
-    for ai_report in report.ai_reports:
-        collected_reports.setdefault(ai_report.ai_name, []).append(
-            {
-                'case_status': ai_report.case_status,
-                'healthcheck_status': ai_report.healthcheck_status,
-                'health_checks': ai_report.health_checks,
-                'errors': ai_report.errors,
-                'timeouts': ai_report.hard_timeouts
-            }
-        )
+    print("Requesting result...")
 
-    results_file_path = os.path.join(
-        FILE_DIR, "data", manager.case_set_id, "results.json")
+    BENCHMARK_MANAGERS[benchmarkId][1].put(
+        ("GetUpdate", 0)
+    )
 
-    if manager.state == ManagerStatuses.IDLE and os.path.isfile(results_file_path):
-        results = json.load(open(
-            os.path.join(FILE_DIR, "data", manager.case_set_id, "results.json"), "r")
-        )
-        results_by_ai = {}
-        if results:
-            for _, ais_results in results.items():
-                for ai_name, ai_result in ais_results.items():
-                    results_by_ai.setdefault(ai_name, []).append(ai_result['result'])
-    else:
-        results_by_ai = {}
+    result = BENCHMARK_MANAGERS[benchmarkId][2].get()
 
-    output = {
-        'run_id': manager.benchmark_id,
-        'case_set_id': manager.case_set_id,
-        'total_cases': report.total_cases,
-        'current_case_index': report.current_case_index,
-        'current_case_id': report.current_case_id,
-        'ai_reports': collected_reports,
-        'results_by_ai': results_by_ai,
-        'logs': manager.accumulated_logs
-    }
+    if len(result['results_by_ai']) > 0:
+        BENCHMARK_MANAGERS[benchmarkId][1].put(None)
+        del BENCHMARK_MANAGERS[benchmarkId]
 
-    return output
+    print("Got result", result)
+
+    return result
 
 
 # def benchmark_status():
