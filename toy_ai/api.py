@@ -16,7 +16,7 @@ from toy_ai.utils import (solve_case_error_type_one,
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-MAX_RETURNED_CONDITIONS = 3
+MAX_RETURNED_CONDITIONS = 5
 
 
 def drop_all_but_keys(val, keys):
@@ -115,12 +115,12 @@ def solve_case_by_symptom_intersection(case_data):
     complaints = [
         element["id"]
         for element in case_data["presentingComplaints"]
-        if element["state"] == "true"
+        if element["state"] == "present"
     ]
     complaints += [
         element["id"]
         for element in case_data["otherFeatures"]
-        if element["state"] == "true"
+        if element["state"] == "present"
     ]
     complaints = set(complaints)
 

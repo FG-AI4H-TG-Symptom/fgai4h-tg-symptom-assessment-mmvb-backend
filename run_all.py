@@ -51,6 +51,14 @@ def start_simple_ui():
     simple_ui__run_app(port=5005, host=CONFIG_DEFAULT_HOST)
 
 
+def start_participants__babylon_toy_ai():
+    change_directory(ORIGINAL_DIRECTORY + "/participants/babylon_toy_ai/")
+    from app import create_app as participants__babylon_toy_ai__create_app
+
+    participants__babylon_toy_ai = participants__babylon_toy_ai__create_app()
+    participants__babylon_toy_ai.run(port=5006, host=CONFIG_DEFAULT_HOST)
+
+
 case_generator = Process(target=start_case_generator)
 case_generator.start()
 
@@ -65,3 +73,6 @@ metric_calculator.start()
 
 simple_ui = Process(target=start_simple_ui)
 simple_ui.start()
+
+participants__babylon_toy_ai = Process(target=start_participants__babylon_toy_ai)
+participants__babylon_toy_ai.start()
