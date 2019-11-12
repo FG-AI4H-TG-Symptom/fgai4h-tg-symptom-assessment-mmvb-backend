@@ -303,7 +303,7 @@ class BenchmarkRunner(Process):
             if response.status_code != 200:
                 message = (
                     f'AI {self.ai_name} responded with unexpected HTTP '
-                    f'status {response.status_code} and data={response.json()}'
+                    f'status {response.status_code} and data={response}'
                 )
                 return_dict['error'] = message
                 return_dict['case_status'] = CaseStatuses.ERROR

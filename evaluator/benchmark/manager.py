@@ -211,6 +211,8 @@ class BenchmarkManager(object):
                 logger.error(message)
                 return {'runId': self.benchmark_id, 'results': results}
 
+            random.shuffle(healthchecked_ai_ids)
+
             for id_ in healthchecked_ai_ids:
                 pipe = self.runners_pool[id_][1]
                 pipe.send((ProcessSignal.SOLVE_CASE, {'case': case}))
