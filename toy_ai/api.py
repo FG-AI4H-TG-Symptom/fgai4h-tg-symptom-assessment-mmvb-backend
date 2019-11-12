@@ -192,6 +192,7 @@ def solve_case(request):
             case_data=case_data, randomisation_type="uniform")
 
     elif ai_implementation == "babylon_toy_ai":
+        # TODO: move to the separate end-point
         return solve_case_by_symptom_intersection(case_data=case_data)
 
     else:

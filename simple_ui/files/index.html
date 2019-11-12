@@ -258,7 +258,15 @@
                 start_polling_for_report();
             }
 
+            function get_time_stamp() {
+                let date = new Date();
+                let timestamp = date.getTime();
+                return timestamp;
+            }
+
             function run_against_available_ais() {
+                var ui_run_timestamp = get_time_stamp();
+                GLOBAL_UI_RUN_TIMESTAMP = ui_run_timestamp;
 
                 $.ajax({
                     url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/create-benchmark-manager",
@@ -271,7 +279,7 @@
                             let case_set_id = $("#case_set_id").val();
                             let cases_length = $("#cases").children().length;
 
-                            if((RUNNING) || ((case_set_id !== "") && (cases_length !== 0))) {
+                            if((case_set_id !== "") && (cases_length !== 0)) {
                                 $('#current_status').children().hide();
                                 build_live_results_table();
                                 clear_live_logging();
@@ -292,6 +300,11 @@
                                     contentType: 'application/json',
                                     complete: function (response, status) {
                                         if (status == "success") {
+                                            if (ui_run_timestamp != GLOBAL_UI_RUN_TIMESTAMP) {
+                                                // Some other run was started.
+                                                return;
+                                            }
+
                                             let data = response.responseJSON;
                                             // checks if manager finished running or if it is still running
                                             manager_status = data['status'];
@@ -412,6 +425,7 @@
             }
 
             function start_polling_for_report() {
+                clearInterval(POLLING_INTERVAL);
                 POLLING_INTERVAL = setInterval(poll_for_updates, 500);
             }
 
