@@ -190,6 +190,10 @@ def solve_case(request):
     elif ai_implementation == "toy_ai_faulty_random_uniform":
         return solve_case_faulty_random_conditions(
             case_data=case_data, randomisation_type="uniform")
+
+    elif ai_implementation == "babylon_toy_ai":
+        return solve_case_by_symptom_intersection(case_data=case_data)
+
     else:
         raise ValueError(
             "AI Module: Selected AI implementation cannot be "

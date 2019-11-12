@@ -50,8 +50,8 @@ AI_TYPES_ENDPOINTS = {
         'solve_case': AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
     },
     'babylon_toy_ai': {
-        'health_check': "http://127.0.0.1:5006/toy-ai/v1/health-check",
-        'solve_case': "http://127.0.0.1:5006/toy-ai/v1/solve-case",
+        'health_check': "http://127.0.0.1:5002/toy-ai/v1/health-check",
+        'solve_case': "http://127.0.0.1:5002/toy-ai/v1/solve-case",
     }
 }
 
