@@ -17,6 +17,7 @@ from evaluator.benchmark.utils import create_dirs
 from evaluator.benchmark.definitions import ManagerStatuses
 
 from multiprocessing import Queue, Process
+import queue
 from threading import Thread
 
 SERVER_HOST_FOR_CASE_GENERATION = "http://0.0.0.0:5001"
@@ -162,43 +163,41 @@ class BenchmarkManagerWorker:
         while True:
             value = self.commands.get()
 
-            print("Value is ", value, value[0] == "GetUpdate")
+            try:
+                print("Value is ", value)
 
-            if value is None:
-                self.results.put(None)
-                print("Breaking because of None")
-                break
+                if value is None:
+                    self.results.put(None)
+                    print("Breaking because of None")
+                    break
 
-            if value[0] == "Start":
-                self.benchmark_manager = BenchmarkManager()
+                if value[0] == "Start":
+                    self.benchmark_manager = BenchmarkManager()
 
-                benchmark_manager = self.benchmark_manager
-                request = value[1]
-                unique_id = value[2]
+                    benchmark_manager = self.benchmark_manager
+                    request = value[1]
+                    unique_id = value[2]
 
-                assert benchmark_manager.state == ManagerStatuses.IDLE
+                    assert benchmark_manager.state == ManagerStatuses.IDLE
 
-                case_set_id = parse_validate_caseSetId(request["caseSetId"])
-                ai_implementations = request["aiImplementations"]
-                results = []
+                    case_set_id = parse_validate_caseSetId(request["caseSetId"])
+                    ai_implementations = request["aiImplementations"]
+                    results = []
 
-                for ai in ai_implementations:
-                    assert ai in AI_TYPES_ENDPOINTS, f'AI {ai} not recognised/configured'
+                    for ai in ai_implementations:
+                        assert ai in AI_TYPES_ENDPOINTS, f'AI {ai} not recognised/configured'
 
-                benchmarked_ais = {
-                    ai: AI_TYPES_ENDPOINTS[ai]
-                    for ai in ai_implementations
-                }
+                    benchmarked_ais = {
+                        ai: AI_TYPES_ENDPOINTS[ai]
+                        for ai in ai_implementations
+                    }
 
-                cases = json.load(
-                    open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json"))
-                )
+                    cases = json.load(
+                        open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json"))
+                    )
 
-                try:
                     benchmark_manager.setup(unique_id, case_set_id, cases, benchmarked_ais)
-                except ValueError:
-                    raise ValueError
-                else:
+
                     def run_me():
                         output = benchmark_manager.run_benchmark()
                         results = output['results']
@@ -208,61 +207,64 @@ class BenchmarkManagerWorker:
                             indent=2)
                     Thread(target=run_me).start()
 
-                self.results.put("Started")
+                    self.results.put("Started")
 
-            if value[0] == "GetStatus":
-                manager = self.benchmark_manager
+                if value[0] == "GetStatus":
+                    manager = self.benchmark_manager
 
-                self.results.put(manager.state)
+                    self.results.put(manager.state)
 
-            if value[0] == "GetUpdate":
-                print("  Preparing the update...")
+                if value[0] == "GetUpdate":
+                    print("  Preparing the update...")
 
-                manager = self.benchmark_manager
+                    manager = self.benchmark_manager
 
-                report = manager.db_client.select_manager_report(
-                    benchmark_id=manager.benchmark_id, prefetch=True)
+                    report = manager.db_client.select_manager_report(
+                        benchmark_id=manager.benchmark_id, prefetch=True)
 
-                collected_reports = {}
-                for ai_report in report.ai_reports:
-                    collected_reports.setdefault(ai_report.ai_name, []).append(
-                        {
-                            'case_status': ai_report.case_status,
-                            'healthcheck_status': ai_report.healthcheck_status,
-                            'health_checks': ai_report.health_checks,
-                            'errors': ai_report.errors,
-                            'timeouts': ai_report.hard_timeouts
-                        }
-                    )
+                    collected_reports = {}
+                    for ai_report in report.ai_reports:
+                        collected_reports.setdefault(ai_report.ai_name, []).append(
+                            {
+                                'case_status': ai_report.case_status,
+                                'healthcheck_status': ai_report.healthcheck_status,
+                                'health_checks': ai_report.health_checks,
+                                'errors': ai_report.errors,
+                                'timeouts': ai_report.hard_timeouts
+                            }
+                        )
 
-                results_file_path = os.path.join(
-                    FILE_DIR, "data", manager.case_set_id, "results.json")
+                    results_file_path = os.path.join(
+                        FILE_DIR, "data", manager.case_set_id, "results.json")
 
-                if manager.state == ManagerStatuses.IDLE and os.path.isfile(results_file_path):
-                    results = json.load(open(
-                        os.path.join(FILE_DIR, "data", manager.case_set_id, "results.json"), "r")
-                    )
-                    results_by_ai = {}
-                    if results:
-                        for _, ais_results in results.items():
-                            for ai_name, ai_result in ais_results.items():
-                                results_by_ai.setdefault(ai_name, []).append(ai_result['result'])
-                else:
-                    results_by_ai = {}
+                    if manager.state == ManagerStatuses.IDLE and os.path.isfile(results_file_path):
+                        results = json.load(open(
+                            os.path.join(FILE_DIR, "data", manager.case_set_id, "results.json"), "r")
+                        )
+                        results_by_ai = {}
+                        if results:
+                            for _, ais_results in results.items():
+                                for ai_name, ai_result in ais_results.items():
+                                    results_by_ai.setdefault(ai_name, []).append(ai_result['result'])
+                    else:
+                        results_by_ai = {}
 
-                output = {
-                    'run_id': manager.benchmark_id,
-                    'case_set_id': manager.case_set_id,
-                    'total_cases': report.total_cases,
-                    'current_case_index': report.current_case_index,
-                    'current_case_id': report.current_case_id,
-                    'ai_reports': collected_reports,
-                    'results_by_ai': results_by_ai,
-                    'logs': manager.accumulated_logs
-                }
+                    output = {
+                        'run_id': manager.benchmark_id,
+                        'case_set_id': manager.case_set_id,
+                        'total_cases': report.total_cases,
+                        'current_case_index': report.current_case_index,
+                        'current_case_id': report.current_case_id,
+                        'ai_reports': collected_reports,
+                        'results_by_ai': results_by_ai,
+                        'logs': manager.accumulated_logs
+                    }
 
-                self.results.put(output)
+                    self.results.put(output)
+            except:
+                self.results.put("Error")
 
+                continue
 
 
 def create_benchmark_manager():
@@ -274,9 +276,13 @@ def create_benchmark_manager():
         benchmark_iterator[1].put(
             ("GetStatus", 0)
         )
-        result = benchmark_iterator[2].get()
-        if result != ManagerStatuses.IDLE:
-            num_running_benchmarks += 1
+        try:
+            result = benchmark_iterator[2].get(block=True, timeout=1)
+            if result != ManagerStatuses.IDLE:
+                num_running_benchmarks += 1
+        except queue.Empty:
+            print("Not alive worker?..")
+            pass
 
     if num_running_benchmarks > LIMIT_MAX_NUM_RUNNING_BENCHMARKS:
         return {

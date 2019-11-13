@@ -88,7 +88,6 @@
             RUNS = {};
             CASE_SET = null;
             RUNNING = false;
-            var POLLING_INTERVAL = null;
 
             $.ajax({
                 url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/list-all-ai-implementations",
@@ -252,7 +251,6 @@
             }
 
             function reset_report() {
-                clearInterval(POLLING_INTERVAL);
                 build_live_results_table();
                 clear_live_logging();
                 start_polling_for_report();
@@ -321,7 +319,6 @@
                                             if(manager_status == 0) {
                                                 // so we need to finish up the polling and update the progress on the UI
                                                 setTimeout(function() {
-                                                    clearInterval(POLLING_INTERVAL);
                                                     update_finished_progress(data['run_id'], data['case_set_id']);
                                                 }, 2000);
 
@@ -433,8 +430,7 @@
             }
 
             function start_polling_for_report() {
-                clearInterval(POLLING_INTERVAL);
-                POLLING_INTERVAL = setInterval(poll_for_updates, 500);
+                setTimeout(poll_for_updates, 500);
             }
 
             function update_finished_progress(benchmark_id, case_set_id) {
@@ -538,6 +534,10 @@
                     contentType: 'application/json',
                     complete: function (response, status) {
                         let data = response.responseJSON;
+                        let run_id = data['run_id'];
+                        if (run_id != benchmark_manager_id) {
+                            return;
+                        }
                         let current_case_id = data['current_case_id'];
                         let current_case_index = data['current_case_index'];
                         let total_cases = data['total_cases'];
@@ -548,8 +548,6 @@
                         update_running_progress(current_case_id, current_case_index, total_cases);
                         update_live_logging(logs);
                         if(results.constructor === Object && Object.entries(results).length !== 0) {
-                            clearInterval(POLLING_INTERVAL);
-
                             let results_by_ai = data['results_by_ai'];
                             for(var ai_name in results_by_ai) {
                                 RUNS[ai_name] = results_by_ai[ai_name];
@@ -557,6 +555,8 @@
                             RUNNING = false;
 
                             update_finished_progress(data['run_id'], data['case_set_id']);
+                        } else {
+                            setTimeout(poll_for_updates, 50);
                         }
 
                     },
