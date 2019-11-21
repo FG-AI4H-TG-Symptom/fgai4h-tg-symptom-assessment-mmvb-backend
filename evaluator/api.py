@@ -323,56 +323,6 @@ def run_case_set_against_ais(request):
 
     return result
 
-# def run_case_set_against_ai(request):
-#     case_set_id = parse_validate_caseSetId(request["caseSetId"])
-#     ai_implementation = request["aiImplementation"]
-#     run_name = request["runName"]
-
-#     assert ai_implementation in AI_TYPES_TO_LOCATIONS
-#     ai_location_path = AI_TYPES_TO_LOCATIONS[ai_implementation]
-
-#     run_hash = get_unique_id()
-
-#     path = os.path.join(FILE_DIR, "data", case_set_id, run_hash)
-
-#     cases = json.load(open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json")))
-
-#     results = []
-
-#     for case in cases:
-#         try:
-#             request = requests.post(
-#                 ai_location_path,
-#                 json={
-#                     "aiImplementation": ai_implementation,
-#                     "caseData": case["caseData"],
-#                 },
-#                 timeout=TIMEOUT,
-#             )
-
-#             assert request.status_code == 200
-#             response = request.json()
-#         except AssertionError:
-#             response = None
-
-#         results.append(response)
-
-#     create_dirs(path)
-
-#     json.dump(
-#         {
-#             "ai_location_path": ai_location_path,
-#             "ai_implementation": ai_implementation,
-#             "run_name": run_name,
-#         },
-#         open(os.path.join(path, "meta.json"), "w"),
-#         indent=2,
-#     )
-
-#     json.dump(results, open(os.path.join(path, "results.json"), "w"), indent=2)
-
-#     return {"runId": run_hash, "results": results}
-
 
 def report_update(request):
     benchmarkId = request['benchmarkId']
@@ -392,7 +342,3 @@ def report_update(request):
     print("Got result", result)
 
     return result
-
-
-# def benchmark_status():
-#     return {'status': bool(int(BENCHMARK_MANAGER.state))}
