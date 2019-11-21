@@ -22,8 +22,6 @@ from threading import Thread
 
 SERVER_HOST_FOR_CASE_GENERATION = "http://0.0.0.0:5001"
 
-TIMEOUT = 5.0  # in seconds
-
 LIMIT_MAX_NUM_RUNNING_BENCHMARKS = 10
 
 FILE_DIR = os.path.dirname((os.path.abspath(__file__)))
