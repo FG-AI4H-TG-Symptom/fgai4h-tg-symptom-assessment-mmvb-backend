@@ -1,8 +1,15 @@
 import time
 from os.path import abspath, dirname, join
 
-from peewee import (CharField, CompositeKey, ForeignKeyField, IntegerField,
-                    IntegrityError, Model, SqliteDatabase,)
+from peewee import (
+    CharField,
+    CompositeKey,
+    ForeignKeyField,
+    IntegerField,
+    IntegrityError,
+    Model,
+    SqliteDatabase,
+)
 
 from evaluator.benchmark.definitions import CaseStatuses
 
