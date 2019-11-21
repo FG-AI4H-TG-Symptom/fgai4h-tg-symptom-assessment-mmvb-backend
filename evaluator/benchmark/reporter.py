@@ -1,18 +1,10 @@
-from os.path import dirname, abspath, join
+import time
+from os.path import abspath, dirname, join
+
+from peewee import (CharField, CompositeKey, ForeignKeyField, IntegerField,
+                    IntegrityError, Model, SqliteDatabase,)
 
 from evaluator.benchmark.definitions import CaseStatuses
-
-from peewee import (
-    Model,
-    CharField,
-    IntegerField,
-    ForeignKeyField,
-    CompositeKey,
-    IntegrityError,
-    SqliteDatabase,
-)
-
-import time
 
 
 def get_unique_id():

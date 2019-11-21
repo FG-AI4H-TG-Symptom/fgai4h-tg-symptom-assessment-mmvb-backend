@@ -1,21 +1,19 @@
 import json
 import os
-import requests
-from requests.exceptions import Timeout, ConnectTimeout
-from timeit import default_timer as timer
 from multiprocessing import Process
+from timeit import default_timer as timer
 
+import requests
+from requests.exceptions import ConnectTimeout, Timeout
 from retrying import retry
 
+from evaluator.benchmark.definitions import (MAX_NUM_ATTEMPTS,
+                                             MAX_WAIT_BETWEEN_RETRIES,
+                                             SOLVE_CASE_HARD_TIMEOUT,
+                                             SOLVE_CASE_SOFT_TIMEOUT,
+                                             CaseStatuses,)
 from evaluator.benchmark.exceptions import UnhealthyAIError
 from evaluator.benchmark.signals import ProcessSignal
-from evaluator.benchmark.definitions import (
-    CaseStatuses,
-    MAX_NUM_ATTEMPTS,
-    MAX_WAIT_BETWEEN_RETRIES,
-    SOLVE_CASE_SOFT_TIMEOUT,
-    SOLVE_CASE_HARD_TIMEOUT,
-)
 from logs.logger import get_logger
 
 logger = get_logger()

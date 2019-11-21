@@ -1,13 +1,13 @@
 import os
 import random
-from multiprocessing import Queue, Pipe
+from multiprocessing import Pipe, Queue
 
 from evaluator.benchmark.definitions import ManagerStatuses
-from evaluator.benchmark.runner import BenchmarkRunner
-from evaluator.benchmark.reporter import create_database_client
 from evaluator.benchmark.exceptions import SetupError
-from evaluator.benchmark.utils import create_dirs
+from evaluator.benchmark.reporter import create_database_client
+from evaluator.benchmark.runner import BenchmarkRunner
 from evaluator.benchmark.signals import ProcessSignal
+from evaluator.benchmark.utils import create_dirs
 from logs.logger import get_logger
 
 logger = get_logger()

@@ -7,18 +7,17 @@ import glob
 import hashlib
 import json
 import os
+import queue
 import time
+from multiprocessing import Process, Queue
+from threading import Thread
 
 import requests
 
-from evaluator.benchmark.manager import BenchmarkManager
-from evaluator.benchmark.exceptions import SetupError
-from evaluator.benchmark.utils import create_dirs
 from evaluator.benchmark.definitions import ManagerStatuses
-
-from multiprocessing import Queue, Process
-import queue
-from threading import Thread
+from evaluator.benchmark.exceptions import SetupError
+from evaluator.benchmark.manager import BenchmarkManager
+from evaluator.benchmark.utils import create_dirs
 
 SERVER_HOST_FOR_CASE_GENERATION = "http://0.0.0.0:5001"
 
