@@ -15,8 +15,10 @@ TEST_CASES = [
             "correct_conditions_top_1": 0.0,
             "correct_conditions_top_3": 1.0,
             "correct_conditions_top_10": 1.0,
+            "proportion_cases_with_ai_result": 1.0,
             "triage_match": 0.0,
             "triage_similarity": 0.5,
+            "triage_similarity_soft": 0.5,
         },
     },
     {
@@ -31,8 +33,10 @@ TEST_CASES = [
             "correct_conditions_top_1": 1.0,
             "correct_conditions_top_3": 1.0,
             "correct_conditions_top_10": 1.0,
+            "proportion_cases_with_ai_result": 1.0,
             "triage_match": 1.0,
             "triage_similarity": 1.0,
+            "triage_similarity_soft": 1.0,
         },
     },
     {
@@ -47,8 +51,10 @@ TEST_CASES = [
             "correct_conditions_top_1": 0.0,
             "correct_conditions_top_3": 0.0,
             "correct_conditions_top_10": 0.0,
+            "proportion_cases_with_ai_result": 1.0,
             "triage_match": 0.0,
             "triage_similarity": 0.5,
+            "triage_similarity_soft": 0.5,
         },
     },
 ]

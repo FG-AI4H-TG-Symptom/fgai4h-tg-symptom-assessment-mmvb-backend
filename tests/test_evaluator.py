@@ -129,25 +129,3 @@ def test_generate_case_set():
     except AssertionError:
         p.terminate()
         raise
-
-
-def test_run_case_set_against_ai():
-    p = Process(target=start_toy_ai_server)
-    p.start()
-    request = {
-        "caseSetId": "1_1",
-        "aiLocationPath": "http://0.0.0.0:5002/toy-ai/v1/solve-case",
-        "aiImplementation": "toy_ai_deterministic_by_symptom_intersection",
-        "runName": "toy_ai_deterministic_by_symptom_intersection",
-    }
-
-    random.seed(42)
-    np.random.seed(42)
-    try:
-        time.sleep(1)
-        res = api.run_case_set_against_ai(request)
-        assert DeepDiff(res["results"], AI_RESULTS) == dict()
-        p.terminate()
-    except AssertionError:
-        p.terminate()
-        raise
