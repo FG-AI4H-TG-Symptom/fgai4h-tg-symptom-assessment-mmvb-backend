@@ -9,10 +9,12 @@ import random
 
 import numpy
 
-from toy_ai.utils import (solve_case_error_type_one,
-                          solve_case_error_type_two,
-                          solve_case_soft_timeout,
-                          solve_case_hard_timeout)
+from toy_ai.utils import (
+    solve_case_error_type_one,
+    solve_case_error_type_two,
+    solve_case_soft_timeout,
+    solve_case_hard_timeout,
+)
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -78,14 +80,16 @@ def solve_case_random_conditions(case_data, randomisation_type):
 
 
 def solve_case_faulty_random_conditions(case_data, randomisation_type):
-    callable_choice = random.choices([
+    callable_choice = random.choices(
+        [
             solve_case_error_type_one,
             solve_case_error_type_two,
             solve_case_soft_timeout,
             solve_case_hard_timeout,
-            solve_case_random_conditions
+            solve_case_random_conditions,
         ],
-        [0.2, 0.2, 0.2, 0.2, 0.2])[0]
+        [0.2, 0.2, 0.2, 0.2, 0.2],
+    )[0]
 
     return callable_choice(case_data, randomisation_type)
 
@@ -158,11 +162,9 @@ def health_check(request):
     """Emulates endpoint for health-checking an AI API"""
     ai_implementation = request["aiImplementation"]
     if ai_implementation == "toy_ai_faulty_random_uniform":
-        response = random.choices([
-                {"status": "OK"},
-                {"status": "Error"}
-            ],
-            [0.5, 0.5])[0]
+        response = random.choices([{"status": "OK"}, {"status": "Error"}], [0.5, 0.5])[
+            0
+        ]
     else:
         response = {"status": "OK"}
 
@@ -175,11 +177,13 @@ def solve_case(request):
 
     if ai_implementation == "toy_ai_random_uniform":
         return solve_case_random_conditions(
-            case_data=case_data, randomisation_type="uniform")
+            case_data=case_data, randomisation_type="uniform"
+        )
 
     elif ai_implementation == "toy_ai_random_probability_weighted":
         return solve_case_random_conditions(
-            case_data=case_data, randomisation_type="probability_weighted")
+            case_data=case_data, randomisation_type="probability_weighted"
+        )
 
     elif ai_implementation == "toy_ai_deterministic_most_likely_conditions":
         return solve_case_deterministic_most_likely_conditions(case_data=case_data)
@@ -189,7 +193,8 @@ def solve_case(request):
 
     elif ai_implementation == "toy_ai_faulty_random_uniform":
         return solve_case_faulty_random_conditions(
-            case_data=case_data, randomisation_type="uniform")
+            case_data=case_data, randomisation_type="uniform"
+        )
 
     else:
         raise ValueError(

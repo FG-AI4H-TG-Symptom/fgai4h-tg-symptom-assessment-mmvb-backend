@@ -27,45 +27,46 @@ LIMIT_MAX_NUM_RUNNING_BENCHMARKS = 10
 FILE_DIR = os.path.dirname((os.path.abspath(__file__)))
 
 AI_LOCATION_ALPHA = "http://127.0.0.1:5002/toy-ai/v1/"
-DEFAULT_HEALTH_CHECK_ENDPOINT_NAME = 'health-check'
-DEFAULT_SOLVE_CASE_ENDPOINT_NAME = 'solve-case'
+DEFAULT_HEALTH_CHECK_ENDPOINT_NAME = "health-check"
+DEFAULT_SOLVE_CASE_ENDPOINT_NAME = "solve-case"
 
 # TODO: make this configurable each ai can implement and have its own root url
 # TODO: as well as its own health check and solve case endpoints
 AI_TYPES_ENDPOINTS = {
-    'toy_ai_random_uniform': {
-        'health_check': AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
-        'solve_case': AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
+    "toy_ai_random_uniform": {
+        "health_check": AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
+        "solve_case": AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
     },
-    'toy_ai_random_probability_weighted': {
-        'health_check': AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
-        'solve_case': AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
+    "toy_ai_random_probability_weighted": {
+        "health_check": AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
+        "solve_case": AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
     },
-    'toy_ai_deterministic_most_likely_conditions': {
-        'health_check': AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
-        'solve_case': AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
+    "toy_ai_deterministic_most_likely_conditions": {
+        "health_check": AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
+        "solve_case": AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
     },
-    'toy_ai_deterministic_by_symptom_intersection': {
-        'health_check': AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
-        'solve_case': AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
+    "toy_ai_deterministic_by_symptom_intersection": {
+        "health_check": AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
+        "solve_case": AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
     },
-    'toy_ai_faulty_random_uniform': {
-        'health_check': AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
-        'solve_case': AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
+    "toy_ai_faulty_random_uniform": {
+        "health_check": AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
+        "solve_case": AI_LOCATION_ALPHA + DEFAULT_SOLVE_CASE_ENDPOINT_NAME,
     },
-    'babylon_toy_ai': {
-        'health_check': "http://127.0.0.1:5006/toy-ai/v1/health-check",
-        'solve_case': "http://127.0.0.1:5006/toy-ai/v1/solve-case",
-    }
+    "babylon_toy_ai": {
+        "health_check": "http://127.0.0.1:5006/toy-ai/v1/health-check",
+        "solve_case": "http://127.0.0.1:5006/toy-ai/v1/solve-case",
+    },
 }
 
 try:
     from extra_ai_links import EXTRA_LINKS
+
     for key, value in EXTRA_LINKS.items():
         AI_TYPES_ENDPOINTS[key] = {
-            'solve_case': value,
+            "solve_case": value,
             # just for now:
-            'health_check': AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
+            "health_check": AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
         }
 except:
     pass
@@ -73,11 +74,9 @@ except:
 # DEPRECATE THIS:
 AI_TYPES_TO_LOCATIONS = {}
 for key, value in AI_TYPES_ENDPOINTS.items():
-    AI_TYPES_TO_LOCATIONS[key] = (
-        value['solve_case']
-    )
+    AI_TYPES_TO_LOCATIONS[key] = value["solve_case"]
 
-# TODO: delete all benchmarks from this dictionary
+#  TODO: delete all benchmarks from this dictionary
 # and from the database after some timeout
 BENCHMARK_MANAGERS = {}
 
@@ -150,7 +149,7 @@ def list_all_ai_implementations():
     }
 
 
-# Idea based on 
+# Idea based on
 # https://stackoverflow.com/questions/54091439/how-to-run-python-custom-objects-in-separate-processes-all-working-on-a-shared
 class BenchmarkManagerWorker:
     def __init__(self, commands: Queue, results: Queue):
@@ -183,26 +182,36 @@ class BenchmarkManagerWorker:
                     results = []
 
                     for ai in ai_implementations:
-                        assert ai in AI_TYPES_ENDPOINTS, f'AI {ai} not recognised/configured'
+                        assert (
+                            ai in AI_TYPES_ENDPOINTS
+                        ), f"AI {ai} not recognised/configured"
 
                     benchmarked_ais = {
-                        ai: AI_TYPES_ENDPOINTS[ai]
-                        for ai in ai_implementations
+                        ai: AI_TYPES_ENDPOINTS[ai] for ai in ai_implementations
                     }
 
                     cases = json.load(
                         open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json"))
                     )
 
-                    benchmark_manager.setup(unique_id, case_set_id, cases, benchmarked_ais)
+                    benchmark_manager.setup(
+                        unique_id, case_set_id, cases, benchmarked_ais
+                    )
 
                     def run_me():
                         output = benchmark_manager.run_benchmark()
-                        results = output['results']
+                        results = output["results"]
                         json.dump(
                             results,
-                            open(os.path.join(FILE_DIR, "data", case_set_id, "results.json"), "w"),
-                            indent=2)
+                            open(
+                                os.path.join(
+                                    FILE_DIR, "data", case_set_id, "results.json"
+                                ),
+                                "w",
+                            ),
+                            indent=2,
+                        )
+
                     Thread(target=run_me).start()
 
                     self.results.put("Started")
@@ -218,44 +227,58 @@ class BenchmarkManagerWorker:
                     manager = self.benchmark_manager
 
                     report = manager.db_client.select_manager_report(
-                        benchmark_id=manager.benchmark_id, prefetch=True)
+                        benchmark_id=manager.benchmark_id, prefetch=True
+                    )
 
                     collected_reports = {}
                     for ai_report in report.ai_reports:
                         collected_reports.setdefault(ai_report.ai_name, []).append(
                             {
-                                'case_status': ai_report.case_status,
-                                'healthcheck_status': ai_report.healthcheck_status,
-                                'health_checks': ai_report.health_checks,
-                                'errors': ai_report.errors,
-                                'timeouts': ai_report.hard_timeouts
+                                "case_status": ai_report.case_status,
+                                "healthcheck_status": ai_report.healthcheck_status,
+                                "health_checks": ai_report.health_checks,
+                                "errors": ai_report.errors,
+                                "timeouts": ai_report.hard_timeouts,
                             }
                         )
 
                     results_file_path = os.path.join(
-                        FILE_DIR, "data", manager.case_set_id, "results.json")
+                        FILE_DIR, "data", manager.case_set_id, "results.json"
+                    )
 
-                    if manager.state == ManagerStatuses.IDLE and os.path.isfile(results_file_path):
-                        results = json.load(open(
-                            os.path.join(FILE_DIR, "data", manager.case_set_id, "results.json"), "r")
+                    if manager.state == ManagerStatuses.IDLE and os.path.isfile(
+                        results_file_path
+                    ):
+                        results = json.load(
+                            open(
+                                os.path.join(
+                                    FILE_DIR,
+                                    "data",
+                                    manager.case_set_id,
+                                    "results.json",
+                                ),
+                                "r",
+                            )
                         )
                         results_by_ai = {}
                         if results:
                             for _, ais_results in results.items():
                                 for ai_name, ai_result in ais_results.items():
-                                    results_by_ai.setdefault(ai_name, []).append(ai_result['result'])
+                                    results_by_ai.setdefault(ai_name, []).append(
+                                        ai_result["result"]
+                                    )
                     else:
                         results_by_ai = {}
 
                     output = {
-                        'run_id': manager.benchmark_id,
-                        'case_set_id': manager.case_set_id,
-                        'total_cases': report.total_cases,
-                        'current_case_index': report.current_case_index,
-                        'current_case_id': report.current_case_id,
-                        'ai_reports': collected_reports,
-                        'results_by_ai': results_by_ai,
-                        'logs': manager.accumulated_logs
+                        "run_id": manager.benchmark_id,
+                        "case_set_id": manager.case_set_id,
+                        "total_cases": report.total_cases,
+                        "current_case_index": report.current_case_index,
+                        "current_case_id": report.current_case_id,
+                        "ai_reports": collected_reports,
+                        "results_by_ai": results_by_ai,
+                        "logs": manager.accumulated_logs,
                     }
 
                     self.results.put(output)
@@ -267,13 +290,11 @@ class BenchmarkManagerWorker:
 
 def create_benchmark_manager():
     num_running_benchmarks = 0
-    for benchmark_iterator in BENCHMARK_MANAGERS.values():  
+    for benchmark_iterator in BENCHMARK_MANAGERS.values():
         if benchmark_iterator == "PLACEHOLDER":
             continue
 
-        benchmark_iterator[1].put(
-            ("GetStatus", 0)
-        )
+        benchmark_iterator[1].put(("GetStatus", 0))
         try:
             result = benchmark_iterator[2].get(block=True, timeout=1)
             if result != ManagerStatuses.IDLE:
@@ -283,23 +304,19 @@ def create_benchmark_manager():
             pass
 
     if num_running_benchmarks > LIMIT_MAX_NUM_RUNNING_BENCHMARKS:
-        return {
-            'benchmarkManagerId': 'CantCreateBecauseTooBusy'
-        }
+        return {"benchmarkManagerId": "CantCreateBecauseTooBusy"}
 
     unique_id = get_unique_id()
 
     BENCHMARK_MANAGERS[unique_id] = "PLACEHOLDER"
 
-    return {
-        'benchmarkManagerId': unique_id,
-    }
+    return {"benchmarkManagerId": unique_id}
 
 
 def run_case_set_against_ais(request):
     """Runs a given case set against a given set of AIs"""
 
-    unique_id = request['benchmarkManagerId']
+    unique_id = request["benchmarkManagerId"]
 
     commands_queue = Queue()
     results_queue = Queue()
@@ -313,9 +330,7 @@ def run_case_set_against_ais(request):
 
     BENCHMARK_MANAGERS[unique_id][0].start()
 
-    BENCHMARK_MANAGERS[unique_id][1].put(
-        ("Start", request, unique_id)
-    )
+    BENCHMARK_MANAGERS[unique_id][1].put(("Start", request, unique_id))
 
     result = BENCHMARK_MANAGERS[unique_id][2].get()
 
@@ -323,17 +338,15 @@ def run_case_set_against_ais(request):
 
 
 def report_update(request):
-    benchmarkId = request['benchmarkId']
+    benchmarkId = request["benchmarkId"]
 
     print("Requesting result...")
 
-    BENCHMARK_MANAGERS[benchmarkId][1].put(
-        ("GetUpdate", 0)
-    )
+    BENCHMARK_MANAGERS[benchmarkId][1].put(("GetUpdate", 0))
 
     result = BENCHMARK_MANAGERS[benchmarkId][2].get()
 
-    if len(result['results_by_ai']) > 0:
+    if len(result["results_by_ai"]) > 0:
         BENCHMARK_MANAGERS[benchmarkId][1].put(None)
         del BENCHMARK_MANAGERS[benchmarkId]
 
