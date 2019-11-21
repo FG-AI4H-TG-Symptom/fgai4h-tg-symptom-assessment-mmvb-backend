@@ -6,13 +6,11 @@ import requests
 from requests.exceptions import ConnectTimeout, Timeout
 from retrying import retry
 
-from evaluator.benchmark.definitions import (
-    MAX_NUM_ATTEMPTS,
-    MAX_WAIT_BETWEEN_RETRIES,
-    SOLVE_CASE_HARD_TIMEOUT,
-    SOLVE_CASE_SOFT_TIMEOUT,
-    CaseStatuses,
-)
+from evaluator.benchmark.definitions import (MAX_NUM_ATTEMPTS,
+                                             MAX_WAIT_BETWEEN_RETRIES,
+                                             SOLVE_CASE_HARD_TIMEOUT,
+                                             SOLVE_CASE_SOFT_TIMEOUT,
+                                             CaseStatuses,)
 from evaluator.benchmark.exceptions import UnhealthyAIError
 from evaluator.benchmark.signals import ProcessSignal
 from logs.logger import get_logger
