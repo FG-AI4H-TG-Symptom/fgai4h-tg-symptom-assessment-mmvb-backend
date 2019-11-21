@@ -11,7 +11,8 @@ def get_unique_id():
     return str(time.time()).replace(".", "_")
 
 
-def create_database_client():
+def create_database_client():  # noqa: C901
+    # TODO: refactor it.
     DATABASE_PATH = join(dirname(dirname(abspath(__file__))), "data")
     DATABASE = SqliteDatabase(join(DATABASE_PATH, "reports_" + get_unique_id() + ".db"))
 

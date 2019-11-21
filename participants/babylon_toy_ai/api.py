@@ -5,12 +5,6 @@
 
 import json
 import os
-import random
-
-import numpy
-
-from toy_ai.utils import (solve_case_error_type_one, solve_case_error_type_two,
-                          solve_case_hard_timeout, solve_case_soft_timeout,)
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 

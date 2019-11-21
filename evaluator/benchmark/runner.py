@@ -1,5 +1,4 @@
 import json
-import os
 from multiprocessing import Process
 from timeit import default_timer as timer
 

@@ -3,7 +3,6 @@ import random
 from multiprocessing import Pipe, Queue
 
 from evaluator.benchmark.definitions import ManagerStatuses
-from evaluator.benchmark.exceptions import SetupError
 from evaluator.benchmark.reporter import create_database_client
 from evaluator.benchmark.runner import BenchmarkRunner
 from evaluator.benchmark.signals import ProcessSignal

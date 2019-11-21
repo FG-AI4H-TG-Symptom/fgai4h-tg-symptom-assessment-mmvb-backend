@@ -15,7 +15,6 @@ from threading import Thread
 import requests
 
 from evaluator.benchmark.definitions import ManagerStatuses
-from evaluator.benchmark.exceptions import SetupError
 from evaluator.benchmark.manager import BenchmarkManager
 from evaluator.benchmark.utils import create_dirs
 
@@ -67,7 +66,7 @@ try:
             # just for now:
             "health_check": AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
         }
-except:
+except ModuleNotFoundError:
     pass
 
 # DEPRECATE THIS:
@@ -281,7 +280,8 @@ class BenchmarkManagerWorker:
                     }
 
                     self.results.put(output)
-            except:
+            except:  # noqa: E722
+                # TODO: improve on this bare `except`
                 self.results.put("Error")
 
                 continue
