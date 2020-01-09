@@ -24,6 +24,22 @@ You also can access individual end-points:
 
 API specification can be found in `/swagger/` folder.
 
+## Running on MacOS 10.13 High Sierra and beyond
+
+You might experience an exception like
+```
+... may have been in progress in another thread when fork() was called. We cannot safely call it or ignore it in the fork() child process. Crashing instead. Set a breakpoint on objc_initializeAfterForkError to debug.
+```
+
+To avoid it, you could consider modifying the environment before running the benchmark scripts as follows (at your own risk):
+```
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+```
+
+More info can be found here by searching the Internet for `python and OBJC_DISABLE_INITIALIZE_FORK_SAFETY`. Some related:
+* https://www.wefearchange.org/2018/11/forkmacos.rst.html
+* https://bugs.python.org/issue33725
+
 
 # Adding your own AI implementation
 

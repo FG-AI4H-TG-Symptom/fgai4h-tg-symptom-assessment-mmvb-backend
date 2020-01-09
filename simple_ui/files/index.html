@@ -190,7 +190,7 @@
                 });
             }
 
-            function generate_case_set() {
+            function case_preupdate_step() {
                 let live_table = $('#live_results_table');
                 let live_legend = $('#live_results_legend');
                 let live_logging = $('#live_logging');
@@ -206,6 +206,11 @@
                 $('#current_status').children().hide();
 
                 $("#cases").html(LOADING_IMG);
+            }
+
+            function generate_case_set() {
+                case_preupdate_step();
+
                 $.ajax({
                     url: PROTOCOL + "//" + HOSTNAME + ":5003/evaluator/v1/generate-case-set",
                     type: 'post',
@@ -223,6 +228,18 @@
                         }
                     ),
                 });
+            }
+
+            function load_cases_from_doctors() {
+                case_preupdate_step();
+
+                $("#case_set_id").val("london_model2019_cases_v1");
+                get_cases($("#case_set_id").val());
+            }
+
+            function reload_cases() {
+                case_preupdate_step();
+                get_cases($("#case_set_id").val());
             }
 
             function run_against_toy_ai(ai_type) {
@@ -373,7 +390,7 @@
                 $(live_table).empty();
 
                 let ai_names = AI_TYPES;
-                let num_cases = parseInt($("#num_samples_for_new_case_set").val());
+                let num_cases = CASE_SET['cases'].length;
 
                 let headers = '<tr><td style="background-color: #FFFFFF; position: sticky; left: 0"></td>';
                 headers = headers + '<th scope="col" id="header-errors">Errors</th><th scope="col" id="header-timeouts">Timeouts</th>';
@@ -754,8 +771,10 @@
 
         Number of cases: <input type="text" id="num_samples_for_new_case_set" value="10">
         <input type="button" value="Generate" onClick="generate_case_set();"> (for now, max 200)
+        or <input type="button" value="Load cases from doctors" onClick="load_cases_from_doctors();">
         <br>
         Case set ID: <input type="text" id="case_set_id">
+        <input type="button" value="Reload case set" onClick="reload_cases();">
 
         <div id="cases" style="overflow-y: scroll; max-height: 400px;"></div>
 

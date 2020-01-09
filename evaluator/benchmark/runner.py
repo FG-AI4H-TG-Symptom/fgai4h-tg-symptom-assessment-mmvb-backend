@@ -165,6 +165,7 @@ class BenchmarkRunner(Process):
                 data={"aiImplementation": self.ai_name},
                 headers={"Content-Type": "application/json"},
             )
+
         except Exception as exc:
             should_retry = self._update_attempts()
             if should_retry:

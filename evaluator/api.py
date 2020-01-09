@@ -8,6 +8,7 @@ import hashlib
 import json
 import os
 import queue
+import shutil
 import time
 from multiprocessing import Process, Queue
 from threading import Thread
@@ -74,9 +75,18 @@ AI_TYPES_TO_LOCATIONS = {}
 for key, value in AI_TYPES_ENDPOINTS.items():
     AI_TYPES_TO_LOCATIONS[key] = value["solve_case"]
 
-#  TODO: delete all benchmarks from this dictionary
+# TODO: delete all benchmarks from this dictionary
 # and from the database after some timeout
 BENCHMARK_MANAGERS = {}
+
+
+# Preparing human doctor cases (London 2019 model)
+if not os.path.isdir("data/london_model2019_cases_v1"):
+    os.mkdir("data/london_model2019_cases_v1")
+    shutil.copyfile(
+        "../data/doctor_cases/london_model/cases.json",
+        "data/london_model2019_cases_v1/cases.json",
+    )
 
 
 def get_unique_id():
@@ -86,7 +96,7 @@ def get_unique_id():
 def parse_validate_caseSetId(caseSetId):
     case_set_id = str(caseSetId)
     for char in case_set_id:
-        assert char in [str(x) for x in range(10)] or char == "_"
+        assert char in "abcdefghijklmnopqrstuvwxyz0123456789_"
     return case_set_id
 
 
