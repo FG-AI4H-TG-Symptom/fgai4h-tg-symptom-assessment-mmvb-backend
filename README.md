@@ -36,7 +36,7 @@ To avoid it, you could consider modifying the environment before running the ben
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 ```
 
-More info can be found here by searching the Internet for `python and OBJC_DISABLE_INITIALIZE_FORK_SAFETY`. Some related:
+More info can be found here by searching the Internet for `python and OBJC_DISABLE_INITIALIZE_FORK_SAFETY`. Some related links:
 * https://www.wefearchange.org/2018/11/forkmacos.rst.html
 * https://bugs.python.org/issue33725
 
