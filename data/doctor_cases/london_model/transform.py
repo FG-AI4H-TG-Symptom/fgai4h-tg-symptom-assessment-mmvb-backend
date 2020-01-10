@@ -8,7 +8,7 @@ for condition in model_data["conditions"]:
 for condition in model_data["symptoms"]:
     concept_names_to_ids[condition["name"]] = condition["id"]
 
-STATE_MAPPING = {"present": "true", "absent": "false", "unknown": "unsure"}
+STATE_MAPPING = {"present": "present", "absent": "absent", "unknown": "unsure"}
 
 TRIAGE_MAPPING = {"self_care": "SC", "primary_care": "PC", "emergency": "EC"}
 
@@ -18,7 +18,7 @@ def create_concept(concept_name):
 
 
 def create_concept_and_state(concept_name, concept_state):
-    assert concept_state in ["true", "false", "unsure"]
+    assert concept_state in ["present", "absent", "unsure"]
     return dict(state=concept_state, **create_concept(concept_name))
 
 
@@ -54,7 +54,7 @@ with open("CollectingCasesLondonModel.csv") as csvfile:
             assert sex in ["male", "female"]
 
             presenting_complaint_concept_and_state = create_concept_and_state(
-                row[5], "true"
+                row[5], "present"
             )
 
             # Note: the `otherFeatures` are recorded below in a separate "if".

@@ -8,7 +8,7 @@
       },
       "presentingComplaints": [
         {
-          "state": "true",
+          "state": "present",
           "name": "Dysuria",
           "id": "5389fc3aab7ca2618978d6c1aceef39f"
         }
@@ -20,7 +20,7 @@
       },
       "otherFeatures": [
         {
-          "state": "true",
+          "state": "present",
           "name": "Increased Urination Freq.",
           "id": "e5bcdaa4cf15318b6f021d4168c702d0"
         }
@@ -43,7 +43,7 @@
       },
       "presentingComplaints": [
         {
-          "state": "true",
+          "state": "present",
           "name": "Diarrhoea",
           "id": "6e16a75aff90a62324940175453741f1"
         }
@@ -55,32 +55,32 @@
       },
       "otherFeatures": [
         {
-          "state": "false",
+          "state": "absent",
           "name": "Fever",
           "id": "5780df68fc82bfb733e0b3d0520d3179"
         },
         {
-          "state": "true",
+          "state": "present",
           "name": "Vomiting",
           "id": "c643bff833aaa9a47e3421a8c8f35445"
         },
         {
-          "state": "true",
+          "state": "present",
           "name": "Abdo Pain Cramping Central 2 days",
           "id": "1e400ff9b77134121117183e3fc9b7a2"
         },
         {
-          "state": "true",
+          "state": "present",
           "name": "Vomiting",
           "id": "c643bff833aaa9a47e3421a8c8f35445"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "sharp lower quadrant pain",
           "id": "7a3094ceceac3afdae15243c11031588"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "Dysuria",
           "id": "5389fc3aab7ca2618978d6c1aceef39f"
         }
@@ -103,7 +103,7 @@
       },
       "presentingComplaints": [
         {
-          "state": "true",
+          "state": "present",
           "name": "heartburn",
           "id": "94b2b09c9194b316738dfc56b526e124"
         }
@@ -115,17 +115,17 @@
       },
       "otherFeatures": [
         {
-          "state": "true",
+          "state": "present",
           "name": "Abdo Pain Cramping Central 2 days",
           "id": "1e400ff9b77134121117183e3fc9b7a2"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "Vomiting",
           "id": "c643bff833aaa9a47e3421a8c8f35445"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "Fever",
           "id": "5780df68fc82bfb733e0b3d0520d3179"
         }
@@ -148,7 +148,7 @@
       },
       "presentingComplaints": [
         {
-          "state": "true",
+          "state": "present",
           "name": "sharp lower quadrant pain",
           "id": "7a3094ceceac3afdae15243c11031588"
         }
@@ -160,22 +160,22 @@
       },
       "otherFeatures": [
         {
-          "state": "true",
+          "state": "present",
           "name": "Abdo Pain Cramping Central 2 days",
           "id": "1e400ff9b77134121117183e3fc9b7a2"
         },
         {
-          "state": "true",
+          "state": "present",
           "name": "Diarrhoea",
           "id": "6e16a75aff90a62324940175453741f1"
         },
         {
-          "state": "true",
+          "state": "present",
           "name": "Fever",
           "id": "5780df68fc82bfb733e0b3d0520d3179"
         },
         {
-          "state": "true",
+          "state": "present",
           "name": "Weight Loss",
           "id": "bcdc01d83bfb31c85ec47efc0642304e"
         }
@@ -198,7 +198,7 @@
       },
       "presentingComplaints": [
         {
-          "state": "true",
+          "state": "present",
           "name": "heartburn",
           "id": "94b2b09c9194b316738dfc56b526e124"
         }
@@ -210,22 +210,22 @@
       },
       "otherFeatures": [
         {
-          "state": "false",
+          "state": "absent",
           "name": "Vomiting",
           "id": "c643bff833aaa9a47e3421a8c8f35445"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "Weight Loss",
           "id": "bcdc01d83bfb31c85ec47efc0642304e"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "Diarrhoea",
           "id": "6e16a75aff90a62324940175453741f1"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "Abdo Pain Cramping Central 2 days",
           "id": "1e400ff9b77134121117183e3fc9b7a2"
         }
@@ -248,7 +248,7 @@
       },
       "presentingComplaints": [
         {
-          "state": "true",
+          "state": "present",
           "name": "Haematuria",
           "id": "0c99a4e31fbba26dc64364ea53cfe3c7"
         }
@@ -260,27 +260,27 @@
       },
       "otherFeatures": [
         {
-          "state": "false",
+          "state": "absent",
           "name": "Fever",
           "id": "5780df68fc82bfb733e0b3d0520d3179"
         },
         {
-          "state": "true",
+          "state": "present",
           "name": "Increased Urination Freq.",
           "id": "e5bcdaa4cf15318b6f021d4168c702d0"
         },
         {
-          "state": "true",
+          "state": "present",
           "name": "Weight Loss",
           "id": "bcdc01d83bfb31c85ec47efc0642304e"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "Dysuria",
           "id": "5389fc3aab7ca2618978d6c1aceef39f"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "sharp lower quadrant pain",
           "id": "7a3094ceceac3afdae15243c11031588"
         }
@@ -303,7 +303,7 @@
       },
       "presentingComplaints": [
         {
-          "state": "true",
+          "state": "present",
           "name": "sharp lower quadrant pain",
           "id": "7a3094ceceac3afdae15243c11031588"
         }
@@ -315,12 +315,12 @@
       },
       "otherFeatures": [
         {
-          "state": "true",
+          "state": "present",
           "name": "Vomiting",
           "id": "c643bff833aaa9a47e3421a8c8f35445"
         },
         {
-          "state": "true",
+          "state": "present",
           "name": "Fever",
           "id": "5780df68fc82bfb733e0b3d0520d3179"
         },
@@ -348,7 +348,7 @@
       },
       "presentingComplaints": [
         {
-          "state": "true",
+          "state": "present",
           "name": "sharp lower quadrant pain",
           "id": "7a3094ceceac3afdae15243c11031588"
         }
@@ -360,27 +360,27 @@
       },
       "otherFeatures": [
         {
-          "state": "true",
+          "state": "present",
           "name": "Fever",
           "id": "5780df68fc82bfb733e0b3d0520d3179"
         },
         {
-          "state": "true",
+          "state": "present",
           "name": "Vomiting",
           "id": "c643bff833aaa9a47e3421a8c8f35445"
         },
         {
-          "state": "true",
+          "state": "present",
           "name": "Dysuria",
           "id": "5389fc3aab7ca2618978d6c1aceef39f"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "Factor: missed period",
           "id": "3a52b6cdfb48b741c1e07599eb03fad3"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "Haematuria",
           "id": "0c99a4e31fbba26dc64364ea53cfe3c7"
         }
@@ -403,7 +403,7 @@
       },
       "presentingComplaints": [
         {
-          "state": "true",
+          "state": "present",
           "name": "Abdo Pain Cramping Central 2 days",
           "id": "1e400ff9b77134121117183e3fc9b7a2"
         }
@@ -415,22 +415,22 @@
       },
       "otherFeatures": [
         {
-          "state": "true",
+          "state": "present",
           "name": "Fever",
           "id": "5780df68fc82bfb733e0b3d0520d3179"
         },
         {
-          "state": "true",
+          "state": "present",
           "name": "Vomiting",
           "id": "c643bff833aaa9a47e3421a8c8f35445"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "Diarrhoea",
           "id": "6e16a75aff90a62324940175453741f1"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "heartburn",
           "id": "94b2b09c9194b316738dfc56b526e124"
         }
@@ -453,7 +453,7 @@
       },
       "presentingComplaints": [
         {
-          "state": "true",
+          "state": "present",
           "name": "Haematuria",
           "id": "0c99a4e31fbba26dc64364ea53cfe3c7"
         }
@@ -465,27 +465,27 @@
       },
       "otherFeatures": [
         {
-          "state": "true",
+          "state": "present",
           "name": "Weight Loss",
           "id": "bcdc01d83bfb31c85ec47efc0642304e"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "Abdo Pain Cramping Central 2 days",
           "id": "1e400ff9b77134121117183e3fc9b7a2"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "sharp lower quadrant pain",
           "id": "7a3094ceceac3afdae15243c11031588"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "Fever",
           "id": "5780df68fc82bfb733e0b3d0520d3179"
         },
         {
-          "state": "false",
+          "state": "absent",
           "name": "Dysuria",
           "id": "5389fc3aab7ca2618978d6c1aceef39f"
         }
