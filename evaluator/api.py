@@ -133,7 +133,7 @@ def list_case_sets():
 
     return {
         "existing_case_sets": [
-            element.replace(path, "") for element in glob.glob(path + "*")
+            {'id': element.replace(path, "")} for element in glob.glob(path + "*")
         ]
     }
 
