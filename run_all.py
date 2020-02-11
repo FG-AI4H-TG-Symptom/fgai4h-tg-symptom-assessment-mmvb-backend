@@ -59,20 +59,21 @@ def start_participants__babylon_toy_ai():
     participants__babylon_toy_ai.run(port=5006, host=CONFIG_DEFAULT_HOST)
 
 
-case_generator = Process(target=start_case_generator)
-case_generator.start()
+if __name__ == '__main__':
+    case_generator = Process(target=start_case_generator)
+    case_generator.start()
 
-toy_ai = Process(target=start_toy_ai)
-toy_ai.start()
+    toy_ai = Process(target=start_toy_ai)
+    toy_ai.start()
 
-evaluator = Process(target=start_evaluator)
-evaluator.start()
+    evaluator = Process(target=start_evaluator)
+    evaluator.start()
 
-metric_calculator = Process(target=start_metric_calculator)
-metric_calculator.start()
+    metric_calculator = Process(target=start_metric_calculator)
+    metric_calculator.start()
 
-simple_ui = Process(target=start_simple_ui)
-simple_ui.start()
+    simple_ui = Process(target=start_simple_ui)
+    simple_ui.start()
 
-participants__babylon_toy_ai = Process(target=start_participants__babylon_toy_ai)
-participants__babylon_toy_ai.start()
+    participants__babylon_toy_ai = Process(target=start_participants__babylon_toy_ai)
+    participants__babylon_toy_ai.start()
