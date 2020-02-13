@@ -133,7 +133,9 @@ def list_case_sets():
 
     return {
         "existing_case_sets": [
-            {'id': element.replace(path, "")} for element in glob.glob(path + "*")
+            {"id": element.replace(path, "")}
+            for element in glob.glob(path + "*")
+            if ".db" not in element
         ]
     }
 
