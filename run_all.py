@@ -59,7 +59,7 @@ def start_participants__babylon_toy_ai():
     participants__babylon_toy_ai.run(port=5006, host=CONFIG_DEFAULT_HOST)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     case_generator = Process(target=start_case_generator)
     case_generator.start()
 
