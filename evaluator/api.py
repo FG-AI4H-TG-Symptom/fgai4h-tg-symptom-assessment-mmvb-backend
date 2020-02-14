@@ -131,9 +131,12 @@ def generate_case_set(request):
 def list_case_sets():
     path = os.path.join(FILE_DIR, "data/")
 
+    # TODO: refactor `.db` and `burnt_cases`
     return {
         "existing_case_sets": [
-            element.replace(path, "") for element in glob.glob(path + "*")
+            {"id": element.replace(path, "")}
+            for element in glob.glob(path + "*")
+            if ".db" not in element and "burnt_cases" not in element
         ]
     }
 
