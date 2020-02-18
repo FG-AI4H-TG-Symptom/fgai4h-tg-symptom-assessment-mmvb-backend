@@ -70,11 +70,6 @@
           "id": "1e400ff9b77134121117183e3fc9b7a2"
         },
         {
-          "state": "present",
-          "name": "Vomiting",
-          "id": "c643bff833aaa9a47e3421a8c8f35445"
-        },
-        {
           "state": "absent",
           "name": "sharp lower quadrant pain",
           "id": "7a3094ceceac3afdae15243c11031588"

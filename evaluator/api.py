@@ -82,6 +82,7 @@ BENCHMARK_MANAGERS = {}
 
 # Preparing human doctor cases (London 2019 model)
 if not os.path.isdir("data/london_model2019_cases_v1"):
+    # TODO: improve this link
     os.mkdir("data/london_model2019_cases_v1")
     shutil.copyfile(
         "../data/doctor_cases/london_model/cases.json",
