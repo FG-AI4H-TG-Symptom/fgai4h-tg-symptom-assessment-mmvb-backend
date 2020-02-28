@@ -80,6 +80,7 @@ for key, value in AI_TYPES_ENDPOINTS.items():
 # and from the database after some timeout
 BENCHMARK_MANAGERS = {}
 
+# TODO: refactor.
 # This is introduced temporarily until the clients
 # start calling `report_update` only after
 # `run_case_set_against_ais` has returned.
