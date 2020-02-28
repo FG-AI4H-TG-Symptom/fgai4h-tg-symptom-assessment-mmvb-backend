@@ -80,12 +80,6 @@ for key, value in AI_TYPES_ENDPOINTS.items():
 # and from the database after some timeout
 BENCHMARK_MANAGERS = {}
 
-# TODO: refactor.
-# This is introduced temporarily until the clients
-# start calling `report_update` only after
-# `run_case_set_against_ais` has returned.
-BENCHMARK_MANAGERS_IS_FULLY_RUNNING = {}
-
 
 # Preparing human doctor cases (London 2019 model)
 if not os.path.isdir("data/london_model2019_cases_v1"):
@@ -333,7 +327,6 @@ def create_benchmark_manager():
     unique_id = get_unique_id()
 
     BENCHMARK_MANAGERS[unique_id] = "PLACEHOLDER"
-    BENCHMARK_MANAGERS_IS_FULLY_RUNNING[unique_id] = False
 
     return {"benchmarkManagerId": unique_id}
 
@@ -358,18 +351,12 @@ def run_case_set_against_ais(request):
     BENCHMARK_MANAGERS[unique_id][1].put(("Start", request, unique_id))
 
     result = BENCHMARK_MANAGERS[unique_id][2].get()
-    BENCHMARK_MANAGERS_IS_FULLY_RUNNING[unique_id] = True
 
     return result
 
 
 def report_update(request):
     benchmarkId = request["benchmarkId"]
-
-    for waiting_step in range(10):
-        if BENCHMARK_MANAGERS_IS_FULLY_RUNNING[benchmarkId]:
-            break
-        time.sleep(1.0)
 
     print("Requesting result...")
 
@@ -380,7 +367,6 @@ def report_update(request):
     if len(result["results_by_ai"]) > 0:
         BENCHMARK_MANAGERS[benchmarkId][1].put(None)
         del BENCHMARK_MANAGERS[benchmarkId]
-        del BENCHMARK_MANAGERS_IS_FULLY_RUNNING[benchmarkId]
 
     print("Got result", result)
 
