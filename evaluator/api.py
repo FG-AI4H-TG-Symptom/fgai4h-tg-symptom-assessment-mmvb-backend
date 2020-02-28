@@ -12,6 +12,7 @@ import shutil
 import time
 from multiprocessing import Process, Queue
 from threading import Thread
+from pathlib import Path
 
 import requests
 
@@ -218,11 +219,13 @@ class BenchmarkManagerWorker:
                     def run_me():
                         output = benchmark_manager.run_benchmark()
                         results = output["results"]
+                        results_path = os.path.join(FILE_DIR, "data", case_set_id, unique_id)
+                        Path(results_path).mkdir(parents=True, exist_ok=True)
                         json.dump(
                             results,
                             open(
                                 os.path.join(
-                                    FILE_DIR, "data", case_set_id, "results.json"
+                                    results_path, "results.json"
                                 ),
                                 "w",
                             ),
@@ -260,24 +263,20 @@ class BenchmarkManagerWorker:
                         )
 
                     results_file_path = os.path.join(
-                        FILE_DIR, "data", manager.case_set_id, "results.json"
+                        FILE_DIR, "data", manager.case_set_id, manager.benchmark_id, "results.json"
                     )
 
                     if (
                         manager.state == ManagerStatuses.IDLE
                         and os.path.isfile(results_file_path)
-                        and len(collected_reports) > 0
                     ):
-                        #  TODO:
-                        #  It should consume only the results for this
-                        #  particular benchmark run, not general
-                        #  results for this case ID.
                         results = json.load(
                             open(
                                 os.path.join(
                                     FILE_DIR,
                                     "data",
                                     manager.case_set_id,
+                                    manager.benchmark_id,
                                     "results.json",
                                 ),
                                 "r",
