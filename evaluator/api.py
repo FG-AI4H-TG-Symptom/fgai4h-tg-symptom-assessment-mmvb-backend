@@ -260,7 +260,7 @@ class BenchmarkManagerWorker:
 
                     if manager.state == ManagerStatuses.IDLE and os.path.isfile(
                         results_file_path
-                    ):
+                    ) and len(collected_reports) > 0:
                         # TODO:
                         # It should consume only the results for this
                         # particular benchmark run, not general
