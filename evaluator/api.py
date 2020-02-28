@@ -261,6 +261,10 @@ class BenchmarkManagerWorker:
                     if manager.state == ManagerStatuses.IDLE and os.path.isfile(
                         results_file_path
                     ):
+                        # TODO:
+                        # It should consume only the results for this
+                        # particular benchmark run, not general
+                        # results for this case ID.
                         results = json.load(
                             open(
                                 os.path.join(
