@@ -196,11 +196,7 @@ class BenchmarkManagerWorker:
                     break
 
                 if value[0] == "Start":
-                    print("Starting...")
-
                     self.benchmark_manager = BenchmarkManager(benchmark_start_time=self.benchmark_start_time)
-
-                    print("Created a benchmark manager object...")
 
                     benchmark_manager = self.benchmark_manager
                     request = value[1]
@@ -225,13 +221,9 @@ class BenchmarkManagerWorker:
                         open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json"))
                     )
 
-                    print("Ready to setup the benchmark manager object...")
-
                     benchmark_manager.setup(
                         unique_id, case_set_id, cases, benchmarked_ais
                     )
-
-                    print("Have setup the benchmark manager object...")
 
                     def run_me():
                         output = benchmark_manager.run_benchmark()
