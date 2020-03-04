@@ -1,4 +1,5 @@
 import json
+import time
 from multiprocessing import Process
 from timeit import default_timer as timer
 
@@ -15,6 +16,7 @@ from evaluator.benchmark.definitions import (
 )
 from evaluator.benchmark.exceptions import UnhealthyAIError
 from evaluator.benchmark.signals import ProcessSignal
+from evaluator.constants import MAX_BENCHMARK_RUN_TIME
 from logs.logger import get_logger
 
 logger = get_logger()
@@ -26,7 +28,9 @@ class BenchmarkRunner(Process):
     of a given AI
     """
 
-    def __init__(self, ai_name, ai_config, in_pipe, out_queue, runner_id):
+    def __init__(
+        self, ai_name, ai_config, in_pipe, out_queue, runner_id, benchmark_start_time
+    ):
         super().__init__()
         self.ai_name = ai_name
         self.runner_id = runner_id
@@ -35,26 +39,38 @@ class BenchmarkRunner(Process):
         self.solve_case_attempts = 1
         self.in_pipe = in_pipe
         self.out_queue = out_queue
+        self.benchmark_start_time = benchmark_start_time
+
+    def if_timeout(self):
+        return time.time() - self.benchmark_start_time > MAX_BENCHMARK_RUN_TIME
 
     def run(self):
-
-        signal, parameters = self.in_pipe.recv()
-
         try:
-            while signal is not ProcessSignal.TERMINATE:
+            while True:
+                if self.if_timeout():
+                    return
 
-                if signal == ProcessSignal.HEALTH_CHECK:
-                    self.is_healthy(parameters["case_id"])
+                if self.in_pipe.poll(timeout=1.0):
+                    signal, parameters = self.in_pipe.recv()
 
-                elif signal == ProcessSignal.SOLVE_CASE:
-                    solvecase_result = self.solve_case(parameters["case"])
-                    self.out_queue.put((signal, self.runner_id, solvecase_result))
-                    self.out_queue.put((ProcessSignal.SENTINEL, self.runner_id, None))
+                    if signal == ProcessSignal.TERMINATE:
+                        break
 
-                elif signal == ProcessSignal.SENTINEL:
-                    raise ValueError(f"Unexpected signal {signal} received")
+                    elif signal == ProcessSignal.HEALTH_CHECK:
+                        self.is_healthy(parameters["case_id"])
 
-                signal, parameters = self.in_pipe.recv()
+                    elif signal == ProcessSignal.SOLVE_CASE:
+                        solvecase_result = self.solve_case(parameters["case"])
+                        self.out_queue.put((signal, self.runner_id, solvecase_result))
+                        self.out_queue.put(
+                            (ProcessSignal.SENTINEL, self.runner_id, None)
+                        )
+
+                    elif signal == ProcessSignal.SENTINEL:
+                        raise ValueError(f"Unexpected signal {signal} received")
+
+                else:
+                    continue
         finally:
             self.out_queue.put(
                 (
@@ -136,6 +152,8 @@ class BenchmarkRunner(Process):
         wait_exponential_max=MAX_WAIT_BETWEEN_RETRIES * 1000,
     )
     def is_healthy(self, case_id):
+        if self.if_timeout():
+            return
 
         result = {
             "ai_name": self.ai_name,
@@ -254,6 +272,8 @@ class BenchmarkRunner(Process):
                     self._respond_healthcheck_signal(result, send_sentinel=True)
 
     def solve_case(self, case):
+        if self.if_timeout():
+            return
 
         return_dict = {
             "ai_name": self.ai_name,
