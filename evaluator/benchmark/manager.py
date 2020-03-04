@@ -129,7 +129,8 @@ class BenchmarkManager(object):
 
         return result
 
-    def _run_benchmark(self):
+    def _run_benchmark(self):  # noqa: C901
+        # TODO: refactor
         self.__state = ManagerStatuses.RUNNING
         results = {}
         burnt_cases_path = os.path.join(DATA_DIR, "burnt_cases")
