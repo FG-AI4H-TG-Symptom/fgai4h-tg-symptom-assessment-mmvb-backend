@@ -13,12 +13,18 @@ import time
 from multiprocessing import Process, Queue
 from threading import Thread
 from pathlib import Path
+import queue
 
 import requests
 
 from evaluator.benchmark.definitions import ManagerStatuses
 from evaluator.benchmark.manager import BenchmarkManager
 from evaluator.benchmark.utils import create_dirs
+from evaluator.constants import (
+    MAX_BENCHMARK_RUN_TIME,
+    QUEUE_GET_TIMEOUT,
+    QUEUE_PUT_TIMEOUT,
+)
 
 SERVER_HOST_FOR_CASE_GENERATION = "http://0.0.0.0:5001"
 
@@ -165,24 +171,36 @@ def list_all_ai_implementations():
 # Idea based on
 # https://stackoverflow.com/questions/54091439/how-to-run-python-custom-objects-in-separate-processes-all-working-on-a-shared
 class BenchmarkManagerWorker:
-    def __init__(self, commands: Queue, results: Queue):
+    def __init__(self, commands: Queue, results: Queue, benchmark_start_time):
         self.commands = commands
         self.results = results
+        self.benchmark_start_time = benchmark_start_time
+
+    def if_timeout(self):
+        return time.time() - self.benchmark_start_time > MAX_BENCHMARK_RUN_TIME
 
     def main(self):
         while True:
-            value = self.commands.get()
+            if self.if_timeout():
+                return
 
             try:
-                print("Value is ", value)
+                value = self.commands.get(block=True, timeout=1.0)
+            except queue.Empty:
+                continue
 
+            try:
                 if value is None:
-                    self.results.put(None)
-                    print("Breaking because of None")
+                    self.results.put_nowait(None)
+                    print("Breaking as requested")
                     break
 
                 if value[0] == "Start":
-                    self.benchmark_manager = BenchmarkManager()
+                    print("Starting...")
+
+                    self.benchmark_manager = BenchmarkManager(benchmark_start_time=self.benchmark_start_time)
+
+                    print("Created a benchmark manager object...")
 
                     benchmark_manager = self.benchmark_manager
                     request = value[1]
@@ -207,9 +225,13 @@ class BenchmarkManagerWorker:
                         open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json"))
                     )
 
+                    print("Ready to setup the benchmark manager object...")
+
                     benchmark_manager.setup(
                         unique_id, case_set_id, cases, benchmarked_ais
                     )
+
+                    print("Have setup the benchmark manager object...")
 
                     def run_me():
                         output = benchmark_manager.run_benchmark()
@@ -229,12 +251,12 @@ class BenchmarkManagerWorker:
 
                     Thread(target=run_me).start()
 
-                    self.results.put("Started")
+                    self.results.put_nowait("Started")
 
                 if value[0] == "GetStatus":
                     manager = self.benchmark_manager
 
-                    self.results.put(manager.state)
+                    self.results.put_nowait(manager.state)
 
                 if value[0] == "GetUpdate":
                     print("  Preparing the update...")
@@ -298,10 +320,10 @@ class BenchmarkManagerWorker:
                         "logs": manager.accumulated_logs,
                     }
 
-                    self.results.put(output)
+                    self.results.put_nowait(output)
             except:  # noqa: E722
                 # TODO: improve on this bare `except`
-                self.results.put("Error")
+                self.results.put_nowait("Error")
 
                 continue
 
@@ -309,24 +331,21 @@ class BenchmarkManagerWorker:
 def create_benchmark_manager():
     num_running_benchmarks = 0
     for benchmark_iterator in BENCHMARK_MANAGERS.values():
-        if benchmark_iterator == "PLACEHOLDER":
+        if benchmark_iterator['object'] == "PLACEHOLDER":
             continue
 
-        benchmark_iterator[1].put(("GetStatus", 0))
-        try:
-            result = benchmark_iterator[2].get(block=True, timeout=1)
-            if result != ManagerStatuses.IDLE:
-                num_running_benchmarks += 1
-        except queue.Empty:
-            print("Not alive worker?..")
-            pass
+        num_running_benchmarks += 1
 
     if num_running_benchmarks > LIMIT_MAX_NUM_RUNNING_BENCHMARKS:
         return {"benchmarkManagerId": "CantCreateBecauseTooBusy"}
 
     unique_id = get_unique_id()
 
-    BENCHMARK_MANAGERS[unique_id] = "PLACEHOLDER"
+    BENCHMARK_MANAGERS[unique_id] = {
+        "created": time.time(),
+        "object": "PLACEHOLDER",
+        "started": False,
+    }
 
     return {"benchmarkManagerId": unique_id}
 
@@ -336,21 +355,30 @@ def run_case_set_against_ais(request):
 
     unique_id = request["benchmarkManagerId"]
 
-    commands_queue = Queue()
-    results_queue = Queue()
-    instance = BenchmarkManagerWorker(commands_queue, results_queue)
+    commands_queue = Queue(1)
+    results_queue = Queue(1)
+    instance = BenchmarkManagerWorker(commands_queue, results_queue, benchmark_start_time=time.time())
 
-    BENCHMARK_MANAGERS[unique_id] = (
+    BENCHMARK_MANAGERS[unique_id]['object'] = (
         Process(target=instance.main),
         commands_queue,
         results_queue,
     )
 
-    BENCHMARK_MANAGERS[unique_id][0].start()
+    BENCHMARK_MANAGERS[unique_id]['object'][0].start()
 
-    BENCHMARK_MANAGERS[unique_id][1].put(("Start", request, unique_id))
+    BENCHMARK_MANAGERS[unique_id]['started'] = True    
 
-    result = BENCHMARK_MANAGERS[unique_id][2].get()
+    BENCHMARK_MANAGERS[unique_id]['object'][1].put(
+        obj=("Start", request, unique_id),
+        block=True,
+        timeout=QUEUE_PUT_TIMEOUT,
+    )
+
+    result = BENCHMARK_MANAGERS[unique_id]['object'][2].get(
+        block=True,
+        timeout=QUEUE_GET_TIMEOUT,
+    )
 
     return result
 
@@ -360,14 +388,47 @@ def report_update(request):
 
     print("Requesting result...")
 
-    BENCHMARK_MANAGERS[benchmarkId][1].put(("GetUpdate", 0))
+    BENCHMARK_MANAGERS[benchmarkId]['object'][1].put(
+        obj=("GetUpdate", 0),
+        block=True,
+        timeout=QUEUE_PUT_TIMEOUT,
+    )
 
-    result = BENCHMARK_MANAGERS[benchmarkId][2].get()
+    result = BENCHMARK_MANAGERS[benchmarkId]['object'][2].get(
+        block=True,
+        timeout=QUEUE_GET_TIMEOUT,
+    )
 
     if len(result["results_by_ai"]) > 0:
-        BENCHMARK_MANAGERS[benchmarkId][1].put(None)
+        BENCHMARK_MANAGERS[benchmarkId]['object'][1].put(
+            obj=None,
+            block=True,
+            timeout=QUEUE_PUT_TIMEOUT,
+        )
+
         del BENCHMARK_MANAGERS[benchmarkId]
 
-    print("Got result", result)
-
     return result
+
+
+def process_controller():
+    while True:
+        for key, benchmark_iterator in list(BENCHMARK_MANAGERS.items()):
+            if (
+                benchmark_iterator['object'] != "PLACEHOLDER" and
+                benchmark_iterator['started'] and
+                not benchmark_iterator['object'][0].is_alive()
+            ):
+                BENCHMARK_MANAGERS.pop(key, None)
+                continue
+
+            # Check that the process is not running longer than expected:
+            if time.time() - benchmark_iterator['created'] > MAX_BENCHMARK_RUN_TIME:
+                BENCHMARK_MANAGERS.pop(key, None)
+                continue
+
+        time.sleep(0.01)
+
+
+process_controller_thread = Thread(target=process_controller, args=())
+process_controller_thread.start()

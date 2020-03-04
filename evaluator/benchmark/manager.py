@@ -1,12 +1,15 @@
 import os
 import random
 from multiprocessing import Pipe, Queue
+import queue
+import time
 
 from evaluator.benchmark.definitions import ManagerStatuses
 from evaluator.benchmark.reporter import create_database_client
 from evaluator.benchmark.runner import BenchmarkRunner
 from evaluator.benchmark.signals import ProcessSignal
 from evaluator.benchmark.utils import create_dirs
+from evaluator.constants import MAX_BENCHMARK_RUN_TIME
 from logs.logger import get_logger
 
 logger = get_logger()
@@ -16,23 +19,20 @@ DATA_DIR = os.path.join(
 )
 
 
-# class Borg(object):
-#     __shared_state = {}
-
-#     def __init__(self):
-#         self.__dict__ = self.__shared_state
-
-
 class BenchmarkManager(object):
     """Helper class for managing benchmark executions"""
 
-    def __init__(self):
-        # super().__init__()
+    def __init__(self, benchmark_start_time):
+        self.benchmark_start_time = benchmark_start_time
+
         try:
             self.benchmark_id
         except AttributeError:
             self.__state = ManagerStatuses.IDLE
             self.db_client = create_database_client()()
+
+    def if_timeout(self):
+        return time.time() - self.benchmark_start_time > MAX_BENCHMARK_RUN_TIME
 
     def setup(self, unique_id, case_set_id, case_set, benchmarked_ais):
         if self.__state == ManagerStatuses.IDLE:
@@ -69,7 +69,7 @@ class BenchmarkManager(object):
             for index, (ai_name, ai_config) in enumerate(self.benchmarked_ais.items()):
                 parent_conn, runner_conn = Pipe()
                 runner = BenchmarkRunner(
-                    ai_name, ai_config, runner_conn, self.result_queue, index
+                    ai_name, ai_config, runner_conn, self.result_queue, index, self.benchmark_start_time
                 )
                 ai_names.append(ai_name)
                 self.runners_pool.append((runner, parent_conn))
@@ -115,10 +115,14 @@ class BenchmarkManager(object):
         [runner.start() for runner, _ in self.runners_pool]
 
         try:
-            return self._run_benchmark()
+            result = self._run_benchmark()
         finally:
             for (_, pipe) in self.runners_pool:
                 pipe.send((ProcessSignal.TERMINATE, None))
+                logger.info("Terminating...")
+            self.finish_execution()
+
+        return result
 
     def _run_benchmark(self):
         self.__state = ManagerStatuses.RUNNING
@@ -131,6 +135,9 @@ class BenchmarkManager(object):
         logger.info(message)
 
         for case_num, case in enumerate(self.case_set):
+            if self.if_timeout():
+                return
+
             case_index = case_num + 1
             case_id = case["caseData"]["caseId"]
             results[case_id] = {}
@@ -152,7 +159,13 @@ class BenchmarkManager(object):
             sentinels = 0
             healthchecked_ai_ids = []
             while sentinels < len(self.runners_pool):
-                signal, runner_id, result = self.result_queue.get()
+                if self.if_timeout():
+                    return
+
+                try:
+                    signal, runner_id, result = self.result_queue.get(block=True, timeout=1.0)
+                except queue.Empty:
+                    continue
 
                 if signal == ProcessSignal.SENTINEL:
                     sentinels += 1
@@ -220,7 +233,13 @@ class BenchmarkManager(object):
 
             sentinels = 0
             while sentinels < len(healthchecked_ai_ids):
-                signal, runner_id, result = self.result_queue.get()
+                if self.if_timeout():
+                    return
+
+                try:
+                    signal, runner_id, result = self.result_queue.get(block=True, timeout=1.0)
+                except queue.Empty:
+                    continue
 
                 if signal == ProcessSignal.SENTINEL:
                     sentinels += 1
@@ -246,5 +265,4 @@ class BenchmarkManager(object):
         self.accumulated_logs.append(message)
         logger.info(message)
 
-        self.finish_execution()
         return {"benchmark_id": self.benchmark_id, "results": results}
