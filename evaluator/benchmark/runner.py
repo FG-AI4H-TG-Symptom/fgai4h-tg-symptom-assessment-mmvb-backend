@@ -28,7 +28,9 @@ class BenchmarkRunner(Process):
     of a given AI
     """
 
-    def __init__(self, ai_name, ai_config, in_pipe, out_queue, runner_id, benchmark_start_time):
+    def __init__(
+        self, ai_name, ai_config, in_pipe, out_queue, runner_id, benchmark_start_time
+    ):
         super().__init__()
         self.ai_name = ai_name
         self.runner_id = runner_id
@@ -60,7 +62,9 @@ class BenchmarkRunner(Process):
                     elif signal == ProcessSignal.SOLVE_CASE:
                         solvecase_result = self.solve_case(parameters["case"])
                         self.out_queue.put((signal, self.runner_id, solvecase_result))
-                        self.out_queue.put((ProcessSignal.SENTINEL, self.runner_id, None))
+                        self.out_queue.put(
+                            (ProcessSignal.SENTINEL, self.runner_id, None)
+                        )
 
                     elif signal == ProcessSignal.SENTINEL:
                         raise ValueError(f"Unexpected signal {signal} received")

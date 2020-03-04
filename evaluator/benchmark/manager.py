@@ -69,7 +69,12 @@ class BenchmarkManager(object):
             for index, (ai_name, ai_config) in enumerate(self.benchmarked_ais.items()):
                 parent_conn, runner_conn = Pipe()
                 runner = BenchmarkRunner(
-                    ai_name, ai_config, runner_conn, self.result_queue, index, self.benchmark_start_time
+                    ai_name,
+                    ai_config,
+                    runner_conn,
+                    self.result_queue,
+                    index,
+                    self.benchmark_start_time,
                 )
                 ai_names.append(ai_name)
                 self.runners_pool.append((runner, parent_conn))
@@ -163,7 +168,9 @@ class BenchmarkManager(object):
                     return
 
                 try:
-                    signal, runner_id, result = self.result_queue.get(block=True, timeout=1.0)
+                    signal, runner_id, result = self.result_queue.get(
+                        block=True, timeout=1.0
+                    )
                 except queue.Empty:
                     continue
 
@@ -237,7 +244,9 @@ class BenchmarkManager(object):
                     return
 
                 try:
-                    signal, runner_id, result = self.result_queue.get(block=True, timeout=1.0)
+                    signal, runner_id, result = self.result_queue.get(
+                        block=True, timeout=1.0
+                    )
                 except queue.Empty:
                     continue
 

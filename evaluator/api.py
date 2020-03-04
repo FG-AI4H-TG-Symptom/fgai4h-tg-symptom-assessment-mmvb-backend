@@ -196,7 +196,9 @@ class BenchmarkManagerWorker:
                     break
 
                 if value[0] == "Start":
-                    self.benchmark_manager = BenchmarkManager(benchmark_start_time=self.benchmark_start_time)
+                    self.benchmark_manager = BenchmarkManager(
+                        benchmark_start_time=self.benchmark_start_time
+                    )
 
                     benchmark_manager = self.benchmark_manager
                     request = value[1]
@@ -228,16 +230,13 @@ class BenchmarkManagerWorker:
                     def run_me():
                         output = benchmark_manager.run_benchmark()
                         results = output["results"]
-                        results_path = os.path.join(FILE_DIR, "data", case_set_id, unique_id)
+                        results_path = os.path.join(
+                            FILE_DIR, "data", case_set_id, unique_id
+                        )
                         Path(results_path).mkdir(parents=True, exist_ok=True)
                         json.dump(
                             results,
-                            open(
-                                os.path.join(
-                                    results_path, "results.json"
-                                ),
-                                "w",
-                            ),
+                            open(os.path.join(results_path, "results.json"), "w"),
                             indent=2,
                         )
 
@@ -272,12 +271,15 @@ class BenchmarkManagerWorker:
                         )
 
                     results_file_path = os.path.join(
-                        FILE_DIR, "data", manager.case_set_id, manager.benchmark_id, "results.json"
+                        FILE_DIR,
+                        "data",
+                        manager.case_set_id,
+                        manager.benchmark_id,
+                        "results.json",
                     )
 
-                    if (
-                        manager.state == ManagerStatuses.IDLE
-                        and os.path.isfile(results_file_path)
+                    if manager.state == ManagerStatuses.IDLE and os.path.isfile(
+                        results_file_path
                     ):
                         results = json.load(
                             open(
@@ -323,7 +325,7 @@ class BenchmarkManagerWorker:
 def create_benchmark_manager():
     num_running_benchmarks = 0
     for benchmark_iterator in BENCHMARK_MANAGERS.values():
-        if benchmark_iterator['object'] == "PLACEHOLDER":
+        if benchmark_iterator["object"] == "PLACEHOLDER":
             continue
 
         num_running_benchmarks += 1
@@ -349,27 +351,26 @@ def run_case_set_against_ais(request):
 
     commands_queue = Queue(1)
     results_queue = Queue(1)
-    instance = BenchmarkManagerWorker(commands_queue, results_queue, benchmark_start_time=time.time())
+    instance = BenchmarkManagerWorker(
+        commands_queue, results_queue, benchmark_start_time=time.time()
+    )
 
-    BENCHMARK_MANAGERS[unique_id]['object'] = (
+    BENCHMARK_MANAGERS[unique_id]["object"] = (
         Process(target=instance.main),
         commands_queue,
         results_queue,
     )
 
-    BENCHMARK_MANAGERS[unique_id]['object'][0].start()
+    BENCHMARK_MANAGERS[unique_id]["object"][0].start()
 
-    BENCHMARK_MANAGERS[unique_id]['started'] = True    
+    BENCHMARK_MANAGERS[unique_id]["started"] = True
 
-    BENCHMARK_MANAGERS[unique_id]['object'][1].put(
-        obj=("Start", request, unique_id),
-        block=True,
-        timeout=QUEUE_PUT_TIMEOUT,
+    BENCHMARK_MANAGERS[unique_id]["object"][1].put(
+        obj=("Start", request, unique_id), block=True, timeout=QUEUE_PUT_TIMEOUT
     )
 
-    result = BENCHMARK_MANAGERS[unique_id]['object'][2].get(
-        block=True,
-        timeout=QUEUE_GET_TIMEOUT,
+    result = BENCHMARK_MANAGERS[unique_id]["object"][2].get(
+        block=True, timeout=QUEUE_GET_TIMEOUT
     )
 
     return result
@@ -380,22 +381,17 @@ def report_update(request):
 
     print("Requesting result...")
 
-    BENCHMARK_MANAGERS[benchmarkId]['object'][1].put(
-        obj=("GetUpdate", 0),
-        block=True,
-        timeout=QUEUE_PUT_TIMEOUT,
+    BENCHMARK_MANAGERS[benchmarkId]["object"][1].put(
+        obj=("GetUpdate", 0), block=True, timeout=QUEUE_PUT_TIMEOUT
     )
 
-    result = BENCHMARK_MANAGERS[benchmarkId]['object'][2].get(
-        block=True,
-        timeout=QUEUE_GET_TIMEOUT,
+    result = BENCHMARK_MANAGERS[benchmarkId]["object"][2].get(
+        block=True, timeout=QUEUE_GET_TIMEOUT
     )
 
     if len(result["results_by_ai"]) > 0:
-        BENCHMARK_MANAGERS[benchmarkId]['object'][1].put(
-            obj=None,
-            block=True,
-            timeout=QUEUE_PUT_TIMEOUT,
+        BENCHMARK_MANAGERS[benchmarkId]["object"][1].put(
+            obj=None, block=True, timeout=QUEUE_PUT_TIMEOUT
         )
 
         del BENCHMARK_MANAGERS[benchmarkId]
@@ -407,15 +403,15 @@ def process_controller():
     while True:
         for key, benchmark_iterator in list(BENCHMARK_MANAGERS.items()):
             if (
-                benchmark_iterator['object'] != "PLACEHOLDER" and
-                benchmark_iterator['started'] and
-                not benchmark_iterator['object'][0].is_alive()
+                benchmark_iterator["object"] != "PLACEHOLDER"
+                and benchmark_iterator["started"]
+                and not benchmark_iterator["object"][0].is_alive()
             ):
                 BENCHMARK_MANAGERS.pop(key, None)
                 continue
 
             # Check that the process is not running longer than expected:
-            if time.time() - benchmark_iterator['created'] > MAX_BENCHMARK_RUN_TIME:
+            if time.time() - benchmark_iterator["created"] > MAX_BENCHMARK_RUN_TIME:
                 BENCHMARK_MANAGERS.pop(key, None)
                 continue
 

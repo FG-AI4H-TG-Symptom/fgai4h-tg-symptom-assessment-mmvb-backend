@@ -1,4 +1,3 @@
-
 # Max time for a benchmark to run (in seconds):
 MAX_BENCHMARK_RUN_TIME = 60 * 5
 
