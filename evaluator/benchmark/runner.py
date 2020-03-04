@@ -1,7 +1,7 @@
 import json
+import time
 from multiprocessing import Process
 from timeit import default_timer as timer
-import time
 
 import requests
 from requests.exceptions import ConnectTimeout, Timeout

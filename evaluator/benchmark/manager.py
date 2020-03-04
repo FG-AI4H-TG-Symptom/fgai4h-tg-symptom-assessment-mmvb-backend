@@ -1,8 +1,8 @@
 import os
-import random
-from multiprocessing import Pipe, Queue
 import queue
+import random
 import time
+from multiprocessing import Pipe, Queue
 
 from evaluator.benchmark.definitions import ManagerStatuses
 from evaluator.benchmark.reporter import create_database_client

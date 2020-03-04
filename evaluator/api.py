@@ -11,9 +11,8 @@ import queue
 import shutil
 import time
 from multiprocessing import Process, Queue
-from threading import Thread
 from pathlib import Path
-import queue
+from threading import Thread
 
 import requests
 
