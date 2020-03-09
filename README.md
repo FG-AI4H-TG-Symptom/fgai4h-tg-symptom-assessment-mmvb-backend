@@ -5,6 +5,8 @@ This is a backend of a minimal minimal viable benchmark (MMVB) designed and deve
 
 As mentioned on [the focus group website](https://www.itu.int/en/ITU-T/focusgroups/ai4h/Pages/default.aspx): “The ITU/WHO Focus Group on artificial intelligence for health (FG-AI4H) works in partnership with the World Health Organization (WHO) to establish a standardized assessment framework for the evaluation of AI-based methods for health, diagnosis, triage or treatment decisions. Participation in the FG-AI4H is free of charge and open to all.”
 
+Note that currently this repo has both a backend implementation and also a previous frontend implementation. The latest frontend version has been implemented and is located in this repo: https://github.com/FG-AI4H-TG-Symptom/fgai4h-tg-symptom-benchmarking-frontend
+
 
 
 # How to run
