@@ -80,4 +80,7 @@ python manage.py runserver
 ```
 
 The application api will be running on http://localhost:8000/api/v1/
+
 To check the admin interface, go to http://localhost:8000/admin/
+
+There is an experimental auto-generated documentation on http://localhost:8000/api/docs/
