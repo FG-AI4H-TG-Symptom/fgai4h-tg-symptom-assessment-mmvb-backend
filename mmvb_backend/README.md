@@ -1,4 +1,4 @@
-### Brief Instalation Instructions ###
+### Brief Installation Instructions ###
 
 The following instructions have been tested on a mac, if you are using another development environment the instructions
 might be a little bit different.
