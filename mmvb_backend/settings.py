@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'common',
     'ais',
+    'cases',
 ]
 
 MIDDLEWARE = [

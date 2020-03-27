@@ -4,6 +4,26 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 
+# TODO: those states should be decided upon for proper
+# TODO: implementation of the reviewing flow
+CREATED = "created"
+SUBMITTED = "submitted"
+REVIEWING = "reviewing"
+ADJUSTING = "adjusting"
+APPROVED = "approved"
+REJECTED = "rejected"
+PUBLISHED = "published"
+
+STATUS_OPTIONS = (
+    (CREATED, "Created"),
+    (SUBMITTED, "Submitted"),
+    (REVIEWING, "Reviewing"),
+    (ADJUSTING, "Adjusting"),
+    (APPROVED, "Approved"),
+    (REJECTED, "Rejected"),
+    (PUBLISHED, "Published")
+)
+
 
 class BaseModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
@@ -13,6 +33,21 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class FlowableModel(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    status = models.CharField(
+        max_length=50,
+        choices=STATUS_OPTIONS,
+        default=CREATED
+    )
+    public = models.NullBooleanField(default=False)
+
+    class Meta:
+        abstract = True
+
+    # TODO: implement flow states transition handling
 
 
 class Company(BaseModel):
