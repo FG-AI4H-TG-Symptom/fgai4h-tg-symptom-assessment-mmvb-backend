@@ -11,7 +11,6 @@ from ais.api.serializers import AIImplementationSerializer
 class AIImplementationViewSet(ModelViewSet):
     schema = AutoSchema(tags=['AI Implementations',])
     serializer_class = AIImplementationSerializer
-    http_method_names = ['get', 'post', 'head', 'put', 'delete']
 
     def get_queryset(self):
         return AIImplementation.objects.all()

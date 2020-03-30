@@ -16,10 +16,14 @@ uncontainerized local versions of the dependencies too.
 
 Create and activate a virtual environment with Python 3.7+.  
 Python 3.8.1 is recommended; you can use pyenv to manage your Python installations.
-
 ```
 $ python3 -m venv .venv
 $ source .venv/bin/activate
+```
+
+And make sure to update your python path for the next steps
+```
+export PYTHONPATH=$PYTHONPATH:./mmvb_backend
 ```
 
 ### Install and Configure MySQL
@@ -101,12 +105,6 @@ LDFLAGS=-L/usr/local/opt/openssl/lib pip install mysqlclient
 python -m pip install -r requirements.txt
 ```
 
-### Include project in PYTHONPATH
-
-```
-export PYTHONPATH=$PYTHONPATH:./mmvb_backend
-```
-
 ### Apply database schema
 
 ```
@@ -133,3 +131,17 @@ The application api will be running on [http://localhost:8000/api/v1/](http://lo
 To check the admin interface, go to [http://localhost:8000/admin/](http://localhost:8000/admin/)
 
 There is an experimental auto-generated documentation on [http://localhost:8000/api/docs/](http://localhost:8000/admin/)
+
+
+#### General Tips ####
+
+It is always useful to run `python manage.py migrate` after you checked out code from someone, as the data models/schema might
+have changed and you need to persist them.
+
+If/when you implement a new data model, you need to run:
+```
+$ python manage.py makemigrations
+$ python manage.py migrate
+```
+
+to generate the schema changes and apply them to the database.
