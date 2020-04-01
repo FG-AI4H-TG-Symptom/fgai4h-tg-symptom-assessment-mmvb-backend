@@ -18,10 +18,18 @@ from django.urls import path, include
 from rest_framework.schemas import get_schema_view
 from django.views.generic import TemplateView
 
+from common.routers import DefaultRouter
+
+from ais.api.urls import router as ais_router
+from cases.api.urls import router as cases_router
+
+router = DefaultRouter()
+router.extend(ais_router)
+router.extend(cases_router)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", include("ais.api.urls")),
+    path("api/v1/", include(router.urls)),
     path('openapi/', get_schema_view(
         title="WHO-ITU AI Benchmarking",
         description="",

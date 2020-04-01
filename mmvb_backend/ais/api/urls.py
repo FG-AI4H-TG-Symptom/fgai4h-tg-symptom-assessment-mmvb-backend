@@ -10,7 +10,3 @@ router = DefaultRouter()
 router.register(
     "ai-implementations", AIImplementationViewSet, basename="ai-implementations"
 )
-
-urlpatterns = [
-    path("v1/", include(router.urls)),
-]

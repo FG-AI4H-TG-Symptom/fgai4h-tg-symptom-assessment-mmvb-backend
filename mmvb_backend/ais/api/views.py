@@ -7,7 +7,7 @@ from rest_framework.viewsets import ModelViewSet
 from ais.models import AIImplementation
 from ais.api.serializers import AIImplementationSerializer
 
-# TODO: proper document endpoint
+# TODO: properly document endpoint
 class AIImplementationViewSet(ModelViewSet):
     schema = AutoSchema(tags=['AI Implementations',])
     serializer_class = AIImplementationSerializer
