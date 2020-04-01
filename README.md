@@ -62,6 +62,21 @@ LDFLAGS=-L/usr/local/opt/openssl/lib pip install mysqlclient
 python -m pip install -r requirements.txt
 ```
 
+#### Celery setup
+For using Celery (task queue) we will need to setup a message broker. Redis should be a good option.
+You should be able to download the proper docker image and run it with the following commands:
+
+```
+$ docker pull redis
+$ docker run -p 6379:6379 --name fgai4h-tg-symptom-mmvb-redis -d redis
+```
+
+On a dedicated shell, run the Celery worker server:
+
+```
+celery -A mmvb_backend worker -l info
+```
+
 #### Apply database schema ####
 
 ```
@@ -102,3 +117,20 @@ $ python manage.py migrate
 ```
 
 to generate the schema changes and apply them to the database.
+
+
+If you need to implement new celery tasks for any of your Django installed apps (the ones listed under `INSTALLED_APPS` in the project `settings.py` module) you only need to:
+
+  - Create (if not already created) a `tasks.py` module under the desired Django app directory (`cases` for example)
+  - Follow the template shown below on your `tasks.py`:
+  ```
+  from celery import shared_tasks
+
+  @shared_tasks
+  def add(x, y):
+      return x + y
+  ```
+
+Then you could simply import the `add` task somewhere in your code and run it and, if the celery worker server is up and running, your task would be executed.
+
+For more details check the [celery docs](https://docs.celeryproject.org/en/stable/django/first-steps-with-django.html).
