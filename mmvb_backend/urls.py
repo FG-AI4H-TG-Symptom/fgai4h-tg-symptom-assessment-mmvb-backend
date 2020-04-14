@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework.schemas import get_schema_view
 from django.views.generic import TemplateView
+from django.conf import settings
+from rest_framework.schemas import get_schema_view
 
 from common.routers import DefaultRouter
 
@@ -40,3 +41,9 @@ urlpatterns = [
         extra_context={'schema_url':'openapi-schema'}
     ), name='swagger-ui'),
 ]
+
+# TODO: try to do it in a cleaner way, using environment-dependant settings
+if "toy_ais" in settings.INSTALLED_APPS:
+    urlpatterns.append(
+        path('toy_ais/', include('toy_ais.urls')),
+    )
