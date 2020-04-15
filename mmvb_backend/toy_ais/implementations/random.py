@@ -19,7 +19,7 @@ class UniformRandomConditions(ToyAI):
         return {"data": f"OK from {cls.name}"}
 
     @classmethod
-    def solve_case(cls, *args, **kwargs):
+    def solve_case(cls, payload, *args, **kwargs):
         pass
 
 
@@ -38,5 +38,5 @@ class WeightedRandomConditions(ToyAI):
         return {"data": f"OK from {cls.name}"}
 
     @classmethod
-    def solve_case(cls, *args, **kwargs):
+    def solve_case(cls, payload, *args, **kwargs):
         pass
