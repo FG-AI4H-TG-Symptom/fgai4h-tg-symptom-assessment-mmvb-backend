@@ -1,7 +1,7 @@
 # FGAI4H TG Symptom – MMVB backend
 
-*This repository hosts the backend only. Find the frontend* 
-*[in this repository](https://github.com/FG-AI4H-TG-Symptom/fgai4h-tg-symptom-benchmarking-frontend)* 
+*This repository hosts the backend only. Find the frontend*
+*[in this repository](https://github.com/FG-AI4H-TG-Symptom/fgai4h-tg-symptom-benchmarking-frontend)*
 *and follow the instructions there.*
 
 ## Installation Instructions
@@ -14,7 +14,7 @@ uncontainerized local versions of the dependencies too.
 
 ### Virtual Environment
 
-Create and activate a virtual environment with Python 3.7+.  
+Create and activate a virtual environment with Python 3.7+.
 Python 3.8.1 is recommended; you can use pyenv to manage your Python installations.
 ```
 $ python3 -m venv .venv
@@ -25,6 +25,30 @@ And make sure to update your python path for the next steps
 ```
 export PYTHONPATH=$PYTHONPATH:./mmvb_backend
 ```
+
+### Requirements:
+
+The requirements for running the server locally can be installed by
+```
+$ make install_requirements
+```
+. This assumes the use of the pyenv.
+
+To install test requirements, which includes tools for development, run
+```
+$ make install_test_requirements
+```
+
+### Pre-commit hooks
+
+This repository lints and tests code as a part of the CI process.
+[Pre-commit][pre-commit] is a project that you can use to run a suite of tools to check the codebase.
+
+To install the hooks that we use run:
+
+    pre-commit install
+
+
 
 ### Install and Configure MySQL
 
@@ -42,7 +66,7 @@ echo 'export PATH="/usr/local/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
 Now, get the image and start up a container
 ```
 docker pull mysql
-docker run -p 3306:3306 --name fgai4h-tg-symptom-mmvb-mysql -e MYSQL_ROOT_PASSWORD='{your-password-here}' -d mysql 
+docker run -p 3306:3306 --name fgai4h-tg-symptom-mmvb-mysql -e MYSQL_ROOT_PASSWORD='{your-password-here}' -d mysql
 ```
 
 Then connect to MySQL using the root user (supply the password you specified above):
@@ -58,7 +82,7 @@ As an initial step you might need to run the following for being able to start M
 $ xcode-select --install
 ```
 
-These steps assume you have [Homebrew](https://brew.sh/) installed.  
+These steps assume you have [Homebrew](https://brew.sh/) installed.
 To install MySQL:
 ```
 $ brew install mysql

@@ -71,7 +71,8 @@ try:
         AI_TYPES_ENDPOINTS[key] = {
             "solve_case": value,
             # just for now:
-            "health_check": AI_LOCATION_ALPHA + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
+            "health_check": AI_LOCATION_ALPHA
+            + DEFAULT_HEALTH_CHECK_ENDPOINT_NAME,
         }
 except ModuleNotFoundError:
     pass
@@ -120,7 +121,8 @@ def generate_case_set(request):
 
     for case_id in range(num_cases):
         request = requests.get(
-            SERVER_HOST_FOR_CASE_GENERATION + "/case-generator/v1/generate-case"
+            SERVER_HOST_FOR_CASE_GENERATION
+            + "/case-generator/v1/generate-case"
         )
         assert request.status_code == 200
         cases.append(request.json())
@@ -205,7 +207,9 @@ class BenchmarkManagerWorker:
 
                     assert benchmark_manager.state == ManagerStatuses.IDLE
 
-                    case_set_id = parse_validate_caseSetId(request["caseSetId"])
+                    case_set_id = parse_validate_caseSetId(
+                        request["caseSetId"]
+                    )
                     ai_implementations = request["aiImplementations"]
                     results = []
 
@@ -219,7 +223,11 @@ class BenchmarkManagerWorker:
                     }
 
                     cases = json.load(
-                        open(os.path.join(FILE_DIR, "data", case_set_id, "cases.json"))
+                        open(
+                            os.path.join(
+                                FILE_DIR, "data", case_set_id, "cases.json"
+                            )
+                        )
                     )
 
                     benchmark_manager.setup(
@@ -235,7 +243,9 @@ class BenchmarkManagerWorker:
                         Path(results_path).mkdir(parents=True, exist_ok=True)
                         json.dump(
                             results,
-                            open(os.path.join(results_path, "results.json"), "w"),
+                            open(
+                                os.path.join(results_path, "results.json"), "w"
+                            ),
                             indent=2,
                         )
 
@@ -259,7 +269,9 @@ class BenchmarkManagerWorker:
 
                     collected_reports = {}
                     for ai_report in report.ai_reports:
-                        collected_reports.setdefault(ai_report.ai_name, []).append(
+                        collected_reports.setdefault(
+                            ai_report.ai_name, []
+                        ).append(
                             {
                                 "case_status": ai_report.case_status,
                                 "healthcheck_status": ai_report.healthcheck_status,
@@ -277,8 +289,9 @@ class BenchmarkManagerWorker:
                         "results.json",
                     )
 
-                    if manager.state == ManagerStatuses.IDLE and os.path.isfile(
-                        results_file_path
+                    if (
+                        manager.state == ManagerStatuses.IDLE
+                        and os.path.isfile(results_file_path)
                     ):
                         results = json.load(
                             open(
@@ -296,9 +309,9 @@ class BenchmarkManagerWorker:
                         if results:
                             for _, ais_results in results.items():
                                 for ai_name, ai_result in ais_results.items():
-                                    results_by_ai.setdefault(ai_name, []).append(
-                                        ai_result["result"]
-                                    )
+                                    results_by_ai.setdefault(
+                                        ai_name, []
+                                    ).append(ai_result["result"])
                     else:
                         results_by_ai = {}
 
@@ -365,7 +378,9 @@ def run_case_set_against_ais(request):
     BENCHMARK_MANAGERS[unique_id]["started"] = True
 
     BENCHMARK_MANAGERS[unique_id]["object"][1].put(
-        obj=("Start", request, unique_id), block=True, timeout=QUEUE_PUT_TIMEOUT
+        obj=("Start", request, unique_id),
+        block=True,
+        timeout=QUEUE_PUT_TIMEOUT,
     )
 
     result = BENCHMARK_MANAGERS[unique_id]["object"][2].get(
@@ -410,7 +425,10 @@ def process_controller():
                 continue
 
             # Check that the process is not running longer than expected:
-            if time.time() - benchmark_iterator["created"] > MAX_BENCHMARK_RUN_TIME:
+            if (
+                time.time() - benchmark_iterator["created"]
+                > MAX_BENCHMARK_RUN_TIME
+            ):
                 BENCHMARK_MANAGERS.pop(key, None)
                 continue
 

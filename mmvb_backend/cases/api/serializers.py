@@ -1,17 +1,16 @@
 from django.db import transaction
-from rest_framework.serializers import (
-    ModelSerializer,
-    JSONField,
-    PrimaryKeyRelatedField,
-    SerializerMethodField,
-    ListField
-)
 
 from cases.models import Case, CaseSet
+from rest_framework.serializers import (
+    JSONField,
+    ListField,
+    ModelSerializer,
+    PrimaryKeyRelatedField,
+    SerializerMethodField,
+)
 
 
 class CaseSetSerializer(ModelSerializer):
-
     class Meta:
         model = CaseSet
         fields = ["id", "name", "cases"]
@@ -53,7 +52,9 @@ class CaseSetSerializer(ModelSerializer):
 
 class CaseSerializer(ModelSerializer):
     data = JSONField()
-    case_sets = PrimaryKeyRelatedField(many=True, queryset=CaseSet.objects.all())
+    case_sets = PrimaryKeyRelatedField(
+        many=True, queryset=CaseSet.objects.all()
+    )
 
     class Meta:
         model = Case
@@ -85,7 +86,8 @@ class CaseSerializer(ModelSerializer):
         if case_sets:
             to_add = [case_set.id for case_set in case_sets]
             to_remove = [
-                case_set.id for case_set in instance.case_sets.all()
+                case_set.id
+                for case_set in instance.case_sets.all()
                 if case_set.id not in to_add
             ]
             instance.case_sets.remove(*to_remove)

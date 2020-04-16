@@ -25,9 +25,7 @@ class AIImplementationEndpoint(models.Model):
     name = models.CharField(max_length=30, choices=ENDPOINT_OPTIONS)
     path = models.CharField(max_length=150)
     ai_implementation = models.ForeignKey(
-        "AIImplementation",
-        related_name="endpoints",
-        on_delete=models.CASCADE
+        "AIImplementation", related_name="endpoints", on_delete=models.CASCADE
     )
 
     def __str__(self):
@@ -36,7 +34,6 @@ class AIImplementationEndpoint(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["name", "ai_implementation"],
-                name="unique_ai_endpoint"
+                fields=["name", "ai_implementation"], name="unique_ai_endpoint"
             )
         ]

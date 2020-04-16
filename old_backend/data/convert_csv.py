@@ -64,7 +64,9 @@ condition_to_expected_triage_level = {}
 condition_symptom_probability = []
 
 
-with open("symptom condition mapping - Matrix official.csv", newline="") as csvfile:
+with open(
+    "symptom condition mapping - Matrix official.csv", newline=""
+) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",", quotechar='"')
     for row_id, row in enumerate(csvreader):
         if row_id == 0:

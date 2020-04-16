@@ -75,5 +75,7 @@ if __name__ == "__main__":
     simple_ui = Process(target=start_simple_ui)
     simple_ui.start()
 
-    participants__babylon_toy_ai = Process(target=start_participants__babylon_toy_ai)
+    participants__babylon_toy_ai = Process(
+        target=start_participants__babylon_toy_ai
+    )
     participants__babylon_toy_ai.start()
