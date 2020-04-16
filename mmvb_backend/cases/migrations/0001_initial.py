@@ -46,7 +46,7 @@ class Migration(migrations.Migration):
                 ("public", models.NullBooleanField(default=False)),
                 ("name", models.CharField(max_length=200, unique=True)),
             ],
-            options={"abstract": False,},
+            options={"abstract": False},
         ),
         migrations.CreateModel(
             name="Case",
@@ -91,6 +91,6 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"abstract": False,},
+            options={"abstract": False},
         ),
     ]

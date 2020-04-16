@@ -6,16 +6,14 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("ais", "0001_initial"),
-    ]
+    dependencies = [("ais", "0001_initial")]
 
     operations = [
         migrations.RemoveField(
-            model_name="aiimplementation", name="health_endpoint",
+            model_name="aiimplementation", name="health_endpoint"
         ),
         migrations.RemoveField(
-            model_name="aiimplementation", name="solution_endpoint",
+            model_name="aiimplementation", name="solution_endpoint"
         ),
         migrations.CreateModel(
             name="AIImplementationEndpoint",
