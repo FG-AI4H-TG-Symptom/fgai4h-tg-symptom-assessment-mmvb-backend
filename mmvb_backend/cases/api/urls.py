@@ -1,8 +1,8 @@
 from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 
 from cases.api.views import CaseSetViewSet, CaseViewSet
 from cases.apps import CasesConfig
-from rest_framework.routers import DefaultRouter
 
 app_name = CasesConfig.name
 

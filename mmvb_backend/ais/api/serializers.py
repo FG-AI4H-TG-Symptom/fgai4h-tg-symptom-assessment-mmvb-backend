@@ -1,5 +1,6 @@
-from ais.models import AIImplementation, AIImplementationEndpoint
 from rest_framework.serializers import ModelSerializer
+
+from ais.models import AIImplementation, AIImplementationEndpoint
 
 
 class AIImplementationEndpointSerializer(ModelSerializer):

@@ -1,6 +1,4 @@
 from django.db import transaction
-
-from cases.models import Case, CaseSet
 from rest_framework.serializers import (
     JSONField,
     ListField,
@@ -8,6 +6,8 @@ from rest_framework.serializers import (
     PrimaryKeyRelatedField,
     SerializerMethodField,
 )
+
+from cases.models import Case, CaseSet
 
 
 class CaseSetSerializer(ModelSerializer):

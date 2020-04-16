@@ -1,8 +1,8 @@
 from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 
 from ais.api.views import AIImplementationViewSet
 from ais.apps import AisConfig
-from rest_framework.routers import DefaultRouter
 
 app_name = AisConfig.name
 
