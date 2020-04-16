@@ -2,6 +2,5 @@
 autoflake==1.2
 flake8==3.6.0
 flake8-quotes==1.0.0
-mypy==0.650
-pre-commit==1.12.0
-safety==1.8.4
+mypy==0.770
+pre-commit==2.2.0
