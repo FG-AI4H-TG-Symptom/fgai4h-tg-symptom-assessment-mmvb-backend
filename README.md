@@ -28,11 +28,11 @@ export PYTHONPATH=$PYTHONPATH:./mmvb_backend
 
 ### Requirements:
 
+This section assumes the use of the pyenv.
 The requirements for running the server locally can be installed by
 ```
 $ make install_requirements
 ```
-. This assumes the use of the pyenv.
 
 To install test requirements, which includes tools for development, run
 ```
@@ -45,10 +45,18 @@ This repository lints and tests code as a part of the CI process.
 [Pre-commit][pre-commit] is a project that you can use to run a suite of tools to check the codebase.
 
 To install the hooks that we use run:
+```
+make precommit_install
+```
 
-    pre-commit install
+### Helper make commands:
 
-
+This assumes you have activated your local virtual environment.
+To run local linting and codestyle checks you can use
+```
+make lint
+```
+We use this in our CI process to make sure codestyle is being adhered to.
 
 ### Install and Configure MySQL
 
