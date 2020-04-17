@@ -90,7 +90,7 @@ As an initial step you might need to run the following for being able to start M
 $ xcode-select --install
 ```
 
-These steps assume you have [Homebrew](https://brew.sh/) installed.
+These steps assume you have [Homebrew](https://brew.sh/) installed.  
 To install MySQL:
 ```
 $ brew install mysql
