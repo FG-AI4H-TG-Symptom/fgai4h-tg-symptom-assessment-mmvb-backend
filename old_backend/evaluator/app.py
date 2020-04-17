@@ -13,7 +13,9 @@ from config import CONFIG_DEFAULT_HOST  # isort:skip  # NOQA: E402
 
 
 def create_app():
-    connexion_app = connexion.App(__name__, specification_dir="../swagger/", debug=True)
+    connexion_app = connexion.App(
+        __name__, specification_dir="../swagger/", debug=True
+    )
     connexion_app.add_api("evaluator.yaml", strict_validation=True)
     app = connexion_app.app
 

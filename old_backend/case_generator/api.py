@@ -12,7 +12,9 @@ EVIDENCE_STATES = ["present", "absent"]
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = json.load(open(os.path.join(ROOT_DIR, "data/data.json")))
-SYMPTOM_ID_TO_SYMPTOMS = {symptom["id"]: symptom for symptom in DATA["symptoms"]}
+SYMPTOM_ID_TO_SYMPTOMS = {
+    symptom["id"]: symptom for symptom in DATA["symptoms"]
+}
 
 OBSERVATION_PROBABILITY = 0.8
 UNSURE_PROBABILITY = 0.1
@@ -23,7 +25,9 @@ def sample_symptoms(symptom_probabilities):
     # Sample latent state
     symptom_states = {}
     for symptom, probability in symptom_probabilities.items():
-        state = random.choices(EVIDENCE_STATES, [probability, 1.0 - probability])[0]
+        state = random.choices(
+            EVIDENCE_STATES, [probability, 1.0 - probability]
+        )[0]
         symptom_states[symptom] = state
 
     # Sample whether state is known
@@ -43,7 +47,9 @@ def sample_symptoms(symptom_probabilities):
         symptom = max(symptom_probabilities, key=symptom_probabilities.get)
         symptom_states[symptom] = "present"
 
-    return {symptom: state for symptom, state in symptom_states.items() if state}
+    return {
+        symptom: state for symptom, state in symptom_states.items() if state
+    }
 
 
 def combine_symptom_and_state(symptom, state_value):
@@ -65,7 +71,9 @@ def generate_case():
     ]
 
     # TODO: Add option to draw cases uniformly from available conditions
-    sampled_condition = random.choices(DATA["conditions"], condition_probabilities)[0]
+    sampled_condition = random.choices(
+        DATA["conditions"], condition_probabilities
+    )[0]
 
     symptom_probabilities = {
         symptom_id: probability
@@ -100,7 +108,10 @@ def generate_case():
         "caseData": {
             "caseId": case_id,
             "metaData": meta_data,
-            "profileInformation": {"biologicalSex": biological_sex, "age": age},
+            "profileInformation": {
+                "biologicalSex": biological_sex,
+                "age": age,
+            },
             "presentingComplaints": [presenting_symptom],
             "otherFeatures": symptoms,
         },

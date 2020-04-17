@@ -5,7 +5,10 @@ from metric_calculator import api
 TEST_CASES = [
     {
         "input": {
-            "valuesToPredict": {"condition": {"id": "b"}, "expectedTriageLevel": "PC"},
+            "valuesToPredict": {
+                "condition": {"id": "b"},
+                "expectedTriageLevel": "PC",
+            },
             "aiResult": {
                 "conditions": [{"id": "a"}, {"id": "b"}, {"id": "c"}],
                 "triage": "SC",
@@ -23,7 +26,10 @@ TEST_CASES = [
     },
     {
         "input": {
-            "valuesToPredict": {"condition": {"id": "a"}, "expectedTriageLevel": "PC"},
+            "valuesToPredict": {
+                "condition": {"id": "a"},
+                "expectedTriageLevel": "PC",
+            },
             "aiResult": {
                 "conditions": [{"id": "a"}, {"id": "b"}, {"id": "c"}],
                 "triage": "PC",
@@ -41,7 +47,10 @@ TEST_CASES = [
     },
     {
         "input": {
-            "valuesToPredict": {"condition": {"id": "d"}, "expectedTriageLevel": "PC"},
+            "valuesToPredict": {
+                "condition": {"id": "d"},
+                "expectedTriageLevel": "PC",
+            },
             "aiResult": {
                 "conditions": [{"id": "a"}, {"id": "b"}, {"id": "c"}],
                 "triage": "SC",
