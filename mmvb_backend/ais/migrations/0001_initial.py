@@ -31,6 +31,6 @@ class Migration(migrations.Migration):
                 ("health_endpoint", models.CharField(max_length=30)),
                 ("solution_endpoint", models.CharField(max_length=50)),
             ],
-            options={"abstract": False,},
-        ),
+            options={"abstract": False},
+        )
     ]

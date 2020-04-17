@@ -13,9 +13,7 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ("auth", "0011_update_proxy_permissions"),
-    ]
+    dependencies = [("auth", "0011_update_proxy_permissions")]
 
     operations = [
         migrations.CreateModel(
@@ -38,7 +36,7 @@ class Migration(migrations.Migration):
                     models.TextField(blank=True, max_length=500, null=True),
                 ),
             ],
-            options={"abstract": False,},
+            options={"abstract": False},
         ),
         migrations.CreateModel(
             name="User",
@@ -166,6 +164,6 @@ class Migration(migrations.Migration):
                 "verbose_name_plural": "users",
                 "abstract": False,
             },
-            managers=[("objects", django.contrib.auth.models.UserManager()),],
+            managers=[("objects", django.contrib.auth.models.UserManager())],
         ),
     ]

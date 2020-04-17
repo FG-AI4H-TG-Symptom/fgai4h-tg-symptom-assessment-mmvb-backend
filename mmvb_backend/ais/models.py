@@ -16,10 +16,7 @@ class AIImplementationEndpoint(models.Model):
     META = "meta"
     METRICS = "metrics"
 
-    ENDPOINT_OPTIONS = (
-        (META, "Meta"),
-        (METRICS, "Metrics"),
-    )
+    ENDPOINT_OPTIONS = ((META, "Meta"), (METRICS, "Metrics"))
 
     # TODO: implement character validation for fields
     name = models.CharField(max_length=30, choices=ENDPOINT_OPTIONS)

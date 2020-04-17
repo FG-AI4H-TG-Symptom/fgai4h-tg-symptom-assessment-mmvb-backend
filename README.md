@@ -138,7 +138,7 @@ python -m pip install -r requirements.txt
 ```
 
 #### Celery setup
-For using Celery (task queue) we will need to setup a message broker. Redis should be a good option.
+For using Celery (task queue) we will need to setup a message broker. Redis should be a good option.  
 You should be able to download the proper docker image and run it with the following commands:
 
 ```

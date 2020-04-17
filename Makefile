@@ -1,15 +1,9 @@
 PYTHONPATH := ./mmvb_backend : $(PYTHONPATH)
 
-pycodestyle:
-	pycodestyle ./mmvb_backend
-
-mypy:
-	mypy --ignore-missing-imports ./mmvb_backend
-
 precommit:
 	pre-commit run -a
 
-lint: pycodestyle mypy precommit
+lint: precommit
 
 .venv/:
 	python3 -m venv .venv

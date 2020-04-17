@@ -10,7 +10,7 @@ from cases.models import Case, CaseSet
 
 # TODO: properly document endpoints
 class CaseViewSet(ModelViewSet):
-    schema = AutoSchema(tags=["Cases",])
+    schema = AutoSchema(tags=["Cases"])
     serializer_class = CaseSerializer
 
     def get_queryset(self):
@@ -18,7 +18,7 @@ class CaseViewSet(ModelViewSet):
 
 
 class CaseSetViewSet(ModelViewSet):
-    schema = AutoSchema(tags=["Cases",])
+    schema = AutoSchema(tags=["Cases"])
     serializer_class = CaseSetSerializer
 
     def get_queryset(self):
