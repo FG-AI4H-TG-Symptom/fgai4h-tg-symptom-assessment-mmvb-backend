@@ -1,6 +1,5 @@
-from django.db import models
-
 from common.models import BaseModel
+from django.db import models
 
 
 class AIImplementation(BaseModel):

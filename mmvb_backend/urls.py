@@ -13,14 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import include, path
-from django.views.generic import TemplateView
 from rest_framework.schemas import get_schema_view
 
 from ais.api.urls import router as ais_router
 from cases.api.urls import router as cases_router
 from common.routers import DefaultRouter
+from django.contrib import admin
+from django.urls import include, path
+from django.views.generic import TemplateView
 
 router = DefaultRouter()
 router.extend(ais_router)

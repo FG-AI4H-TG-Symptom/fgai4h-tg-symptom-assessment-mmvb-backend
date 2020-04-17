@@ -23,7 +23,7 @@ class AIImplementationSerializer(ModelSerializer):
         endpoints_serializer = self.fields["endpoints"]
         for endpoint in endpoints_validated_data:
             endpoint["ai_implementation"] = ai_implementation
-        endpoints = endpoints_serializer.create(endpoints_validated_data)
+        endpoints_serializer.create(endpoints_validated_data)
 
         return ai_implementation
 
