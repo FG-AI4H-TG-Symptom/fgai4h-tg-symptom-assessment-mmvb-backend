@@ -14,7 +14,7 @@ uncontainerized local versions of the dependencies too.
 
 ### Virtual Environment
 
-Create and activate a virtual environment with Python 3.7+.
+Create and activate a virtual environment with Python 3.7+.  
 Python 3.8.1 is recommended; you can use pyenv to manage your Python installations.
 ```
 $ python3 -m venv .venv
@@ -90,7 +90,7 @@ As an initial step you might need to run the following for being able to start M
 $ xcode-select --install
 ```
 
-These steps assume you have [Homebrew](https://brew.sh/) installed.
+These steps assume you have [Homebrew](https://brew.sh/) installed.  
 To install MySQL:
 ```
 $ brew install mysql
