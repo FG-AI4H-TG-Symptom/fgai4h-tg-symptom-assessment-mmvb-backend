@@ -14,7 +14,7 @@ uncontainerized local versions of the dependencies too.
 
 ### Virtual Environment
 
-Create and activate a virtual environment with Python 3.7+.
+Create and activate a virtual environment with Python 3.7+.  
 Python 3.8.1 is recommended; you can use pyenv to manage your Python installations.
 ```
 $ python3 -m venv .venv
@@ -138,7 +138,7 @@ python -m pip install -r requirements.txt
 ```
 
 #### Celery setup
-For using Celery (task queue) we will need to setup a message broker. Redis should be a good option.
+For using Celery (task queue) we will need to setup a message broker. Redis should be a good option.  
 You should be able to download the proper docker image and run it with the following commands:
 
 ```
