@@ -1,7 +1,8 @@
 Django==3.0.4
 django-filter==2.2.0
 Markdown==3.2.1
--e git+https://github.com/encode/django-rest-framework.git#egg=djangorestframework
+djangorestframework==3.11.0
+djangorestframework-camel-case==1.1.2
 django-mysql==3.3.0
 ipdb==0.13.2
 mysqlclient==1.4.6
@@ -10,3 +11,4 @@ PyYAML==5.3.1
 uritemplate==3.0.1
 Celery==4.4.2
 redis==3.4.1
+stringcase==1.2.0
