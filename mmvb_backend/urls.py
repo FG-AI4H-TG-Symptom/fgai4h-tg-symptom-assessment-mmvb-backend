@@ -22,7 +22,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
 
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
 router.extend(ais_router)
 router.extend(cases_router)
 
