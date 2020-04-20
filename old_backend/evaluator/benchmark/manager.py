@@ -66,7 +66,9 @@ class BenchmarkManager(object):
         if self.__state == ManagerStatuses.IDLE:
             self.runners_pool = []
             ai_names = []
-            for index, (ai_name, ai_config) in enumerate(self.benchmarked_ais.items()):
+            for index, (ai_name, ai_config) in enumerate(
+                self.benchmarked_ais.items()
+            ):
                 parent_conn, runner_conn = Pipe()
                 runner = BenchmarkRunner(
                     ai_name,
@@ -84,7 +86,9 @@ class BenchmarkManager(object):
             )
 
     def build_report(self):
-        report = self.db_client.select_manager_report(self.benchmark_id, prefetch=True)
+        report = self.db_client.select_manager_report(
+            self.benchmark_id, prefetch=True
+        )
         report_dict = {
             "benchmark_id": report.benchmark_id,
             "case_set_id": report.case_set_id,
@@ -227,7 +231,8 @@ class BenchmarkManager(object):
                 # if all healthchecks have failed, what to do?
                 # TODO: implement rule for when all healthchecks have failed
                 message = (
-                    f"All AIs have failed the health check for " f"case #{case_index}"
+                    f"All AIs have failed the health check for "
+                    f"case #{case_index}"
                 )
                 self.accumulated_logs.append(message)
                 logger.error(message)

@@ -2,7 +2,7 @@
 # This is a component of the MMVB for the "Symptom assessment" sub-group
 # (of the the International Telecommunication Union focus group
 # "Artificial Intelligence for Health".
-# For copyright and licence, see the parent directory. 
+# For copyright and licence, see the parent directory.
 
 swagger: '2.0'
 info:

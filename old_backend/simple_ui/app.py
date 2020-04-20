@@ -6,6 +6,7 @@
 import sys
 
 from flask import Flask
+
 from flask_restful import Api
 
 sys.path.append("..")  # isort:skip

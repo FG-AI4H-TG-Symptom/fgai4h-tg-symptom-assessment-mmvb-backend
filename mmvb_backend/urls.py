@@ -19,10 +19,12 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from rest_framework.schemas import get_schema_view
 
-from common.routers import DefaultRouter
-
 from ais.api.urls import router as ais_router
 from cases.api.urls import router as cases_router
+from common.routers import DefaultRouter
+from django.contrib import admin
+from django.urls import include, path
+from django.views.generic import TemplateView
 
 router = DefaultRouter()
 router.extend(ais_router)
@@ -31,15 +33,21 @@ router.extend(cases_router)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include(router.urls)),
-    path('openapi/', get_schema_view(
-        title="WHO-ITU AI Benchmarking",
-        description="",
-        version="v1"
-    ), name='openapi-schema'),
-    path('api/docs/', TemplateView.as_view(
-        template_name='swagger-ui.html',
-        extra_context={'schema_url':'openapi-schema'}
-    ), name='swagger-ui'),
+    path(
+        "openapi/",
+        get_schema_view(
+            title="WHO-ITU AI Benchmarking", description="", version="v1"
+        ),
+        name="openapi-schema",
+    ),
+    path(
+        "api/docs/",
+        TemplateView.as_view(
+            template_name="swagger-ui.html",
+            extra_context={"schema_url": "openapi-schema"},
+        ),
+        name="swagger-ui",
+    ),
 ]
 
 # TODO: try to do it in a cleaner way, using environment-dependant settings

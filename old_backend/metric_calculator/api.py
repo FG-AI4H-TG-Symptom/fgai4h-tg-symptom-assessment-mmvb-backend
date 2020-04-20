@@ -46,7 +46,9 @@ def calculate_triage_similarity(expected_triage, ai_triage, soft=False):
     expected_triage = EXPECTED_TRIAGES.index(expected_triage)
     ai_triage = EXPECTED_TRIAGES.index(ai_triage)
 
-    return 1.0 - (abs(expected_triage - ai_triage) / (len(EXPECTED_TRIAGES) - 1.0))
+    return 1.0 - (
+        abs(expected_triage - ai_triage) / (len(EXPECTED_TRIAGES) - 1.0)
+    )
 
 
 def calculate_metrics(request):
@@ -68,13 +70,19 @@ def calculate_metrics(request):
             ai_result_exists = 1.0
 
             recall_top_1 = calculate_recall(
-                ai_result["conditions"], values_to_predict["condition"], top_n=1
+                ai_result["conditions"],
+                values_to_predict["condition"],
+                top_n=1,
             )
             recall_top_3 = calculate_recall(
-                ai_result["conditions"], values_to_predict["condition"], top_n=3
+                ai_result["conditions"],
+                values_to_predict["condition"],
+                top_n=3,
             )
             recall_top_10 = calculate_recall(
-                ai_result["conditions"], values_to_predict["condition"], top_n=10
+                ai_result["conditions"],
+                values_to_predict["condition"],
+                top_n=10,
             )
 
             triage_match = float(
@@ -85,7 +93,9 @@ def calculate_metrics(request):
                 values_to_predict["expectedTriageLevel"], ai_result["triage"]
             )
             triage_similarity_soft = calculate_triage_similarity(
-                values_to_predict["expectedTriageLevel"], ai_result["triage"], soft=True
+                values_to_predict["expectedTriageLevel"],
+                ai_result["triage"],
+                soft=True,
             )
 
         metric_results.append(

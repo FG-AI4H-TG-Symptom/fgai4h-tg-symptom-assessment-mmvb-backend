@@ -67,7 +67,9 @@ with open("CollectingCasesLondonModel.csv") as csvfile:
                 "caseId": "human_doctor_case_london_model_spreadsheet111D40_case_"
                 + str(case_index),
                 "profileInformation": {"age": age, "biologicalSex": sex},
-                "presentingComplaints": [presenting_complaint_concept_and_state],
+                "presentingComplaints": [
+                    presenting_complaint_concept_and_state
+                ],
                 "metaData": {
                     "description": "A case created by a human doctor (the London 2019 model cases)",  # noqa: E501
                     "case_creator": row[1],
@@ -80,7 +82,9 @@ with open("CollectingCasesLondonModel.csv") as csvfile:
             }
 
         if row[6] != "" and current_case is not None:
-            other_features += [create_concept_and_state(row[6], STATE_MAPPING[row[7]])]
+            other_features += [
+                create_concept_and_state(row[6], STATE_MAPPING[row[7]])
+            ]
 
 record_last_case(current_case, CASES, other_features)
 

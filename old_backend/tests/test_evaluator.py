@@ -29,7 +29,10 @@ TEST_CASES = [
             "profileInformation": {"age": 25, "biologicalSex": "male"},
         },
         "valuesToPredict": {
-            "condition": {"id": "ed9e333b5cf04cb91068bbcde643076e", "name": "GERD"},
+            "condition": {
+                "id": "ed9e333b5cf04cb91068bbcde643076e",
+                "name": "GERD",
+            },
             "expectedTriageLevel": "PC",
         },
     },
@@ -71,7 +74,10 @@ AI_RESULTS = [
                 "id": "42e009a4e3d8c8a17a29b4c57311e9cf",
                 "name": "IBD (first presentation non flare)",
             },
-            {"id": "379771d589cd397c770bb6915c3c17a6", "name": "acute pyelonephritis"},
+            {
+                "id": "379771d589cd397c770bb6915c3c17a6",
+                "name": "acute pyelonephritis",
+            },
             {"id": "85473ef69bd60889a208bc1a65dc0cb8", "name": "simple UTI"},
         ],
         "triage": "PC",
@@ -82,7 +88,10 @@ AI_RESULTS = [
                 "id": "42e009a4e3d8c8a17a29b4c57311e9cf",
                 "name": "IBD (first presentation non flare)",
             },
-            {"id": "379771d589cd397c770bb6915c3c17a6", "name": "acute pyelonephritis"},
+            {
+                "id": "379771d589cd397c770bb6915c3c17a6",
+                "name": "acute pyelonephritis",
+            },
             {"id": "85473ef69bd60889a208bc1a65dc0cb8", "name": "simple UTI"},
         ],
         "triage": "PC",

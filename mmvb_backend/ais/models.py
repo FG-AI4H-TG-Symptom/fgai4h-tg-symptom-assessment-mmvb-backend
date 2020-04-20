@@ -1,6 +1,5 @@
-from django.db import models
-
 from common.models import BaseModel
+from django.db import models
 
 
 class AIImplementation(BaseModel):
@@ -16,18 +15,13 @@ class AIImplementationEndpoint(models.Model):
     META = "meta"
     METRICS = "metrics"
 
-    ENDPOINT_OPTIONS = (
-        (META, "Meta"),
-        (METRICS, "Metrics"),
-    )
+    ENDPOINT_OPTIONS = ((META, "Meta"), (METRICS, "Metrics"))
 
     # TODO: implement character validation for fields
     name = models.CharField(max_length=30, choices=ENDPOINT_OPTIONS)
     path = models.CharField(max_length=150)
     ai_implementation = models.ForeignKey(
-        "AIImplementation",
-        related_name="endpoints",
-        on_delete=models.CASCADE
+        "AIImplementation", related_name="endpoints", on_delete=models.CASCADE
     )
 
     def __str__(self):
@@ -36,7 +30,6 @@ class AIImplementationEndpoint(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["name", "ai_implementation"],
-                name="unique_ai_endpoint"
+                fields=["name", "ai_implementation"], name="unique_ai_endpoint"
             )
         ]

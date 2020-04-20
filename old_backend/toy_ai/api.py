@@ -42,7 +42,9 @@ def sort_array_by_another_array(values, map_for_ordering, reverse=False):
     return [
         element
         for _, element in sorted(
-            zip(map_for_ordering, values), key=lambda pair: pair[0], reverse=reverse
+            zip(map_for_ordering, values),
+            key=lambda pair: pair[0],
+            reverse=reverse,
         )
     ]
 
@@ -133,11 +135,15 @@ def solve_case_by_symptom_intersection(case_data):
     for condition in DATA["conditions"]:
         if condition["probability"][biological_sex] > 0.0:
             conditions.append(
-                drop_all_but_keys(condition, ["id", "name", "expected_triage_level"])
+                drop_all_but_keys(
+                    condition, ["id", "name", "expected_triage_level"]
+                )
             )
             probability = 0
             num_related_symptoms = 0
-            for condition_id, symptom_id, _ in DATA["condition_symptom_probability"]:
+            for condition_id, symptom_id, _ in DATA[
+                "condition_symptom_probability"
+            ]:
                 if condition_id == condition["id"]:
                     num_related_symptoms += 1
                     if symptom_id in complaints:
@@ -145,14 +151,17 @@ def solve_case_by_symptom_intersection(case_data):
             probability /= num_related_symptoms
             probabilities.append(probability)
 
-    conditions = sort_array_by_another_array(conditions, probabilities, reverse=True)
+    conditions = sort_array_by_another_array(
+        conditions, probabilities, reverse=True
+    )
 
     conditions = conditions[:MAX_RETURNED_CONDITIONS]
 
     triage = conditions[0]["expected_triage_level"]
 
     conditions = [
-        drop_all_but_keys(condition, ["id", "name"]) for condition in conditions
+        drop_all_but_keys(condition, ["id", "name"])
+        for condition in conditions
     ]
 
     return {"triage": triage, "conditions": conditions}
@@ -162,9 +171,9 @@ def health_check(request):
     """Emulates endpoint for health-checking an AI API"""
     ai_implementation = request["aiImplementation"]
     if ai_implementation == "toy_ai_faulty_random_uniform":
-        response = random.choices([{"status": "OK"}, {"status": "Error"}], [0.5, 0.5])[
-            0
-        ]
+        response = random.choices(
+            [{"status": "OK"}, {"status": "Error"}], [0.5, 0.5]
+        )[0]
     else:
         response = {"status": "OK"}
 
@@ -186,7 +195,9 @@ def solve_case(request):
         )
 
     elif ai_implementation == "toy_ai_deterministic_most_likely_conditions":
-        return solve_case_deterministic_most_likely_conditions(case_data=case_data)
+        return solve_case_deterministic_most_likely_conditions(
+            case_data=case_data
+        )
 
     elif ai_implementation == "toy_ai_deterministic_by_symptom_intersection":
         return solve_case_by_symptom_intersection(case_data=case_data)
