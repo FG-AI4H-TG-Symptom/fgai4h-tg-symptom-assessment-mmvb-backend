@@ -27,7 +27,10 @@ def test_generate_case():
         },
         "valuesToPredict": {
             "expectedTriageLevel": "PC",
-            "condition": {"id": "ed9e333b5cf04cb91068bbcde643076e", "name": "GERD"},
+            "condition": {
+                "id": "ed9e333b5cf04cb91068bbcde643076e",
+                "name": "GERD",
+            },
         },
     }
 

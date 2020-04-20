@@ -16,7 +16,9 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def create_app():
     connexion_app = connexion.App(
-        __name__, specification_dir=os.path.join(ROOT_DIR, "swagger"), debug=True
+        __name__,
+        specification_dir=os.path.join(ROOT_DIR, "swagger"),
+        debug=True,
     )
     connexion_app.add_api("case-generator.yaml", strict_validation=True)
     app = connexion_app.app

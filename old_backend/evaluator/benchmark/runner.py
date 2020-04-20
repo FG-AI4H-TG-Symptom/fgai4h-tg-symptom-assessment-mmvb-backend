@@ -29,7 +29,13 @@ class BenchmarkRunner(Process):
     """
 
     def __init__(
-        self, ai_name, ai_config, in_pipe, out_queue, runner_id, benchmark_start_time
+        self,
+        ai_name,
+        ai_config,
+        in_pipe,
+        out_queue,
+        runner_id,
+        benchmark_start_time,
     ):
         super().__init__()
         self.ai_name = ai_name
@@ -61,13 +67,17 @@ class BenchmarkRunner(Process):
 
                     elif signal == ProcessSignal.SOLVE_CASE:
                         solvecase_result = self.solve_case(parameters["case"])
-                        self.out_queue.put((signal, self.runner_id, solvecase_result))
+                        self.out_queue.put(
+                            (signal, self.runner_id, solvecase_result)
+                        )
                         self.out_queue.put(
                             (ProcessSignal.SENTINEL, self.runner_id, None)
                         )
 
                     elif signal == ProcessSignal.SENTINEL:
-                        raise ValueError(f"Unexpected signal {signal} received")
+                        raise ValueError(
+                            f"Unexpected signal {signal} received"
+                        )
 
                 else:
                     continue
@@ -82,7 +92,13 @@ class BenchmarkRunner(Process):
         return
 
     def _perform_request(
-        self, url, method="GET", parameters=None, data=None, timeout=3, headers=None
+        self,
+        url,
+        method="GET",
+        parameters=None,
+        data=None,
+        timeout=3,
+        headers=None,
     ):
         parameters = parameters or {}
         data = data or {}
@@ -106,7 +122,9 @@ class BenchmarkRunner(Process):
         self.healthcheck_attempts += 1
         return True
 
-    def _log_error(self, message=None, status_code=None, data=None, exception=None):
+    def _log_error(
+        self, message=None, status_code=None, data=None, exception=None
+    ):
         if not message:
             message = (
                 f"Max attempts of {MAX_NUM_ATTEMPTS} retries failed "
@@ -123,7 +141,9 @@ class BenchmarkRunner(Process):
 
         logger.error(message)
 
-    def _log_info(self, message=None, status_code=None, data=None, exception=None):
+    def _log_info(
+        self, message=None, status_code=None, data=None, exception=None
+    ):
         if not message:
             message = (
                 f"Health check attempt #{self.healthcheck_attempts} failed "
@@ -141,7 +161,9 @@ class BenchmarkRunner(Process):
         logger.info(message)
 
     def _respond_healthcheck_signal(self, result, send_sentinel=False):
-        self.out_queue.put((ProcessSignal.HEALTH_CHECK, self.runner_id, result))
+        self.out_queue.put(
+            (ProcessSignal.HEALTH_CHECK, self.runner_id, result)
+        )
 
         if send_sentinel:
             self.out_queue.put((ProcessSignal.SENTINEL, self.runner_id, None))
@@ -231,13 +253,17 @@ class BenchmarkRunner(Process):
                     self._log_error(
                         status_code=response.status_code, data=response.json()
                     )
-                    self._respond_healthcheck_signal(result, send_sentinel=True)
+                    self._respond_healthcheck_signal(
+                        result, send_sentinel=True
+                    )
             else:
                 data = response.json()
                 if data.get("status", "Error") != "OK":
                     should_retry = self._update_attempts()
                     if should_retry:
-                        self._log_info(status_code=response.status_code, data=data)
+                        self._log_info(
+                            status_code=response.status_code, data=data
+                        )
                         self._respond_healthcheck_signal(result)
                         result["log"].append(
                             f"Unhealthy response on healthcheck "
@@ -250,15 +276,20 @@ class BenchmarkRunner(Process):
                         )
                     else:
                         result["report"]["errors"] = 1
-                        result["report"]["healthcheck_status"] = CaseStatuses.ERROR
+                        result["report"][
+                            "healthcheck_status"
+                        ] = CaseStatuses.ERROR
                         result["log"].append(
                             f"Error: could not get successful healthcheck response for "
                             f"{self.ai_name} after {MAX_NUM_ATTEMPTS} attempts."
                         )
                         self._log_error(
-                            status_code=response.status_code, data=response.json()
+                            status_code=response.status_code,
+                            data=response.json(),
                         )
-                        self._respond_healthcheck_signal(result, send_sentinel=True)
+                        self._respond_healthcheck_signal(
+                            result, send_sentinel=True
+                        )
 
                 else:
                     message = (
@@ -269,7 +300,9 @@ class BenchmarkRunner(Process):
                     self._log_info(message=message)
                     result["healthy"] = True
                     result["report"]["healthcheck_status"] = CaseStatuses.OK
-                    self._respond_healthcheck_signal(result, send_sentinel=True)
+                    self._respond_healthcheck_signal(
+                        result, send_sentinel=True
+                    )
 
     def solve_case(self, case):
         if self.if_timeout():

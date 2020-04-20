@@ -1,6 +1,7 @@
 import time
 from os.path import abspath, dirname, join
 
+from evaluator.benchmark.definitions import CaseStatuses
 from peewee import (
     CharField,
     CompositeKey,
@@ -11,8 +12,6 @@ from peewee import (
     SqliteDatabase,
 )
 
-from evaluator.benchmark.definitions import CaseStatuses
-
 
 def get_unique_id():
     return str(time.time()).replace(".", "_")
@@ -21,7 +20,9 @@ def get_unique_id():
 def create_database_client():  # noqa: C901
     # TODO: refactor it.
     DATABASE_PATH = join(dirname(dirname(abspath(__file__))), "data")
-    DATABASE = SqliteDatabase(join(DATABASE_PATH, "reports_" + get_unique_id() + ".db"))
+    DATABASE = SqliteDatabase(
+        join(DATABASE_PATH, "reports_" + get_unique_id() + ".db")
+    )
 
     class ManagerReport(Model):
         benchmark_id = CharField(primary_key=True)
@@ -60,7 +61,9 @@ def create_database_client():  # noqa: C901
             self.database.stop()
             self.connection.close()
 
-        def create_manager_report(self, benchmark_id, case_set_id, total_cases):
+        def create_manager_report(
+            self, benchmark_id, case_set_id, total_cases
+        ):
             with self.database:
                 try:
                     report = ManagerReport.create(
@@ -93,9 +96,13 @@ def create_database_client():  # noqa: C901
 
             return report
 
-        def delete_manager_report(self, report_instance=None, benchmark_id=None):
+        def delete_manager_report(
+            self, report_instance=None, benchmark_id=None
+        ):
             with self.database:
-                if report_instance and isinstance(report_instance, ManagerReport):
+                if report_instance and isinstance(
+                    report_instance, ManagerReport
+                ):
                     report_instance.delete_instance()
                     return True
                 elif benchmark_id:
@@ -117,7 +124,9 @@ def create_database_client():  # noqa: C901
             benchmark_id=None,
         ):
             with self.database:
-                if report_instance and isinstance(report_instance, ManagerReport):
+                if report_instance and isinstance(
+                    report_instance, ManagerReport
+                ):
                     report_instance.current_case_index = current_case_index
                     report_instance.current_case_id = current_case_id
                     report_instance.save()
@@ -127,7 +136,9 @@ def create_database_client():  # noqa: C901
                             ManagerReport.current_case_index: current_case_index,
                             ManagerReport.current_case_id: current_case_id,
                         }
-                    ).where(ManagerReport.benchmark_id == benchmark_id).execute()
+                    ).where(
+                        ManagerReport.benchmark_id == benchmark_id
+                    ).execute()
                     report_instance = self.select_manager_report(
                         benchmark_id=benchmark_id
                     )
@@ -183,7 +194,11 @@ def create_database_client():  # noqa: C901
             return report
 
         def delete_ai_report(
-            self, report_instance=None, manager_report=None, ai_name=None, case_id=None
+            self,
+            report_instance=None,
+            manager_report=None,
+            ai_name=None,
+            case_id=None,
         ):
             with self.database:
                 if report_instance and isinstance(report_instance, AIReport):
@@ -222,19 +237,27 @@ def create_database_client():  # noqa: C901
                 update_dict[AIReport.case_status] = case_status
 
                 if healthcheck_status is not None:
-                    update_dict[AIReport.healthcheck_status] = healthcheck_status
+                    update_dict[
+                        AIReport.healthcheck_status
+                    ] = healthcheck_status
 
                 if error:
                     update_dict[AIReport.errors] = AIReport.errors + 1
 
                 if health_checks:
-                    update_dict[AIReport.health_checks] = AIReport.health_checks + 1
+                    update_dict[AIReport.health_checks] = (
+                        AIReport.health_checks + 1
+                    )
 
                 if soft_timeout:
-                    update_dict[AIReport.soft_timeouts] = AIReport.soft_timeouts + 1
+                    update_dict[AIReport.soft_timeouts] = (
+                        AIReport.soft_timeouts + 1
+                    )
 
                 if hard_timeout:
-                    update_dict[AIReport.hard_timeouts] = AIReport.hard_timeouts + 1
+                    update_dict[AIReport.hard_timeouts] = (
+                        AIReport.hard_timeouts + 1
+                    )
 
                 query = AIReport.update(update_dict).where(
                     AIReport.manager_report == manager_report,

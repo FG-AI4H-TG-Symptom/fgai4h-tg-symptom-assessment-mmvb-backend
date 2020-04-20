@@ -14,12 +14,7 @@ class AIImplementationSerializer(ModelSerializer):
 
     class Meta:
         model = AIImplementation
-        fields = [
-            "id",
-            "name",
-            "base_url",
-            "endpoints"
-        ]
+        fields = ["id", "name", "base_url", "endpoints"]
 
     def create(self, validated_data):
         endpoints_validated_data = validated_data.pop("endpoints")
@@ -28,7 +23,7 @@ class AIImplementationSerializer(ModelSerializer):
         endpoints_serializer = self.fields["endpoints"]
         for endpoint in endpoints_validated_data:
             endpoint["ai_implementation"] = ai_implementation
-        endpoints = endpoints_serializer.create(endpoints_validated_data)
+        endpoints_serializer.create(endpoints_validated_data)
 
         return ai_implementation
 
@@ -37,7 +32,9 @@ class AIImplementationSerializer(ModelSerializer):
         if "endpoints" in validated_data:
             endpoints_validated_data = validated_data.pop("endpoints")
 
-        AIImplementation.objects.filter(pk=instance.pk).update(**validated_data)
+        AIImplementation.objects.filter(pk=instance.pk).update(
+            **validated_data
+        )
         instance.refresh_from_db()
 
         if endpoints_validated_data:
@@ -45,8 +42,7 @@ class AIImplementationSerializer(ModelSerializer):
                 data["ai_implementation"] = instance
 
                 endpoint = AIImplementationEndpoint.objects.filter(
-                    name=data["name"],
-                    ai_implementation=instance
+                    name=data["name"], ai_implementation=instance
                 )
                 if endpoint:
                     endpoint.update(**data)
