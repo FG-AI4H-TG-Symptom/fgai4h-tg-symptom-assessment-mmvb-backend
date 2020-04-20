@@ -15,3 +15,7 @@ class CamelCaseAutoSchema(AutoSchema):
             new_result["required"] = list(map(camelcase, result["required"]))
 
         return new_result
+
+
+def is_true(value):
+    return str(value).lower() in ["1", "true", "yes"]

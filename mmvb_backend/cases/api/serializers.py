@@ -94,3 +94,11 @@ class CaseSerializer(ModelSerializer):
         instance.refresh_from_db()
 
         return instance
+
+
+class CaseSetFullSerializer(ModelSerializer):
+    cases = CaseSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = CaseSet
+        fields = ["id", "name", "cases"]
