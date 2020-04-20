@@ -10,7 +10,7 @@ from common.utils import CamelCaseAutoSchema
 
 # TODO: properly document endpoint
 class AIImplementationViewSet(ModelViewSet):
-    schema = CamelCaseAutoSchema(tags=['AI Implementations',])
+    schema = CamelCaseAutoSchema(tags=["AI Implementations",])
     serializer_class = AIImplementationSerializer
 
     def get_queryset(self):
