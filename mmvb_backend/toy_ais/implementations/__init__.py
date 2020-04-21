@@ -4,6 +4,7 @@ import sys
 
 from .base import ToyAI
 
+
 def import_modules(package_name):
     """Dynamically imports submodules"""
     exclude = {"base"}
@@ -12,6 +13,7 @@ def import_modules(package_name):
     for loader, name, is_pkg in pkgutil.walk_packages(package.__path__):
         if name not in exclude:
             importlib.import_module(package_name + "." + name)
+
 
 # imports sybmodules to populate ToyAI subclasses
 import_modules(__name__)

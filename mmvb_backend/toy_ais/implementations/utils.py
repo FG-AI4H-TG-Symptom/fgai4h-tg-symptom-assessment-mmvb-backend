@@ -1,5 +1,6 @@
 import json
 import os
+import random
 
 import numpy
 
@@ -17,6 +18,13 @@ UNSURE_PROBABILITY = 0.1
 MIN_AGE, MAX_AGE = 18, 80
 
 
+def drop_all_but_keys(val, keys):
+    output = {}
+    for key in keys:
+        output[key] = val[key]
+    return output
+
+
 def extract_biological_sex(case_data):
     biological_sex = case_data["profileInformation"]["biologicalSex"]
     assert biological_sex in GENDERS
@@ -31,7 +39,7 @@ def sort_array_by_another_array(values, map_for_ordering, reverse=False):
         for _, element in sorted(
             zip(map_for_ordering, values),
             key=lambda pair: pair[0],
-            reverse=reverse
+            reverse=reverse,
         )
     ]
 

@@ -1,11 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import Dict, List
 
 from django.utils.decorators import classproperty
 
 
 class ToyAI(ABC):
-
     @classmethod
     def __subclasshook__(cls, C):
         if cls is ToyAI:

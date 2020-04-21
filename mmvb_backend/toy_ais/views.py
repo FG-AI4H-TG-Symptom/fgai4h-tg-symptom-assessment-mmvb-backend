@@ -3,23 +3,15 @@ from http import HTTPStatus
 
 from django.http import JsonResponse
 from django.views import View
-
 from toy_ais.implementations import TOY_AIS
 
 
 class ToyAIsView(View):
     OPERATIONS_MAPPING = {
-        "GET": {
-            "health-check": "health_check"
-        },
-        "POST": {
-            "solve-case": "solve_case"
-        }
-
+        "GET": {"health-check": "health_check"},
+        "POST": {"solve-case": "solve_case"},
     }
-    SLUGS_MAPPING = {
-        ai.slug_name: ai for ai in TOY_AIS
-    }
+    SLUGS_MAPPING = {ai.slug_name: ai for ai in TOY_AIS}
 
     def parse_request(self, request, *args, **kwargs):
         ai_slug = None
@@ -35,7 +27,7 @@ class ToyAIsView(View):
                     f"Valid operations are "
                     f"{', '.join(self.OPERATIONS_MAPPING[method])}"
                 ),
-                "status": HTTPStatus.BAD_REQUEST
+                "status": HTTPStatus.BAD_REQUEST,
             }
         else:
             ai_slug = kwargs.get("ai_slug_name", None)
@@ -45,7 +37,7 @@ class ToyAIsView(View):
                         f"AI with slug name '{ai_slug}' is not implemented. "
                         f"Valid options are {', '.join(self.SLUGS_MAPPING)}"
                     ),
-                    "status": HTTPStatus.BAD_REQUEST
+                    "status": HTTPStatus.BAD_REQUEST,
                 }
 
         return ai_slug, operation, error
@@ -59,7 +51,7 @@ class ToyAIsView(View):
         except json.JSONDecodeError as exc:
             error = {
                 "status": HTTPStatus.BAD_REQUEST,
-                "message": f"Unable to parse payload. Got: {repr(exc)}"
+                "message": f"Unable to parse payload. Got: {repr(exc)}",
             }
 
         # TODO: implement data schema validation
@@ -67,7 +59,9 @@ class ToyAIsView(View):
 
     def get(self, request, *args, **kwargs):
         method = request.method
-        ai_slug, operation, error = self.parse_request(request, *args, **kwargs)
+        ai_slug, operation, error = self.parse_request(
+            request, *args, **kwargs
+        )
 
         if error is not None:
             status = error["status"]
@@ -83,10 +77,11 @@ class ToyAIsView(View):
 
         return JsonResponse(data=data, status=status)
 
-
     def post(self, request, *args, **kwargs):
         method = request.method
-        ai_slug, operation, error = self.parse_request(request, *args, **kwargs)
+        ai_slug, operation, error = self.parse_request(
+            request, *args, **kwargs
+        )
 
         if error is not None:
             status = error["status"]

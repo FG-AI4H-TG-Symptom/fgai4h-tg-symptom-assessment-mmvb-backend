@@ -13,15 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from django.views.generic import TemplateView
-from django.conf import settings
 from rest_framework.schemas import get_schema_view
 
 from ais.api.urls import router as ais_router
 from cases.api.urls import router as cases_router
 from common.routers import DefaultRouter
+from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
@@ -52,6 +49,4 @@ urlpatterns = [
 
 # TODO: try to do it in a cleaner way, using environment-dependant settings
 if "toy_ais" in settings.INSTALLED_APPS:
-    urlpatterns.append(
-        path('toy_ais/', include('toy_ais.urls')),
-    )
+    urlpatterns.append(path("toy_ais/", include("toy_ais.urls")),)
