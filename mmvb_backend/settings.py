@@ -131,6 +131,7 @@ STATIC_URL = "/static/"
 
 AUTH_USER_MODEL = "common.User"
 
+APPEND_SLASH = False
 
 # DRF settings
 

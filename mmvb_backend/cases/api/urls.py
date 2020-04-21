@@ -5,6 +5,6 @@ from cases.apps import CasesConfig
 
 app_name = CasesConfig.name
 
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
 router.register("cases", CaseViewSet, basename="cases")
 router.register("case-sets", CaseSetViewSet, basename="case-sets")
