@@ -1,5 +1,6 @@
 from typing import Dict, List
 from .base import ToyAI
+from .utils import solve_case_random_conditions
 
 from django.utils.decorators import classproperty
 
@@ -20,7 +21,15 @@ class UniformRandomConditions(ToyAI):
 
     @classmethod
     def solve_case(cls, payload, *args, **kwargs):
-        pass
+        response = {"error": "", "triage": None, "conditions": []}
+        case_data = payload.get("case_data", {})
+        if case_data:
+            result = solve_case_random_conditions(case_data, "uniform")
+            response.update(result)
+        else:
+            response["error"] = "Invalid case data or case data not found in payload"
+
+        return response
 
 
 class WeightedRandomConditions(ToyAI):
@@ -39,4 +48,12 @@ class WeightedRandomConditions(ToyAI):
 
     @classmethod
     def solve_case(cls, payload, *args, **kwargs):
-        pass
+        response = {"error": "", "triage": None, "conditions": []}
+        case_data = payload.get("case_data", {})
+        if case_data:
+            result = solve_case_random_conditions(case_data, "probability_weighted")
+            response.update(result)
+        else:
+            response["error"] = "Invalid case data or case data not found in payload"
+
+        return response

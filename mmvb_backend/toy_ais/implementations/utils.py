@@ -1,6 +1,8 @@
 import json
 import os
 
+import numpy
+
 GENDERS = ["male", "female"]
 EVIDENCE_STATES = ["present", "absent"]
 

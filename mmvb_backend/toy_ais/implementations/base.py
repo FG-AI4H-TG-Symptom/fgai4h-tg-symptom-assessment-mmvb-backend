@@ -10,7 +10,7 @@ class ToyAI(ABC):
     def __subclasshook__(cls, C):
         if cls is ToyAI:
             return True
-        return NotImplementedError
+        return False
 
     @classproperty
     @abstractmethod
