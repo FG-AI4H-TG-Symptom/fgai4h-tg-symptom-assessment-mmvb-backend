@@ -5,7 +5,7 @@ from ais.apps import AisConfig
 
 app_name = AisConfig.name
 
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
 router.register(
     "ai-implementations",
     AIImplementationViewSet,
