@@ -2,10 +2,14 @@ import json
 from http import HTTPStatus
 
 from django.http import JsonResponse
+from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 from toy_ais.implementations import TOY_AIS
 
 
+# TODO: we will need to protect this view in the future, maybe using JWT?
+@method_decorator(csrf_exempt, name="dispatch")
 class ToyAIsView(View):
     OPERATIONS_MAPPING = {
         "GET": {"health-check": "health_check"},
@@ -27,7 +31,7 @@ class ToyAIsView(View):
                     f"Valid operations are "
                     f"{', '.join(self.OPERATIONS_MAPPING[method])}"
                 ),
-                "status": HTTPStatus.BAD_REQUEST,
+                "status": HTTPStatus.BAD_REQUEST.value,
             }
         else:
             ai_slug = kwargs.get("ai_slug_name", None)
@@ -37,7 +41,7 @@ class ToyAIsView(View):
                         f"AI with slug name '{ai_slug}' is not implemented. "
                         f"Valid options are {', '.join(self.SLUGS_MAPPING)}"
                     ),
-                    "status": HTTPStatus.BAD_REQUEST,
+                    "status": HTTPStatus.BAD_REQUEST.value,
                 }
 
         return ai_slug, operation, error
@@ -50,7 +54,7 @@ class ToyAIsView(View):
             payload = json.loads(request.body)
         except json.JSONDecodeError as exc:
             error = {
-                "status": HTTPStatus.BAD_REQUEST,
+                "status": HTTPStatus.BAD_REQUEST.value,
                 "message": f"Unable to parse payload. Got: {repr(exc)}",
             }
 
@@ -73,7 +77,7 @@ class ToyAIsView(View):
             )
             # add try/except
             data = operation_callable()
-            status = HTTPStatus.OK
+            status = HTTPStatus.OK.value
 
         return JsonResponse(data=data, status=status)
 
@@ -98,6 +102,6 @@ class ToyAIsView(View):
                 )
                 # add try/except
                 data = operation_callable(payload)
-                status = HTTPStatus.OK
+                status = HTTPStatus.OK.value
 
         return JsonResponse(data=data, status=status)

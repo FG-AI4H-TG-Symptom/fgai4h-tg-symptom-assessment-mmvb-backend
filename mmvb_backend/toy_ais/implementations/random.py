@@ -20,15 +20,12 @@ class UniformRandomConditions(ToyAI):
     @classmethod
     def solve_case(cls, payload, *args, **kwargs):
         response = {"error": "", "triage": None, "conditions": []}
-        case_data = payload.get("case_data", {})
-        if case_data:
-            result = solve_case_random_conditions(case_data, "uniform")
-            response.update(result)
+        try:
+            result = solve_case_random_conditions(payload, "uniform")
+        except Exception as exc:
+            response["error"] = f"Error handling case data. Got {str(exc)}"
         else:
-            response[
-                "error"
-            ] = "Invalid case data or case data not found in payload"
-
+            response.update(result)
         return response
 
 
@@ -48,15 +45,12 @@ class WeightedRandomConditions(ToyAI):
     @classmethod
     def solve_case(cls, payload, *args, **kwargs):
         response = {"error": "", "triage": None, "conditions": []}
-        case_data = payload.get("case_data", {})
-        if case_data:
+        try:
             result = solve_case_random_conditions(
-                case_data, "probability_weighted"
+                payload, "probability_weighted"
             )
-            response.update(result)
+        except Exception as exc:
+            response["error"] = f"Error handling case data. Got {str(exc)}"
         else:
-            response[
-                "error"
-            ] = "Invalid case data or case data not found in payload"
-
+            response.update(result)
         return response
