@@ -13,18 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from rest_framework.schemas import get_schema_view
-
-from ais.api.urls import router as ais_router
-from cases.api.urls import router as cases_router
-from common.routers import DefaultRouter
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
+from rest_framework.schemas import get_schema_view
+
+from ai_implementations.api.urls import router as ai_implementations_router
+from cases.api.urls import router as cases_router
+from common.routers import DefaultRouter
 
 router = DefaultRouter(trailing_slash=False)
-router.extend(ais_router)
+router.extend(ai_implementations_router)
 router.extend(cases_router)
 
 # TODO: conditionally import it depending on the environment settings

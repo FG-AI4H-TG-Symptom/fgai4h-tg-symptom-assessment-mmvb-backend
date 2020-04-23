@@ -1,7 +1,7 @@
 from rest_framework.routers import DefaultRouter
 
-from ais.api.views import AIImplementationViewSet
-from ais.apps import AisConfig
+from ai_implementations.api.views import AIImplementationViewSet
+from ai_implementations.apps import AisConfig
 
 app_name = AisConfig.name
 
