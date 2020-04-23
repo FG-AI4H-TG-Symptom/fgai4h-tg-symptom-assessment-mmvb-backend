@@ -1,5 +1,6 @@
-from common.models import FlowableModel
 from django.db import models
+
+from common.models import FlowableModel
 from django_mysql.models import JSONField, Model
 
 

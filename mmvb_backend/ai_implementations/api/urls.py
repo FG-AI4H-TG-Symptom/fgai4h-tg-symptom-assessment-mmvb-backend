@@ -7,5 +7,7 @@ app_name = AisConfig.name
 
 router = DefaultRouter(trailing_slash=False)
 router.register(
-    "ai-implementations", AIImplementationViewSet, basename="ai-implementations",
+    "ai-implementations",
+    AIImplementationViewSet,
+    basename="ai-implementations",
 )

@@ -1,3 +1,4 @@
+from django.db import transaction
 from rest_framework.serializers import (
     JSONField,
     ModelSerializer,
@@ -5,7 +6,6 @@ from rest_framework.serializers import (
 )
 
 from cases.models import Case, CaseSet
-from django.db import transaction
 
 
 class CaseSetSerializer(ModelSerializer):
@@ -50,7 +50,9 @@ class CaseSetSerializer(ModelSerializer):
 
 class CaseSerializer(ModelSerializer):
     data = JSONField()
-    case_sets = PrimaryKeyRelatedField(many=True, queryset=CaseSet.objects.all())
+    case_sets = PrimaryKeyRelatedField(
+        many=True, queryset=CaseSet.objects.all()
+    )
 
     class Meta:
         model = Case

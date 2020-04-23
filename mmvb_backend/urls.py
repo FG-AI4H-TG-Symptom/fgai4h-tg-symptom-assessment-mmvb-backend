@@ -13,15 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from rest_framework.schemas import get_schema_view
-
-from ai_implementations.api.urls import router as ai_implementations_router
-from cases.api.urls import router as cases_router
-from common.routers import DefaultRouter
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
-from benchmarking_sessions.api.urls import router as benchmarking_sessions_router
+from rest_framework.schemas import get_schema_view
+
+from ai_implementations.api.urls import router as ai_implementations_router
+from benchmarking_sessions.api.urls import (
+    router as benchmarking_sessions_router,
+)
+from cases.api.urls import router as cases_router
+from common.routers import DefaultRouter
 
 router = DefaultRouter(trailing_slash=False)
 router.extend(ai_implementations_router)
@@ -33,7 +35,9 @@ urlpatterns = [
     path("api/v1/", include(router.urls)),
     path(
         "openapi/",
-        get_schema_view(title="WHO-ITU AI Benchmarking", description="", version="v1"),
+        get_schema_view(
+            title="WHO-ITU AI Benchmarking", description="", version="v1"
+        ),
         name="openapi-schema",
     ),
     path(
