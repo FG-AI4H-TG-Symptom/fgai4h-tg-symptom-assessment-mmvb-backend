@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "common",
     "ai_implementations",
     "cases",
+    "toy_ais",  # TODO: conditionally import it based on settings/environment
 ]
 
 MIDDLEWARE = [

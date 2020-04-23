@@ -24,6 +24,10 @@ from benchmarking_sessions.api.urls import (
 )
 from cases.api.urls import router as cases_router
 from common.routers import DefaultRouter
+from django.conf import settings
+from django.contrib import admin
+from django.urls import include, path
+from django.views.generic import TemplateView
 
 router = DefaultRouter(trailing_slash=False)
 router.extend(ai_implementations_router)
@@ -49,3 +53,7 @@ urlpatterns = [
         name="swagger-ui",
     ),
 ]
+
+# TODO: try to do it in a cleaner way, using environment-dependant settings
+if "toy_ais" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("toy_ais/", include("toy_ais.urls")),)
