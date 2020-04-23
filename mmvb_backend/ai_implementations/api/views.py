@@ -3,8 +3,8 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from ais.api.serializers import AIImplementationSerializer
-from ais.models import AIImplementation
+from ai_implementations.api.serializers import AIImplementationSerializer
+from ai_implementations.models import AIImplementation
 from common.utils import CamelCaseAutoSchema
 
 

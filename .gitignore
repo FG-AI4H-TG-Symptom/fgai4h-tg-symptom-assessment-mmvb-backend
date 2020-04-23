@@ -145,3 +145,6 @@ static
 .DS_Store
 .vscode/
 *.sqlite3
+
+#PyCharm
+.idea/
