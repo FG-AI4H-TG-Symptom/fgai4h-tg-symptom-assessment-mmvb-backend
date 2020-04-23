@@ -7,7 +7,7 @@ from .base import ToyAI
 
 def import_modules(package_name):
     """Dynamically imports submodules"""
-    exclude = {"base"}
+    exclude = {"base", "utils"}
 
     package = sys.modules[package_name]
     for loader, name, is_pkg in pkgutil.walk_packages(package.__path__):
@@ -15,6 +15,6 @@ def import_modules(package_name):
             importlib.import_module(package_name + "." + name)
 
 
-# imports sybmodules to populate ToyAI subclasses
+# imports submodules to populate ToyAI subclasses list
 import_modules(__name__)
 TOY_AIS = ToyAI.__subclasses__()

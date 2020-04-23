@@ -4,7 +4,7 @@ import random
 
 import numpy
 
-GENDERS = ["male", "female"]
+BIOLOGICAL_SEX = ["male", "female"]
 EVIDENCE_STATES = ["present", "absent"]
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,7 +27,7 @@ def drop_all_but_keys(val, keys):
 
 def extract_biological_sex(case_data):
     biological_sex = case_data["profile_information"]["biological_sex"]
-    assert biological_sex in GENDERS
+    assert biological_sex in BIOLOGICAL_SEX
     return biological_sex
 
 
