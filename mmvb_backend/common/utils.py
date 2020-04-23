@@ -23,4 +23,4 @@ def is_true(value):
 
 
 def generate_id():
-    return uuid4().hex
+    return uuid4()
