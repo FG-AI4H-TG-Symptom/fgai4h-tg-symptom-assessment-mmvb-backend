@@ -5,7 +5,14 @@ import sys
 
 
 def main():
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mmvb_backend.settings")
+    project_root = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "mmvb_backend"
+    )
+
+    if project_root not in sys.path:
+        sys.path.append(project_root)
+
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mmvb_backend.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

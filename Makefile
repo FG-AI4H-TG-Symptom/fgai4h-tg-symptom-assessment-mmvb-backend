@@ -19,3 +19,10 @@ install_requirements: .venv/
 install_test_requirements: .venv/
 	. .venv/bin/activate; \
 	pip install -r test_requirements.txt
+
+
+run:
+	. .venv/bin/activate; \
+	python manage.py migrate; \
+	python manage.py register_ais; \
+	python manage.py runserver
