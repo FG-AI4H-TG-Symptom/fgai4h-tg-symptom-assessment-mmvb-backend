@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "common",
     "ais",
     "cases",
+    "toy_ais",  # TODO: conditionally import it based on settings/environment
 ]
 
 MIDDLEWARE = [
