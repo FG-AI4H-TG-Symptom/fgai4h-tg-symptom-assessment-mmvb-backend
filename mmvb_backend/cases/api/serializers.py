@@ -50,13 +50,11 @@ class CaseSetSerializer(ModelSerializer):
 
 class CaseSerializer(ModelSerializer):
     data = JSONField()
-    case_sets = PrimaryKeyRelatedField(
-        many=True, queryset=CaseSet.objects.all()
-    )
+    case_sets = PrimaryKeyRelatedField(many=True, queryset=CaseSet.objects.all())
 
     class Meta:
         model = Case
-        fields = ["id", "name", "data", "case_sets"]
+        fields = ["id", "data", "case_sets"]
 
     @transaction.atomic
     def create(self, validated_data):

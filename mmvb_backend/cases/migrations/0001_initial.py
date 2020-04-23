@@ -79,15 +79,11 @@ class Migration(migrations.Migration):
                 ("name", models.CharField(max_length=150, unique=True)),
                 (
                     "data",
-                    django_mysql.models.JSONField(
-                        default=cases.models.default_data
-                    ),
+                    django_mysql.models.JSONField(default=cases.models.default_data),
                 ),
                 (
                     "case_sets",
-                    models.ManyToManyField(
-                        related_name="cases", to="cases.CaseSet"
-                    ),
+                    models.ManyToManyField(related_name="cases", to="cases.CaseSet"),
                 ),
             ],
             options={"abstract": False},

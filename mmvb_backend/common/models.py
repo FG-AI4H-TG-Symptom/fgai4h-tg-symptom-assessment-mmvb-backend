@@ -36,9 +36,7 @@ class BaseModel(models.Model):
 
 class FlowableModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    status = models.CharField(
-        max_length=50, choices=STATUS_OPTIONS, default=CREATED
-    )
+    status = models.CharField(max_length=50, choices=STATUS_OPTIONS, default=CREATED)
     public = models.NullBooleanField(default=False)
 
     class Meta:
