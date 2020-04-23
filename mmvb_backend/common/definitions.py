@@ -1,5 +1,5 @@
-import os
 import json
+import os
 
 BIOLOGICAL_SEXES = ["male", "female"]
 PRESENT = "present"

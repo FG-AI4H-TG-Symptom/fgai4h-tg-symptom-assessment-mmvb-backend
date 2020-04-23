@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     "ai_implementations",
     "cases",
     "toy_ais",  # TODO: conditionally import it based on settings/environment
-    "case_synthesizer", # TODO: conditionally import it based on settings/environment
+    "case_synthesizer",  # TODO: conditionally import it based on settings/environment
 ]
 
 MIDDLEWARE = [

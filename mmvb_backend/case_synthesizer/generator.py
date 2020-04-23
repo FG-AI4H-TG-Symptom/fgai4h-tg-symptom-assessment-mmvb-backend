@@ -1,19 +1,18 @@
 import random
 
+from cases.models import Case
 from common.definitions import (
-    ABSENT,
     BIOLOGICAL_SEXES,
     EVIDENCE_STATES,
     FIXTURES_DATA,
-    MIN_AGE,
     MAX_AGE,
+    MIN_AGE,
     OBSERVATION_PROBABILITY,
     PRESENT,
     UNKNOWN,
     UNSURE_PROBABILITY,
 )
 from common.utils import generate_id
-from cases.models import Case
 
 
 def sample_symptoms(symptom_probabilities):
@@ -88,7 +87,9 @@ def generate_cases(quantity):
             raise EnvironmentError
 
         symptoms = [
-            combine_symptom_and_state(symptom, symptom_states.get(symptom["id"]))
+            combine_symptom_and_state(
+                symptom, symptom_states.get(symptom["id"])
+            )
             for symptom in FIXTURES_DATA["symptoms"]
             if symptom["id"] in symptom_states
         ]
@@ -123,7 +124,7 @@ def generate_cases(quantity):
                         "name": sampled_condition["name"],
                     },
                 },
-            }
+            },
         )
         cases.append(case)
 

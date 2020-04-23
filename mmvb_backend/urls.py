@@ -30,6 +30,7 @@ router.extend(cases_router)
 # TODO: conditionally import it depending on the environment settings
 if "case_synthesizer" in settings.INSTALLED_APPS:
     from case_synthesizer.api.urls import router as synthesizer_router
+
     router.extend(synthesizer_router)
 
 urlpatterns = [

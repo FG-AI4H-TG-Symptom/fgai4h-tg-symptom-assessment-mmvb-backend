@@ -1,6 +1,7 @@
 from uuid import uuid4
 
 from rest_framework.schemas.openapi import AutoSchema
+
 from stringcase import camelcase
 
 

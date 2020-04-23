@@ -1,10 +1,7 @@
-import json
-import os
 import random
 
 import numpy
-
-from common.definitions import FIXTURES_DATA, BIOLOGICAL_SEXES
+from common.definitions import BIOLOGICAL_SEXES, FIXTURES_DATA
 
 
 def drop_all_but_keys(val, keys):

@@ -1,4 +1,4 @@
-from rest_framework.serializers import Serializer, IntegerField
+from rest_framework.serializers import IntegerField, Serializer
 
 
 class CaseSynthesizerSerializer(Serializer):
