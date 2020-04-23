@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
+
 from toy_ais.implementations import TOY_AIS
 
 
