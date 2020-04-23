@@ -5,7 +5,7 @@ from common.utils import CamelCaseAutoSchema
 
 
 class CaseSynthesizerSchema(CamelCaseAutoSchema):
-    def get_custom_serializer(self, path, method):
+    def get_response_serializer(self, path, method):
         view = self.view
         try:
             return view.get_response_serializer()

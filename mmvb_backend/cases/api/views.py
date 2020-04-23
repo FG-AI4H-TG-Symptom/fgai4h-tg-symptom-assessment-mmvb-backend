@@ -15,7 +15,7 @@ class CaseViewSet(ModelViewSet):
     serializer_class = CaseSerializer
 
     def get_queryset(self):
-        return Case.objects.all()
+        return Case.objects.all().order_by("id")
 
 
 class CaseSetViewSet(ModelViewSet):

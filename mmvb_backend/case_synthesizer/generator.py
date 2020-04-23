@@ -129,4 +129,4 @@ def generate_cases(quantity):
 
     Case.objects.bulk_create(cases)
 
-    return cases
+    return sorted(cases, key=lambda case: case.id)
