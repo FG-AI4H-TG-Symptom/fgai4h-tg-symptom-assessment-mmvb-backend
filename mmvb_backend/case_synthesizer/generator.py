@@ -1,6 +1,7 @@
 import random
 
 from cases.models import Case
+from case_synthesizer.exceptions import SynthesisError
 from common.definitions import (
     BIOLOGICAL_SEXES,
     EVIDENCE_STATES,
@@ -79,12 +80,16 @@ def generate_cases(quantity):
         }
 
         if len(symptom_probabilities) <= 0:
-            raise EnvironmentError
+            raise SynthesisError(
+                "Something went wrong when generating symptom probabilities"
+            )
 
         symptom_states = sample_symptoms(symptom_probabilities)
 
         if len(symptom_states) <= 0:
-            raise EnvironmentError
+            raise SynthesisError(
+                "Something went wrong when sampling symptom states"
+            )
 
         symptoms = [
             combine_symptom_and_state(

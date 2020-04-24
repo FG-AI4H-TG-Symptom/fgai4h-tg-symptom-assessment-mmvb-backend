@@ -1,0 +1,2 @@
+class SynthesisError(Exception):
+    pass
