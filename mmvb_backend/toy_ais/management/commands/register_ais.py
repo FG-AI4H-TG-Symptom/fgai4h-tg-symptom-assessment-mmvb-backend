@@ -6,6 +6,7 @@ from toy_ais.implementations import TOY_AIS
 
 class Command(BaseCommand):
     """Loads toy ai implementations into ai implementations"""
+
     # TODO: properly configure this from the environment?
     SERVER_URL = "http://localhost:8000"
 

@@ -8,7 +8,7 @@ class Command(BaseCommand):
     """Generates synthetic cases"""
 
     def add_arguments(self, parser):
-        parser.add_argument('quantity', type=int)
+        parser.add_argument("quantity", type=int)
 
     def handle(self, *args, **options):
         quantity = options.get("quantity")
@@ -16,9 +16,7 @@ class Command(BaseCommand):
             cases = generate_cases(quantity)
         except SynthesisError as exc:
             self.stdout.write(
-                self.style.ERROR(
-                    f"Error synthesizing cases. Got: {str(exc)}"
-                )
+                self.style.ERROR(f"Error synthesizing cases. Got: {str(exc)}")
             )
         else:
             cases_ids = {case.id.hex for case in cases}

@@ -1,7 +1,7 @@
 import random
 
-from cases.models import Case
 from case_synthesizer.exceptions import SynthesisError
+from cases.models import Case
 from common.definitions import (
     BIOLOGICAL_SEXES,
     EVIDENCE_STATES,
