@@ -16,3 +16,4 @@ redis==3.4.1
 stringcase==1.2.0
 pre-commit==2.2.0
 numpy==1.16.4
+django-cors-headers==3.2.1
