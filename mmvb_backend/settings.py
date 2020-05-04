@@ -161,4 +161,6 @@ CELERY_BROKER_URL = "redis://localhost"
 CELERY_RESULT_BACKEND = "redis://"
 
 # CORS settings
+
+# todo: disable for production and configure URL whitelist
 CORS_ORIGIN_ALLOW_ALL = True
