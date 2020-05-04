@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_mysql",
     "rest_framework",
+    "corsheaders",
     "common",
     "ai_implementations",
     "cases",
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -157,3 +159,8 @@ REST_FRAMEWORK = {
 
 CELERY_BROKER_URL = "redis://localhost"
 CELERY_RESULT_BACKEND = "redis://"
+
+# CORS settings
+
+# todo: disable for production and configure URL whitelist
+CORS_ORIGIN_ALLOW_ALL = True
