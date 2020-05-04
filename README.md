@@ -180,7 +180,9 @@ To check the admin interface, go to [http://localhost:8000/admin/](http://localh
 There is an experimental auto-generated documentation on [http://localhost:8000/api/docs/](http://localhost:8000/admin/)
 
 
-#### General Tips ####
+## General Tips
+
+### Migrations
 
 It is always useful to run `python manage.py migrate` after you checked out code from someone, as the data models/schema might
 have changed and you need to persist them.
@@ -193,15 +195,16 @@ $ python manage.py migrate
 
 to generate the schema changes and apply them to the database.
 
+### Celery
 
 If you need to implement new celery tasks for any of your Django installed apps (the ones listed under `INSTALLED_APPS` in the project `settings.py` module) you only need to:
 
   - Create (if not already created) a `tasks.py` module under the desired Django app directory (`cases` for example)
   - Follow the template shown below on your `tasks.py`:
   ```
-  from celery import shared_tasks
+  from celery import shared_task
 
-  @shared_tasks
+  @shared_task
   def add(x, y):
       return x + y
   ```

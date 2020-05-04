@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "common",
     "ai_implementations",
+    "benchmarking_sessions",
     "cases",
     "toy_ais",  # TODO: conditionally import it based on settings/environment
 ]
