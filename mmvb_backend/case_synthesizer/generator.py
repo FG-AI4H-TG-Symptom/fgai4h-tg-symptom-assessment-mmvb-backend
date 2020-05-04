@@ -59,7 +59,9 @@ def generate_cases(quantity):
         case_id = generate_id()
         age = random.randint(MIN_AGE, MAX_AGE)
         biological_sex = random.choice(BIOLOGICAL_SEXES)
-        meta_data = {"description": "a synthetic case for the MMVB"}
+        meta_data = {
+            "description": f"Synthetic London-model case ({number+1}/{quantity})"
+        }
 
         # Sample from conditions based on their probabilities
         condition_probabilities = [
