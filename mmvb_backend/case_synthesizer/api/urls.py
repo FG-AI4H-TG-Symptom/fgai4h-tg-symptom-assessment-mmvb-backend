@@ -7,5 +7,5 @@ app_name = CaseSynthesizerConfig.name
 
 router = DefaultRouter(trailing_slash=False)
 router.register(
-    "case-synthesizer", CaseSynthesizerViewSet, basename="case-synthesizer",
+    "synthesize", CaseSynthesizerViewSet, basename="case-synthesizer",
 )

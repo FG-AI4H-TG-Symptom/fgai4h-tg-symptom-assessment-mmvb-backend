@@ -12,7 +12,7 @@ from case_synthesizer.generator import generate_cases
 
 class CaseSynthesizerViewSet(GenericViewSet):
     schema = CaseSynthesizerSchema(
-        tags=["Case Synthesizer"], operation_id_base="synthesizeCases"
+        tags=["Cases"], operation_id_base="synthesizeCases"
     )
     serializer_class = CaseSynthesizerSerializer
 
