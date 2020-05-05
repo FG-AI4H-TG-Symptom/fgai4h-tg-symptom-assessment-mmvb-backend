@@ -1,5 +1,14 @@
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 from rest_framework.viewsets import ModelViewSet
 
+from case_synthesizer.api.schemas import CaseSynthesizerSchema
+from case_synthesizer.api.serializers import (
+    CasesListSerializer,
+    CaseSynthesizerSerializer,
+)
+from case_synthesizer.generator import generate_cases
 from cases.api.serializers import (
     CaseSerializer,
     CaseSetFullSerializer,
@@ -16,6 +25,44 @@ class CaseViewSet(ModelViewSet):
 
     def get_queryset(self):
         return Case.objects.all().order_by("id")
+
+
+class ExtendedCaseViewSet(CaseViewSet):
+    def get_serializer_class(self):
+        if self.action == "synthesize":
+            return CaseSynthesizerSerializer
+        else:
+            return CaseSerializer
+
+    def get_response_serializer(self, *args, **kwargs):
+        serializer_class = CasesListSerializer
+        kwargs["context"] = self.get_serializer_context()
+        return serializer_class(*args, **kwargs)
+
+    @action(
+        methods=["post"],
+        detail=False,
+        schema=CaseSynthesizerSchema(
+            tags=["Cases"], operation_id_base="synthesizeCases"
+        ),
+        url_path="synthesize",
+    )
+    def synthesize(self, request, *args, **kwargs):
+        self.schema = CaseSynthesizerSchema(
+            tags=["Cases"], operation_id_base="synthesizeCases"
+        )
+
+        serializer = self.get_serializer_class()(data=request.data)
+        if serializer.is_valid():
+            quantity = serializer.validated_data.get("quantity")
+            cases = generate_cases(int(quantity))
+            serialized = CasesListSerializer(cases, many=True)
+            return Response(data=serialized.data, status=HTTP_201_CREATED)
+        else:
+            error = {"quantity": str(serializer.errors["quantity"][0])}
+            return Response(
+                data={"detail": error}, status=HTTP_400_BAD_REQUEST
+            )
 
 
 class CaseSetViewSet(ModelViewSet):

@@ -11,3 +11,6 @@ class CaseSynthesizerSerializer(Serializer):
 class CasesListSerializer(BaseSerializer):
     def to_representation(self, obj):
         return reverse("cases-detail", kwargs={"pk": obj.pk})
+
+    def to_internal_value(self, data):
+        return {"quantity": data["quantity"]}
