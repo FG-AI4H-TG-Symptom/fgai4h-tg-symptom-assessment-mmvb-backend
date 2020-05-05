@@ -1,7 +1,7 @@
 from django.urls import reverse
+from rest_framework.serializers import BaseSerializer, IntegerField, Serializer
 
 from case_synthesizer.validators import quantity_range
-from rest_framework.serializers import IntegerField, Serializer, BaseSerializer
 
 
 class CaseSynthesizerSerializer(Serializer):

@@ -54,4 +54,7 @@ if "toy_ais" in settings.INSTALLED_APPS:
 # TODO: conditionally import it depending on the environment settings
 if "case_synthesizer" in settings.INSTALLED_APPS:
     from case_synthesizer.api.urls import router as synthesizer_router
-    urlpatterns.append(path("api/v1/cases/", include(synthesizer_router.urls)),)
+
+    urlpatterns.append(
+        path("api/v1/cases/", include(synthesizer_router.urls)),
+    )

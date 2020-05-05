@@ -5,7 +5,7 @@ from rest_framework.viewsets import GenericViewSet
 from case_synthesizer.api.schemas import CaseSynthesizerSchema
 from case_synthesizer.api.serializers import (
     CasesListSerializer,
-    CaseSynthesizerSerializer
+    CaseSynthesizerSerializer,
 )
 from case_synthesizer.generator import generate_cases
 

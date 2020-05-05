@@ -20,14 +20,17 @@ class Command(BaseCommand):
             message = str(exc.detail[0])
             self.stdout.write(
                 self.style.ERROR(
-                    f"Error synthesizing cases. Got a ValidationError: {message}")
+                    f"Error synthesizing cases. Got a ValidationError: {message}"
+                )
             )
         else:
             try:
                 cases = generate_cases(quantity)
             except SynthesisError as exc:
                 self.stdout.write(
-                    self.style.ERROR(f"Error synthesizing cases. Got: {str(exc)}")
+                    self.style.ERROR(
+                        f"Error synthesizing cases. Got: {str(exc)}"
+                    )
                 )
             else:
                 cases_ids = {case.id.hex for case in cases}
