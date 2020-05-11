@@ -68,7 +68,10 @@ class BenchmarkingSessionViewSet(ModelViewSet):
                     del response["value"]
 
         return Response(
-            {"status": BenchmarkingSession.Status.RUNNING, "report": result.info},
+            {
+                "status": BenchmarkingSession.Status.RUNNING,
+                "report": result.info,
+            },
             status=status.HTTP_200_OK,
         )
 

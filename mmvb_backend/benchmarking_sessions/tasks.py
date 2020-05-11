@@ -147,13 +147,12 @@ def run_benchmark(self, benchmarking_session_id):
                 ai_response = response.json()
 
                 # todo: implement proper validation of response
-                if ai_response.get('triage', '') not in ['SC', 'PC', 'EC']:
+                if ai_response.get("triage", "") not in ["SC", "PC", "EC"]:
                     reporter.error(
                         ai_implementation.id,
                         BenchmarkingStepError.BAD_RESPONSE,
                     )
                     continue
-
 
                 reporter.completed(ai_implementation.id, ai_response)
 
