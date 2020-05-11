@@ -23,6 +23,7 @@ class BenchmarkingSession(BaseModel):
     class Status(models.TextChoices):
         CREATED = "created"
         RUNNING = "running"
+        INTERMEDIATE = "intermediate"
         FINISHED = "finished"
 
     status = models.CharField(

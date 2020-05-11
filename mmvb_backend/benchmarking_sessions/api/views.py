@@ -51,9 +51,12 @@ class BenchmarkingSessionViewSet(ModelViewSet):
             )
 
         result = run_benchmark.AsyncResult(benchmarking_session.task_id)
-        if result.status == "PENDING":
+        if result.status == "PENDING" or result.info is None:
+            # this is an in-between state where the celery task status is not yet reflected in the main DB,
+            # so either the task is about to begin or just finished -- in either case it's easiest to pretend it is
+            # running
             return Response(
-                {"status": BenchmarkingSession.Status.RUNNING},
+                {"status": BenchmarkingSession.Status.INTERMEDIATE},
                 status=status.HTTP_200_OK,
             )
 
@@ -65,7 +68,7 @@ class BenchmarkingSessionViewSet(ModelViewSet):
                     del response["value"]
 
         return Response(
-            {"status": benchmarking_session.status, "report": result.info},
+            {"status": BenchmarkingSession.Status.RUNNING, "report": result.info},
             status=status.HTTP_200_OK,
         )
 
