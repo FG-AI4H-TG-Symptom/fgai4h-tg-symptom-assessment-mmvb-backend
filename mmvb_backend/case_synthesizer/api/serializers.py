@@ -21,7 +21,10 @@ class CaseSetSynthesizerSerializer(Serializer):
         validators=[quantity_range(MIN_CASES_QUANTITY, MAX_CASES_QUANTITY)]
     )
     quantity_of_casesets = IntegerField(
-        validators=[quantity_range(MIN_CASESETS_QUANTITY, MAX_CASESETS_QUANTITY)])
+        validators=[
+            quantity_range(MIN_CASESETS_QUANTITY, MAX_CASESETS_QUANTITY)
+        ]
+    )
 
 
 class CasesListSerializer(BaseSerializer):

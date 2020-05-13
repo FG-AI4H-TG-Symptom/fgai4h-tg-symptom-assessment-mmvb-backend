@@ -14,4 +14,5 @@ def quantity_range(lower_limit, upper_limit):
                 f"Invalid value {value}. It must be within "
                 f"{lower_limit} and {upper_limit}."
             )
+
     return validator

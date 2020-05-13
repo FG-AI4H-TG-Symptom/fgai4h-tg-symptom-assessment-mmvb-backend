@@ -14,7 +14,9 @@ app_name = CasesConfig.name
 router = DefaultRouter(trailing_slash=False)
 if "case_synthesizer" in settings.INSTALLED_APPS:
     router.register("cases", ExtendedCaseViewSet, basename="cases")
-    router.register("cases-sets", ExtendedCaseSetViewSet, basename="cases-sets")
+    router.register(
+        "cases-sets", ExtendedCaseSetViewSet, basename="cases-sets"
+    )
 else:
     router.register("cases", CaseViewSet, basename="cases")
     router.register("case-sets", CaseSetViewSet, basename="case-sets")

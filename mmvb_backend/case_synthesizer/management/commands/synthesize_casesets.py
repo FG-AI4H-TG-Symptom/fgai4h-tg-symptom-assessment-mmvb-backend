@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from rest_framework.serializers import ValidationError
 
 from case_synthesizer.exceptions import SynthesisError
-from case_synthesizer.generator import generate_cases, generate_casesets
+from case_synthesizer.generator import generate_casesets
 from case_synthesizer.validators import (
     MAX_CASES_QUANTITY,
     MAX_CASESETS_QUANTITY,
@@ -36,7 +36,9 @@ class Command(BaseCommand):
                 )
             )
         else:
-            cases_validator = quantity_range(MIN_CASES_QUANTITY, MAX_CASES_QUANTITY)
+            cases_validator = quantity_range(
+                MIN_CASES_QUANTITY, MAX_CASES_QUANTITY
+            )
             try:
                 cases_validator(cases_per_caseset)
             except ValidationError as exc:
@@ -48,7 +50,9 @@ class Command(BaseCommand):
                 )
             else:
                 try:
-                    case_sets = generate_casesets(quantity_of_casesets, cases_per_caseset)
+                    case_sets = generate_casesets(
+                        quantity_of_casesets, cases_per_caseset
+                    )
                 except SynthesisError as exc:
                     self.stdout.write(
                         self.style.ERROR(

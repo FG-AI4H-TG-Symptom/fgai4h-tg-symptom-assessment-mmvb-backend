@@ -18,7 +18,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         quantity = options.get("quantity")
-        quantity_validator = quantity_range(MIN_CASES_QUANTITY, MAX_CASES_QUANTITY)
+        quantity_validator = quantity_range(
+            MIN_CASES_QUANTITY, MAX_CASES_QUANTITY
+        )
         try:
             quantity_validator(quantity)
         except ValidationError as exc:
