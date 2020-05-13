@@ -3,19 +3,24 @@ from rest_framework.serializers import ValidationError
 
 from case_synthesizer.exceptions import SynthesisError
 from case_synthesizer.generator import generate_cases
-from case_synthesizer.validators import quantity_range
+from case_synthesizer.validators import (
+    MAX_CASES_QUANTITY,
+    MIN_CASES_QUANTITY,
+    quantity_range,
+)
 
 
 class Command(BaseCommand):
     """Generates synthetic cases"""
 
     def add_arguments(self, parser):
-        parser.add_argument("quantity", type=int)
+        parser.add_argument("--quantity", type=int)
 
     def handle(self, *args, **options):
         quantity = options.get("quantity")
+        quantity_validator = quantity_range(MIN_CASES_QUANTITY, MAX_CASES_QUANTITY)
         try:
-            quantity_range(quantity)
+            quantity_validator(quantity)
         except ValidationError as exc:
             message = str(exc.detail[0])
             self.stdout.write(

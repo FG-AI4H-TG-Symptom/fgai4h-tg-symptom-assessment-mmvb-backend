@@ -1,7 +1,7 @@
 import random
 
 from case_synthesizer.exceptions import SynthesisError
-from cases.models import Case
+from cases.models import Case, CaseSet
 from common.definitions import (
     BIOLOGICAL_SEXES,
     EVIDENCE_STATES,
@@ -138,3 +138,19 @@ def generate_cases(quantity):
     Case.objects.bulk_create(cases)
 
     return sorted(cases, key=lambda case: case.id)
+
+
+def generate_casesets(quantity_of_casesets, cases_per_caseset):
+    case_sets = []
+
+    for quantity in range(quantity_of_casesets):
+        case_id = generate_id()
+        name = case_id.hex
+        cases = generate_cases(cases_per_caseset)
+
+        case_set = CaseSet(id=case_id, name=name)
+        case_set.save()
+        case_set.cases.add(*cases)
+        case_sets.append(case_set)
+
+    return sorted(case_sets, key=lambda case_set: case_set.id)
