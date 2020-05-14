@@ -1,8 +1,9 @@
+from collections import defaultdict
+
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.schemas.openapi import AutoSchema
 from rest_framework.viewsets import ModelViewSet
 
 from benchmarking_sessions.api.serializers import (
@@ -14,11 +15,12 @@ from benchmarking_sessions.models import (
     BenchmarkingStepStatus,
 )
 from benchmarking_sessions.tasks import run_benchmark
+from common.utils import CamelCaseAutoSchema
 
 
 # todo: properly document endpoints
 class BenchmarkingSessionViewSet(ModelViewSet):
-    schema = AutoSchema(tags=["BenchmarkingSessions",])
+    schema = CamelCaseAutoSchema(tags=["BenchmarkingSessions",])
     serializer_class = BenchmarkingSessionSerializer
 
     def get_queryset(self):
@@ -34,7 +36,9 @@ class BenchmarkingSessionViewSet(ModelViewSet):
         benchmarking_session.task_id = task.id
         benchmarking_session.save()
         return Response(
-            f"/benchmarking-sessions/{benchmarking_session.id}/status",
+            {
+                "statusUrl": f"/benchmarking-sessions/{benchmarking_session.id}/status"
+            },
             status=status.HTTP_202_ACCEPTED,
         )
 
@@ -87,35 +91,33 @@ class BenchmarkingSessionViewSet(ModelViewSet):
         ).data
 
         # todo: add metrics infrastructure, add more metrics
-        proportion_cases_with_ai_result_counts = {}
-        for case_response in benchmarking_session_result["responses"]:
-            for ai_implementation_id, response in case_response[
-                "responses"
-            ].items():
-                proportion_cases_with_ai_result_counts[
-                    ai_implementation_id
-                ] = proportion_cases_with_ai_result_counts.get(
-                    ai_implementation_id, 0
-                ) + int(
+        cases_with_ai_result_counts = defaultdict(int)
+        responses = benchmarking_session_result["responses"]
+        for case_response in responses:
+            case_responses = case_response["responses"]
+            for ai_implementation_id, response in case_responses.items():
+                ai_implementation_has_result_for_case = int(
                     response["status"]
                     == BenchmarkingStepStatus.COMPLETED.value
                 )
+                cases_with_ai_result_counts[
+                    ai_implementation_id
+                ] += ai_implementation_has_result_for_case
 
-        proportion_cases_with_ai_result_values = {}
-        for (
-            ai_implementation_id,
-            proportion_cases_with_ai_result_count,
-        ) in proportion_cases_with_ai_result_counts.items():
-            proportion_cases_with_ai_result_values[ai_implementation_id] = (
-                proportion_cases_with_ai_result_count
-                / len(benchmarking_session_result["responses"])
-            )
+        case_count = len(benchmarking_session_result["responses"])
+        proportion_cases_with_ai_result = {
+            ai_implementation_id: result_count / case_count
+            for (
+                ai_implementation_id,
+                result_count,
+            ) in cases_with_ai_result_counts.items()
+        }
 
         benchmarking_session_result["aggregatedMetrics"] = {
             "proportion_cases_with_ai_result": {
                 "id": "proportion_cases_with_ai_result",
                 "name": "Proportion of cases with AI result",
-                "values": proportion_cases_with_ai_result_values,
+                "values": proportion_cases_with_ai_result,
             }
         }
 
