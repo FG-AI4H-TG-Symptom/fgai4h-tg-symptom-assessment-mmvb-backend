@@ -84,11 +84,13 @@ WSGI_APPLICATION = "mmvb_backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "mmvb",
-        "USER": "system",
-        "PASSWORD": "systemsecret",  # TODO: move configs to environment variables
-        "HOST": "127.0.0.1",  # Or an IP Address that your DB is hosted on
-        "PORT": "3306",
+        "NAME": os.environ.get("DB_NAME", "mmvb"),
+        "USER": os.environ.get("DB_USER", "system"),
+        "PASSWORD": os.environ.get("DB_PWD", "systemsecret"),
+        "HOST": os.environ.get(
+            "DB_HOST", "127.0.0.1"
+        ),  # Or an IP Address that your DB is hosted on
+        "PORT": os.environ.get("DB_PORT", "3306"),
     }
 }
 
