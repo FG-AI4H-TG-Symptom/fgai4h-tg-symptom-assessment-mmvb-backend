@@ -1,21 +1,7 @@
-import json
-import os
 import random
 
 import numpy
-
-BIOLOGICAL_SEX = ["male", "female"]
-EVIDENCE_STATES = ["present", "absent"]
-
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FIXTURES_DATA = json.load(open(os.path.join(ROOT_DIR, "fixtures/data.json")))
-SYMPTOM_ID_TO_SYMPTOMS = {
-    symptom["id"]: symptom for symptom in FIXTURES_DATA["symptoms"]
-}
-
-OBSERVATION_PROBABILITY = 0.8
-UNSURE_PROBABILITY = 0.1
-MIN_AGE, MAX_AGE = 18, 80
+from common.definitions import BIOLOGICAL_SEXES, FIXTURES_DATA
 
 
 def drop_all_but_keys(val, keys):
@@ -27,7 +13,7 @@ def drop_all_but_keys(val, keys):
 
 def extract_biological_sex(case_data):
     biological_sex = case_data["profile_information"]["biological_sex"]
-    assert biological_sex in BIOLOGICAL_SEX
+    assert biological_sex in BIOLOGICAL_SEXES
     return biological_sex
 
 

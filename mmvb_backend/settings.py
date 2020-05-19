@@ -25,8 +25,8 @@ SECRET_KEY = "7ik*d943xjsg6+yc!fj+sd!xf6l2qculn-ufn@3%tlse2p5rd)"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# TODO: properly configure it for dev/prod environments in the future
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     "ai_implementations",
     "benchmarking_sessions",
     "cases",
-    "toy_ais",  # TODO: conditionally import it based on settings/environment
+    "toy_ais",  # TODO: conditionally add it based on settings/environment
+    "case_synthesizer",  # TODO: conditionally add it based on settings/environment
 ]
 
 MIDDLEWARE = [
@@ -85,11 +86,13 @@ WSGI_APPLICATION = "mmvb_backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "mmvb",
-        "USER": "system",
-        "PASSWORD": "systemsecret",  # TODO: move configs to environment variables
-        "HOST": "127.0.0.1",  # Or an IP Address that your DB is hosted on
-        "PORT": "3306",
+        "NAME": os.environ.get("DB_NAME", "mmvb"),
+        "USER": os.environ.get("DB_USER", "system"),
+        "PASSWORD": os.environ.get("DB_PWD", "systemsecret"),
+        "HOST": os.environ.get(
+            "DB_HOST", "127.0.0.1"
+        ),  # Or an IP Address that your DB is hosted on
+        "PORT": os.environ.get("DB_PORT", "3306"),
     }
 }
 

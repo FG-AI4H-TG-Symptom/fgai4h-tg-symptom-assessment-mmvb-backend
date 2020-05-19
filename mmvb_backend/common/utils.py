@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from rest_framework.schemas.openapi import AutoSchema
 
 from stringcase import camelcase
@@ -19,3 +21,7 @@ class CamelCaseAutoSchema(AutoSchema):
 
 def is_true(value):
     return str(value).lower() in ["1", "true", "yes"]
+
+
+def generate_id():
+    return uuid4()
