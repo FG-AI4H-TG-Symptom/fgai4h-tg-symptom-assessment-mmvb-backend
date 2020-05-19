@@ -7,6 +7,9 @@ from toy_ais.implementations import TOY_AIS
 class Command(BaseCommand):
     """Loads toy ai implementations into ai implementations"""
 
+    # TODO: properly configure this from the environment?
+    SERVER_URL = "http://localhost:8000"
+
     def handle(self, *args, **options):
         for toy_ai in TOY_AIS:
             self.stdout.write(
@@ -21,7 +24,7 @@ class Command(BaseCommand):
                 # TODO: dynamically get server
                 AIImplementation.objects.create(
                     name=toy_ai.name,
-                    base_url=f"http://localhost:8000/toy_ais/{toy_ai.slug_name}",
+                    base_url=f"{self.SERVER_URL}/toy_ais/{toy_ai.slug_name}",
                 )
                 self.stdout.write(
                     self.style.SUCCESS(
