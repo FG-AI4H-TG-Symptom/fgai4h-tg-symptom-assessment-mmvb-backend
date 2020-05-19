@@ -167,3 +167,8 @@ CELERY_RESULT_BACKEND = "redis://"
 
 # todo: disable for production and configure URL whitelist
 CORS_ORIGIN_ALLOW_ALL = True
+
+# Apps Configurations
+BENCHMARKING_SESSION_TIMEOUT = int(
+    os.environ.get("BENCHMARKING_SESSION_TIMEOUT", 10)
+)

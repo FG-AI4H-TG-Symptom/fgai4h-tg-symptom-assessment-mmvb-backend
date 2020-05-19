@@ -2,6 +2,8 @@ from concurrent.futures import as_completed
 from posixpath import join as urljoin
 from uuid import UUID
 
+from django.conf import settings
+
 from benchmarking_sessions.models import (
     BenchmarkingSession,
     BenchmarkingStepError,
@@ -10,6 +12,8 @@ from benchmarking_sessions.models import (
 from celery import shared_task
 from requests import ReadTimeout
 from requests_futures.sessions import FuturesSession
+
+TIMEOUT = settings.BENCHMARKING_SESSION_TIMEOUT
 
 
 class BenchmarkReporter:
@@ -84,8 +88,6 @@ class BenchmarkReporter:
 
 @shared_task(bind=True)
 def run_benchmark(self, benchmarking_session_id):
-    # todo: make configurable in benchmarking session
-    TIMEOUT = 10
 
     benchmarking_session = BenchmarkingSession.objects.get(
         id=benchmarking_session_id
