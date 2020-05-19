@@ -145,7 +145,10 @@ def generate_casesets(quantity_of_casesets, cases_per_caseset):
 
     for quantity in range(quantity_of_casesets):
         case_id = generate_id()
-        name = case_id.hex
+        name = (
+            f"Synthesised case set with {cases_per_caseset} "
+            f"cases ({case_id.hex})"
+        )
         cases = generate_cases(cases_per_caseset)
 
         case_set = CaseSet(id=case_id, name=name)
