@@ -1,18 +1,28 @@
-flake8:
-	flake8 .
+PYTHONPATH := ./mmvb_backend : $(PYTHONPATH)
 
-black-check:
-	black --check --diff .
+precommit:
+	pre-commit run -a
 
-isort:
-	isort -rc .
+lint: precommit
 
-isort-check:
-	isort -c -rc .
+.venv/:
+	python3 -m venv .venv
 
-black:
-	black .
+precommit_install: .venv/
+	. .venv/bin/activate; \
+	pre-commit install
 
-lint: flake8 isort-check black-check
+install_requirements: .venv/
+	. .venv/bin/activate; \
+	pip install -r requirements.txt
 
-format: black isort
+install_test_requirements: .venv/
+	. .venv/bin/activate; \
+	pip install -r test_requirements.txt
+
+
+run:
+	. .venv/bin/activate; \
+	python manage.py migrate; \
+	python manage.py register_ais; \
+	python manage.py runserver

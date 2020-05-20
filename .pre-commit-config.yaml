@@ -1,0 +1,30 @@
+# See http://pre-commit.com for more information
+# See http://pre-commit.com/hooks.html for more hooks
+files: "mmvb_backend/"
+
+repos:
+  - repo: https://github.com/FalconSocial/pre-commit-python-sorter
+    rev: master
+    hooks:
+      - id: python-import-sorter
+        args: ["--silent-overwrite"]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-json
+      - id: debug-statements
+      - id: requirements-txt-fixer
+
+  - repo: https://github.com/ambv/black
+    rev: 19.10b0
+    hooks:
+      - id: black
+        args: [--line-length=79, --target-version=py38]
+
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.7.9
+    hooks:
+      - id: flake8

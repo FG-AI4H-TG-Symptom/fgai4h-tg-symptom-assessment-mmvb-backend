@@ -1,0 +1,391 @@
+{
+    "condition_symptom_probability": [
+      [
+        "42e009a4e3d8c8a17a29b4c57311e9cf",
+        "1e400ff9b77134121117183e3fc9b7a2",
+        0.6
+      ],
+      [
+        "a4a1fa1b6cb58a3b5ecd8276a42198d8",
+        "1e400ff9b77134121117183e3fc9b7a2",
+        0.6
+      ],
+      [
+        "6df481067214644360ec303283dd6a34",
+        "1e400ff9b77134121117183e3fc9b7a2",
+        0.3
+      ],
+      [
+        "e184ecb7e8603966edb9d305ba1c544f",
+        "1e400ff9b77134121117183e3fc9b7a2",
+        0.3
+      ],
+      [
+        "ffd0bbadd52f955ed05435212ac19b05",
+        "1e400ff9b77134121117183e3fc9b7a2",
+        0.3
+      ],
+      [
+        "2d6a20420b1bf50f84ca352932c9cab8",
+        "1e400ff9b77134121117183e3fc9b7a2",
+        0.6
+      ],
+      [
+        "379771d589cd397c770bb6915c3c17a6",
+        "1e400ff9b77134121117183e3fc9b7a2",
+        0.3
+      ],
+      [
+        "2b7b88ae49684f658748094e633c2536",
+        "1e400ff9b77134121117183e3fc9b7a2",
+        0.3
+      ],
+      [
+        "42e009a4e3d8c8a17a29b4c57311e9cf",
+        "7a3094ceceac3afdae15243c11031588",
+        0.3
+      ],
+      [
+        "85473ef69bd60889a208bc1a65dc0cb8",
+        "7a3094ceceac3afdae15243c11031588",
+        0.3
+      ],
+      [
+        "e184ecb7e8603966edb9d305ba1c544f",
+        "7a3094ceceac3afdae15243c11031588",
+        0.6
+      ],
+      [
+        "ffd0bbadd52f955ed05435212ac19b05",
+        "7a3094ceceac3afdae15243c11031588",
+        0.6
+      ],
+      [
+        "379771d589cd397c770bb6915c3c17a6",
+        "7a3094ceceac3afdae15243c11031588",
+        0.6
+      ],
+      [
+        "42e009a4e3d8c8a17a29b4c57311e9cf",
+        "6e16a75aff90a62324940175453741f1",
+        0.6
+      ],
+      [
+        "a4a1fa1b6cb58a3b5ecd8276a42198d8",
+        "6e16a75aff90a62324940175453741f1",
+        0.6
+      ],
+      [
+        "e184ecb7e8603966edb9d305ba1c544f",
+        "6e16a75aff90a62324940175453741f1",
+        0.3
+      ],
+      [
+        "2d6a20420b1bf50f84ca352932c9cab8",
+        "6e16a75aff90a62324940175453741f1",
+        0.6
+      ],
+      [
+        "42e009a4e3d8c8a17a29b4c57311e9cf",
+        "c643bff833aaa9a47e3421a8c8f35445",
+        0.3
+      ],
+      [
+        "ed9e333b5cf04cb91068bbcde643076e",
+        "c643bff833aaa9a47e3421a8c8f35445",
+        0.3
+      ],
+      [
+        "85473ef69bd60889a208bc1a65dc0cb8",
+        "c643bff833aaa9a47e3421a8c8f35445",
+        0.3
+      ],
+      [
+        "a4a1fa1b6cb58a3b5ecd8276a42198d8",
+        "c643bff833aaa9a47e3421a8c8f35445",
+        0.6
+      ],
+      [
+        "6df481067214644360ec303283dd6a34",
+        "c643bff833aaa9a47e3421a8c8f35445",
+        0.6
+      ],
+      [
+        "e184ecb7e8603966edb9d305ba1c544f",
+        "c643bff833aaa9a47e3421a8c8f35445",
+        0.3
+      ],
+      [
+        "ffd0bbadd52f955ed05435212ac19b05",
+        "c643bff833aaa9a47e3421a8c8f35445",
+        0.6
+      ],
+      [
+        "2d6a20420b1bf50f84ca352932c9cab8",
+        "c643bff833aaa9a47e3421a8c8f35445",
+        0.3
+      ],
+      [
+        "379771d589cd397c770bb6915c3c17a6",
+        "c643bff833aaa9a47e3421a8c8f35445",
+        0.6
+      ],
+      [
+        "85473ef69bd60889a208bc1a65dc0cb8",
+        "5389fc3aab7ca2618978d6c1aceef39f",
+        0.6
+      ],
+      [
+        "379771d589cd397c770bb6915c3c17a6",
+        "5389fc3aab7ca2618978d6c1aceef39f",
+        0.6
+      ],
+      [
+        "85473ef69bd60889a208bc1a65dc0cb8",
+        "e5bcdaa4cf15318b6f021d4168c702d0",
+        0.6
+      ],
+      [
+        "2ecf4419d2505b5265383a5d6dbbcf65",
+        "e5bcdaa4cf15318b6f021d4168c702d0",
+        0.3
+      ],
+      [
+        "e184ecb7e8603966edb9d305ba1c544f",
+        "e5bcdaa4cf15318b6f021d4168c702d0",
+        0.3
+      ],
+      [
+        "379771d589cd397c770bb6915c3c17a6",
+        "e5bcdaa4cf15318b6f021d4168c702d0",
+        0.6
+      ],
+      [
+        "85473ef69bd60889a208bc1a65dc0cb8",
+        "0c99a4e31fbba26dc64364ea53cfe3c7",
+        0.3
+      ],
+      [
+        "2ecf4419d2505b5265383a5d6dbbcf65",
+        "0c99a4e31fbba26dc64364ea53cfe3c7",
+        0.6
+      ],
+      [
+        "e184ecb7e8603966edb9d305ba1c544f",
+        "0c99a4e31fbba26dc64364ea53cfe3c7",
+        0.3
+      ],
+      [
+        "ffd0bbadd52f955ed05435212ac19b05",
+        "0c99a4e31fbba26dc64364ea53cfe3c7",
+        0.3
+      ],
+      [
+        "379771d589cd397c770bb6915c3c17a6",
+        "0c99a4e31fbba26dc64364ea53cfe3c7",
+        0.6
+      ],
+      [
+        "42e009a4e3d8c8a17a29b4c57311e9cf",
+        "bcdc01d83bfb31c85ec47efc0642304e",
+        0.3
+      ],
+      [
+        "2ecf4419d2505b5265383a5d6dbbcf65",
+        "bcdc01d83bfb31c85ec47efc0642304e",
+        0.6
+      ],
+      [
+        "42e009a4e3d8c8a17a29b4c57311e9cf",
+        "5780df68fc82bfb733e0b3d0520d3179",
+        0.3
+      ],
+      [
+        "85473ef69bd60889a208bc1a65dc0cb8",
+        "5780df68fc82bfb733e0b3d0520d3179",
+        0.3
+      ],
+      [
+        "a4a1fa1b6cb58a3b5ecd8276a42198d8",
+        "5780df68fc82bfb733e0b3d0520d3179",
+        0.3
+      ],
+      [
+        "6df481067214644360ec303283dd6a34",
+        "5780df68fc82bfb733e0b3d0520d3179",
+        0.6
+      ],
+      [
+        "e184ecb7e8603966edb9d305ba1c544f",
+        "5780df68fc82bfb733e0b3d0520d3179",
+        0.6
+      ],
+      [
+        "ffd0bbadd52f955ed05435212ac19b05",
+        "5780df68fc82bfb733e0b3d0520d3179",
+        0.3
+      ],
+      [
+        "379771d589cd397c770bb6915c3c17a6",
+        "5780df68fc82bfb733e0b3d0520d3179",
+        0.6
+      ],
+      [
+        "ed9e333b5cf04cb91068bbcde643076e",
+        "94b2b09c9194b316738dfc56b526e124",
+        0.6
+      ],
+      [
+        "ffd0bbadd52f955ed05435212ac19b05",
+        "3a52b6cdfb48b741c1e07599eb03fad3",
+        0.3
+      ]
+    ],
+    "conditions": [
+      {
+        "expected_triage_level": "PC",
+        "id": "42e009a4e3d8c8a17a29b4c57311e9cf",
+        "name": "IBD (first presentation non flare)",
+        "probability": {
+          "female": 0.3,
+          "male": 0.3
+        }
+      },
+      {
+        "expected_triage_level": "EC",
+        "id": "379771d589cd397c770bb6915c3c17a6",
+        "name": "acute pyelonephritis",
+        "probability": {
+          "female": 0.3,
+          "male": 0.3
+        }
+      },
+      {
+        "expected_triage_level": "PC",
+        "id": "85473ef69bd60889a208bc1a65dc0cb8",
+        "name": "simple UTI",
+        "probability": {
+          "female": 0.6,
+          "male": 0.6
+        }
+      },
+      {
+        "expected_triage_level": "EC",
+        "id": "e184ecb7e8603966edb9d305ba1c544f",
+        "name": "appendicitis",
+        "probability": {
+          "female": 0.3,
+          "male": 0.3
+        }
+      },
+      {
+        "expected_triage_level": "EC",
+        "id": "ffd0bbadd52f955ed05435212ac19b05",
+        "name": "ectopic pregnancy",
+        "probability": {
+          "female": 0.3,
+          "male": 0.0
+        }
+      },
+      {
+        "expected_triage_level": "PC",
+        "id": "2d6a20420b1bf50f84ca352932c9cab8",
+        "name": "IBS",
+        "probability": {
+          "female": 0.9,
+          "male": 0.9
+        }
+      },
+      {
+        "expected_triage_level": "PC",
+        "id": "2b7b88ae49684f658748094e633c2536",
+        "name": "Abdo Pain NOS (Idiopathic)",
+        "probability": {
+          "female": 0.6,
+          "male": 0.6
+        }
+      },
+      {
+        "expected_triage_level": "PC",
+        "id": "ed9e333b5cf04cb91068bbcde643076e",
+        "name": "GERD",
+        "probability": {
+          "female": 0.6,
+          "male": 0.6
+        }
+      },
+      {
+        "expected_triage_level": "SC",
+        "id": "a4a1fa1b6cb58a3b5ecd8276a42198d8",
+        "name": "viral GE",
+        "probability": {
+          "female": 0.6,
+          "male": 0.6
+        }
+      },
+      {
+        "expected_triage_level": "EC",
+        "id": "6df481067214644360ec303283dd6a34",
+        "name": "acute cholecystitis",
+        "probability": {
+          "female": 0.3,
+          "male": 0.3
+        }
+      },
+      {
+        "expected_triage_level": "PC",
+        "id": "2ecf4419d2505b5265383a5d6dbbcf65",
+        "name": "bladder cancer (first presentation)",
+        "probability": {
+          "female": 0.3,
+          "male": 0.3
+        }
+      }
+    ],
+    "symptoms": [
+      {
+        "id": "0c99a4e31fbba26dc64364ea53cfe3c7",
+        "name": "Haematuria"
+      },
+      {
+        "id": "3a52b6cdfb48b741c1e07599eb03fad3",
+        "name": "Factor: missed period"
+      },
+      {
+        "id": "94b2b09c9194b316738dfc56b526e124",
+        "name": "heartburn"
+      },
+      {
+        "id": "6e16a75aff90a62324940175453741f1",
+        "name": "Diarrhoea"
+      },
+      {
+        "id": "bcdc01d83bfb31c85ec47efc0642304e",
+        "name": "Weight Loss"
+      },
+      {
+        "id": "e5bcdaa4cf15318b6f021d4168c702d0",
+        "name": "Increased Urination Freq."
+      },
+      {
+        "id": "5780df68fc82bfb733e0b3d0520d3179",
+        "name": "Fever"
+      },
+      {
+        "id": "7a3094ceceac3afdae15243c11031588",
+        "name": "sharp lower quadrant pain"
+      },
+      {
+        "id": "1e400ff9b77134121117183e3fc9b7a2",
+        "name": "Abdo Pain Cramping Central 2 days"
+      },
+      {
+        "id": "5389fc3aab7ca2618978d6c1aceef39f",
+        "name": "Dysuria"
+      },
+      {
+        "id": "c643bff833aaa9a47e3421a8c8f35445",
+        "name": "Vomiting"
+      }
+    ]
+  }
