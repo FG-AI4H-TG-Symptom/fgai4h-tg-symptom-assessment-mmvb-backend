@@ -10,11 +10,13 @@ from benchmarking_sessions.api.serializers import (
     BenchmarkingSessionResultsSerializer,
     BenchmarkingSessionSerializer,
 )
+from benchmarking_sessions.api.utils import strip_values_from_responses
 from benchmarking_sessions.models import (
     BenchmarkingSession,
     BenchmarkingStepStatus,
 )
 from benchmarking_sessions.tasks import run_benchmark
+from celery.states import PENDING
 from common.utils import CamelCaseAutoSchema
 
 
@@ -55,7 +57,7 @@ class BenchmarkingSessionViewSet(ModelViewSet):
             )
 
         result = run_benchmark.AsyncResult(benchmarking_session.task_id)
-        if result.status == "PENDING" or result.info is None:
+        if result.status == PENDING or result.info is None:
             # this is an in-between state where the celery task status is not yet reflected in the main DB,
             # so either the task is about to begin or just finished -- in either case it's easiest to pretend it is
             # running
@@ -64,12 +66,7 @@ class BenchmarkingSessionViewSet(ModelViewSet):
                 status=status.HTTP_200_OK,
             )
 
-        for case_responses in result.info["responses"]:
-            for ai_implementation_id, response in case_responses[
-                "responses"
-            ].items():
-                if "value" in response:
-                    del response["value"]
+        strip_values_from_responses(result.info["responses"])
 
         return Response(
             {
@@ -113,13 +110,13 @@ class BenchmarkingSessionViewSet(ModelViewSet):
             ) in cases_with_ai_result_counts.items()
         }
 
-        benchmarking_session_result["aggregatedMetrics"] = {
-            "proportion_cases_with_ai_result": {
+        benchmarking_session_result["aggregatedMetrics"] = [
+            {
                 "id": "proportion_cases_with_ai_result",
                 "name": "Proportion of cases with AI result",
                 "values": proportion_cases_with_ai_result,
             }
-        }
+        ]
 
         return Response(
             benchmarking_session_result, status=status.HTTP_200_OK,
