@@ -83,6 +83,8 @@ class ExtendedCaseSetViewSet(CaseSetViewSet):
     def get_serializer_class(self):
         if self.action == "synthesize":
             return CaseSetSynthesizerSerializer
+        elif self.serializer_class == CaseSetFullSerializer:
+            return self.serializer_class
         else:
             return CaseSetSerializer
 
