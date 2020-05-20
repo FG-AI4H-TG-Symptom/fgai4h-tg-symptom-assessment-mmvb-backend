@@ -12,11 +12,18 @@ from cases.apps import CasesConfig
 app_name = CasesConfig.name
 
 router = DefaultRouter(trailing_slash=False)
-if "case_synthesizer" in settings.INSTALLED_APPS:
-    router.register("cases", ExtendedCaseViewSet, basename="cases")
-    router.register(
-        "cases-sets", ExtendedCaseSetViewSet, basename="cases-sets"
-    )
-else:
-    router.register("cases", CaseViewSet, basename="cases")
-    router.register("case-sets", CaseSetViewSet, basename="case-sets")
+
+router.register(
+    "cases",
+    ExtendedCaseViewSet
+    if "case_synthesizer" in settings.INSTALLED_APPS
+    else CaseViewSet,
+    basename="cases",
+)
+router.register(
+    "case-sets",
+    ExtendedCaseSetViewSet
+    if "case_synthesizer" in settings.INSTALLED_APPS
+    else CaseSetViewSet,
+    basename="case-sets",
+)
