@@ -6,6 +6,7 @@ PRESENT = "present"
 ABSENT = "absent"
 UNKNOWN = "unsure"
 EVIDENCE_STATES = [PRESENT, ABSENT]
+TRIAGE_OPTIONS = ["SC", "PC", "EC", "UNCERTAIN"]
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 FIXTURES_DATA = json.load(open(os.path.join(ROOT_DIR, "fixtures/data.json")))
