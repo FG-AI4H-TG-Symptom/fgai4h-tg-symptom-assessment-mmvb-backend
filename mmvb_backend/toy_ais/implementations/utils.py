@@ -57,10 +57,6 @@ def solve_case_random_conditions(case_data, randomisation_type):
     )
     conditions = [element for element in conditions]
 
-<<<<<<< Updated upstream
-    triage = random.choice(["SC", "PC", "EC", "UNCERTAIN"])
-=======
     triage = random.choice(TRIAGE_OPTIONS)
->>>>>>> Stashed changes
 
     return {"triage": triage, "conditions": conditions}
