@@ -1,7 +1,7 @@
 import random
 
 import numpy
-from common.definitions import BIOLOGICAL_SEXES, FIXTURES_DATA
+from common.definitions import BIOLOGICAL_SEXES, FIXTURES_DATA, TRIAGE_OPTIONS
 
 
 def drop_all_but_keys(val, keys):
@@ -57,6 +57,6 @@ def solve_case_random_conditions(case_data, randomisation_type):
     )
     conditions = [element for element in conditions]
 
-    triage = random.choice(["SC", "PC", "EC", "UNCERTAIN"])
+    triage = random.choice(TRIAGE_OPTIONS)
 
     return {"triage": triage, "conditions": conditions}
