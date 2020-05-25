@@ -12,7 +12,7 @@ def drop_all_but_keys(val, keys):
 
 
 def extract_biological_sex(case_data):
-    biological_sex = case_data["profile_information"]["biological_sex"]
+    biological_sex = case_data["profileInformation"]["biologicalSex"]
     assert biological_sex in BIOLOGICAL_SEXES
     return biological_sex
 

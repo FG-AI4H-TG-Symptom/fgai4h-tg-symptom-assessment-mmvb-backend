@@ -113,17 +113,17 @@ def generate_cases(quantity):
         case = Case(
             id=case_id,
             data={
-                "case_data": {
-                    "meta_data": meta_data,
-                    "profile_information": {
-                        "biological_sex": biological_sex,
+                "caseData": {
+                    "metaData": meta_data,
+                    "profileInformation": {
+                        "biologicalSex": biological_sex,
                         "age": age,
                     },
-                    "presenting_complaints": [presenting_symptom],
-                    "other_features": symptoms,
+                    "presentingComplaints": [presenting_symptom],
+                    "otherFeatures": symptoms,
                 },
-                "values_to_predict": {
-                    "expected_triage_level": (
+                "valuesToPredict": {
+                    "expectedTriageLevel": (
                         sampled_condition["expected_triage_level"]
                     ),
                     "condition": {
