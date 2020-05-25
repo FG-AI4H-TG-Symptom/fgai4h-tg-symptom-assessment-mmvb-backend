@@ -19,9 +19,10 @@ class UniformRandomConditions(ToyAI):
 
     @classmethod
     def solve_case(cls, payload, *args, **kwargs):
-        response = {"error": "", "triage": None, "conditions": []}
+        case_data = payload["caseData"]
+        response = {"triage": None, "conditions": []}
         try:
-            result = solve_case_random_conditions(payload, "uniform")
+            result = solve_case_random_conditions(case_data, "uniform")
         except Exception as exc:
             response["error"] = f"Error handling case data. Got {str(exc)}"
         else:
