@@ -10,6 +10,7 @@ from benchmarking_sessions.models import (
     BenchmarkingStepStatus,
 )
 from celery import shared_task
+from common.definitions import TRIAGE_OPTIONS
 from requests import ReadTimeout
 from requests_futures.sessions import FuturesSession
 
@@ -25,7 +26,7 @@ class BenchmarkReporter:
 
         self.responses = [
             {
-                "caseId": case.data["caseData"]["caseId"],
+                "caseId": str(case.id),
                 "caseIndex": case_index,
                 "responses": self.response_template(),
             }
@@ -148,8 +149,15 @@ def run_benchmark(self, benchmarking_session_id):
 
                 ai_response = response.json()
 
+                if "error" in ai_response:
+                    reporter.error(
+                        ai_implementation.id,
+                        BenchmarkingStepError.SERVER_ERROR,
+                    )
+                    continue
+
                 # todo: implement proper validation of response
-                if ai_response.get("triage", "") not in ["SC", "PC", "EC"]:
+                if ai_response.get("triage", "") not in TRIAGE_OPTIONS:
                     reporter.error(
                         ai_implementation.id,
                         BenchmarkingStepError.BAD_RESPONSE,
