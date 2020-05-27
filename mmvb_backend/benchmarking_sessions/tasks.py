@@ -10,6 +10,7 @@ from benchmarking_sessions.models import (
     BenchmarkingStepStatus,
 )
 from celery import shared_task
+from common.definitions import TRIAGE_OPTIONS
 from requests import ReadTimeout
 from requests_futures.sessions import FuturesSession
 
@@ -156,12 +157,7 @@ def run_benchmark(self, benchmarking_session_id):
                     continue
 
                 # todo: implement proper validation of response
-                if ai_response.get("triage", "") not in [
-                    "SC",
-                    "PC",
-                    "EC",
-                    "UNCERTAIN",
-                ]:
+                if ai_response.get("triage", "") not in TRIAGE_OPTIONS:
                     reporter.error(
                         ai_implementation.id,
                         BenchmarkingStepError.BAD_RESPONSE,
