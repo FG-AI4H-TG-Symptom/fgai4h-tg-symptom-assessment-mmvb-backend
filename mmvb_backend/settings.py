@@ -175,3 +175,4 @@ BENCHMARKING_SESSION_TIMEOUT = int(
 
 SERVER_URL = os.environ.get("MMVB_SERVER_URL", "http://localhost")
 SERVER_PORT = os.environ.get("MMVB_SERVER_PORT", "8000")
+DEFAULT_TIMEOUT = int(os.environ.get("DEFAULT_TIMEOUT", 2))
