@@ -11,7 +11,7 @@ from stringcase import camelcase
 DEFAULT_TIMEOUT = settings.DEFAULT_TIMEOUT
 retry_strategy = Retry(
     total=3,
-    status_forcelist=[429, 500, 502, 503, 504, 400],
+    status_forcelist=[429, 500, 502, 503, 504],
     method_whitelist=["HEAD", "GET", "OPTIONS"],
 )
 
