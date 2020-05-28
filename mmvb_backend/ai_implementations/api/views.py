@@ -28,18 +28,19 @@ class AIImplementationViewSet(ModelViewSet):
                 "detail": f"Could not find ai implementation with id {pk}"
             }
         else:
-            response_status = status.HTTP_200_OK
             target_url = f"{ai_implementation.base_url}/health-check"
 
             request_response = perform_request(target_url)
             json_response = request_response.json()
 
             if request_response.status_code != status.HTTP_200_OK:
+                response_status = status.HTTP_400_BAD_REQUEST
                 response_data = {
                     "detail": json_response.get("detail", "Unknown error"),
                     "original_status": request_response.status_code,
                 }
             else:
+                response_status = status.HTTP_200_OK
                 response_data = {"data": json_response.get("data")}
 
         return Response(response_data, status=response_status)
