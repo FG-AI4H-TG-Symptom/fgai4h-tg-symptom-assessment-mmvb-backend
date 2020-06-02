@@ -22,5 +22,10 @@ class Metric(ABC):
 
     @classmethod
     @abstractmethod
+    def aggregate(cls, *args, **kwargs):
+        return NotImplementedError
+
+    @classmethod
+    @abstractmethod
     def calculate(cls, *args, **kwargs):
         return NotImplementedError
