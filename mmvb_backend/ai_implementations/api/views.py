@@ -18,7 +18,6 @@ class AIImplementationViewSet(ModelViewSet):
 
     @action(methods=["get"], detail=True, url_path="health-check")
     def health_check(self, request, *args, **kwargs):
-        # TODO: implement actual endpoint
         pk = kwargs.get("pk")
         ai_implementation = self.get_queryset().filter(pk=pk).first()
 
