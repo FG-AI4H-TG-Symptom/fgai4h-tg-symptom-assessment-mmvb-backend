@@ -1,5 +1,13 @@
 import json
 import os
+from enum import Enum
+
+
+class HealthCheckStatus(Enum):
+    OK = "ok"
+    BAD_RESPONSE = "bad response"
+    TIMEOUT = "timeout"
+
 
 BIOLOGICAL_SEXES = ["male", "female"]
 PRESENT = "present"

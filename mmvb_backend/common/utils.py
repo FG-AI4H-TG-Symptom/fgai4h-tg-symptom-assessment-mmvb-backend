@@ -2,29 +2,16 @@ from uuid import uuid4
 
 from django.conf import settings
 from rest_framework.schemas.openapi import AutoSchema
+from rest_framework.status import HTTP_200_OK
 
 import requests
+from common.definitions import HealthCheckStatus
 from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
+from requests.exceptions import ConnectionError
 from stringcase import camelcase
 
 DEFAULT_TIMEOUT = settings.DEFAULT_TIMEOUT
-retry_strategy = Retry(
-    total=3,
-    status_forcelist=[429, 500, 502, 503, 504],
-    method_whitelist=["HEAD", "GET", "OPTIONS"],
-)
-
-
-class TimeoutHTTPAdapter(HTTPAdapter):
-    def __init__(self, *args, **kwargs):
-        self.timeout = kwargs.pop("timeout", DEFAULT_TIMEOUT)
-        super().__init__(*args, **kwargs)
-
-    def send(self, request, **kwargs):
-        if "timeout" not in kwargs:
-            kwargs["timeout"] = self.timeout
-        return super().send(request, **kwargs)
+DEFAULT_MAX_RETRIES = settings.MAX_RETRIES
 
 
 class CamelCaseAutoSchema(AutoSchema):
@@ -49,17 +36,28 @@ def generate_id():
     return uuid4()
 
 
-def perform_request(url):
-    adapter = TimeoutHTTPAdapter()
-    http = requests.Session()
+def perform_request(url, retries=DEFAULT_MAX_RETRIES, timeout=DEFAULT_TIMEOUT):
+    adapter = HTTPAdapter(max_retries=1)
+    session = requests.Session()
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
 
-    http.mount("https://", adapter)
-    http.mount("http://", adapter)
+    response = {"status": "", "data": None, "detail": ""}
 
     try:
-        response = http.get(url)
+        request_response = session.get(url, timeout=timeout)
+    except ConnectionError as exc:
+        response["status"] = HealthCheckStatus.TIMEOUT
+        response["detail"] = f"Error trying to perform request. Got {str(exc)}"
     except Exception as exc:
-        response = {
-            "detail": f"Error trying to perform request. Got {str(exc)}"
-        }
+        response["status"] = HealthCheckStatus.BAD_RESPONSE
+        response["detail"] = f"Error trying to perform request. Got {str(exc)}"
+    else:
+        if request_response.status_code != HTTP_200_OK:
+            response["status"] = HealthCheckStatus.BAD_RESPONSE
+        else:
+            response["status"] = HealthCheckStatus.OK
+
+        response["data"] = request_response.json()
+
     return response
