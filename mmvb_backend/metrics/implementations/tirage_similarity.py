@@ -4,7 +4,11 @@ from django.shortcuts import get_object_or_404
 from django.utils.decorators import classproperty
 
 from benchmarking_sessions.models import BenchmarkingStepStatus
-from common.definitions import EXPECTED_TRIAGE_OPTIONS, SOFT_FAIL_TRIAGE_SIMILARITY
+from cases.models import Case
+from common.definitions import (
+    EXPECTED_TRIAGE_OPTIONS,
+    SOFT_FAIL_TRIAGE_SIMILARITY,
+)
 from metrics.implementations.base import Metric
 
 
@@ -29,9 +33,8 @@ class TriageSimilarity(Metric):
         expected_triage = EXPECTED_TRIAGE_OPTIONS.index(expected_triage)
         ai_triage = EXPECTED_TRIAGE_OPTIONS.index(ai_triage)
 
-        similarity_factor = (
-            abs(expected_triage - ai_triage) /
-            (len(EXPECTED_TRIAGE_OPTIONS) - 1.0)
+        similarity_factor = abs(expected_triage - ai_triage) / (
+            len(EXPECTED_TRIAGE_OPTIONS) - 1.0
         )
 
         return 1.0 - similarity_factor
@@ -40,16 +43,20 @@ class TriageSimilarity(Metric):
     def aggregate(cls, metrics):
         metrics["aggregatedValues"] = {}
 
-        ais_triage_similarity_sum= defaultdict(int)
+        ais_triage_similarity_sum = defaultdict(int)
         for case_id, ais_metrics in metrics["values"]:
             for ai_implementation_id, triage_similarity in ais_metrics.items():
-                ais_triage_similarity_sum[ai_implementation_id] += triage_similarity
+                ais_triage_similarity_sum[
+                    ai_implementation_id
+                ] += triage_similarity
 
         case_count = len(metrics["values"])
         mean_triage_similarity = {
             ai_implementation_id: similarity_sum / case_count
-            for (ai_implementation_id, similarity_sum)
-            in ais_triage_similarity_sum.items()
+            for (
+                ai_implementation_id,
+                similarity_sum,
+            ) in ais_triage_similarity_sum.items()
         }
 
         metrics["aggregatedValues"] = mean_triage_similarity
@@ -58,11 +65,7 @@ class TriageSimilarity(Metric):
     @classmethod
     def calculate(cls, benchmarking_session_result, soft=False):
         COMPLETED = BenchmarkingStepStatus.COMPLETED.value
-        metrics = {
-            "id": cls.name,
-            "name": cls.description,
-            "values": {}
-        }
+        metrics = {"id": cls.name, "name": cls.description, "values": {}}
 
         cases_metrics = {}
         responses = benchmarking_session_result["responses"]
@@ -75,18 +78,18 @@ class TriageSimilarity(Metric):
                 has_completed = response["status"] == COMPLETED
 
                 if not has_completed:
-                    tiage_similarity = 0.0
+                    triage_similarity = 0.0
                 else:
-                    expected_triage = case.data["valuesToPredict"]["expectedTriageLevel"]
+                    expected_triage = case.data["valuesToPredict"][
+                        "expectedTriageLevel"
+                    ]
 
                     triage_similarity = cls._calculate_triage_similarity(
                         expected_triage, response["triage"], soft=soft
                     )
 
                 cases_metrics.setdefault(case_id, {}).update(
-                    {
-                        ai_implementation_id: triage_similarity
-                    }
+                    {ai_implementation_id: triage_similarity}
                 )
 
         metrics["values"] = cases_metrics

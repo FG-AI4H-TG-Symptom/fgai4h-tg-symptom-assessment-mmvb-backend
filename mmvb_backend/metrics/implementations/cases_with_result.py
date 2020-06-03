@@ -27,8 +27,10 @@ class CasesWithAIResult(Metric):
         case_count = len(metrics["values"])
         proportion_cases_with_ai_result = {
             ai_implementation_id: result_count / case_count
-            for (ai_implementation_id, result_count)
-            in cases_with_ai_result_counts.items()
+            for (
+                ai_implementation_id,
+                result_count,
+            ) in cases_with_ai_result_counts.items()
         }
 
         metrics["aggregatedValues"] = proportion_cases_with_ai_result
@@ -37,11 +39,7 @@ class CasesWithAIResult(Metric):
     @classmethod
     def calculate(cls, benchmarking_session_result, *args, **kwargs):
         COMPLETED = BenchmarkingStepStatus.COMPLETED.value
-        metrics = {
-            "id": cls.name,
-            "name": cls.description,
-            "values": {}
-        }
+        metrics = {"id": cls.name, "name": cls.description, "values": {}}
 
         cases_metrics = {}
         responses = benchmarking_session_result["responses"]
@@ -49,14 +47,10 @@ class CasesWithAIResult(Metric):
             case_id = case_response["caseId"]
             ai_responses = case_response["responses"]
             for ai_implementation_id, response in ai_responses.items():
-                has_result_for_case = int(
-                    response["status"] == COMPLETED
-                )
+                has_result_for_case = int(response["status"] == COMPLETED)
 
                 cases_metrics.setdefault(case_id, {}).update(
-                    {
-                        ai_implementation_id: has_result_for_case
-                    }
+                    {ai_implementation_id: has_result_for_case}
                 )
 
         metrics["values"] = cases_metrics
