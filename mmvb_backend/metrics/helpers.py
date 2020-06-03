@@ -11,9 +11,7 @@ def calculate_metrics(benchmark_session_result, metrics=METRICS_IDS):
         calculated_metric = metric_implementation.calculate(
             benchmark_session_result
         )
-        calculated_metric = metric_implementation.aggregate(
-            calculated_metric
-        )
+        calculated_metric = metric_implementation.aggregate(calculated_metric)
         calculated_metrics.append(calculated_metric)
 
     return calculated_metrics
