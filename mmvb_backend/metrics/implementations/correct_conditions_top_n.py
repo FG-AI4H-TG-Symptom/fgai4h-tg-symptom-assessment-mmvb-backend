@@ -8,14 +8,18 @@ from cases.models import Case
 from metrics.implementations.base import Metric
 
 
-class CorrectConditionsTop1(Metric):
+class CorrectConditionsTopN(Metric):
     @classproperty
     def name(cls):
-        return "correct_conditions_top_1"
+        return "correct_conditions_top_n"
 
     @classproperty
     def description(cls):
-        return "Correct conditions (top 1)"
+        return "Correct conditions (top n)"
+
+    @classmethod
+    def include_as_metric(cls):
+        return False
 
     @classmethod
     def _calculate_recall(
@@ -48,7 +52,7 @@ class CorrectConditionsTop1(Metric):
         return metrics
 
     @classmethod
-    def calculate(cls, benchmarking_session_result, top_n=1):
+    def calculate(cls, benchmarking_session_result, top_n=None):
         COMPLETED = BenchmarkingStepStatus.COMPLETED.value
         metrics = {"id": cls.name, "name": cls.description, "values": {}}
 
@@ -78,7 +82,25 @@ class CorrectConditionsTop1(Metric):
         return metrics
 
 
-class CorrectConditionsTop3(CorrectConditionsTop1):
+class CorrectConditionsTop1(CorrectConditionsTopN):
+    @classproperty
+    def name(cls):
+        return "correct_conditions_top_1"
+
+    @classproperty
+    def description(cls):
+        return "Correct conditions (top 1)"
+
+    @classmethod
+    def include_as_metric(cls):
+        return True
+
+    @classmethod
+    def calculate(cls, benchmarking_session_result, *args, **kwargs):
+        return super().calculate(benchmarking_session_result, top_n=1)
+
+
+class CorrectConditionsTop3(CorrectConditionsTopN):
     @classproperty
     def name(cls):
         return "correct_conditions_top_3"
@@ -88,11 +110,15 @@ class CorrectConditionsTop3(CorrectConditionsTop1):
         return "Correct conditions (top 3)"
 
     @classmethod
+    def include_as_metric(cls):
+        return True
+
+    @classmethod
     def calculate(cls, benchmarking_session_result, *args, **kwargs):
         return super().calculate(benchmarking_session_result, top_n=3)
 
 
-class CorrectConditionsTop10(CorrectConditionsTop1):
+class CorrectConditionsTop10(CorrectConditionsTopN):
     @classproperty
     def name(cls):
         return "correct_conditions_top_10"
@@ -100,6 +126,10 @@ class CorrectConditionsTop10(CorrectConditionsTop1):
     @classproperty
     def description(cls):
         return "Correct conditions (top 10)"
+
+    @classmethod
+    def include_as_metric(cls):
+        return True
 
     @classmethod
     def calculate(cls, benchmarking_session_result, *args, **kwargs):

@@ -41,7 +41,7 @@ def generate_id():
 
 
 def get_all_subclasses(cls):
-    return set(cls.__subclasses__()).union(
+    all_subclasses = set(cls.__subclasses__()).union(
         [
             sub
             for klass in cls.__subclasses__()
@@ -49,13 +49,33 @@ def get_all_subclasses(cls):
         ]
     )
 
+    subclasses = []
 
-def atoi(text):
+    for klass in all_subclasses:
+        if (
+            not hasattr(klass, "include_as_metric")
+            or klass.include_as_metric()
+        ):
+            subclasses.append(klass)
+    return subclasses
+
+
+def char_to_digit(text):
+    """
+    Converts text to integer if it contains a number else returns the text
+    """
     return int(text) if text.isdigit() else text
 
 
 def natural_keys(text):
-    return [atoi(c) for c in re.split(r"(\d+)", text)]
+    """
+    Filters strings to find numbers and convert them to integers.
+    It can be used for sorting strings containing integers to avoid
+    situations where `something1`, `something12`, `something2`
+    will be sorted like that when the expected sorting would be
+    `something1`, `something2`, `something12`
+    """
+    return [char_to_digit(c) for c in re.split(r"(\d+)", text)]
 
 
 def import_modules(package_name):

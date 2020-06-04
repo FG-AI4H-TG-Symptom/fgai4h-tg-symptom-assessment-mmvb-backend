@@ -16,6 +16,10 @@ class CasesWithAIResult(Metric):
         return "Cases with AI result"
 
     @classmethod
+    def include_as_metric(cls):
+        return True
+
+    @classmethod
     def aggregate(cls, metrics):
         metrics["aggregatedValues"] = {}
 

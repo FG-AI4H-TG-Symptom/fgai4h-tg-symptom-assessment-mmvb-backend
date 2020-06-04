@@ -12,14 +12,18 @@ from common.definitions import (
 from metrics.implementations.base import Metric
 
 
-class TriageSimilarity(Metric):
+class TriageSimilarityBase(Metric):
     @classproperty
     def name(cls):
-        return "triage_similarity"
+        return "triage_similarity_base"
 
     @classproperty
     def description(cls):
-        return "Triage similarity"
+        return "Triage similarity (Base)"
+
+    @classmethod
+    def include_as_metric(cls):
+        return False
 
     def _calculate_triage_similarity(expected_triage, ai_triage, soft=False):
         # TODO: what to do in case this validation fails?
@@ -96,7 +100,25 @@ class TriageSimilarity(Metric):
         return metrics
 
 
-class SoftTriageSimilarity(TriageSimilarity):
+class TriageSimilarity(TriageSimilarityBase):
+    @classproperty
+    def name(cls):
+        return "triage_similarity"
+
+    @classproperty
+    def description(cls):
+        return "Triage similarity"
+
+    @classmethod
+    def include_as_metric(cls):
+        return True
+
+    @classmethod
+    def calculate(cls, benchmarking_session_result):
+        super().calculate(benchmarking_session_result, soft=False)
+
+
+class SoftTriageSimilarity(TriageSimilarityBase):
     @classproperty
     def name(cls):
         return "soft_triage_similarity"
@@ -104,6 +126,10 @@ class SoftTriageSimilarity(TriageSimilarity):
     @classproperty
     def description(cls):
         return "Soft triage similarity"
+
+    @classmethod
+    def include_as_metric(cls):
+        return True
 
     @classmethod
     def calculate(cls, benchmarking_session_result):

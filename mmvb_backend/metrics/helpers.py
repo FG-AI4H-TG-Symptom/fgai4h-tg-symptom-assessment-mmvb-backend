@@ -1,6 +1,6 @@
 from metrics.implementations import SUPPORTED_METRICS
 
-METRICS_IDS = [metric for metric in SUPPORTED_METRICS]
+METRICS_IDS = list(SUPPORTED_METRICS)
 
 
 def calculate_metrics(benchmark_session_result, metrics=METRICS_IDS):
