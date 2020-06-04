@@ -22,7 +22,7 @@ class TriageMatch(Metric):
         metrics["aggregatedValues"] = {}
 
         ais_with_triage_match = defaultdict(int)
-        for case_id, ais_metrics in metrics["values"]:
+        for case_id, ais_metrics in metrics["values"].items():
             for ai_implementation_id, triage_matches in ais_metrics.items():
                 ais_with_triage_match[ai_implementation_id] += triage_matches
 
@@ -56,7 +56,8 @@ class TriageMatch(Metric):
                     "expectedTriageLevel"
                 ]
                 triage_matches = int(
-                    has_completed and response["triage"] == expected_triage
+                    has_completed
+                    and response.get("triage", "") == expected_triage
                 )
 
                 cases_metrics.setdefault(case_id, {}).update(
