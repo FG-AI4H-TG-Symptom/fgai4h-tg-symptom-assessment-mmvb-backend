@@ -55,6 +55,9 @@ def perform_request(url, retries=DEFAULT_MAX_RETRIES, timeout=DEFAULT_TIMEOUT):
     else:
         if request_response.status_code != HTTP_200_OK:
             response["status"] = HealthCheckStatus.BAD_RESPONSE
+            response[
+                "detail"
+            ] = f"Error on health check response. Got HTTP {request_response.status_code}"
         else:
             response["status"] = HealthCheckStatus.OK
 
