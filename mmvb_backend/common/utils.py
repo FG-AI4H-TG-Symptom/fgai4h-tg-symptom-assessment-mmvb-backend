@@ -1,3 +1,7 @@
+import importlib
+import pkgutil
+import re
+import sys
 from uuid import uuid4
 
 from django.conf import settings
@@ -36,8 +40,56 @@ def generate_id():
     return uuid4()
 
 
+def get_all_subclasses(cls):
+    all_subclasses = set(cls.__subclasses__()).union(
+        [
+            sub
+            for klass in cls.__subclasses__()
+            for sub in get_all_subclasses(klass)
+        ]
+    )
+
+    subclasses = []
+
+    for klass in all_subclasses:
+        if (
+            not hasattr(klass, "include_as_metric")
+            or klass.include_as_metric()
+        ):
+            subclasses.append(klass)
+    return subclasses
+
+
+def char_to_digit(text):
+    """
+    Converts text to integer if it contains a number else returns the text
+    """
+    return int(text) if text.isdigit() else text
+
+
+def natural_keys(text):
+    """
+    Filters strings to find numbers and convert them to integers.
+    It can be used for sorting strings containing integers to avoid
+    situations where `something1`, `something12`, `something2`
+    will be sorted like that when the expected sorting would be
+    `something1`, `something2`, `something12`
+    """
+    return [char_to_digit(c) for c in re.split(r"(\d+)", text)]
+
+
+def import_modules(package_name):
+    """Dynamically imports submodules"""
+    exclude = {"base", "utils"}
+
+    package = sys.modules[package_name]
+    for loader, name, is_pkg in pkgutil.walk_packages(package.__path__):
+        if name not in exclude:
+            importlib.import_module(package_name + "." + name)
+
+
 def perform_request(url, retries=DEFAULT_MAX_RETRIES, timeout=DEFAULT_TIMEOUT):
-    adapter = HTTPAdapter(max_retries=1)
+    adapter = HTTPAdapter(max_retries=retries)
     session = requests.Session()
     session.mount("https://", adapter)
     session.mount("http://", adapter)

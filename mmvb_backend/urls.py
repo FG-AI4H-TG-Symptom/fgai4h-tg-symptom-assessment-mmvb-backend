@@ -25,11 +25,13 @@ from benchmarking_sessions.api.urls import (
 )
 from cases.api.urls import router as cases_router
 from common.routers import DefaultRouter
+from metrics.api.urls import router as metrics_router
 
 router = DefaultRouter(trailing_slash=False)
 router.extend(ai_implementations_router)
 router.extend(benchmarking_sessions_router)
 router.extend(cases_router)
+router.extend(metrics_router)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

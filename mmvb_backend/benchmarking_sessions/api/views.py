@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import action
@@ -11,13 +9,11 @@ from benchmarking_sessions.api.serializers import (
     BenchmarkingSessionSerializer,
 )
 from benchmarking_sessions.api.utils import strip_values_from_responses
-from benchmarking_sessions.models import (
-    BenchmarkingSession,
-    BenchmarkingStepStatus,
-)
+from benchmarking_sessions.models import BenchmarkingSession
 from benchmarking_sessions.tasks import run_benchmark
 from celery.states import PENDING
 from common.utils import CamelCaseAutoSchema
+from metrics.helpers import calculate_metrics
 
 
 # todo: properly document endpoints
@@ -87,36 +83,9 @@ class BenchmarkingSessionViewSet(ModelViewSet):
             benchmarking_session
         ).data
 
-        # todo: add metrics infrastructure, add more metrics
-        cases_with_ai_result_counts = defaultdict(int)
-        responses = benchmarking_session_result["responses"]
-        for case_response in responses:
-            case_responses = case_response["responses"]
-            for ai_implementation_id, response in case_responses.items():
-                ai_implementation_has_result_for_case = int(
-                    response["status"]
-                    == BenchmarkingStepStatus.COMPLETED.value
-                )
-                cases_with_ai_result_counts[
-                    ai_implementation_id
-                ] += ai_implementation_has_result_for_case
-
-        case_count = len(benchmarking_session_result["responses"])
-        proportion_cases_with_ai_result = {
-            ai_implementation_id: result_count / case_count
-            for (
-                ai_implementation_id,
-                result_count,
-            ) in cases_with_ai_result_counts.items()
-        }
-
-        benchmarking_session_result["aggregatedMetrics"] = [
-            {
-                "id": "proportion_cases_with_ai_result",
-                "name": "Proportion of cases with AI result",
-                "values": proportion_cases_with_ai_result,
-            }
-        ]
+        benchmarking_session_result["metrics"] = calculate_metrics(
+            benchmarking_session_result
+        )
 
         return Response(
             benchmarking_session_result, status=status.HTTP_200_OK,
