@@ -70,7 +70,7 @@ class ToyAIsView(View):
 
         if error is not None:
             status = error["status"]
-            data = {"detail": status["message"]}
+            data = {"detail": error["message"]}
         else:
             ai = self.SLUGS_MAPPING[ai_slug]
             operation_callable = getattr(
