@@ -4,9 +4,18 @@ import re
 import sys
 from uuid import uuid4
 
+from django.conf import settings
 from rest_framework.schemas.openapi import AutoSchema
+from rest_framework.status import HTTP_200_OK
 
+import requests
+from common.definitions import HealthCheckStatus
+from requests.adapters import HTTPAdapter
+from requests.exceptions import ConnectionError
 from stringcase import camelcase
+
+DEFAULT_TIMEOUT = settings.DEFAULT_TIMEOUT
+DEFAULT_MAX_RETRIES = settings.MAX_RETRIES
 
 
 class CamelCaseAutoSchema(AutoSchema):
@@ -57,3 +66,33 @@ def import_modules(package_name):
     for loader, name, is_pkg in pkgutil.walk_packages(package.__path__):
         if name not in exclude:
             importlib.import_module(package_name + "." + name)
+
+
+def perform_request(url, retries=DEFAULT_MAX_RETRIES, timeout=DEFAULT_TIMEOUT):
+    adapter = HTTPAdapter(max_retries=retries)
+    session = requests.Session()
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+
+    response = {"status": "", "data": None, "detail": ""}
+
+    try:
+        request_response = session.get(url, timeout=timeout)
+    except ConnectionError as exc:
+        response["status"] = HealthCheckStatus.TIMEOUT
+        response["detail"] = f"Error trying to perform request. Got {str(exc)}"
+    except Exception as exc:
+        response["status"] = HealthCheckStatus.BAD_RESPONSE
+        response["detail"] = f"Error trying to perform request. Got {str(exc)}"
+    else:
+        if request_response.status_code != HTTP_200_OK:
+            response["status"] = HealthCheckStatus.BAD_RESPONSE
+            response[
+                "detail"
+            ] = f"Error on health check response. Got HTTP {request_response.status_code}"
+        else:
+            response["status"] = HealthCheckStatus.OK
+
+        response["data"] = request_response.json()
+
+    return response
