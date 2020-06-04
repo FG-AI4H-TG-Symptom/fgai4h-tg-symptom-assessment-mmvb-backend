@@ -48,7 +48,7 @@ class TriageSimilarityBase(Metric):
         metrics["aggregatedValues"] = {}
 
         ais_triage_similarity_sum = defaultdict(int)
-        for case_id, ais_metrics in metrics["values"]:
+        for case_id, ais_metrics in metrics["values"].items():
             for ai_implementation_id, triage_similarity in ais_metrics.items():
                 ais_triage_similarity_sum[
                     ai_implementation_id
@@ -89,7 +89,7 @@ class TriageSimilarityBase(Metric):
                     ]
 
                     triage_similarity = cls._calculate_triage_similarity(
-                        expected_triage, response["triage"], soft=soft
+                        expected_triage, response.get("triage", ""), soft=soft
                     )
 
                 cases_metrics.setdefault(case_id, {}).update(
@@ -115,7 +115,7 @@ class TriageSimilarity(TriageSimilarityBase):
 
     @classmethod
     def calculate(cls, benchmarking_session_result):
-        super().calculate(benchmarking_session_result, soft=False)
+        return super().calculate(benchmarking_session_result, soft=False)
 
 
 class SoftTriageSimilarity(TriageSimilarityBase):
@@ -133,4 +133,4 @@ class SoftTriageSimilarity(TriageSimilarityBase):
 
     @classmethod
     def calculate(cls, benchmarking_session_result):
-        super().calculate(benchmarking_session_result, soft=True)
+        return super().calculate(benchmarking_session_result, soft=True)
