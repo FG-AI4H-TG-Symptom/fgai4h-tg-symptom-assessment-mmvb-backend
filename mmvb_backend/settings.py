@@ -93,6 +93,7 @@ DATABASES = {
             "DB_HOST", "127.0.0.1"
         ),  # Or an IP Address that your DB is hosted on
         "PORT": os.environ.get("DB_PORT", "3306"),
+        "OPTIONS": {"charset": "utf8mb4",},
     }
 }
 
