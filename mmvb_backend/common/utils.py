@@ -2,6 +2,7 @@ import importlib
 import pkgutil
 import re
 import sys
+from json import JSONDecodeError
 from uuid import uuid4
 
 from django.conf import settings
@@ -99,20 +100,24 @@ def perform_request(url, retries=DEFAULT_MAX_RETRIES, timeout=DEFAULT_TIMEOUT):
     try:
         request_response = session.get(url, timeout=timeout)
     except ConnectionError as exc:
-        response["status"] = HealthCheckStatus.TIMEOUT
+        response["status"] = HealthCheckStatus.TIMEOUT.value
         response["detail"] = f"Error trying to perform request. Got {str(exc)}"
     except Exception as exc:
-        response["status"] = HealthCheckStatus.BAD_RESPONSE
+        response["status"] = HealthCheckStatus.BAD_RESPONSE.value
         response["detail"] = f"Error trying to perform request. Got {str(exc)}"
     else:
         if request_response.status_code != HTTP_200_OK:
-            response["status"] = HealthCheckStatus.BAD_RESPONSE
+            response["status"] = HealthCheckStatus.BAD_RESPONSE.value
             response[
                 "detail"
             ] = f"Error on health check response. Got HTTP {request_response.status_code}"
         else:
-            response["status"] = HealthCheckStatus.OK
+            response["status"] = HealthCheckStatus.OK.value
 
-        response["data"] = request_response.json()
+        try:
+            response["data"] = request_response.json()
+        except JSONDecodeError:
+            response["status"] = HealthCheckStatus.BAD_RESPONSE.value
+            response["data"] = "Error trying to parse response (invalid JSON)"
 
     return response
