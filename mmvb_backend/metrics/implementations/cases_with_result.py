@@ -24,7 +24,7 @@ class CasesWithAIResult(Metric):
         metrics["aggregatedValues"] = {}
 
         cases_with_ai_result_counts = defaultdict(int)
-        for case_id, ais_metrics in metrics["values"]:
+        for case_id, ais_metrics in metrics["values"].items():
             for ai_implementation_id, has_result in ais_metrics.items():
                 cases_with_ai_result_counts[ai_implementation_id] += has_result
 

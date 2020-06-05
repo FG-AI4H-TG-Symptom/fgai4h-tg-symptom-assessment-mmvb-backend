@@ -35,7 +35,7 @@ class CorrectConditionsTopN(Metric):
         metrics["aggregatedValues"] = {}
 
         ais_with_results_in_top_n = defaultdict(int)
-        for case_id, ais_metrics in metrics["values"]:
+        for case_id, ais_metrics in metrics["values"].items():
             for ai_implementation_id, has_result in ais_metrics.items():
                 ais_with_results_in_top_n[ai_implementation_id] += has_result
 
