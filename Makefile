@@ -41,16 +41,20 @@ register_ais:
 run_database:
 	docker stop $(DB_CONTAINER) || true && docker rm -f $(DB_CONTAINER) || true; \
 	docker pull mysql; \
-	docker run -p $(DB_PORT):$(DB_PORT) --name $(DB_CONTAINER) -e MYSQL_ROOT_PASSWORD=$(DB_ROOT_PWD) -d mysql:latest
+	docker run -p $(DB_PORT):$(DB_PORT) --name $(DB_CONTAINER) -v mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=$(DB_ROOT_PWD) -d mysql
 
 run_redis:
 	docker stop $(REDIS_CONTAINER) || true && docker rm -f $(REDIS_CONTAINER) || true; \
 	docker pull redis; \
-	docker run -p $(REDIS_PORT):$(REDIS_PORT) --name $(REDIS_CONTAINER) -d redis:latest
+	docker run -p $(REDIS_PORT):$(REDIS_PORT) --name $(REDIS_CONTAINER) -d redis redis-server --appendonly yes
 
 run_celery:
 	watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- celery -A mmvb_backend worker-mmvb -l info
 
 run_app:
+	$(MAKE) run_database && \
+	$(MAKE) run_redis && \
+	$(MAKE) apply_migrations && \
+	$(MAKE) register_ais && \
 	. .venv/bin/activate; \
 	python manage.py runserver

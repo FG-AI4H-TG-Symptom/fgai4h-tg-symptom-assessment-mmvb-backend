@@ -148,3 +148,6 @@ static
 
 #PyCharm
 .idea/
+
+logs/celery/*
+data/*
