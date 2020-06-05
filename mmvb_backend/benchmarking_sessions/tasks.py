@@ -11,7 +11,7 @@ from benchmarking_sessions.models import (
 )
 from celery import shared_task
 from common.definitions import TRIAGE_OPTIONS
-from requests import ReadTimeout
+from requests import ConnectionError, ReadTimeout
 from requests_futures.sessions import FuturesSession
 
 TIMEOUT = settings.BENCHMARKING_SESSION_TIMEOUT
@@ -135,6 +135,10 @@ def run_benchmark(self, benchmarking_session_id):
             ai_implementation = request_ai_implementation_map[request]
             request_exception = request.exception(timeout=0)
             if isinstance(request_exception, ReadTimeout):
+                reporter.error(
+                    ai_implementation.id, BenchmarkingStepError.TIMEOUT
+                )
+            elif isinstance(request_exception, ConnectionError):
                 reporter.error(
                     ai_implementation.id, BenchmarkingStepError.TIMEOUT
                 )
