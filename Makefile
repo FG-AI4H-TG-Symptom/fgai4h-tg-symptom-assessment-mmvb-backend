@@ -1,4 +1,4 @@
-export PYTHONPATH := ./mmvb_backend : $(PYTHONPATH)
+export PYTHONPATH := $(pwd):./mmvb_backend:$(PYTHONPATH)
 export DB_ROOT_USER := root
 export DB_ROOT_PWD := rootsecret
 export DB_NAME := mmvb
@@ -38,23 +38,30 @@ register_ais:
 	. .venv/bin/activate; \
 	python manage.py register_ais
 
-run_database:
-	docker stop $(DB_CONTAINER) || true && docker rm -f $(DB_CONTAINER) || true; \
+stop_database:
+	docker stop $(DB_CONTAINER) || true && docker rm -f $(DB_CONTAINER) || true
+
+start_database: stop_database
 	docker pull mysql; \
 	docker run -p $(DB_PORT):$(DB_PORT) --name $(DB_CONTAINER) -v mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=$(DB_ROOT_PWD) -d mysql
 
-run_redis:
+stop_redis:
 	docker stop $(REDIS_CONTAINER) || true && docker rm -f $(REDIS_CONTAINER) || true; \
+
+start_redis: stop_redis
 	docker pull redis; \
 	docker run -p $(REDIS_PORT):$(REDIS_PORT) --name $(REDIS_CONTAINER) -d redis redis-server --appendonly yes
 
-run_celery:
-	watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- celery -A mmvb_backend worker-mmvb -l info
+start_celery:
+	watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- celery worker -A mmvb_backend -l info
 
-run_app:
-	$(MAKE) run_database && \
-	$(MAKE) run_redis && \
+start_app:
+	$(MAKE) start_database && \
+	$(MAKE) start_redis && \
 	$(MAKE) apply_migrations && \
 	$(MAKE) register_ais && \
 	. .venv/bin/activate; \
 	python manage.py runserver
+
+stop_app: stop_database stop_redis
+	kill `ps aux | grep [c]elery | awk '{print $$2}'`
