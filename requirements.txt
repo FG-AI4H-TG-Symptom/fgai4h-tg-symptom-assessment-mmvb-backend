@@ -1,5 +1,5 @@
 Celery==4.4.2
-Django==3.0.4
+Django==3.0.7
 django-filter==2.2.0
 Markdown==3.2.1
 -e git+https://github.com/encode/django-rest-framework.git@8cba4f87ca8e785d1a8c022a7a8ea9649e049c11#egg=djangorestframework

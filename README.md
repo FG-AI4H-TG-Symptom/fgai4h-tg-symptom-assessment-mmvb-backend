@@ -5,14 +5,12 @@
 *and follow the instructions there.*
 
 ## Installation Instructions
-
 The following instructions have been tested on a macOS, if you are using another development environment the instructions
 might be a little bit different.
 
 It will be assumed you have installed and use [Docker](https://www.docker.com/get-started).
 
 ### Virtual Environment
-
 Create and activate a virtual environment with Python 3.7+.
 Python 3.8.1 is recommended; you can use [pyenv](https://github.com/pyenv/pyenv) to manage your Python installations.
 ```
@@ -26,7 +24,6 @@ export PYTHONPATH=$PYTHONPATH:./mmvb_backend
 ```
 
 ### Pre-commit hooks
-
 This repository lints and tests code as a part of the CI process.
 [Pre-commit][pre-commit] is a project that you can use to run a suite of tools to check the codebase.
 
@@ -40,7 +37,6 @@ This will make sure the linting checks are run when trying to create a new commi
 ### Install and Configure MySQL with Docker
 
 #### Docker
-
 Although MySQL will be running in a container you need a local MySQL connector. On macOS you can install it with
 ```
 brew install mysql-connector-c
@@ -64,7 +60,6 @@ docker exec -it fgai4h-tg-symptom-mmvb-mysql mysql -u root -p
 You should now see a `mysql>` prompt and can continue with **Set up MySQL database** below.
 
 #### Set up MySQL database
-
 In the client console, create a system user with proper privileges and a new database to be used on the django project:
 ```
 mysql> CREATE USER 'system'@'172.17.0.1' IDENTIFIED BY 'systemsecret';
@@ -172,7 +167,6 @@ $ python manage.py createsuperuser
 then provide an `username`, `email` and `password` (with confirmation).
 
 ## Running the application
-
 For running the application you need to have configured the mysql database as explained in the previous sessions.
 You will need 2 different shells for this, one for running the command the brings up mysql, redis and the application itself:
 ```
@@ -197,7 +191,6 @@ For stopping the whole structure, go to the shell that is running the applicatio
 ## General Tips
 
 ### Migrations
-
 It is always useful to run `make apply_migrations` after you checked out code from someone, as the data models/schema might
 have changed and you need to persist them. **Make sure mysql is running before trying to apply migrations**
 
@@ -210,7 +203,6 @@ $ python manage.py migrate
 to generate the schema changes and apply them to the database.
 
 ### Celery
-
 If you need to implement new celery tasks for any of your Django installed apps (the ones listed under `INSTALLED_APPS` in the project `settings.py` module) you only need to:
 
   - Create (if not already created) a `tasks.py` module under the desired Django app directory (`cases` for example)
@@ -226,3 +218,61 @@ If you need to implement new celery tasks for any of your Django installed apps 
 Then you could simply import the `add` task somewhere in your code and run it and, if the celery worker server is up and running, your task would be executed.
 
 For more details check the [celery docs](https://docs.celeryproject.org/en/4.4.2/django/first-steps-with-django.html).
+
+## Django and Django Rest Framework
+
+This project is based on Django and DRF, if you're not familiar with those frameworks it is highly recommended to have a look at their documentation:
+   * [Django docs](https://docs.djangoproject.com/en/3.0/)
+   * [DRF docs](https://www.django-rest-framework.org/)
+
+And also try to follow their tutorial/quickstart guides to get some traction on the basics:
+   * [Django intro](https://docs.djangoproject.com/en/3.0/intro/)
+   * [DRF quickstart](https://www.django-rest-framework.org/tutorial/quickstart/)
+
+### Project structure
+The project structure is based on a regular django project. Within the root folder there are a `manage.py` file and the root project folder `mmvb_backend`, both initially generated with the django command for starting a new project:
+```
+$ django-admin startproject mmvb_backend .
+```
+
+Within the project folder the multiple django applications were initially created using the django command for starting a new application:
+```
+$ cd mmvb_backend
+$ django-admin startapp <app_name>
+```
+
+The general structure of a django application is the following:
+  * app_root_folder
+    - models.py
+    - views.py
+    - urls.py
+    - apps.py
+    - migrations
+    - templates
+
+The `models.py` file is where you implement your data models using the orm classes and infrastructure provided by django.
+In the `views.py` file you should implement the classes/functions for handling the http requests your application should respond to.
+While in the `urls.py` you map the url patterns you are serving to the view functions that will handle the requests to those urls.
+
+The `apps.py` should contain the application custom configurations, which is particularly useful when you are building reusable applications.
+
+On the `migrations` folder django stores the data migration files, which are a python representation of the database operations that should be performed to adequate the database schema to the changes in your data models. Those files can be generated by
+`python manage.py makemigrations` and can be applied to the database with `python manage.py migrate`.
+
+Within the `templates` folder you usually store the html templates implementing the uis your views should render/serve.
+
+For this project you will see some of those files might no be present for some apps due to the fact they were not being used.
+In addition to the exposed structure, some of the applications implement rest api endpoints using DRF, and should add the presented structure:
+  * app_root_folder
+    - api
+      + views.py
+      + serializers.py
+      + urls.py
+
+The api folder should contain the files for implementing the REST API endpoints.
+
+Within the `views.py` file you usually implement the the classes for handling the api endpoints requests. This can be achieved using multiple different approaches: [Views](https://www.django-rest-framework.org/api-guide/views/), [Generic Views](https://www.django-rest-framework.org/api-guide/generic-views/), [ViewSets](https://www.django-rest-framework.org/api-guide/viewsets/).
+
+In the `serializers.py` file you usually implement the classes for handling data serialization for your data models. Depending on the approach the serializer can also be used to handle the request itself, delegated by the view. Check [Serializers](https://www.django-rest-framework.org/api-guide/serializers/#serializers) and [ModelSerializers](https://www.django-rest-framework.org/api-guide/serializers/#modelserializer) for more information.
+
+Finally, the `urls.py` file is used to define the api routing to bind the api endpoints to their request handlers (views). For further information check [Routers](https://www.django-rest-framework.org/api-guide/routers/).
