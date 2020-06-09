@@ -230,6 +230,8 @@ And also try to follow their tutorial/quickstart guides to get some traction on 
    * [DRF quickstart](https://www.django-rest-framework.org/tutorial/quickstart/)
 
 ### Project structure
+
+#### Django and DRF general structures
 The project structure is based on a regular django project. Within the root folder there are a `manage.py` file and the root project folder `mmvb_backend`, both initially generated with the django command for starting a new project:
 ```
 $ django-admin startproject mmvb_backend .
@@ -241,14 +243,30 @@ $ cd mmvb_backend
 $ django-admin startapp <app_name>
 ```
 
+The general structure of a django project is the following:
+  * project_name
+    - settings.py
+    - urls.py
+    - wsgi.py
+    - app_name_1
+    - app_name_n
+
+In the `wsgi.py` file you can define the configurations for serving the application using the Web Server Gateway Interface protocol.
+
+Within the `urls.py` files you can configure, on a project level, the url patterns you want to serve and bind them to the request handlers you implement on your apps views, or delegate their resolving to your apps urls files or routers.
+
+The `settings.py` files is where you configure the whole project. Within it you define the database connection configurations, the middleware the framework is supposed to use, and the django applications that are supposed to be installed in this project, amongst other settings.
+
 The general structure of a django application is the following:
-  * app_root_folder
+  * app_name_n
     - models.py
     - views.py
     - urls.py
     - apps.py
     - migrations
     - templates
+
+The `app_name_n` folder is a python package in which the application files are created.
 
 The `models.py` file is where you implement your data models using the orm classes and infrastructure provided by django.
 In the `views.py` file you should implement the classes/functions for handling the http requests your application should respond to.
@@ -275,4 +293,34 @@ Within the `views.py` file you usually implement the the classes for handling th
 
 In the `serializers.py` file you usually implement the classes for handling data serialization for your data models. Depending on the approach the serializer can also be used to handle the request itself, delegated by the view. Check [Serializers](https://www.django-rest-framework.org/api-guide/serializers/#serializers) and [ModelSerializers](https://www.django-rest-framework.org/api-guide/serializers/#modelserializer) for more information.
 
-Finally, the `urls.py` file is used to define the api routing to bind the api endpoints to their request handlers (views). For further information check [Routers](https://www.django-rest-framework.org/api-guide/routers/).
+Finally, the `urls.py` file is used to define the api routing to bind the api endpoints to their request handlers (views). For further information check [Routers](https://www.django-rest-framework.org/api-guide/routers/).\
+
+#### Celery integration
+
+For properly integrating celery within the django project three things are/were necessary:
+  - Configurations for the celery application within the django `settings.py` file
+  - `djcelery.py` file on the project root to configure the celery application integrated with the django project
+  - Exposure of the celery application on the project python package through the `__init__.py` file on the project root folder
+
+#### The mmvb_backend applications
+
+##### common
+This application aims to act as an aggregator of all the common/shared functionalities for the other applications.
+
+##### ai_implementations
+This application is responsible for implementing the data models and api for AI Implementations. Through this it is possible to register a new AI Implementation, list the registered AI Implementations, etc...
+
+##### cases
+This application is responsible for implementing the data models and api for Cases and CaseSets. Through this it is possible to list, retrieve, create, and update Cases and CaseSets.
+
+##### case_synthesizer
+This application is responsible for implementing the structure for synthesizing Cases and CaseSets.
+
+##### toy_ais
+This application is responsible for the structure needed for implementing Toy AIs and registering them as available ai implementations.
+
+##### benchmarking_sessions
+This application is responsible for implementing the structure for creating, restrieving, and handling benchmarking sessions.
+
+##### metrics
+This applictaion is responsible for the structure needed for implementing Metrics as well as calculating the metrics for a given benchmarking session result.
