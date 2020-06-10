@@ -7,7 +7,7 @@ export DB_USER := system
 export DB_PWD := systemsecret
 export DB_CONTAINER := fgai4h-tg-symptom-mmvb-mysql
 export REDIS_CONTAINER := fgai4h-tg-symptom-mmvb-redis
-export REDIS_PORT := 6309
+export REDIS_PORT := 6379
 
 
 precommit:
