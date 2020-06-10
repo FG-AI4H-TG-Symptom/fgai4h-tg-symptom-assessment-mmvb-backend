@@ -34,7 +34,7 @@ class CamelCaseAutoSchema(AutoSchema):
 
 
 def is_true(value):
-    return str(value).lower() in ["1", "true", "yes"]
+    return settings.IS_TRUE(value)
 
 
 def generate_id():

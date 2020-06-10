@@ -53,6 +53,5 @@ urlpatterns = [
     ),
 ]
 
-# TODO: try to do it in a cleaner way, using environment-dependant settings
-if "toy_ais" in settings.INSTALLED_APPS:
+if settings.ENABLE_TOY_AIS:
     urlpatterns.append(path("toy_ais/", include("toy_ais.urls")),)
