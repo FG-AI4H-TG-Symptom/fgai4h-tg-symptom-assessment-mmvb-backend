@@ -18,3 +18,4 @@ numpy==1.16.4
 django-cors-headers==3.2.1
 requests_futures==1.0.0
 watchdog==0.10.2
+argh==0.26.2
