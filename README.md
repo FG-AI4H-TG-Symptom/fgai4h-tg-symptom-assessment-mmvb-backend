@@ -96,64 +96,6 @@ $ make install_test_requirements
 The project requires [Celery](https://docs.celeryproject.org/en/4.4.2/) (task queue) for some of its features (running benchmarks for example). For being able
 to use Celery we need a message broker, we decided to use [Redis](https://redis.io/).
 
-The following session brings together useful commands for running the application, which includes the commands for setting up
-Redis and Celery.
-
-### Useful django and make commands:
-There are multiple useful individual commands for specific purposes and some commands that group them together to bring the application app. Those commands are briefly listed and explained in case you need to run them separetely, to really set up and run the whole application check
-
-#### Linting
-This assumes you have activated your local virtual environment.
-To run local linting and codestyle checks you can use
-```
-$ make lint
-```
-We use this in our CI process to make sure codestyle is being adhered to.
-
-#### MySQL database
-You can shutdown the mysql database instance running on docker by running:
-```
-$ make stop_database
-```
-
-And you can start the database instance with:
-```
-$ make start_database
-```
-
-#### Redis storage
-You can shutdown the redis storage instance running on docker by running:
-```
-$ make stop_redis
-```
-**Make sure Celery is not still running tasks before doing it though**
-
-You can start the database instance with:
-```
-$ make start_redis
-```
-
-#### Database migrations
-Whenever there are changes to your database models you need to run a django command to apply those changes to the database schema.
-**Make sure mysql database is up and running before running this command.**
-```
-$ make apply_migrations
-```
-
-#### Toy AIs registration
-In a scenario where Toy AIs are being used, if you want to manually register them using the custom django command that was implemented for this purpose, just run:
-```
-$ make register_ais
-```
-**Make sure mysql database is up and running before running this command.**
-
-#### Celery
-For running the celery workers you just need to run:
-```
-$ make start_celery
-```
-**Make sure mysql and redis are up and running before running this command.**
-
 ### Django admin interface
 This is currently not being used for the application but might be useful in the future as the django admin interface is a simple yet very powerful and extensible tool.
 
@@ -188,139 +130,14 @@ There is an experimental auto-generated documentation on [http://localhost:8000/
 
 For stopping the whole structure, go to the shell that is running the application and press `ctrl+C`, this should stop the django application, you just need to further run `make stop_app` in order to stop redis, mysql and celery.
 
+## Useful django and make commands
+Check the [useful commands](./docs/useful_commands.md) section for a list and brief explanation of the available django and make commands.
+
 ## General Tips
-
-### Migrations
-It is always useful to run `make apply_migrations` after you checked out code from someone, as the data models/schema might
-have changed and you need to persist them. **Make sure mysql is running before trying to apply migrations**
-
-If/when you implement a new data model, you need to run:
-```
-$ python manage.py makemigrations
-$ python manage.py migrate
-```
-
-to generate the schema changes and apply them to the database.
-
-### Celery
-If you need to implement new celery tasks for any of your Django installed apps (the ones listed under `INSTALLED_APPS` in the project `settings.py` module) you only need to:
-
-  - Create (if not already created) a `tasks.py` module under the desired Django app directory (`cases` for example)
-  - Follow the template shown below on your `tasks.py`:
-  ```
-  from celery import shared_task
-
-  @shared_task
-  def add(x, y):
-      return x + y
-  ```
-
-Then you could simply import the `add` task somewhere in your code and run it and, if the celery worker server is up and running, your task would be executed.
-
-For more details check the [celery docs](https://docs.celeryproject.org/en/4.4.2/django/first-steps-with-django.html).
+For some general tips on development-related topics, such as database migrations and celery tasks implementation, check the [general tips](./docs/general_tips.md) section.
 
 ## Django and Django Rest Framework
+Check the [Django and DRF](./docs/django_and_drf.md) section for more information on the project structure and the mentioned frameworks.
 
-This project is based on Django and DRF, if you're not familiar with those frameworks it is highly recommended to have a look at their documentation:
-   * [Django docs](https://docs.djangoproject.com/en/3.0/)
-   * [DRF docs](https://www.django-rest-framework.org/)
-
-And also try to follow their tutorial/quickstart guides to get some traction on the basics:
-   * [Django intro](https://docs.djangoproject.com/en/3.0/intro/)
-   * [DRF quickstart](https://www.django-rest-framework.org/tutorial/quickstart/)
-
-### Project structure
-
-#### Django and DRF general structures
-The project structure is based on a regular django project. Within the root folder there are a `manage.py` file and the root project folder `mmvb_backend`, both initially generated with the django command for starting a new project:
-```
-$ django-admin startproject mmvb_backend .
-```
-
-Within the project folder the multiple django applications were initially created using the django command for starting a new application:
-```
-$ cd mmvb_backend
-$ django-admin startapp <app_name>
-```
-
-The general structure of a django project is the following:
-  * project_name
-    - settings.py
-    - urls.py
-    - wsgi.py
-    - app_name_1
-    - app_name_n
-
-In the `wsgi.py` file you can define the configurations for serving the application using the Web Server Gateway Interface protocol.
-
-Within the `urls.py` files you can configure, on a project level, the url patterns you want to serve and bind them to the request handlers you implement on your apps views, or delegate their resolving to your apps urls files or routers.
-
-The `settings.py` files is where you configure the whole project. Within it you define the database connection configurations, the middleware the framework is supposed to use, and the django applications that are supposed to be installed in this project, amongst other settings.
-
-The general structure of a django application is the following:
-  * app_name_n
-    - models.py
-    - views.py
-    - urls.py
-    - apps.py
-    - migrations
-    - templates
-
-The `app_name_n` folder is a python package in which the application files are created.
-
-The `models.py` file is where you implement your data models using the orm classes and infrastructure provided by django.
-In the `views.py` file you should implement the classes/functions for handling the http requests your application should respond to.
-While in the `urls.py` you map the url patterns you are serving to the view functions that will handle the requests to those urls.
-
-The `apps.py` should contain the application custom configurations, which is particularly useful when you are building reusable applications.
-
-On the `migrations` folder django stores the data migration files, which are a python representation of the database operations that should be performed to adequate the database schema to the changes in your data models. Those files can be generated by
-`python manage.py makemigrations` and can be applied to the database with `python manage.py migrate`.
-
-Within the `templates` folder you usually store the html templates implementing the uis your views should render/serve.
-
-For this project you will see some of those files might no be present for some apps due to the fact they were not being used.
-In addition to the exposed structure, some of the applications implement rest api endpoints using DRF, and should add the presented structure:
-  * app_root_folder
-    - api
-      + views.py
-      + serializers.py
-      + urls.py
-
-The api folder should contain the files for implementing the REST API endpoints.
-
-Within the `views.py` file you usually implement the the classes for handling the api endpoints requests. This can be achieved using multiple different approaches: [Views](https://www.django-rest-framework.org/api-guide/views/), [Generic Views](https://www.django-rest-framework.org/api-guide/generic-views/), [ViewSets](https://www.django-rest-framework.org/api-guide/viewsets/).
-
-In the `serializers.py` file you usually implement the classes for handling data serialization for your data models. Depending on the approach the serializer can also be used to handle the request itself, delegated by the view. Check [Serializers](https://www.django-rest-framework.org/api-guide/serializers/#serializers) and [ModelSerializers](https://www.django-rest-framework.org/api-guide/serializers/#modelserializer) for more information.
-
-Finally, the `urls.py` file is used to define the api routing to bind the api endpoints to their request handlers (views). For further information check [Routers](https://www.django-rest-framework.org/api-guide/routers/).\
-
-#### Celery integration
-
-For properly integrating celery within the django project three things are/were necessary:
-  - Configurations for the celery application within the django `settings.py` file
-  - `djcelery.py` file on the project root to configure the celery application integrated with the django project
-  - Exposure of the celery application on the project python package through the `__init__.py` file on the project root folder
-
-#### The mmvb_backend applications
-
-##### common
-This application aims to act as an aggregator of all the common/shared functionalities for the other applications.
-
-##### ai_implementations
-This application is responsible for implementing the data models and api for AI Implementations. Through this it is possible to register a new AI Implementation, list the registered AI Implementations, etc...
-
-##### cases
-This application is responsible for implementing the data models and api for Cases and CaseSets. Through this it is possible to list, retrieve, create, and update Cases and CaseSets.
-
-##### case_synthesizer
-This application is responsible for implementing the structure for synthesizing Cases and CaseSets.
-
-##### toy_ais
-This application is responsible for the structure needed for implementing Toy AIs and registering them as available ai implementations.
-
-##### benchmarking_sessions
-This application is responsible for implementing the structure for creating, restrieving, and handling benchmarking sessions.
-
-##### metrics
-This applictaion is responsible for the structure needed for implementing Metrics as well as calculating the metrics for a given benchmarking session result.
+## Project applications
+You can find a brief explanation about the scope of each django application developed for the `mmvb_backend` project [here](./docs/mmvb_apps.md).
