@@ -13,6 +13,8 @@ app_name = CasesConfig.name
 
 router = DefaultRouter(trailing_slash=False)
 
+# conditionally registers the viewsets according to the settings
+# enabling or not case synthetization features
 router.register(
     "cases",
     ExtendedCaseViewSet

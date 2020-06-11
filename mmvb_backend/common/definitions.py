@@ -4,11 +4,14 @@ from enum import Enum
 
 
 class HealthCheckStatus(Enum):
+    """Definitions of expected health check status"""
+
     OK = "ok"
     BAD_RESPONSE = "bad response"
     TIMEOUT = "timeout"
 
 
+# Common definitions to be shared with and used by other applications
 BIOLOGICAL_SEXES = ["male", "female"]
 PRESENT = "present"
 ABSENT = "absent"

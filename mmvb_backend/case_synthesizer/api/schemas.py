@@ -7,7 +7,13 @@ from common.utils import CamelCaseAutoSchema
 
 
 class CaseSynthesizerSchema(CamelCaseAutoSchema):
+    """
+    Custom CamelCaseAuthoSchema for properly selecting response serializer
+    and response schema
+    """
+
     def get_response_serializer(self, path, method):
+        """Returns proper response serializer"""
         view = self.view
         try:
             return view.get_response_serializer()
@@ -21,6 +27,7 @@ class CaseSynthesizerSchema(CamelCaseAutoSchema):
             )
 
     def get_responses(self, path, method):
+        """Builds up schema for documenting response"""
         self.response_media_types = self.map_renderers(path, method)
 
         serializer = self.get_response_serializer(path, method)
@@ -50,6 +57,7 @@ class CaseSynthesizerSchema(CamelCaseAutoSchema):
 
 class CaseSetSynthesizerSchema(CamelCaseAutoSchema):
     def get_response_serializer(self, path, method):
+        """Returns proper response serializer"""
         view = self.view
         try:
             return view.get_response_serializer()
@@ -63,6 +71,7 @@ class CaseSetSynthesizerSchema(CamelCaseAutoSchema):
             )
 
     def get_responses(self, path, method):
+        """Builds up schema for documenting response"""
         self.response_media_types = self.map_renderers(path, method)
 
         serializer = self.get_response_serializer(path, method)

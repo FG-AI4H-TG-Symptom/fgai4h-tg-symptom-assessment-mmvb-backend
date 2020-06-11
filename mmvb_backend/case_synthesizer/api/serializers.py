@@ -11,12 +11,16 @@ from case_synthesizer.validators import (
 
 
 class CaseSynthesizerSerializer(Serializer):
+    """Serializer for case synthesation request"""
+
     quantity = IntegerField(
         validators=[quantity_range(MIN_CASES_QUANTITY, MAX_CASES_QUANTITY)]
     )
 
 
 class CaseSetSynthesizerSerializer(Serializer):
+    """Serializer for case set synthesation request"""
+
     cases_per_caseset = IntegerField(
         validators=[quantity_range(MIN_CASES_QUANTITY, MAX_CASES_QUANTITY)]
     )
@@ -28,6 +32,8 @@ class CaseSetSynthesizerSerializer(Serializer):
 
 
 class CasesListSerializer(BaseSerializer):
+    """Serializer for case synthesation response"""
+
     def to_representation(self, obj):
         return reverse("cases-detail", kwargs={"pk": obj.pk})
 
