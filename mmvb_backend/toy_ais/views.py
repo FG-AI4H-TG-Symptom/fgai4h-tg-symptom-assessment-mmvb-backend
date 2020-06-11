@@ -12,6 +12,8 @@ from toy_ais.implementations import TOY_AIS
 # TODO: we will need to protect this view in the future, maybe using JWT?
 @method_decorator(csrf_exempt, name="dispatch")
 class ToyAIsView(View):
+    """View for handling """
+
     OPERATIONS_MAPPING = {
         "GET": {"health-check": "health_check"},
         "POST": {"solve-case": "solve_case"},
@@ -19,6 +21,7 @@ class ToyAIsView(View):
     SLUGS_MAPPING = {ai.slug_name: ai for ai in TOY_AIS}
 
     def parse_request(self, request, *args, **kwargs):
+        """Parses get request for a given toy ai and operation"""
         ai_slug = None
         operation = None
         error = None
@@ -48,6 +51,7 @@ class ToyAIsView(View):
         return ai_slug, operation, error
 
     def parse_post_request(self, request, *args, **kwargs):
+        """Parses post request for a given toy ai and operation"""
         payload = {}
         error = None
 
@@ -63,6 +67,7 @@ class ToyAIsView(View):
         return payload, error
 
     def get(self, request, *args, **kwargs):
+        """Handles get request for a given toy ai and operation"""
         method = request.method
         ai_slug, operation, error = self.parse_request(
             request, *args, **kwargs
@@ -83,6 +88,7 @@ class ToyAIsView(View):
         return JsonResponse(data=data, status=status)
 
     def post(self, request, *args, **kwargs):
+        """Handles post request for a given toy ai and operation"""
         method = request.method
         ai_slug, operation, error = self.parse_request(
             request, *args, **kwargs
