@@ -18,6 +18,8 @@ from metrics.helpers import calculate_metrics
 
 # todo: properly document endpoints
 class BenchmarkingSessionViewSet(ModelViewSet):
+    """ViewSet for handling benchmark sessions requests"""
+
     schema = CamelCaseAutoSchema(tags=["BenchmarkingSessions",])
     serializer_class = BenchmarkingSessionSerializer
 
@@ -27,9 +29,12 @@ class BenchmarkingSessionViewSet(ModelViewSet):
     # todo: generate 404
     @action(methods=["post"], detail=True, url_path="run")
     def run_benchmark(self, request, *args, **kwargs):
+        """Handler for running benchmark sessions"""
         benchmarking_session = get_object_or_404(
             BenchmarkingSession, id=kwargs["pk"]
         )
+
+        # pushes benchmarking task into celery queue
         task = run_benchmark.delay(benchmarking_session.id)
         benchmarking_session.task_id = task.id
         benchmarking_session.save()
@@ -43,6 +48,7 @@ class BenchmarkingSessionViewSet(ModelViewSet):
     # todo: document response structure (OpenAPI)
     @action(methods=["get"], detail=True, url_path="status")
     def benchmark_status(self, request, *args, **kwargs):
+        """Handler for checking benchmark session status"""
         benchmarking_session = get_object_or_404(
             BenchmarkingSession, id=kwargs["pk"]
         )
@@ -75,6 +81,7 @@ class BenchmarkingSessionViewSet(ModelViewSet):
     # todo: document response structure (OpenAPI)
     @action(methods=["get"], detail=True, url_path="results")
     def benchmark_results(self, request, *args, **kwargs):
+        """Handler for fetching benchmark results"""
         benchmarking_session = get_object_or_404(
             BenchmarkingSession, id=kwargs["pk"]
         )
@@ -83,6 +90,7 @@ class BenchmarkingSessionViewSet(ModelViewSet):
             benchmarking_session
         ).data
 
+        # calculates and aggregates metrics for benchmark results
         benchmarking_session_result["metrics"] = calculate_metrics(
             benchmarking_session_result
         )
