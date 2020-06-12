@@ -166,8 +166,20 @@ CELERY_RESULT_BACKEND = "redis://"
 
 # CORS settings
 
-# todo: disable for production and configure URL whitelist
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = [
+    "https://localhost:3000",
+    "http://localhost:3000",
+    "https://127.0.0.1:3000",
+    "http://127.0.0.1:3000",
+    "https://localhost:8000",
+    "http://localhost:8000",
+    "https://127.0.0.1:8000",
+    "http://127.0.0.1:8000",
+    "https://fgai4h-tg-symptom-benchmarking-frontend-omne4kyxzq-ez.a.run.app",
+    "http://fgai4h-tg-symptom-benchmarking-frontend-omne4kyxzq-ez.a.run.app",
+    "https://demo-who2019.air.babylontech.co.uk:8000",
+    "http://demo-who2019.air.babylontech.co.uk:8000",
+]
 
 # Project and Apps Configurations
 BENCHMARKING_SESSION_TIMEOUT = int(
