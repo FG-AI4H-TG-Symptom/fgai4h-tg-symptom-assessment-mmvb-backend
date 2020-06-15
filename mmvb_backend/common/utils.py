@@ -41,7 +41,7 @@ class CamelCaseAutoSchema(AutoSchema):
 
 def is_true(value):
     """Evaluates if a given value is true or false"""
-    return str(value).lower() in ["1", "true", "yes"]
+    return settings.IS_TRUE(value)
 
 
 def generate_id():
