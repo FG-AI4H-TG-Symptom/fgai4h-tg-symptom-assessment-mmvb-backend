@@ -1,0 +1,29 @@
+[
+{
+  "model": "cases.caseset",
+  "pk": "4e6f19b5-a52f-4cd5-9645-604d759a03d1",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "name": "Synthesised case set with 10 cases (4e6f19b5a52f4cd59645604d759a03d1)"
+  }
+},
+{
+  "model": "cases.caseset",
+  "pk": "517a8a7f-d286-4fca-b845-954006ac461a",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "name": "Synthesised case set with 10 cases (517a8a7fd2864fcab845954006ac461a)"
+  }
+},
+{
+  "model": "cases.caseset",
+  "pk": "f7c88c3d-bb78-4d63-a09f-d56c26f7fe23",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "name": "Synthesised case set with 10 cases (f7c88c3dbb784d63a09fd56c26f7fe23)"
+  }
+}
+]

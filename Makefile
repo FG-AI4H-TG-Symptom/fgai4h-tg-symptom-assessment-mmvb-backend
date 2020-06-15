@@ -55,11 +55,16 @@ start_redis: stop_redis
 start_celery:
 	watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- celery worker -A mmvb_backend -l info
 
+load_fixtures:
+	. .venv/bin/activate; \
+	python manage.py loaddata case_sets.json cases.json benchmarking_sessions.json
+
 start_app:
 	$(MAKE) start_database && \
 	$(MAKE) start_redis && \
 	$(MAKE) apply_migrations && \
 	$(MAKE) register_ais && \
+	$(MAKE) load_fixtures && \
 	. .venv/bin/activate; \
 	python manage.py runserver
 

@@ -1,0 +1,1369 @@
+[
+{
+  "model": "cases.case",
+  "pk": "04f1a1a4-1795-4c13-b162-8aef20bbb4f1",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (5/5)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 68,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "2d6a20420b1bf50f84ca352932c9cab8",
+          "name": "IBS"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": []
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "09865420-70e5-40f3-b8d6-3a1e652fa9ee",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (3/10)"
+        },
+        "otherFeatures": [
+          {
+            "id": "0c99a4e31fbba26dc64364ea53cfe3c7",
+            "name": "Haematuria",
+            "state": "absent"
+          }
+        ],
+        "profileInformation": {
+          "age": 18,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "7a3094ceceac3afdae15243c11031588",
+            "name": "sharp lower quadrant pain",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "e184ecb7e8603966edb9d305ba1c544f",
+          "name": "appendicitis"
+        },
+        "expectedTriageLevel": "EC"
+      }
+    },
+    "case_sets": [
+      "f7c88c3d-bb78-4d63-a09f-d56c26f7fe23"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "16b09073-df5c-4eaf-8505-bbafaabe4a0b",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (3/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 59,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "0c99a4e31fbba26dc64364ea53cfe3c7",
+            "name": "Haematuria",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "2ecf4419d2505b5265383a5d6dbbcf65",
+          "name": "bladder cancer (first presentation)"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "517a8a7f-d286-4fca-b845-954006ac461a"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "1f4b8753-218b-44e9-957d-3c372764e0ff",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (2/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 20,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "c643bff833aaa9a47e3421a8c8f35445",
+            "name": "Vomiting",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "ed9e333b5cf04cb91068bbcde643076e",
+          "name": "GERD"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "4e6f19b5-a52f-4cd5-9645-604d759a03d1"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "20e1a303-7a73-4707-87ba-796c500b9fce",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (1/5)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 28,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "2b7b88ae49684f658748094e633c2536",
+          "name": "Abdo Pain NOS (Idiopathic)"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": []
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "218326b7-d0bd-4f3f-ab66-a870a494d462",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (7/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 56,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "7a3094ceceac3afdae15243c11031588",
+            "name": "sharp lower quadrant pain",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "379771d589cd397c770bb6915c3c17a6",
+          "name": "acute pyelonephritis"
+        },
+        "expectedTriageLevel": "EC"
+      }
+    },
+    "case_sets": [
+      "f7c88c3d-bb78-4d63-a09f-d56c26f7fe23"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "2c6ca33b-c0a4-478c-91e4-564cb170cc7f",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (4/10)"
+        },
+        "otherFeatures": [
+          {
+            "id": "5780df68fc82bfb733e0b3d0520d3179",
+            "name": "Fever",
+            "state": "absent"
+          },
+          {
+            "id": "7a3094ceceac3afdae15243c11031588",
+            "name": "sharp lower quadrant pain",
+            "state": "absent"
+          }
+        ],
+        "profileInformation": {
+          "age": 50,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "bcdc01d83bfb31c85ec47efc0642304e",
+            "name": "Weight Loss",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "42e009a4e3d8c8a17a29b4c57311e9cf",
+          "name": "IBD (first presentation non flare)"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "f7c88c3d-bb78-4d63-a09f-d56c26f7fe23"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "2e560183-7dea-4372-a8c5-22bd1aefb8f1",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (6/10)"
+        },
+        "otherFeatures": [
+          {
+            "id": "c643bff833aaa9a47e3421a8c8f35445",
+            "name": "Vomiting",
+            "state": "absent"
+          }
+        ],
+        "profileInformation": {
+          "age": 53,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "42e009a4e3d8c8a17a29b4c57311e9cf",
+          "name": "IBD (first presentation non flare)"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "517a8a7f-d286-4fca-b845-954006ac461a"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "31835bc0-94a8-44f1-9028-bf7af7caf71e",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (9/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 58,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "0c99a4e31fbba26dc64364ea53cfe3c7",
+            "name": "Haematuria",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "2ecf4419d2505b5265383a5d6dbbcf65",
+          "name": "bladder cancer (first presentation)"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "4e6f19b5-a52f-4cd5-9645-604d759a03d1"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "410dd64c-a5ad-4b01-94ca-3269b4438374",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (1/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 64,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "94b2b09c9194b316738dfc56b526e124",
+            "name": "heartburn",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "ed9e333b5cf04cb91068bbcde643076e",
+          "name": "GERD"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "4e6f19b5-a52f-4cd5-9645-604d759a03d1"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "45dcd483-a2d7-45bd-a760-93cc4b911683",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (8/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 71,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "ffd0bbadd52f955ed05435212ac19b05",
+          "name": "ectopic pregnancy"
+        },
+        "expectedTriageLevel": "EC"
+      }
+    },
+    "case_sets": [
+      "517a8a7f-d286-4fca-b845-954006ac461a"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "48040e43-ff63-45ed-b92e-681b8300aea8",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (1/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 76,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "94b2b09c9194b316738dfc56b526e124",
+            "name": "heartburn",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "ed9e333b5cf04cb91068bbcde643076e",
+          "name": "GERD"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "f7c88c3d-bb78-4d63-a09f-d56c26f7fe23"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "4dcc8386-ea25-4d0f-91c7-e924ceca47cb",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (9/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 40,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "2b7b88ae49684f658748094e633c2536",
+          "name": "Abdo Pain NOS (Idiopathic)"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "517a8a7f-d286-4fca-b845-954006ac461a"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "508fcc88-f889-4d07-a29a-4534f0ce6cdd",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (4/5)"
+        },
+        "otherFeatures": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ],
+        "profileInformation": {
+          "age": 42,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "5780df68fc82bfb733e0b3d0520d3179",
+            "name": "Fever",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "6df481067214644360ec303283dd6a34",
+          "name": "acute cholecystitis"
+        },
+        "expectedTriageLevel": "EC"
+      }
+    },
+    "case_sets": []
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "595d571a-a4ee-4686-8c11-3d613b270be3",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (5/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 64,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "a4a1fa1b6cb58a3b5ecd8276a42198d8",
+          "name": "viral GE"
+        },
+        "expectedTriageLevel": "SC"
+      }
+    },
+    "case_sets": [
+      "517a8a7f-d286-4fca-b845-954006ac461a"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "62ce542b-2da1-4d07-9b11-f0651c2ea5dd",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (4/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 63,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "2d6a20420b1bf50f84ca352932c9cab8",
+          "name": "IBS"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "4e6f19b5-a52f-4cd5-9645-604d759a03d1"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "6cf83106-8d53-4057-b34d-a05172564981",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (2/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 45,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "94b2b09c9194b316738dfc56b526e124",
+            "name": "heartburn",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "ed9e333b5cf04cb91068bbcde643076e",
+          "name": "GERD"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "517a8a7f-d286-4fca-b845-954006ac461a"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "78209317-6b1b-4211-95f8-4c67f250b3bf",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (10/10)"
+        },
+        "otherFeatures": [
+          {
+            "id": "6e16a75aff90a62324940175453741f1",
+            "name": "Diarrhoea",
+            "state": "absent"
+          }
+        ],
+        "profileInformation": {
+          "age": 69,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "42e009a4e3d8c8a17a29b4c57311e9cf",
+          "name": "IBD (first presentation non flare)"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "f7c88c3d-bb78-4d63-a09f-d56c26f7fe23"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "78cdd2b1-fb83-4f0f-bac1-d8ccbd3d775f",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (4/10)"
+        },
+        "otherFeatures": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "absent"
+          }
+        ],
+        "profileInformation": {
+          "age": 71,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "c643bff833aaa9a47e3421a8c8f35445",
+            "name": "Vomiting",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "ffd0bbadd52f955ed05435212ac19b05",
+          "name": "ectopic pregnancy"
+        },
+        "expectedTriageLevel": "EC"
+      }
+    },
+    "case_sets": [
+      "517a8a7f-d286-4fca-b845-954006ac461a"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "7f424e26-2960-4ad4-b059-11ca9fe0f78d",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (5/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 47,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "2b7b88ae49684f658748094e633c2536",
+          "name": "Abdo Pain NOS (Idiopathic)"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "4e6f19b5-a52f-4cd5-9645-604d759a03d1"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "89d0b6ae-227b-480f-b823-fd4a3ad8a925",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (1/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 64,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "94b2b09c9194b316738dfc56b526e124",
+            "name": "heartburn",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "ed9e333b5cf04cb91068bbcde643076e",
+          "name": "GERD"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "517a8a7f-d286-4fca-b845-954006ac461a"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "8b8b634f-c468-4ccc-9671-40a890d882ce",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (5/10)"
+        },
+        "otherFeatures": [
+          {
+            "id": "c643bff833aaa9a47e3421a8c8f35445",
+            "name": "Vomiting",
+            "state": "unsure"
+          }
+        ],
+        "profileInformation": {
+          "age": 33,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "e5bcdaa4cf15318b6f021d4168c702d0",
+            "name": "Increased Urination Freq.",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "e184ecb7e8603966edb9d305ba1c544f",
+          "name": "appendicitis"
+        },
+        "expectedTriageLevel": "EC"
+      }
+    },
+    "case_sets": [
+      "f7c88c3d-bb78-4d63-a09f-d56c26f7fe23"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "8efa191b-a456-4c54-beea-1e2c5f36ff8d",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (2/5)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 71,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "2b7b88ae49684f658748094e633c2536",
+          "name": "Abdo Pain NOS (Idiopathic)"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": []
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "a08b2c59-b490-4d9e-be20-5cce5bcdee33",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (7/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 42,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "2d6a20420b1bf50f84ca352932c9cab8",
+          "name": "IBS"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "4e6f19b5-a52f-4cd5-9645-604d759a03d1"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "a26d41b0-4804-409d-91aa-3b5b9c7edd05",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (3/10)"
+        },
+        "otherFeatures": [
+          {
+            "id": "c643bff833aaa9a47e3421a8c8f35445",
+            "name": "Vomiting",
+            "state": "absent"
+          }
+        ],
+        "profileInformation": {
+          "age": 76,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "7a3094ceceac3afdae15243c11031588",
+            "name": "sharp lower quadrant pain",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "e184ecb7e8603966edb9d305ba1c544f",
+          "name": "appendicitis"
+        },
+        "expectedTriageLevel": "EC"
+      }
+    },
+    "case_sets": [
+      "4e6f19b5-a52f-4cd5-9645-604d759a03d1"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "a94be68a-3e04-43f7-bb81-1356dd13364b",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (8/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 33,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "2d6a20420b1bf50f84ca352932c9cab8",
+          "name": "IBS"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "4e6f19b5-a52f-4cd5-9645-604d759a03d1"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "c02125af-1f0c-4623-b466-a46db125004d",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (10/10)"
+        },
+        "otherFeatures": [
+          {
+            "id": "e5bcdaa4cf15318b6f021d4168c702d0",
+            "name": "Increased Urination Freq.",
+            "state": "absent"
+          },
+          {
+            "id": "7a3094ceceac3afdae15243c11031588",
+            "name": "sharp lower quadrant pain",
+            "state": "absent"
+          }
+        ],
+        "profileInformation": {
+          "age": 69,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "5389fc3aab7ca2618978d6c1aceef39f",
+            "name": "Dysuria",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "85473ef69bd60889a208bc1a65dc0cb8",
+          "name": "simple UTI"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "4e6f19b5-a52f-4cd5-9645-604d759a03d1"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "c2cf3f4f-3f3f-4bce-b977-efeca2d16c41",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (6/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 27,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "2b7b88ae49684f658748094e633c2536",
+          "name": "Abdo Pain NOS (Idiopathic)"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "4e6f19b5-a52f-4cd5-9645-604d759a03d1"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "c7d48e9d-4996-47d7-b0a5-a14db39419a7",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (2/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 43,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "2d6a20420b1bf50f84ca352932c9cab8",
+          "name": "IBS"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "f7c88c3d-bb78-4d63-a09f-d56c26f7fe23"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "daf4dbb9-cccc-4b13-ab6e-181227adb8d2",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (10/10)"
+        },
+        "otherFeatures": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "absent"
+          }
+        ],
+        "profileInformation": {
+          "age": 78,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "c643bff833aaa9a47e3421a8c8f35445",
+            "name": "Vomiting",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "6df481067214644360ec303283dd6a34",
+          "name": "acute cholecystitis"
+        },
+        "expectedTriageLevel": "EC"
+      }
+    },
+    "case_sets": [
+      "517a8a7f-d286-4fca-b845-954006ac461a"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "eae25e2c-9395-4f87-9940-3a2993568129",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (8/10)"
+        },
+        "otherFeatures": [
+          {
+            "id": "6e16a75aff90a62324940175453741f1",
+            "name": "Diarrhoea",
+            "state": "unsure"
+          }
+        ],
+        "profileInformation": {
+          "age": 56,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "7a3094ceceac3afdae15243c11031588",
+            "name": "sharp lower quadrant pain",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "e184ecb7e8603966edb9d305ba1c544f",
+          "name": "appendicitis"
+        },
+        "expectedTriageLevel": "EC"
+      }
+    },
+    "case_sets": [
+      "f7c88c3d-bb78-4d63-a09f-d56c26f7fe23"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "ec812823-01a4-4cc4-b9a9-ac0243363e6c",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (7/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 67,
+          "biologicalSex": "male"
+        },
+        "presentingComplaints": [
+          {
+            "id": "bcdc01d83bfb31c85ec47efc0642304e",
+            "name": "Weight Loss",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "42e009a4e3d8c8a17a29b4c57311e9cf",
+          "name": "IBD (first presentation non flare)"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "517a8a7f-d286-4fca-b845-954006ac461a"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "f553082a-80bb-4ba0-a846-cdad960a8e1e",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (3/5)"
+        },
+        "otherFeatures": [
+          {
+            "id": "5780df68fc82bfb733e0b3d0520d3179",
+            "name": "Fever",
+            "state": "absent"
+          }
+        ],
+        "profileInformation": {
+          "age": 71,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "42e009a4e3d8c8a17a29b4c57311e9cf",
+          "name": "IBD (first presentation non flare)"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": []
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "f9832417-30a3-4f12-a284-ea746c1060e3",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (9/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 27,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "94b2b09c9194b316738dfc56b526e124",
+            "name": "heartburn",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "ed9e333b5cf04cb91068bbcde643076e",
+          "name": "GERD"
+        },
+        "expectedTriageLevel": "PC"
+      }
+    },
+    "case_sets": [
+      "f7c88c3d-bb78-4d63-a09f-d56c26f7fe23"
+    ]
+  }
+},
+{
+  "model": "cases.case",
+  "pk": "fed1dbb2-9f07-4307-9be6-9172ba4d84c2",
+  "fields": {
+    "status": "created",
+    "public": false,
+    "data": {
+      "caseData": {
+        "metaData": {
+          "description": "Synthetic London-model case (6/10)"
+        },
+        "otherFeatures": [],
+        "profileInformation": {
+          "age": 27,
+          "biologicalSex": "female"
+        },
+        "presentingComplaints": [
+          {
+            "id": "1e400ff9b77134121117183e3fc9b7a2",
+            "name": "Abdo Pain Cramping Central 2 days",
+            "state": "present"
+          }
+        ]
+      },
+      "valuesToPredict": {
+        "condition": {
+          "id": "a4a1fa1b6cb58a3b5ecd8276a42198d8",
+          "name": "viral GE"
+        },
+        "expectedTriageLevel": "SC"
+      }
+    },
+    "case_sets": [
+      "f7c88c3d-bb78-4d63-a09f-d56c26f7fe23"
+    ]
+  }
+}
+]
