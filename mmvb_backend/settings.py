@@ -12,6 +12,14 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+IS_TRUE = lambda value: str(value).lower() in ["1", "true", "yes"]  # noqa
+
+ENABLE_TOY_AIS = IS_TRUE(os.environ.get("ENABLE_CASE_SYNTHESIZER", "true"))
+
+ENABLE_CASE_SYNTHESIZER = IS_TRUE(
+    os.environ.get("ENABLE_CASE_SYNTHESIZER", "true")
+)
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -44,9 +52,13 @@ INSTALLED_APPS = [
     "ai_implementations",
     "benchmarking_sessions",
     "cases",
-    "toy_ais",  # TODO: conditionally add it based on settings/environment
-    "case_synthesizer",  # TODO: conditionally add it based on settings/environment
 ]
+
+if ENABLE_TOY_AIS:
+    INSTALLED_APPS.append("toy_ais")
+
+if ENABLE_CASE_SYNTHESIZER:
+    INSTALLED_APPS.append("case_synthesizer")
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
