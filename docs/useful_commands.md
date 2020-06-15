@@ -54,3 +54,10 @@ For running the celery workers you just need to run:
 $ make start_celery
 ```
 **Make sure mysql and redis are up and running before running this command.**
+
+### Fixtures loading
+During development it might be important to quickly load some data into the database to perform some manual testing. Before running the following command make sure you have registered the ais with the command in the *Toy AIs registration* section above, then run:
+```
+$ make load_fixtures
+```
+It will load some CaseSets, Cases and BenchmarkingSessions into the database.
