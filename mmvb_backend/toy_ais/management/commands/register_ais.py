@@ -6,7 +6,7 @@ from toy_ais.implementations import TOY_AIS
 
 
 class Command(BaseCommand):
-    """Loads toy ai implementations into ai implementations"""
+    """Loads toy ai implementations into ai implementations database table"""
 
     SERVER_ADDRESS = f"{settings.SERVER_URL}:{settings.SERVER_PORT}"
 

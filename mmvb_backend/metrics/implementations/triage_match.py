@@ -9,16 +9,29 @@ from metrics.implementations.base import Metric
 
 
 class TriageMatch(Metric):
+    """
+    Metric for checking if the triage solution given by an AI for a case
+    matches the expected triage solution for the case
+    """
+
     @classproperty
     def name(cls):
+        """Returns the Metric name"""
         return "triage_match"
 
     @classproperty
     def description(cls):
+        """Returns the Metric description"""
         return "Triage match"
 
     @classmethod
+    def include_as_metric(cls):
+        """Informs wether this Metric should be listed as an available metric"""
+        return True
+
+    @classmethod
     def aggregate(cls, metrics):
+        """Aggregates metrics of a benchmark result"""
         metrics["aggregatedValues"] = {}
 
         ais_with_triage_match = defaultdict(int)
@@ -40,6 +53,7 @@ class TriageMatch(Metric):
 
     @classmethod
     def calculate(cls, benchmarking_session_result):
+        """Calculates metrics on a benchmark result"""
         COMPLETED = BenchmarkingStepStatus.COMPLETED.value
         metrics = {"id": cls.name, "name": cls.description, "values": {}}
 

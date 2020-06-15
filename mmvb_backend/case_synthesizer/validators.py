@@ -7,6 +7,8 @@ MAX_CASESETS_QUANTITY = 10
 
 
 def quantity_range(lower_limit, upper_limit):
+    """Closure function to validate a given value is within an expected range"""
+
     def validator(value):
         value = int(value)
         if value > upper_limit or value < lower_limit:

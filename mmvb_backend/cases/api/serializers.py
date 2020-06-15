@@ -9,12 +9,15 @@ from cases.models import Case, CaseSet
 
 
 class CaseSetSerializer(ModelSerializer):
+    """Serializer for Case Set data models"""
+
     class Meta:
         model = CaseSet
         fields = ["id", "name", "cases"]
 
     @transaction.atomic
     def create(self, validated_data):
+        """Custom handler for the creation of a new case set"""
         cases = []
         if "cases" in validated_data:
             cases = validated_data.pop("cases")
@@ -29,6 +32,7 @@ class CaseSetSerializer(ModelSerializer):
 
     @transaction.atomic
     def update(self, instance, validated_data):
+        """Custom handler for the update of given case set"""
         cases = []
         if "cases" in validated_data:
             cases = validated_data.pop("cases")
@@ -49,6 +53,8 @@ class CaseSetSerializer(ModelSerializer):
 
 
 class CaseSerializer(ModelSerializer):
+    """Serializer for Case model data"""
+
     data = JSONField()
     case_sets = PrimaryKeyRelatedField(
         many=True, queryset=CaseSet.objects.all()
@@ -60,6 +66,7 @@ class CaseSerializer(ModelSerializer):
 
     @transaction.atomic
     def create(self, validated_data):
+        """Custom handler for the creation of a new case"""
         case_sets = None
         if "case_sets" in validated_data:
             case_sets = validated_data.pop("case_sets")
@@ -75,6 +82,7 @@ class CaseSerializer(ModelSerializer):
 
     @transaction.atomic
     def update(self, instance, validated_data):
+        """Custom handler for the update of a given case"""
         case_sets = None
         if "case_sets" in validated_data:
             case_sets = validated_data.pop("case_sets")
@@ -97,6 +105,11 @@ class CaseSerializer(ModelSerializer):
 
 
 class CaseSetFullSerializer(ModelSerializer):
+    """
+    Serializer for Case Set that includes full serialization of
+    contained cases
+    """
+
     cases = CaseSerializer(many=True, read_only=True)
 
     class Meta:

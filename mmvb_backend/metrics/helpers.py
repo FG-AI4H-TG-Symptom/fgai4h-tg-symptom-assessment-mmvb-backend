@@ -4,6 +4,7 @@ METRICS_IDS = list(SUPPORTED_METRICS)
 
 
 def calculate_metrics(benchmark_session_result, metrics=METRICS_IDS):
+    """Calculates the selected or the available metrics for a given benchmark result"""
     calculated_metrics = []
 
     for metric_id in metrics:

@@ -13,19 +13,31 @@ from metrics.implementations.base import Metric
 
 
 class TriageSimilarityBase(Metric):
+    """
+    Metric for checking the triage similarity score for solution given
+    by an AI for a case when compared to the expected triage solution
+    for the case
+    """
+
     @classproperty
     def name(cls):
+        """Returns Metric name"""
         return "triage_similarity_base"
 
     @classproperty
     def description(cls):
+        """Returns Metric description"""
         return "Triage similarity (Base)"
 
     @classmethod
     def include_as_metric(cls):
+        """Informs wether this Metric should be listed as an available metric"""
         return False
 
     def _calculate_triage_similarity(expected_triage, ai_triage, soft=False):
+        """
+        Calculates triage similarity factor between ai triage and expected triage
+        """
         # TODO: what to do in case this validation fails?
         assert expected_triage in EXPECTED_TRIAGE_OPTIONS
         if ai_triage not in EXPECTED_TRIAGE_OPTIONS:
@@ -45,6 +57,7 @@ class TriageSimilarityBase(Metric):
 
     @classmethod
     def aggregate(cls, metrics):
+        """Aggregates metrics of a benchmark result"""
         metrics["aggregatedValues"] = {}
 
         ais_triage_similarity_sum = defaultdict(int)
@@ -68,6 +81,7 @@ class TriageSimilarityBase(Metric):
 
     @classmethod
     def calculate(cls, benchmarking_session_result, soft=False):
+        """Calculates metrics on a benchmark result"""
         COMPLETED = BenchmarkingStepStatus.COMPLETED.value
         metrics = {"id": cls.name, "name": cls.description, "values": {}}
 
@@ -103,34 +117,42 @@ class TriageSimilarityBase(Metric):
 class TriageSimilarity(TriageSimilarityBase):
     @classproperty
     def name(cls):
+        """Returns Metric name"""
         return "triage_similarity"
 
     @classproperty
     def description(cls):
+        """Returns Metric description"""
         return "Triage similarity"
 
     @classmethod
     def include_as_metric(cls):
+        """Informs wether this Metric should be listed as an available metric"""
         return True
 
     @classmethod
     def calculate(cls, benchmarking_session_result):
+        """Calculates metrics on a benchmark result"""
         return super().calculate(benchmarking_session_result, soft=False)
 
 
 class SoftTriageSimilarity(TriageSimilarityBase):
     @classproperty
     def name(cls):
+        """Returns Metric name"""
         return "soft_triage_similarity"
 
     @classproperty
     def description(cls):
+        """Returns Metric description"""
         return "Soft triage similarity"
 
     @classmethod
     def include_as_metric(cls):
+        """Informs wether this Metric should be listed as an available metric"""
         return True
 
     @classmethod
     def calculate(cls, benchmarking_session_result):
+        """Calculates metrics on a benchmark result"""
         return super().calculate(benchmarking_session_result, soft=True)
