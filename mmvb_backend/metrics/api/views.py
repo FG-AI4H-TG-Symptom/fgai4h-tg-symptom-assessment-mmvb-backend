@@ -7,9 +7,12 @@ from metrics.implementations import SUPPORTED_METRICS
 
 
 class MetricsViewset(ViewSet):
+    """ViewSet for handling Metrics requests"""
+
     schema = AutoSchema(tags=["Metrics"])
 
     def list(self, request):
+        """Handles the request for the available metrics list"""
         metrics_data = [
             {"id": name, "name": metric.description}
             for (name, metric) in SUPPORTED_METRICS.items()
