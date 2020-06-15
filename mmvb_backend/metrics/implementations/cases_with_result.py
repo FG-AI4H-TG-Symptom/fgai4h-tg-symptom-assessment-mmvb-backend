@@ -7,20 +7,26 @@ from metrics.implementations.base import Metric
 
 
 class CasesWithAIResult(Metric):
+    """Metric for checking if an AI has responded with a result for a case"""
+
     @classproperty
     def name(cls):
+        """Returns Metric name"""
         return "cases_with_ai_result"
 
     @classproperty
     def description(cls):
+        """Returns Metric description"""
         return "Cases with AI result"
 
     @classmethod
     def include_as_metric(cls):
+        """Informs wether this Metric should be listed as an available metric"""
         return True
 
     @classmethod
     def aggregate(cls, metrics):
+        """Aggregates metrics of a benchmark result"""
         metrics["aggregatedValues"] = {}
 
         cases_with_ai_result_counts = defaultdict(int)
@@ -42,6 +48,7 @@ class CasesWithAIResult(Metric):
 
     @classmethod
     def calculate(cls, benchmarking_session_result, *args, **kwargs):
+        """Calculates metrics on a benchmark result"""
         COMPLETED = BenchmarkingStepStatus.COMPLETED.value
         metrics = {"id": cls.name, "name": cls.description, "values": {}}
 

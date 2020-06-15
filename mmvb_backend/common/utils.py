@@ -20,7 +20,13 @@ DEFAULT_MAX_RETRIES = settings.MAX_RETRIES
 
 
 class CamelCaseAutoSchema(AutoSchema):
+    """
+    Custom AutoSchema to properly perform snake_case to CamelCase
+    conversion of serialized data for the API endpoints requests/responses
+    """
+
     def map_serializer(self, serializer):
+        """Performs camelcase conversion for properties of serialised data"""
         result = super().map_serializer(serializer)
         camelized_properties = {
             camelcase(field_name): schema
@@ -34,14 +40,17 @@ class CamelCaseAutoSchema(AutoSchema):
 
 
 def is_true(value):
+    """Evaluates if a given value is true or false"""
     return settings.IS_TRUE(value)
 
 
 def generate_id():
+    """Generates a UUID"""
     return uuid4()
 
 
 def get_all_subclasses(cls):
+    """Gets all subclasses of a given class or its subclasses"""
     all_subclasses = set(cls.__subclasses__()).union(
         [
             sub
@@ -90,6 +99,10 @@ def import_modules(package_name):
 
 
 def perform_request(url, retries=DEFAULT_MAX_RETRIES, timeout=DEFAULT_TIMEOUT):
+    """
+    Performs a http GET request to a given url respecting the maximum amount
+    of retries and the specified timeout
+    """
     adapter = HTTPAdapter(max_retries=retries)
     session = requests.Session()
     session.mount("https://", adapter)

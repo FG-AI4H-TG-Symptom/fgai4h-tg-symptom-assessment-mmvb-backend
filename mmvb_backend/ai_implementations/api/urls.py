@@ -5,6 +5,7 @@ from ai_implementations.apps import AisConfig
 
 app_name = AisConfig.name
 
+# registers route for ai implementations
 router = DefaultRouter(trailing_slash=False)
 router.register(
     "ai-implementations",
