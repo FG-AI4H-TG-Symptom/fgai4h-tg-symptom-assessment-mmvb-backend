@@ -13,7 +13,9 @@ class CaseSynthesizerSchema(CamelCaseAutoSchema):
     """
 
     def get_response_serializer(self, path, method):
-        """Returns proper response serializer"""
+        """
+        Returns the correct serializer instance defined in the view's
+        `get_response_serializer` to be used in the response serialization"""
         view = self.view
         try:
             return view.get_response_serializer()
@@ -57,7 +59,10 @@ class CaseSynthesizerSchema(CamelCaseAutoSchema):
 
 class CaseSetSynthesizerSchema(CamelCaseAutoSchema):
     def get_response_serializer(self, path, method):
-        """Returns proper response serializer"""
+        """
+        Returns the correct serializer instance defined in the view's
+        get_response_serializer to be used in the response serialization
+        """
         view = self.view
         try:
             return view.get_response_serializer()

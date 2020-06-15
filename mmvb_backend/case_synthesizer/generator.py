@@ -49,7 +49,10 @@ def sample_symptoms(symptom_probabilities):
 
 
 def combine_symptom_and_state(symptom, state_value):
-    """Combines two dictionaries together"""
+    """
+    Incorporates the `state_value` dictionary within the `symptom` dictionary
+    under the `state` key
+    """
     return {**symptom, **{"state": state_value}}
 
 

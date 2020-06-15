@@ -100,7 +100,7 @@ def import_modules(package_name):
 
 def perform_request(url, retries=DEFAULT_MAX_RETRIES, timeout=DEFAULT_TIMEOUT):
     """
-    Performs an http GET request to a given url respecting the maximum amount
+    Performs a http GET request to a given url respecting the maximum amount
     of retries and the specified timeout
     """
     adapter = HTTPAdapter(max_retries=retries)

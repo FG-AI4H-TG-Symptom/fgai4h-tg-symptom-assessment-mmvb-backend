@@ -19,7 +19,7 @@ TIMEOUT = settings.BENCHMARKING_SESSION_TIMEOUT
 
 class BenchmarkReporter:
     """
-    Helper class for keep tracking of Benchmark Session execution
+    Helper class to keep track of Benchmark Session execution
     and report its progress
     """
 

@@ -18,7 +18,7 @@ from metrics.helpers import calculate_metrics
 
 # todo: properly document endpoints
 class BenchmarkingSessionViewSet(ModelViewSet):
-    """ViewSet for handling benchmark sessions requests"""
+    """ViewSet for handling benchmark session requests"""
 
     schema = CamelCaseAutoSchema(tags=["BenchmarkingSessions",])
     serializer_class = BenchmarkingSessionSerializer
