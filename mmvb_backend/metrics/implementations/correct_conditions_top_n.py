@@ -11,20 +11,27 @@ from metrics.implementations.base import Metric
 class CorrectConditionsTopN(Metric):
     @classproperty
     def name(cls):
+        """Returns Metric name"""
         return "correct_conditions_top_n"
 
     @classproperty
     def description(cls):
+        """Returns Metric description"""
         return "Correct conditions (top n)"
 
     @classmethod
     def include_as_metric(cls):
+        """Informs wether this Metric should be listed as an available metric"""
         return False
 
     @classmethod
     def _calculate_recall(
         cls, ai_result_conditions, correct_condition, top_n=None
     ):
+        """
+        Calculates if correct condition is within top n conditions returned by
+        an AI case solving result
+        """
         return int(
             correct_condition["id"]
             in [condition["id"] for condition in ai_result_conditions[:top_n]]
@@ -32,6 +39,7 @@ class CorrectConditionsTopN(Metric):
 
     @classmethod
     def aggregate(cls, metrics):
+        """Aggregates metrics of a benchmark result"""
         metrics["aggregatedValues"] = {}
 
         ais_with_results_in_top_n = defaultdict(int)
@@ -53,6 +61,7 @@ class CorrectConditionsTopN(Metric):
 
     @classmethod
     def calculate(cls, benchmarking_session_result, top_n=None):
+        """Calculates metrics on a benchmark result"""
         COMPLETED = BenchmarkingStepStatus.COMPLETED.value
         metrics = {"id": cls.name, "name": cls.description, "values": {}}
 
@@ -83,54 +92,87 @@ class CorrectConditionsTopN(Metric):
 
 
 class CorrectConditionsTop1(CorrectConditionsTopN):
+    """
+    Metric for checking if the correct solution of a case appears in the top 1
+    solutions given by an AI for that case
+    """
+
     @classproperty
     def name(cls):
+        """Returns Metric name"""
         return "correct_conditions_top_1"
 
     @classproperty
     def description(cls):
+        """Returns Metric description"""
         return "Correct conditions (top 1)"
 
     @classmethod
     def include_as_metric(cls):
+        """Informs wether this Metric should be listed as an available metric"""
         return True
 
     @classmethod
     def calculate(cls, benchmarking_session_result, *args, **kwargs):
+        """
+        Calculates metrics on a benchmark result providing the proper parameters
+        """
         return super().calculate(benchmarking_session_result, top_n=1)
 
 
 class CorrectConditionsTop3(CorrectConditionsTopN):
+    """
+    Metric for checking if the correct solution of a case appears in the top 3
+    solutions given by an AI for that case
+    """
+
     @classproperty
     def name(cls):
+        """Returns Metric name"""
         return "correct_conditions_top_3"
 
     @classproperty
     def description(cls):
+        """Returns Metric description"""
         return "Correct conditions (top 3)"
 
     @classmethod
     def include_as_metric(cls):
+        """Informs wether this Metric should be listed as an available metric"""
         return True
 
     @classmethod
     def calculate(cls, benchmarking_session_result, *args, **kwargs):
+        """
+        Calculates metrics on a benchmark result providing the proper parameters
+        """
         return super().calculate(benchmarking_session_result, top_n=3)
 
 
 class CorrectConditionsTop10(CorrectConditionsTopN):
+    """
+    Metric for checking if the correct solution of a case appears in the top 10
+    solutions given by an AI for that case
+    """
+
     @classproperty
     def name(cls):
+        """Returns Metric name"""
         return "correct_conditions_top_10"
 
     @classproperty
     def description(cls):
+        """Returns Metric description"""
         return "Correct conditions (top 10)"
 
     @classmethod
     def include_as_metric(cls):
+        """Informs wether this Metric should be listed as an available metric"""
         return True
 
     @classmethod
     def calculate(cls, benchmarking_session_result, *args, **kwargs):
+        """
+        Calculates metrics on a benchmark result providing the proper parameters
+        """
         return super().calculate(benchmarking_session_result, top_n=10)

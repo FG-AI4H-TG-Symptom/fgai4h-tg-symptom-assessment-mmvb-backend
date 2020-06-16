@@ -10,6 +10,8 @@ from common.utils import CamelCaseAutoSchema, perform_request
 
 # TODO: properly document endpoint
 class AIImplementationViewSet(ModelViewSet):
+    """ViewSet for handling AI Implementation endpoints requests"""
+
     schema = CamelCaseAutoSchema(tags=["AI Implementations",])
     serializer_class = AIImplementationSerializer
 
@@ -18,6 +20,8 @@ class AIImplementationViewSet(ModelViewSet):
 
     @action(methods=["get"], detail=True, url_path="health-check")
     def health_check(self, request, *args, **kwargs):
+        """Handler for proxying a health check request to a given AI Implementation"""
+
         pk = kwargs.get("pk")
         ai_implementation = self.get_queryset().filter(pk=pk).first()
 

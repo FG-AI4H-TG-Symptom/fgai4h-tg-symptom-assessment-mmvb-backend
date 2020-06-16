@@ -17,6 +17,7 @@ from common.utils import generate_id
 
 
 def sample_symptoms(symptom_probabilities):
+    """Samples symptoms and their states"""
     # Sample latent state
     symptom_states = {}
     for symptom, probability in symptom_probabilities.items():
@@ -48,11 +49,18 @@ def sample_symptoms(symptom_probabilities):
 
 
 def combine_symptom_and_state(symptom, state_value):
-    # Combining two dictionaries together:
+    """
+    Incorporates the `state_value` dictionary within the `symptom` dictionary
+    under the `state` key
+    """
     return {**symptom, **{"state": state_value}}
 
 
 def generate_cases(quantity):
+    """
+    Generates `quantity` of cases by sampling personal characteristics,
+    conditions, symptoms and their states
+    """
     cases = []
 
     for number in range(quantity):
@@ -141,6 +149,10 @@ def generate_cases(quantity):
 
 
 def generate_casesets(quantity_of_casesets, cases_per_caseset):
+    """
+    Generates a `quantity_of_casesets` each containing an amount of
+    `cases_per_caseset` cases
+    """
     case_sets = []
 
     for quantity in range(quantity_of_casesets):

@@ -24,6 +24,11 @@ from common.utils import CamelCaseAutoSchema, is_true
 
 # TODO: properly document endpoints
 class CaseViewSet(ModelViewSet):
+    """
+    ViewSet for handling Case endpoints requests
+    It delegates the actual handling to the CaseSerializer
+    """
+
     schema = CamelCaseAutoSchema(tags=["Cases",])
     serializer_class = CaseSerializer
 
@@ -32,13 +37,23 @@ class CaseViewSet(ModelViewSet):
 
 
 class ExtendedCaseViewSet(CaseViewSet):
+    """
+    ViewSet for handling Case endpoints requests when case
+    synthetization is enabled
+    It delegates the part of the handling to the CaseSerializer
+    """
+
     def get_serializer_class(self):
+        """
+        Selects serializer class based on the request action being handled.
+        """
         if self.action == "synthesize":
             return CaseSynthesizerSerializer
         else:
             return CaseSerializer
 
     def get_response_serializer(self, *args, **kwargs):
+        """Sets serializer class for the response data"""
         serializer_class = CasesListSerializer
         kwargs["context"] = self.get_serializer_context()
         return serializer_class(*args, **kwargs)
@@ -52,6 +67,7 @@ class ExtendedCaseViewSet(CaseViewSet):
         url_path="synthesize",
     )
     def synthesize(self, request, *args, **kwargs):
+        """Handles requests for cases synthetization"""
         serializer = self.get_serializer_class()(data=request.data)
         if serializer.is_valid():
             quantity = serializer.validated_data.get("quantity")
@@ -66,6 +82,11 @@ class ExtendedCaseViewSet(CaseViewSet):
 
 
 class CaseSetViewSet(ModelViewSet):
+    """
+    ViewSet for handling CaseSet endpoints requests
+    It delegates most of the actual handling to the CaseSetSerializer
+    """
+
     schema = CamelCaseAutoSchema(tags=["Cases",])
     serializer_class = CaseSetSerializer
 
@@ -73,6 +94,12 @@ class CaseSetViewSet(ModelViewSet):
         return CaseSet.objects.all()
 
     def retrieve(self, request, *args, **kwargs):
+        """
+        Custom implementation for the retrieve action to allow extra
+        parameters to be provided/handled
+        """
+        # if the 'full' query parameter is provided in the request
+        # and has a true value, change the data serializer
         full = request.query_params.get("full", False)
         if is_true(full):
             self.serializer_class = CaseSetFullSerializer
@@ -80,7 +107,13 @@ class CaseSetViewSet(ModelViewSet):
 
 
 class ExtendedCaseSetViewSet(CaseSetViewSet):
+    """
+    ViewSet for handling Case Sets endpoints requests when case/case set
+    synthetization is enabled
+    """
+
     def get_serializer_class(self):
+        """Conditionally selects serializer class"""
         if self.action == "synthesize":
             return CaseSetSynthesizerSerializer
         elif self.serializer_class == CaseSetFullSerializer:
@@ -89,6 +122,7 @@ class ExtendedCaseSetViewSet(CaseSetViewSet):
             return CaseSetSerializer
 
     def get_response_serializer(self, *args, **kwargs):
+        """Returns proper serializer instance for response"""
         serializer_class = CaseSetSerializer
         kwargs["context"] = self.get_serializer_context()
         return serializer_class(*args, **kwargs)
@@ -102,6 +136,7 @@ class ExtendedCaseSetViewSet(CaseSetViewSet):
         url_path="synthesize",
     )
     def synthesize(self, request, *args, **kwargs):
+        """Handles Case Set synthetization"""
         serializer = self.get_serializer_class()(data=request.data)
         if serializer.is_valid():
             cases_per_caseset = serializer.validated_data.get(

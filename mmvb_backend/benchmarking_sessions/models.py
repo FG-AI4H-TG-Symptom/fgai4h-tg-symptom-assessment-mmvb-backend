@@ -7,6 +7,8 @@ from django_mysql.models import JSONField
 
 
 class BenchmarkingStepStatus(Enum):
+    """Definition of possible status for a benchmark session step"""
+
     PENDING = "PENDING"
     PROCESSING = "PROCESSING"
     COMPLETED = "COMPLETED"
@@ -14,13 +16,19 @@ class BenchmarkingStepStatus(Enum):
 
 
 class BenchmarkingStepError(Enum):
+    """Definition of possible errors for a benchmark session step"""
+
     TIMEOUT = "TIMEOUT"
     SERVER_ERROR = "SERVER_ERROR"
     BAD_RESPONSE = "BAD_RESPONSE"
 
 
 class BenchmarkingSession(BaseModel):
+    """Data model representation for a Benchmark Session"""
+
     class Status(models.TextChoices):
+        """Definition of possible status for a benchmark session"""
+
         CREATED = "created"
         RUNNING = "running"
         INTERMEDIATE = "intermediate"

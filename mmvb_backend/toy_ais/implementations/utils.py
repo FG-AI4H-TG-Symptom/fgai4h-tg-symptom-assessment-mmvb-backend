@@ -5,6 +5,7 @@ from common.definitions import BIOLOGICAL_SEXES, FIXTURES_DATA, TRIAGE_OPTIONS
 
 
 def drop_all_but_keys(val, keys):
+    """Filters dictionary keys and their values"""
     output = {}
     for key in keys:
         output[key] = val[key]
@@ -12,6 +13,7 @@ def drop_all_but_keys(val, keys):
 
 
 def extract_biological_sex(case_data):
+    """Extracts biological sex information from profile in case data"""
     biological_sex = case_data["profileInformation"]["biologicalSex"]
     assert biological_sex in BIOLOGICAL_SEXES
     return biological_sex
@@ -20,6 +22,7 @@ def extract_biological_sex(case_data):
 # (https://stackoverflow.com/questions/6618515/
 #  sorting-list-based-on-values-from-another-list)
 def sort_array_by_another_array(values, map_for_ordering, reverse=False):
+    """Sorts a list based on values from another list"""
     return [
         element
         for _, element in sorted(
@@ -31,6 +34,10 @@ def sort_array_by_another_array(values, map_for_ordering, reverse=False):
 
 
 def solve_case_random_conditions(case_data, randomisation_type):
+    """
+    Solves case given on `case_data` using the strategy given on
+    `randomisation_type`
+    """
     biological_sex = extract_biological_sex(case_data)
 
     conditions = []

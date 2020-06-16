@@ -12,6 +12,14 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+IS_TRUE = lambda value: str(value).lower() in ["1", "true", "yes"]  # noqa
+
+ENABLE_TOY_AIS = IS_TRUE(os.environ.get("ENABLE_CASE_SYNTHESIZER", "true"))
+
+ENABLE_CASE_SYNTHESIZER = IS_TRUE(
+    os.environ.get("ENABLE_CASE_SYNTHESIZER", "true")
+)
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -44,9 +52,13 @@ INSTALLED_APPS = [
     "ai_implementations",
     "benchmarking_sessions",
     "cases",
-    "toy_ais",  # TODO: conditionally add it based on settings/environment
-    "case_synthesizer",  # TODO: conditionally add it based on settings/environment
 ]
+
+if ENABLE_TOY_AIS:
+    INSTALLED_APPS.append("toy_ais")
+
+if ENABLE_CASE_SYNTHESIZER:
+    INSTALLED_APPS.append("case_synthesizer")
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -166,8 +178,20 @@ CELERY_RESULT_BACKEND = "redis://"
 
 # CORS settings
 
-# todo: disable for production and configure URL whitelist
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = [
+    "https://localhost:3000",
+    "http://localhost:3000",
+    "https://127.0.0.1:3000",
+    "http://127.0.0.1:3000",
+    "https://localhost:8000",
+    "http://localhost:8000",
+    "https://127.0.0.1:8000",
+    "http://127.0.0.1:8000",
+    "https://fgai4h-tg-symptom-benchmarking-frontend-omne4kyxzq-ez.a.run.app",
+    "http://fgai4h-tg-symptom-benchmarking-frontend-omne4kyxzq-ez.a.run.app",
+    "https://demo-who2019.air.babylontech.co.uk:8000",
+    "http://demo-who2019.air.babylontech.co.uk:8000",
+]
 
 # Project and Apps Configurations
 BENCHMARKING_SESSION_TIMEOUT = int(

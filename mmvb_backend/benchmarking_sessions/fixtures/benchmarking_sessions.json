@@ -1,0 +1,50 @@
+[
+{
+  "model": "benchmarking_sessions.benchmarkingsession",
+  "pk": "1391360b-2e1e-4115-9925-cde711d6104d",
+  "fields": {
+    "created_on": "2020-06-15T11:09:08.506Z",
+    "modified_on": "2020-06-15T11:09:08.526Z",
+    "status": "created",
+    "case_set": "517a8a7f-d286-4fca-b845-954006ac461a",
+    "task_id": null,
+    "responses": {},
+    "ai_implementations": [
+      "0cad484e-756d-488e-b396-43a91a442704",
+      "4b0f0bf6-ae44-4b9b-8c01-5b2527cf2727"
+    ]
+  }
+},
+{
+  "model": "benchmarking_sessions.benchmarkingsession",
+  "pk": "52c7442d-105d-4bae-86c8-c7efa59c1a52",
+  "fields": {
+    "created_on": "2020-06-15T11:09:08.476Z",
+    "modified_on": "2020-06-15T11:09:08.498Z",
+    "status": "created",
+    "case_set": "4e6f19b5-a52f-4cd5-9645-604d759a03d1",
+    "task_id": null,
+    "responses": {},
+    "ai_implementations": [
+      "0cad484e-756d-488e-b396-43a91a442704",
+      "4b0f0bf6-ae44-4b9b-8c01-5b2527cf2727"
+    ]
+  }
+},
+{
+  "model": "benchmarking_sessions.benchmarkingsession",
+  "pk": "ea11d4a4-5652-4efb-bcff-3abb227877a7",
+  "fields": {
+    "created_on": "2020-06-15T11:09:08.532Z",
+    "modified_on": "2020-06-15T11:09:08.553Z",
+    "status": "created",
+    "case_set": "f7c88c3d-bb78-4d63-a09f-d56c26f7fe23",
+    "task_id": null,
+    "responses": {},
+    "ai_implementations": [
+      "0cad484e-756d-488e-b396-43a91a442704",
+      "4b0f0bf6-ae44-4b9b-8c01-5b2527cf2727"
+    ]
+  }
+}
+]

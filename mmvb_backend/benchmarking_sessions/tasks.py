@@ -18,6 +18,11 @@ TIMEOUT = settings.BENCHMARKING_SESSION_TIMEOUT
 
 
 class BenchmarkReporter:
+    """
+    Helper class to keep track of Benchmark Session execution
+    and report its progress
+    """
+
     def __init__(self, ai_implementations, cases, update_state):
         self.ai_implementations = ai_implementations
         self.cases = cases
@@ -34,6 +39,10 @@ class BenchmarkReporter:
         ]
 
     def response_template(self):
+        """
+        Returns the template data structure for a case response for
+        the ai implementations
+        """
         template = {}
 
         for ai_implementation in self.ai_implementations:
@@ -44,6 +53,7 @@ class BenchmarkReporter:
         return template
 
     def mark_begin_case(self, case_index):
+        """Updates the index tracking with the case currently being benchmarked"""
         self.case_index = case_index
 
     def _update_case_status(
@@ -52,6 +62,10 @@ class BenchmarkReporter:
         status: BenchmarkingStepStatus,
         error: BenchmarkingStepError = None,
     ):
+        """
+        Updates the status for a given ai implementation for case currently
+        being benchmarked
+        """
         response = self.responses[self.case_index]["responses"][
             str(ai_implementation_id)
         ]
@@ -69,11 +83,19 @@ class BenchmarkReporter:
         self.update_state(status="PROCESSING", meta=report)
 
     def processing(self, ai_implementation_id: UUID):
+        """
+        Helper method for updating status of ai implementation as PROCESSING
+        for case currently being benchmarked
+        """
         self._update_case_status(
             ai_implementation_id, BenchmarkingStepStatus.PROCESSING
         )
 
     def completed(self, ai_implementation_id: UUID, response: dict):
+        """
+        Helper method for updating status of ai implementation as COMPLETED
+        for case currently being benchmarked
+        """
         self._update_case_status(
             ai_implementation_id, BenchmarkingStepStatus.COMPLETED
         )
@@ -82,6 +104,10 @@ class BenchmarkReporter:
         ]["value"] = response
 
     def error(self, ai_implementation_id: UUID, error: BenchmarkingStepError):
+        """
+        Helper method for updating status of ai implementation as ERRORED
+        for case currently being benchmarked
+        """
         self._update_case_status(
             ai_implementation_id, BenchmarkingStepStatus.ERRORED, error
         )
@@ -89,7 +115,10 @@ class BenchmarkReporter:
 
 @shared_task(bind=True)
 def run_benchmark(self, benchmarking_session_id):
-
+    """
+    Task implementation for actually running the benchmark session
+    asynchronously
+    """
     benchmarking_session = BenchmarkingSession.objects.get(
         id=benchmarking_session_id
     )
