@@ -5,6 +5,7 @@ from cases.models import Case, CaseSet
 from common.definitions import (
     BIOLOGICAL_SEXES,
     EVIDENCE_STATES,
+    FACTOR_PROBABILITY,
     FIXTURES_DATA,
     MAX_AGE,
     MIN_AGE,
@@ -15,45 +16,168 @@ from common.definitions import (
 )
 from common.utils import generate_id
 
+WEIGHT_TO_PROBABILITY = {0: 0.0, 1: 30.0, 2: 60.0, 3: 90.0}
+ID_TO_SYMPTOM = {
+    symptom["id"]: symptom for symptom in FIXTURES_DATA["symptoms"]
+}
 
-def sample_symptoms(symptom_probabilities):
+
+def sample_attribute_values(symptom_weight):
+    symptom = ID_TO_SYMPTOM[symptom_weight["symptom_id"]]
+    attribute_values = []
+    for attribute_weights in symptom_weight["attributes"]:
+        attribute = next(
+            attribute for attribute in symptom["attributes"]
+            if attribute["id"] == attribute_weights["id"]
+        )
+        # TODO: Ignoring multiselection for now as not supported by schema
+        value_id = random.choices(
+            [value["id"] for value in attribute_weights["values"]],
+            [value["weight"] for value in attribute_weights["values"]]
+        )[0]
+        value = next(
+            value for value in attribute["value_set"]
+            if value["id"] == value_id
+        )
+        attribute_values.append(
+            {
+                "id": attribute["id"],
+                "name": attribute["term"],
+                "standardOntologyUris": [attribute["sctid"]],
+                "value": {
+                    "id": value["id"],
+                    "name": value["term"],
+                    "standardOntologyUris": [value["sctid"]],
+                }
+            }
+        )
+    return attribute_values
+
+
+def sample_symptoms(symptom_weights):
     """Samples symptoms and their states"""
-    # Sample latent state
-    symptom_states = {}
-    for symptom, probability in symptom_probabilities.items():
+
+    # Sample presenting symptom
+    symptom_weight = random.choices(
+        [item for item in symptom_weights],
+        [WEIGHT_TO_PROBABILITY[item["weight"]] for item in symptom_weights]
+    )[0]
+    symptom = ID_TO_SYMPTOM[symptom_weight["symptom_id"]]
+    attributes = sample_attribute_values(symptom_weight)
+    presenting_symptom = {
+        "id": symptom["id"],
+        "name": symptom["term"],
+        "standardOntologyUris": [symptom["sctid"]],
+        "state": PRESENT,
+        "attributes": attributes
+      }
+
+    # Sample other symptoms
+    symptom_states, symptom_attributes = {}, {}
+    for symptom_weight in symptom_weights:
+        symptom_id = symptom_weight["symptom_id"]
+        if symptom_id == presenting_symptom["id"]:
+            continue
+        probability = WEIGHT_TO_PROBABILITY[symptom_weight["weight"]]
         state = random.choices(
             EVIDENCE_STATES, [probability, 1.0 - probability]
         )[0]
-        symptom_states[symptom] = state
+        symptom_states[symptom_id] = state
+        symptom_attributes[symptom_id] = sample_attribute_values(symptom_weight)
 
-    # Sample whether state is known
-    for symptom in symptom_states:
+    # Sample whether symptom is observed and known
+    for symptom_id in symptom_states:
         if random.random() < OBSERVATION_PROBABILITY:
-            symptom_states[symptom] = None
+            symptom_states[symptom_id] = None
+        elif random.random() < UNSURE_PROBABILITY:
+            symptom_states[symptom_id] = UNKNOWN
 
-    # Sample whether user answers "I don't know"
-    for symptom, state in symptom_states.items():
+    symptoms = []
+    for symptom_id, state in symptom_states.items():
         if not state:
             continue
-        if random.random() < UNSURE_PROBABILITY:
-            symptom_states[symptom] = UNKNOWN
+        symptom = ID_TO_SYMPTOM[symptom_id]
+        attributes = symptom_attributes[symptom_id] if state == PRESENT else []
+        symptoms.append(
+            {
+                "id": symptom["id"],
+                "name": symptom["term"],
+                "standardOntologyUris": [symptom["sctid"]],
+                "state": state,
+                "attributes": attributes
+            }
+        )
+    return presenting_symptom, symptoms
 
-    # Ensure at least one present symptom
-    if PRESENT not in symptom_states.values():
-        symptom = max(symptom_probabilities, key=symptom_probabilities.get)
-        symptom_states[symptom] = PRESENT
 
-    return {
-        symptom: state for symptom, state in symptom_states.items() if state
+def generate_case_data():
+    age = random.randint(MIN_AGE, MAX_AGE)
+    biological_sex = random.choice(BIOLOGICAL_SEXES)
+
+    sampled_factor_ids = [
+        factor["id"] for factor in FIXTURES_DATA['factors']
+        if random.random() < FACTOR_PROBABILITY
+    ]
+
+    # Sample a condition based on priors and factors
+    condition_priors = []
+    for condition in FIXTURES_DATA["conditions"]:
+        prior = condition["prior"]
+        sex_factor = next(
+            item["weights"][biological_sex]
+            for item in FIXTURES_DATA['condition_sex_weights']
+            if item["condition_id"] == condition["id"]
+        )
+        prior *= sex_factor
+        for factor in FIXTURES_DATA["condition_factor_weights"]:
+            if factor["condition_id"] == condition["id"]:
+                if factor["factor_id"] in sampled_factor_ids:
+                    prior *= factor["weight"]
+        condition_priors.append(prior)
+
+    sampled_condition = random.choices(
+        FIXTURES_DATA["conditions"], condition_priors
+    )[0]
+
+    # Sample symptoms based on weight of connection to sampled condition
+    related_symptom_weights = [
+        weight_info
+        for weight_info in FIXTURES_DATA["condition_symptom_weights"]
+        if weight_info["condition_id"] == sampled_condition["id"]
+    ]
+    presenting_symptom, symptoms = sample_symptoms(related_symptom_weights)
+
+    if len(presenting_symptom) < 1:
+        raise SynthesisError(
+            "Something went wrong when sampling symptom states"
+        )
+
+    case_data = {
+        "caseData": {
+            "profileInformation": {
+                "age": age,
+                "biologicalSex": biological_sex
+            },
+            "presentingComplaints": [presenting_symptom],
+            "otherFeatures": symptoms  # ADD FACTORS
+        },
+        "valuesToPredict": {
+            "expectedTriageLevel": sampled_condition["triage"],
+            "expectedCondition": {
+                "id": sampled_condition["id"],
+                "name": sampled_condition["term"],
+                "standardOntologyUris": [sampled_condition["sctid"]]
+            },
+            "otherRelevantDifferentials": [],
+            "impossibleConditions": [],
+            "correctCondition": {
+                "id": sampled_condition["id"],
+                "name": sampled_condition["term"],
+                "standardOntologyUris": [sampled_condition["sctid"]]
+            }
+        }
     }
-
-
-def combine_symptom_and_state(symptom, state_value):
-    """
-    Incorporates the `state_value` dictionary within the `symptom` dictionary
-    under the `state` key
-    """
-    return {**symptom, **{"state": state_value}}
+    return case_data
 
 
 def generate_cases(quantity):
@@ -65,82 +189,12 @@ def generate_cases(quantity):
 
     for number in range(quantity):
         case_id = generate_id()
-        age = random.randint(MIN_AGE, MAX_AGE)
-        biological_sex = random.choice(BIOLOGICAL_SEXES)
-        meta_data = {
-            "description": f"Synthetic London-model case ({number+1}/{quantity})"
+        case_data = generate_case_data()
+        metadata = {
+            "description": f"Synthetic Berlin-model case ({number+1}/{quantity})",
+            "caseCreator": "MMVB case synthesizer"
         }
-
-        # Sample from conditions based on their probabilities
-        condition_probabilities = [
-            condition_info["probability"][biological_sex]
-            for condition_info in FIXTURES_DATA["conditions"]
-        ]
-
-        sampled_condition = random.choices(
-            FIXTURES_DATA["conditions"], condition_probabilities
-        )[0]
-
-        symptom_probabilities = {
-            symptom_id: probability
-            for condition_id, symptom_id, probability in FIXTURES_DATA[
-                "condition_symptom_probability"
-            ]
-            if condition_id == sampled_condition["id"]
-        }
-
-        if len(symptom_probabilities) <= 0:
-            raise SynthesisError(
-                "Something went wrong when generating symptom probabilities"
-            )
-
-        symptom_states = sample_symptoms(symptom_probabilities)
-
-        if len(symptom_states) <= 0:
-            raise SynthesisError(
-                "Something went wrong when sampling symptom states"
-            )
-
-        symptoms = [
-            combine_symptom_and_state(
-                symptom, symptom_states.get(symptom["id"])
-            )
-            for symptom in FIXTURES_DATA["symptoms"]
-            if symptom["id"] in symptom_states
-        ]
-
-        # Split a present symptom as presenting symptom
-        presenting_symptom = symptoms.pop(
-            [
-                index
-                for index, symptom in enumerate(symptoms)
-                if symptom["state"] == PRESENT
-            ][0]
-        )
-
-        case = Case(
-            id=case_id,
-            data={
-                "caseData": {
-                    "metaData": meta_data,
-                    "profileInformation": {
-                        "biologicalSex": biological_sex,
-                        "age": age,
-                    },
-                    "presentingComplaints": [presenting_symptom],
-                    "otherFeatures": symptoms,
-                },
-                "valuesToPredict": {
-                    "expectedTriageLevel": (
-                        sampled_condition["expected_triage_level"]
-                    ),
-                    "condition": {
-                        "id": sampled_condition["id"],
-                        "name": sampled_condition["name"],
-                    },
-                },
-            },
-        )
+        case = Case(id=case_id, data=case_data, metadata=metadata)
         cases.append(case)
 
     Case.objects.bulk_create(cases)
