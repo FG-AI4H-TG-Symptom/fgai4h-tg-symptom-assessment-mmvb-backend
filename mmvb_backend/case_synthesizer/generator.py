@@ -27,16 +27,18 @@ def sample_attribute_values(symptom_weight):
     attribute_values = []
     for attribute_weights in symptom_weight["attributes"]:
         attribute = next(
-            attribute for attribute in symptom["attributes"]
+            attribute
+            for attribute in symptom["attributes"]
             if attribute["id"] == attribute_weights["id"]
         )
         # TODO: Ignoring multiselection for now as not supported by schema
         value_id = random.choices(
             [value["id"] for value in attribute_weights["values"]],
-            [value["weight"] for value in attribute_weights["values"]]
+            [value["weight"] for value in attribute_weights["values"]],
         )[0]
         value = next(
-            value for value in attribute["value_set"]
+            value
+            for value in attribute["value_set"]
             if value["id"] == value_id
         )
         attribute_values.append(
@@ -48,7 +50,7 @@ def sample_attribute_values(symptom_weight):
                     "id": value["id"],
                     "name": value["term"],
                     "standardOntologyUris": [value["sctid"]],
-                }
+                },
             }
         )
     return attribute_values
@@ -60,7 +62,7 @@ def sample_symptoms(symptom_weights):
     # Sample presenting symptom
     symptom_weight = random.choices(
         [item for item in symptom_weights],
-        [WEIGHT_TO_PROBABILITY[item["weight"]] for item in symptom_weights]
+        [WEIGHT_TO_PROBABILITY[item["weight"]] for item in symptom_weights],
     )[0]
     symptom = ID_TO_SYMPTOM[symptom_weight["symptom_id"]]
     attributes = sample_attribute_values(symptom_weight)
@@ -69,8 +71,8 @@ def sample_symptoms(symptom_weights):
         "name": symptom["term"],
         "standardOntologyUris": [symptom["sctid"]],
         "state": PRESENT,
-        "attributes": attributes
-      }
+        "attributes": attributes,
+    }
 
     # Sample other symptoms
     symptom_states, symptom_attributes = {}, {}
@@ -83,7 +85,9 @@ def sample_symptoms(symptom_weights):
             EVIDENCE_STATES, [probability, 1.0 - probability]
         )[0]
         symptom_states[symptom_id] = state
-        symptom_attributes[symptom_id] = sample_attribute_values(symptom_weight)
+        symptom_attributes[symptom_id] = sample_attribute_values(
+            symptom_weight
+        )
 
     # Sample whether symptom is observed and known
     for symptom_id in symptom_states:
@@ -104,7 +108,7 @@ def sample_symptoms(symptom_weights):
                 "name": symptom["term"],
                 "standardOntologyUris": [symptom["sctid"]],
                 "state": state,
-                "attributes": attributes
+                "attributes": attributes,
             }
         )
     return presenting_symptom, symptoms
@@ -115,7 +119,8 @@ def generate_case_data():
     biological_sex = random.choice(BIOLOGICAL_SEXES)
 
     sampled_factor_ids = [
-        factor["id"] for factor in FIXTURES_DATA['factors']
+        factor["id"]
+        for factor in FIXTURES_DATA["factors"]
         if random.random() < FACTOR_PROBABILITY
     ]
 
@@ -125,7 +130,7 @@ def generate_case_data():
         prior = condition["prior"]
         sex_factor = next(
             item["weights"][biological_sex]
-            for item in FIXTURES_DATA['condition_sex_weights']
+            for item in FIXTURES_DATA["condition_sex_weights"]
             if item["condition_id"] == condition["id"]
         )
         prior *= sex_factor
@@ -156,26 +161,26 @@ def generate_case_data():
         "caseData": {
             "profileInformation": {
                 "age": age,
-                "biologicalSex": biological_sex
+                "biologicalSex": biological_sex,
             },
             "presentingComplaints": [presenting_symptom],
-            "otherFeatures": symptoms  # ADD FACTORS
+            "otherFeatures": symptoms,  # ADD FACTORS
         },
         "valuesToPredict": {
             "expectedTriageLevel": sampled_condition["triage"],
             "expectedCondition": {
                 "id": sampled_condition["id"],
                 "name": sampled_condition["term"],
-                "standardOntologyUris": [sampled_condition["sctid"]]
+                "standardOntologyUris": [sampled_condition["sctid"]],
             },
             "otherRelevantDifferentials": [],
             "impossibleConditions": [],
             "correctCondition": {
                 "id": sampled_condition["id"],
                 "name": sampled_condition["term"],
-                "standardOntologyUris": [sampled_condition["sctid"]]
-            }
-        }
+                "standardOntologyUris": [sampled_condition["sctid"]],
+            },
+        },
     }
     return case_data
 
@@ -192,7 +197,7 @@ def generate_cases(quantity):
         case_data = generate_case_data()
         metadata = {
             "description": f"Synthetic Berlin-model case ({number+1}/{quantity})",
-            "caseCreator": "MMVB case synthesizer"
+            "caseCreator": "MMVB case synthesizer",
         }
         case = Case(id=case_id, data=case_data, metadata=metadata)
         cases.append(case)
