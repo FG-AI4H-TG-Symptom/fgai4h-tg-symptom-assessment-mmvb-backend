@@ -8,7 +8,8 @@ class BenchmarkingSessionSerializer(ModelSerializer):
 
     class Meta:
         model = BenchmarkingSession
-        fields = ["id", "case_set", "ai_implementations", "status"]
+        fields = ["id", "case_set", "ai_implementations",
+                  "status", "created_on", "modified_on"]
 
 
 class BenchmarkingSessionResultsSerializer(ModelSerializer):
