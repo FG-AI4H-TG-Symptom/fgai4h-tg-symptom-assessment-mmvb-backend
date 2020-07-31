@@ -1,4 +1,5 @@
 from concurrent.futures import as_completed
+from json.decoder import JSONDecodeError
 from posixpath import join as urljoin
 from uuid import UUID
 
@@ -12,6 +13,7 @@ from benchmarking_sessions.models import (
 )
 from celery import shared_task
 from common.definitions import TRIAGE_OPTIONS
+from requests import ConnectionError, ReadTimeout
 from requests_futures.sessions import FuturesSession
 
 TIMEOUT = settings.BENCHMARKING_SESSION_TIMEOUT
@@ -163,37 +165,62 @@ def run_benchmark(self, benchmarking_session_id):
         for request in as_completed(request_futures):
             ai_implementation = request_ai_implementation_map[request]
             request_exception = request.exception(timeout=0)
-            if isinstance(request_exception, ReadTimeout):
+            if isinstance(request_exception, ConnectionError):
                 reporter.error(
-                    ai_implementation.id, BenchmarkingStepError.TIMEOUT
+                    ai_implementation.id,
+                    BenchmarkingStepError.TIMEOUT,
+                    f"Failed to connect to AI {ai_implementation.id}, "
+                    f"it seems to be offline",
+                )
+            elif isinstance(request_exception, ReadTimeout):
+                reporter.error(
+                    ai_implementation.id,
+                    BenchmarkingStepError.TIMEOUT,
+                    f"Failed to get a response from AI {ai_implementation.id} "
+                    f"in reasonable time",
                 )
             else:
                 response = request.result(timeout=0)
-                if not response.ok:
+                try:
+                    ai_response = response.json()
+                except JSONDecodeError:
                     reporter.error(
                         ai_implementation.id,
                         BenchmarkingStepError.SERVER_ERROR,
+                        f"Failed to decode json response from "
+                        f"{ai_implementation.id}",
                     )
-                    continue
+                else:
+                    if not response.ok:
+                        reporter.error(
+                            ai_implementation.id,
+                            BenchmarkingStepError.SERVER_ERROR,
+                            f"Got a HTTP {response.status_code} from "
+                            f"{ai_implementation.id}",
+                        )
+                        continue
 
-                ai_response = response.json()
+                    if "error" in ai_response:
+                        reporter.error(
+                            ai_implementation.id,
+                            BenchmarkingStepError.SERVER_ERROR,
+                            f"Faulty response from {ai_implementation.id}, "
+                            f"got {ai_response['error']}",
+                        )
+                        continue
 
-                if "error" in ai_response:
-                    reporter.error(
-                        ai_implementation.id,
-                        BenchmarkingStepError.SERVER_ERROR,
-                    )
-                    continue
+                    # todo: implement proper validation of response
+                    triage_value = ai_response.get("triage", "")
+                    if triage_value not in TRIAGE_OPTIONS:
+                        reporter.error(
+                            ai_implementation.id,
+                            BenchmarkingStepError.BAD_RESPONSE,
+                            f"Bad response from {ai_implementation.id}. "
+                            f"Got invalid triage value '{triage_value}'",
+                        )
+                        continue
 
-                # todo: implement proper validation of response
-                if ai_response.get("triage", "") not in TRIAGE_OPTIONS:
-                    reporter.error(
-                        ai_implementation.id,
-                        BenchmarkingStepError.BAD_RESPONSE,
-                    )
-                    continue
-
-                reporter.completed(ai_implementation.id, ai_response)
+                    reporter.completed(ai_implementation.id, ai_response)
 
     benchmarking_session.responses = reporter.responses
     benchmarking_session.status = BenchmarkingSession.Status.FINISHED
