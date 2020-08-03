@@ -3,7 +3,7 @@
 files: "mmvb_backend/"
 
 repos:
-  - repo: git://github.com/FalconSocial/pre-commit-python-sorter
+  - repo: https://github.com/FalconSocial/pre-commit-python-sorter
     rev: 1.0.4
     hooks:
       - id: python-import-sorter
