@@ -3,8 +3,8 @@
 files: "mmvb_backend/"
 
 repos:
-  - repo: https://github.com/FalconSocial/pre-commit-python-sorter
-    rev: master
+  - repo: git://github.com/FalconSocial/pre-commit-python-sorter
+    rev: 1.0.4
     hooks:
       - id: python-import-sorter
         args: ["--silent-overwrite"]
