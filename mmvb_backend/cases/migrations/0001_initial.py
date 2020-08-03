@@ -2,10 +2,10 @@
 
 import uuid
 
+import django_mysql.models
 from django.db import migrations, models
 
 import cases.models
-import django_mysql.models
 
 
 class Migration(migrations.Migration):

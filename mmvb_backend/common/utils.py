@@ -5,15 +5,15 @@ import sys
 from json import JSONDecodeError
 from uuid import uuid4
 
-from django.conf import settings
-from rest_framework.schemas.openapi import AutoSchema
-from rest_framework.status import HTTP_200_OK
-
 import requests
-from common.definitions import HealthCheckStatus
+from django.conf import settings
 from requests.adapters import HTTPAdapter
 from requests.exceptions import ConnectionError
+from rest_framework.schemas.openapi import AutoSchema
+from rest_framework.status import HTTP_200_OK
 from stringcase import camelcase
+
+from common.definitions import HealthCheckStatus
 
 DEFAULT_TIMEOUT = settings.DEFAULT_TIMEOUT
 DEFAULT_MAX_RETRIES = settings.MAX_RETRIES

@@ -1,7 +1,7 @@
 from django.db import models
+from django_mysql.models import JSONField, Model
 
 from common.models import FlowableModel
-from django_mysql.models import JSONField, Model
 
 
 def default_data():
