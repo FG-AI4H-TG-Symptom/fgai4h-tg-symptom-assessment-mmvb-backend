@@ -1,6 +1,7 @@
 import random
 
 import numpy
+
 from common.definitions import BIOLOGICAL_SEXES, FIXTURES_DATA, TRIAGE_OPTIONS
 
 

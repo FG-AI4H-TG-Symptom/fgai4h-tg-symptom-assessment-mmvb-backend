@@ -5,14 +5,14 @@ import sys
 from json import JSONDecodeError
 from uuid import uuid4
 
+import requests
 from django.conf import settings
+from requests.adapters import HTTPAdapter
+from requests.exceptions import ConnectionError
 from rest_framework.schemas.openapi import AutoSchema
 from rest_framework.status import HTTP_200_OK
 
-import requests
 from common.definitions import HealthCheckStatus
-from requests.adapters import HTTPAdapter
-from requests.exceptions import ConnectionError
 from stringcase import camelcase
 
 DEFAULT_TIMEOUT = settings.DEFAULT_TIMEOUT

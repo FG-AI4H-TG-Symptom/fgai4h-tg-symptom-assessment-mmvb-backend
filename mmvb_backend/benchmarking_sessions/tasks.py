@@ -1,9 +1,10 @@
 from concurrent.futures import as_completed
 from json.decoder import JSONDecodeError
-from posixpath import join as urljoin
 from uuid import UUID
 
 from django.conf import settings
+from posixpath import join as urljoin
+from requests import ConnectionError, ReadTimeout
 
 from benchmarking_sessions.models import (
     BenchmarkingSession,
@@ -12,7 +13,6 @@ from benchmarking_sessions.models import (
 )
 from celery import shared_task
 from common.definitions import TRIAGE_OPTIONS
-from requests import ConnectionError, ReadTimeout
 from requests_futures.sessions import FuturesSession
 
 TIMEOUT = settings.BENCHMARKING_SESSION_TIMEOUT
