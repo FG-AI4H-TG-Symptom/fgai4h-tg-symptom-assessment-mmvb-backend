@@ -1,4 +1,5 @@
 import random
+from uuid import uuid4
 
 from case_synthesizer.exceptions import SynthesisError
 from cases.models import Case, CaseSet
@@ -166,6 +167,10 @@ def generate_case_data():
             "presentingComplaints": [presenting_symptom],
             "otherFeatures": symptoms,  # ADD FACTORS
         },
+        "metaData": {
+            "name": f"Synthesized case {str(uuid4())[:8]}",
+            "caseCreator": "MMVB Berlin model case synthesizer",
+        },
         "valuesToPredict": {
             "expectedTriageLevel": sampled_condition["triage"],
             "expectedCondition": {
@@ -195,11 +200,7 @@ def generate_cases(quantity):
     for number in range(quantity):
         case_id = generate_id()
         case_data = generate_case_data()
-        metadata = {
-            "description": f"Synthetic Berlin-model case ({number+1}/{quantity})",
-            "caseCreator": "MMVB case synthesizer",
-        }
-        case = Case(id=case_id, data=case_data, metadata=metadata)
+        case = Case(id=case_id, data=case_data)
         cases.append(case)
 
     Case.objects.bulk_create(cases)
