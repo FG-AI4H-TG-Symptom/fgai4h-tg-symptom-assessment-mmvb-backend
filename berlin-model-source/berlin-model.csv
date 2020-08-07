@@ -1,0 +1,71 @@
+Reference,Attribute,Clinical finding type,Clinical finding SCTID,Clinical finding short name,Attribute SCTID or custom ID,Attribute short name,Value SCTID or custom ID,Value short name,IBD (first presentation non flare),GERD,simple UTI,viral GE,bladder cancer (first presentation),acute cholecystitis,appendicitis,ectopic pregnancy,IBS,acute pyelonephritis,Abdo Pain NOS (Idiopathic)
+Condition SCTID,,,,,,,,,24526004,235595009,68566005,111843007,399326009,65275009,74400008,34801009,10743008,36689008,21522001
+Condition prior,,,,,,,,,x,xx,xx,xx,x,x,x,x,xxx,x,xx
+Condition triage,,,,,,,,,PC,PC,PC,PC,PC,EC,EC,EC,PC,EC,PC
+Clinical finding,,symptom,21522001,Abdominal pain,,,,,xxx,xx,xx,xx,x,xxx,xx,xx,xxx,xx,xxx
+,,,,,406127006,Pain intensity,255604002,Mild,,xx,xx,x,xx,,,,x,,xx
+,,,,,,,6736007,Moderate,xx,xx,x,xx,,xx,x,x,xxx,x,xx
+,,,,,,,24484000,Severe,x,,,,,xx,xx,xx,x,xx,
+,,,,,CUSTOM:1,Time since onset,CUSTOM:100,less than a day,,,x,x,,xx,xx,x,,x,x
+,,,,,,,CUSTOM:101,a couple days (1-2 days),x,,xxx,xx,,xx,xx,xx,,x,x
+,,,,,,,CUSTOM:102,3 days - to 1 week,xx,x,xx,xx,,x,x,xx,,xx,xx
+,,,,,,,CUSTOM:103,a few weeks (1 weeks - 1 month),xx,xx,,x,x,,,x,x,,xx
+,,,,,,,CUSTOM:104,1 month to 1 year,x,xx,,,xx,,,,xx,,x
+,,,,,,,CUSTOM:105,a year or more,,x,,,x,,,,x,,
+,,,,,364625007,Characteristic of pain,410709000,Cramping,xx,,,xx,,x,x,,xxx,,x
+,,,,,,,410708008,Dull,x,xx,xx,x,xx,x,x,x,x,,x
+,,,,,,,410707003,Sharp,x,x,x,x,,xx,xx,xx,,xx,
+,,,,,363698007,Finding site,818983003,Generalised,x,,,xx,,,xx,x,xxx,x,xx
+,,,,,,,50519007,Upper right,x,x,,x,,xx,,,x,,
+,,,,,,,86367003,Upper left,x,x,,x,,,,,x,,
+,,,,,,,27947004,Epigastric,,xxx,,x,,xx,,,x,,
+,,,,,,,48544008,Lower right,xx,,xx,x,,,xx,xx,x,x,
+,,,,,,,68505006,Lower left,xx,,xxx,x,,,,xx,xx,x,
+,,,,,,,11708003,Hypogastric,x,,xxx,x,xx,,,x,,xx,
+,,,,,,,133944004,Right loin,,,,,x,,,,,xxx,
+,,,,,,,133943005,Left loin,,,,,x,,,,,xxx,
+,,,,,,,422314007,Central,x,x,,xx,x,,xx,x,x,x,x
+Clinical finding,,symptom,62315008,Diarrhea,,,,,xxx,,,xxx,,,x,,xx,,x
+,,,,,249622004,Contents of stool,87612001,Blood,xx,,,x,,,,,,,
+,,,,,,,49909006,Mucus,x,,,,,,,,xx,,
+,,,,,,,11713004,Water,,,,xxx,,,x,,x,,
+,,,,,CUSTOM:1,Time since onset,CUSTOM:100,less than a day,,,,xx,,,xx,,,,
+,,,,,,,CUSTOM:101,a couple days (1-2 days),x,,,xx,,,xx,,,,
+,,,,,,,CUSTOM:102,3 days - to 1 week,xx,,,xx,,,x,,,,
+,,,,,,,CUSTOM:103,a few weeks (1 weeks - 1 month),xx,,,x,,,,,x,,
+,,,,,,,CUSTOM:104,1 month to 1 year,x,,,,,,,,xx,,
+,,,,,,,CUSTOM:105,a year or more,,,,,,,,,x,,
+Clinical finding,,symptom,422400008,Vomiting,,,,,x,x,x,xxx,,xx,x,x,,xx,
+,,,,,CUSTOM:1,Time since onset,CUSTOM:100,less than a day,,,xx,xx,,xx,xx,xx,,xx,
+,,,,,,,CUSTOM:101,a couple days (1-2 days),x,,x,xx,,xx,xx,xx,,xx,
+,,,,,,,CUSTOM:102,3 days - to 1 week,xx,x,,x,,x,x,x,,x,
+,,,,,,,CUSTOM:103,a few weeks (1 weeks - 1 month),xx,xx,,x,,,,,,,
+,,,,,,,CUSTOM:104,1 month to 1 year,x,x,,,,,,,,,
+,,,,,,,CUSTOM:105,a year or more,,,,,,,,,,,
+Clinical finding,,symptom,49650001,Dysuria,,,,,,,xx,,x,,,,,xx,
+,,,,,CUSTOM:1,Time since onset,CUSTOM:100,less than a day,,,x,,,,,,,x,
+,,,,,,,CUSTOM:101,a couple days (1-2 days),,,xx,,,,,,,xx,
+,,,,,,,CUSTOM:102,3 days - to 1 week,,,xx,,,,,,,xx,
+,,,,,,,CUSTOM:103,a few weeks (1 weeks - 1 month),,,x,,xx,,,,,x,
+,,,,,,,CUSTOM:104,1 month to 1 year,,,,,xx,,,,,,
+,,,,,,,CUSTOM:105,a year or more,,,,,x,,,,,,
+Clinical finding,,symptom,162116003,Increased frequency of urination,,,,,,,xx,,x,,,,,xx,
+,,symptom,34436003,Blood in urine,,,,,,,xx,,xxx,,,xx,,x,
+,,,,,CUSTOM:1,Time since onset,CUSTOM:100,less than a day,,,x,,,,,xx,,xx,
+,,,,,,,CUSTOM:101,a couple days (1-2 days),,,xx,,,,,xx,,xx,
+,,,,,,,CUSTOM:102,3 days - to 1 week,,,xx,,x,,,x,,xx,
+,,,,,,,CUSTOM:103,a few weeks (1 weeks - 1 month),,,x,,xx,,,,,,
+,,,,,,,CUSTOM:104,1 month to 1 year,,,,,xxx,,,,,,
+,,,,,,,CUSTOM:105,a year or more,,,,,x,,,,,,
+Clinical finding,,symptom,89362005,Weight loss,,,,,xx,,,,xx,,,x,x,,
+Clinical finding,,symptom,386661006,Fever,,,,,x,,x,x,,xx,xx,x,,xx,
+Clinical finding,,symptom,16331000,Heartburn,,,,,,xxx,,,,,,,,,
+,,,,,CUSTOM:1,Time since onset,CUSTOM:100,less than a day,,,,,,,,,,,
+,,,,,,,CUSTOM:101,a couple days (1-2 days),,,,,,,,,,,
+,,,,,,,CUSTOM:102,3 days - to 1 week,,x,,,,,,,,,
+,,,,,,,CUSTOM:103,a few weeks (1 weeks - 1 month),,xx,,,,,,,,,
+,,,,,,,CUSTOM:104,1 month to 1 year,,xx,,,,,,,,,
+,,,,,,,CUSTOM:105,a year or more,,x,,,,,,,,,
+Clinical finding,,factor,84292000,Menstrual period late,,,,,1,1,1,1,1,1,1,1.2,1,1,1
+Sex,female,,,,,,,,1,1,1,1,1,2,1,1,1,1,1
+,male,,,,,,,,1,1,1,1,1,1,1,0,1,1,1

@@ -1,391 +1,4371 @@
 {
-    "condition_symptom_probability": [
-      [
-        "42e009a4e3d8c8a17a29b4c57311e9cf",
-        "1e400ff9b77134121117183e3fc9b7a2",
-        0.6
-      ],
-      [
-        "a4a1fa1b6cb58a3b5ecd8276a42198d8",
-        "1e400ff9b77134121117183e3fc9b7a2",
-        0.6
-      ],
-      [
-        "6df481067214644360ec303283dd6a34",
-        "1e400ff9b77134121117183e3fc9b7a2",
-        0.3
-      ],
-      [
-        "e184ecb7e8603966edb9d305ba1c544f",
-        "1e400ff9b77134121117183e3fc9b7a2",
-        0.3
-      ],
-      [
-        "ffd0bbadd52f955ed05435212ac19b05",
-        "1e400ff9b77134121117183e3fc9b7a2",
-        0.3
-      ],
-      [
-        "2d6a20420b1bf50f84ca352932c9cab8",
-        "1e400ff9b77134121117183e3fc9b7a2",
-        0.6
-      ],
-      [
-        "379771d589cd397c770bb6915c3c17a6",
-        "1e400ff9b77134121117183e3fc9b7a2",
-        0.3
-      ],
-      [
-        "2b7b88ae49684f658748094e633c2536",
-        "1e400ff9b77134121117183e3fc9b7a2",
-        0.3
-      ],
-      [
-        "42e009a4e3d8c8a17a29b4c57311e9cf",
-        "7a3094ceceac3afdae15243c11031588",
-        0.3
-      ],
-      [
-        "85473ef69bd60889a208bc1a65dc0cb8",
-        "7a3094ceceac3afdae15243c11031588",
-        0.3
-      ],
-      [
-        "e184ecb7e8603966edb9d305ba1c544f",
-        "7a3094ceceac3afdae15243c11031588",
-        0.6
-      ],
-      [
-        "ffd0bbadd52f955ed05435212ac19b05",
-        "7a3094ceceac3afdae15243c11031588",
-        0.6
-      ],
-      [
-        "379771d589cd397c770bb6915c3c17a6",
-        "7a3094ceceac3afdae15243c11031588",
-        0.6
-      ],
-      [
-        "42e009a4e3d8c8a17a29b4c57311e9cf",
-        "6e16a75aff90a62324940175453741f1",
-        0.6
-      ],
-      [
-        "a4a1fa1b6cb58a3b5ecd8276a42198d8",
-        "6e16a75aff90a62324940175453741f1",
-        0.6
-      ],
-      [
-        "e184ecb7e8603966edb9d305ba1c544f",
-        "6e16a75aff90a62324940175453741f1",
-        0.3
-      ],
-      [
-        "2d6a20420b1bf50f84ca352932c9cab8",
-        "6e16a75aff90a62324940175453741f1",
-        0.6
-      ],
-      [
-        "42e009a4e3d8c8a17a29b4c57311e9cf",
-        "c643bff833aaa9a47e3421a8c8f35445",
-        0.3
-      ],
-      [
-        "ed9e333b5cf04cb91068bbcde643076e",
-        "c643bff833aaa9a47e3421a8c8f35445",
-        0.3
-      ],
-      [
-        "85473ef69bd60889a208bc1a65dc0cb8",
-        "c643bff833aaa9a47e3421a8c8f35445",
-        0.3
-      ],
-      [
-        "a4a1fa1b6cb58a3b5ecd8276a42198d8",
-        "c643bff833aaa9a47e3421a8c8f35445",
-        0.6
-      ],
-      [
-        "6df481067214644360ec303283dd6a34",
-        "c643bff833aaa9a47e3421a8c8f35445",
-        0.6
-      ],
-      [
-        "e184ecb7e8603966edb9d305ba1c544f",
-        "c643bff833aaa9a47e3421a8c8f35445",
-        0.3
-      ],
-      [
-        "ffd0bbadd52f955ed05435212ac19b05",
-        "c643bff833aaa9a47e3421a8c8f35445",
-        0.6
-      ],
-      [
-        "2d6a20420b1bf50f84ca352932c9cab8",
-        "c643bff833aaa9a47e3421a8c8f35445",
-        0.3
-      ],
-      [
-        "379771d589cd397c770bb6915c3c17a6",
-        "c643bff833aaa9a47e3421a8c8f35445",
-        0.6
-      ],
-      [
-        "85473ef69bd60889a208bc1a65dc0cb8",
-        "5389fc3aab7ca2618978d6c1aceef39f",
-        0.6
-      ],
-      [
-        "379771d589cd397c770bb6915c3c17a6",
-        "5389fc3aab7ca2618978d6c1aceef39f",
-        0.6
-      ],
-      [
-        "85473ef69bd60889a208bc1a65dc0cb8",
-        "e5bcdaa4cf15318b6f021d4168c702d0",
-        0.6
-      ],
-      [
-        "2ecf4419d2505b5265383a5d6dbbcf65",
-        "e5bcdaa4cf15318b6f021d4168c702d0",
-        0.3
-      ],
-      [
-        "e184ecb7e8603966edb9d305ba1c544f",
-        "e5bcdaa4cf15318b6f021d4168c702d0",
-        0.3
-      ],
-      [
-        "379771d589cd397c770bb6915c3c17a6",
-        "e5bcdaa4cf15318b6f021d4168c702d0",
-        0.6
-      ],
-      [
-        "85473ef69bd60889a208bc1a65dc0cb8",
-        "0c99a4e31fbba26dc64364ea53cfe3c7",
-        0.3
-      ],
-      [
-        "2ecf4419d2505b5265383a5d6dbbcf65",
-        "0c99a4e31fbba26dc64364ea53cfe3c7",
-        0.6
-      ],
-      [
-        "e184ecb7e8603966edb9d305ba1c544f",
-        "0c99a4e31fbba26dc64364ea53cfe3c7",
-        0.3
-      ],
-      [
-        "ffd0bbadd52f955ed05435212ac19b05",
-        "0c99a4e31fbba26dc64364ea53cfe3c7",
-        0.3
-      ],
-      [
-        "379771d589cd397c770bb6915c3c17a6",
-        "0c99a4e31fbba26dc64364ea53cfe3c7",
-        0.6
-      ],
-      [
-        "42e009a4e3d8c8a17a29b4c57311e9cf",
-        "bcdc01d83bfb31c85ec47efc0642304e",
-        0.3
-      ],
-      [
-        "2ecf4419d2505b5265383a5d6dbbcf65",
-        "bcdc01d83bfb31c85ec47efc0642304e",
-        0.6
-      ],
-      [
-        "42e009a4e3d8c8a17a29b4c57311e9cf",
-        "5780df68fc82bfb733e0b3d0520d3179",
-        0.3
-      ],
-      [
-        "85473ef69bd60889a208bc1a65dc0cb8",
-        "5780df68fc82bfb733e0b3d0520d3179",
-        0.3
-      ],
-      [
-        "a4a1fa1b6cb58a3b5ecd8276a42198d8",
-        "5780df68fc82bfb733e0b3d0520d3179",
-        0.3
-      ],
-      [
-        "6df481067214644360ec303283dd6a34",
-        "5780df68fc82bfb733e0b3d0520d3179",
-        0.6
-      ],
-      [
-        "e184ecb7e8603966edb9d305ba1c544f",
-        "5780df68fc82bfb733e0b3d0520d3179",
-        0.6
-      ],
-      [
-        "ffd0bbadd52f955ed05435212ac19b05",
-        "5780df68fc82bfb733e0b3d0520d3179",
-        0.3
-      ],
-      [
-        "379771d589cd397c770bb6915c3c17a6",
-        "5780df68fc82bfb733e0b3d0520d3179",
-        0.6
-      ],
-      [
-        "ed9e333b5cf04cb91068bbcde643076e",
-        "94b2b09c9194b316738dfc56b526e124",
-        0.6
-      ],
-      [
-        "ffd0bbadd52f955ed05435212ac19b05",
-        "3a52b6cdfb48b741c1e07599eb03fad3",
-        0.3
+  "conditions": [
+    {
+      "id": "2827c3412389f50313f873f8a0de44d6",
+      "short_name": "IBD (first presentation non flare)",
+      "sctid": "24526004",
+      "term": "Inflammatory bowel disease (disorder)",
+      "prior": 1,
+      "triage": "PC"
+    },
+    {
+      "id": "23334e278d34e6394e763c05e8ba13c8",
+      "short_name": "GERD",
+      "sctid": "235595009",
+      "term": "Gastroesophageal reflux disease (disorder)",
+      "prior": 2,
+      "triage": "PC"
+    },
+    {
+      "id": "84e38911d4dadafc033e196683720b70",
+      "short_name": "simple UTI",
+      "sctid": "68566005",
+      "term": "Urinary tract infectious disease (disorder)",
+      "prior": 2,
+      "triage": "PC"
+    },
+    {
+      "id": "817ce20937adbd22595275ddfa572a6e",
+      "short_name": "viral GE",
+      "sctid": "111843007",
+      "term": "Viral gastroenteritis (disorder)",
+      "prior": 2,
+      "triage": "PC"
+    },
+    {
+      "id": "7f2657a0f5b61e32b6867bd215b4a41e",
+      "short_name": "bladder cancer (first presentation)",
+      "sctid": "399326009",
+      "term": "Malignant tumor of urinary bladder (disorder)",
+      "prior": 1,
+      "triage": "PC"
+    },
+    {
+      "id": "af900dbf0fcecf02e5b7f70bbd10ea44",
+      "short_name": "acute cholecystitis",
+      "sctid": "65275009",
+      "term": "Acute cholecystitis (disorder)",
+      "prior": 1,
+      "triage": "EC"
+    },
+    {
+      "id": "9d27455f69d907a7dad7bb471f3717a4",
+      "short_name": "appendicitis",
+      "sctid": "74400008",
+      "term": "Appendicitis (disorder)",
+      "prior": 1,
+      "triage": "EC"
+    },
+    {
+      "id": "9a40d00e1b3ae580a85fb303778873ca",
+      "short_name": "ectopic pregnancy",
+      "sctid": "34801009",
+      "term": "Ectopic pregnancy (disorder)",
+      "prior": 1,
+      "triage": "EC"
+    },
+    {
+      "id": "715d4aa3c75953768e71eb85c74a79d6",
+      "short_name": "IBS",
+      "sctid": "10743008",
+      "term": "Irritable bowel syndrome (disorder)",
+      "prior": 3,
+      "triage": "PC"
+    },
+    {
+      "id": "b94c486b512b29cfcece35fcf417ecfd",
+      "short_name": "acute pyelonephritis",
+      "sctid": "36689008",
+      "term": "Acute pyelonephritis (disorder)",
+      "prior": 1,
+      "triage": "EC"
+    },
+    {
+      "id": "e158fc5e03298d772a8b7db69517800e",
+      "short_name": "Abdo Pain NOS (Idiopathic)",
+      "sctid": "21522001",
+      "term": "Abdominal pain (finding)",
+      "prior": 2,
+      "triage": "PC"
+    }
+  ],
+  "symptoms": [
+    {
+      "id": "5d60ebfd3b9ee2a12b816a66cd0d98e6",
+      "short_name": "Increased frequency of urination",
+      "sctid": "162116003",
+      "term": "Increased frequency of urination (finding)",
+      "attributes": []
+    },
+    {
+      "id": "bed900f01bde98f8d8a9d5a10bcca20e",
+      "short_name": "Heartburn",
+      "sctid": "16331000",
+      "term": "Heartburn (finding)",
+      "attributes": [
+        {
+          "id": "88dc7bcb398f2ef4004b3e496650c04a",
+          "short_name": "Time since onset",
+          "sctid": "CUSTOM:1",
+          "term": "Time since onset",
+          "multiselect": false,
+          "value_set": [
+            {
+              "id": "b70a432f0c9c6eaa9cfd09cd8adda24e",
+              "short_name": "less than a day",
+              "sctid": "CUSTOM:100",
+              "term": "less than a day"
+            },
+            {
+              "id": "1ee6ba6c501aa93ea0d1e847e68d9eb1",
+              "short_name": "a couple days (1-2 days)",
+              "sctid": "CUSTOM:101",
+              "term": "a couple days (1-2 days)"
+            },
+            {
+              "id": "4cde44906dd52cafb8aaa189d510f5d3",
+              "short_name": "3 days - to 1 week",
+              "sctid": "CUSTOM:102",
+              "term": "3 days - to 1 week"
+            },
+            {
+              "id": "287f7ef95a910a7be01d3ee5083f7f43",
+              "short_name": "a few weeks (1 weeks - 1 month)",
+              "sctid": "CUSTOM:103",
+              "term": "a few weeks (1 weeks - 1 month)"
+            },
+            {
+              "id": "72ef84b5f256f8bd0ee64e940af200e1",
+              "short_name": "1 month to 1 year",
+              "sctid": "CUSTOM:104",
+              "term": "1 month to 1 year"
+            },
+            {
+              "id": "fe43413b1d8a11f8d058f0571cab4b5c",
+              "short_name": "a year or more",
+              "sctid": "CUSTOM:105",
+              "term": "a year or more"
+            }
+          ]
+        }
       ]
-    ],
-    "conditions": [
-      {
-        "expected_triage_level": "PC",
-        "id": "42e009a4e3d8c8a17a29b4c57311e9cf",
-        "name": "IBD (first presentation non flare)",
-        "probability": {
-          "female": 0.3,
-          "male": 0.3
+    },
+    {
+      "id": "f531a0d969119b7ab1f8e76424516fed",
+      "short_name": "Abdominal pain",
+      "sctid": "21522001",
+      "term": "Abdominal pain (finding)",
+      "attributes": [
+        {
+          "id": "28fed1c97d4a2c644da4d56f1e56368c",
+          "short_name": "Finding site",
+          "sctid": "363698007",
+          "term": "Finding site (attribute)",
+          "multiselect": true,
+          "value_set": [
+            {
+              "id": "bd1eb6360249ffebc075eedf8f2483a0",
+              "short_name": "Generalised",
+              "sctid": "818983003",
+              "term": "Structure of abdominopelvic cavity and/or content of abdominopelvic cavity and/or anterior abdominal wall (body structure)"
+            },
+            {
+              "id": "6d348cc3aa90f56f84564b358a81c28a",
+              "short_name": "Upper right",
+              "sctid": "50519007",
+              "term": "Structure of right upper quadrant of abdomen (body structure)"
+            },
+            {
+              "id": "0593d23b912f73beb47f64386194fd88",
+              "short_name": "Upper left",
+              "sctid": "86367003",
+              "term": "Structure of left upper quadrant of abdomen (body structure)"
+            },
+            {
+              "id": "d436501e79fdb70236cfe7c03d7e9140",
+              "short_name": "Epigastric",
+              "sctid": "27947004",
+              "term": "Epigastric region structure (body structure)"
+            },
+            {
+              "id": "f834c45b83b879a4fdb7adb92a65b6e2",
+              "short_name": "Lower right",
+              "sctid": "48544008",
+              "term": "Structure of right lower quadrant of abdomen (body structure)"
+            },
+            {
+              "id": "fd243e61e9915e6b4b7066ec46981383",
+              "short_name": "Lower left",
+              "sctid": "68505006",
+              "term": "Structure of left lower quadrant of abdomen (body structure)"
+            },
+            {
+              "id": "da195f5b52f1469507c21cb0059c60a5",
+              "short_name": "Hypogastric",
+              "sctid": "11708003",
+              "term": "Hypogastric region structure (body structure)"
+            },
+            {
+              "id": "0e8f18693874a846d1f943db6a90d009",
+              "short_name": "Right loin",
+              "sctid": "133944004",
+              "term": "Right lumbar region (body structure)"
+            },
+            {
+              "id": "87b4cd3224fc40db1b3e116fb7237a23",
+              "short_name": "Left loin",
+              "sctid": "133943005",
+              "term": "Left lumbar region (body structure)"
+            },
+            {
+              "id": "29c2257603fdaa44f9bc3f06d30bfa58",
+              "short_name": "Central",
+              "sctid": "422314007",
+              "term": "Structure of central region of abdomen (body structure)"
+            }
+          ]
+        },
+        {
+          "id": "4925dd31d0bea68275c91d22f7be0997",
+          "short_name": "Characteristic of pain",
+          "sctid": "364625007",
+          "term": "Characteristic of pain (observable entity)",
+          "multiselect": false,
+          "value_set": [
+            {
+              "id": "19a8876aa386bfdaba38c6912263aa0f",
+              "short_name": "Cramping",
+              "sctid": "410709000",
+              "term": "Cramping sensation quality (qualifier value)"
+            },
+            {
+              "id": "63ee7081ae04864511a5a9fa051bee40",
+              "short_name": "Dull",
+              "sctid": "410708008",
+              "term": "Dull sensation quality (qualifier value)"
+            },
+            {
+              "id": "014681fa683ab84b18f86414785cd1bb",
+              "short_name": "Sharp",
+              "sctid": "410707003",
+              "term": "Sharp sensation quality (qualifier value)"
+            }
+          ]
+        },
+        {
+          "id": "344f1bb9cd9653862f86649bbe5207b0",
+          "short_name": "Pain intensity",
+          "sctid": "406127006",
+          "term": "Pain intensity (observable entity)",
+          "multiselect": false,
+          "value_set": [
+            {
+              "id": "19e86e1e3ae79fa2db16b3aa99820d7a",
+              "short_name": "Mild",
+              "sctid": "255604002",
+              "term": "Mild (qualifier value)"
+            },
+            {
+              "id": "208bed0ef2533bc353baef333a3ef07a",
+              "short_name": "Moderate",
+              "sctid": "6736007",
+              "term": "Moderate (severity modifier) (qualifier value)"
+            },
+            {
+              "id": "add77620256601bf48335aca5ed17a00",
+              "short_name": "Severe",
+              "sctid": "24484000",
+              "term": "Severe (severity modifier) (qualifier value)"
+            }
+          ]
+        },
+        {
+          "id": "f98f04e71d97d246028d51d5b317348c",
+          "short_name": "Time since onset",
+          "sctid": "CUSTOM:1",
+          "term": "Time since onset",
+          "multiselect": false,
+          "value_set": [
+            {
+              "id": "958ea562391d15e40c0314ec64b75d50",
+              "short_name": "less than a day",
+              "sctid": "CUSTOM:100",
+              "term": "less than a day"
+            },
+            {
+              "id": "ff8afbdb927e479d4b8ce94aadf792d6",
+              "short_name": "a couple days (1-2 days)",
+              "sctid": "CUSTOM:101",
+              "term": "a couple days (1-2 days)"
+            },
+            {
+              "id": "842c2fd0ef7164b22d47ffb0d2fe4dd8",
+              "short_name": "3 days - to 1 week",
+              "sctid": "CUSTOM:102",
+              "term": "3 days - to 1 week"
+            },
+            {
+              "id": "2b3c3e1b6596c0fa4e8a44b1dddff376",
+              "short_name": "a few weeks (1 weeks - 1 month)",
+              "sctid": "CUSTOM:103",
+              "term": "a few weeks (1 weeks - 1 month)"
+            },
+            {
+              "id": "95e0c38054abaadf24ad9fc3b5d990eb",
+              "short_name": "1 month to 1 year",
+              "sctid": "CUSTOM:104",
+              "term": "1 month to 1 year"
+            },
+            {
+              "id": "bbac8e28e033b153c93348c2cf9538f8",
+              "short_name": "a year or more",
+              "sctid": "CUSTOM:105",
+              "term": "a year or more"
+            }
+          ]
         }
-      },
-      {
-        "expected_triage_level": "EC",
-        "id": "379771d589cd397c770bb6915c3c17a6",
-        "name": "acute pyelonephritis",
-        "probability": {
-          "female": 0.3,
-          "male": 0.3
+      ]
+    },
+    {
+      "id": "1eac2373d00170c7eff9aa2ce2c683ce",
+      "short_name": "Blood in urine",
+      "sctid": "34436003",
+      "term": "Blood in urine (finding)",
+      "attributes": [
+        {
+          "id": "273665c63bb7979768e1233ed6d45854",
+          "short_name": "Time since onset",
+          "sctid": "CUSTOM:1",
+          "term": "Time since onset",
+          "multiselect": false,
+          "value_set": [
+            {
+              "id": "44c6826876ab99ab53d5af1bbf0b53dc",
+              "short_name": "less than a day",
+              "sctid": "CUSTOM:100",
+              "term": "less than a day"
+            },
+            {
+              "id": "fa9235e29714d244a05a3d2a0d2ab5f4",
+              "short_name": "a couple days (1-2 days)",
+              "sctid": "CUSTOM:101",
+              "term": "a couple days (1-2 days)"
+            },
+            {
+              "id": "8d25c0caf851aacf220e9cff2ea4a1b3",
+              "short_name": "3 days - to 1 week",
+              "sctid": "CUSTOM:102",
+              "term": "3 days - to 1 week"
+            },
+            {
+              "id": "5bbc49ea75b935d72c0b038e125d41a0",
+              "short_name": "a few weeks (1 weeks - 1 month)",
+              "sctid": "CUSTOM:103",
+              "term": "a few weeks (1 weeks - 1 month)"
+            },
+            {
+              "id": "5116c05965217919f6266d4a7b1e11e3",
+              "short_name": "1 month to 1 year",
+              "sctid": "CUSTOM:104",
+              "term": "1 month to 1 year"
+            },
+            {
+              "id": "8f17cef186e5de3b218efadef565896f",
+              "short_name": "a year or more",
+              "sctid": "CUSTOM:105",
+              "term": "a year or more"
+            }
+          ]
         }
-      },
-      {
-        "expected_triage_level": "PC",
-        "id": "85473ef69bd60889a208bc1a65dc0cb8",
-        "name": "simple UTI",
-        "probability": {
-          "female": 0.6,
-          "male": 0.6
+      ]
+    },
+    {
+      "id": "3e9a9aad2f3ad7fc49aa1a8b165e146b",
+      "short_name": "Fever",
+      "sctid": "386661006",
+      "term": "Fever (finding)",
+      "attributes": []
+    },
+    {
+      "id": "356aee0186422335720c9763ac4ca492",
+      "short_name": "Vomiting",
+      "sctid": "422400008",
+      "term": "Vomiting (disorder)",
+      "attributes": [
+        {
+          "id": "ccb58f95ffcbeea12cadd05170cd7793",
+          "short_name": "Time since onset",
+          "sctid": "CUSTOM:1",
+          "term": "Time since onset",
+          "multiselect": false,
+          "value_set": [
+            {
+              "id": "4a755831dfa10619324cd4edd547ae35",
+              "short_name": "less than a day",
+              "sctid": "CUSTOM:100",
+              "term": "less than a day"
+            },
+            {
+              "id": "f7d3bd4c0d099c62c2c179afad3abb7d",
+              "short_name": "a couple days (1-2 days)",
+              "sctid": "CUSTOM:101",
+              "term": "a couple days (1-2 days)"
+            },
+            {
+              "id": "3992ef54a27cab45e9f6d0c17d5718f5",
+              "short_name": "3 days - to 1 week",
+              "sctid": "CUSTOM:102",
+              "term": "3 days - to 1 week"
+            },
+            {
+              "id": "d4a14cb8b99e75b5a0413284d84c164e",
+              "short_name": "a few weeks (1 weeks - 1 month)",
+              "sctid": "CUSTOM:103",
+              "term": "a few weeks (1 weeks - 1 month)"
+            },
+            {
+              "id": "61eea9b0cccce064b0cf79a398ee2500",
+              "short_name": "1 month to 1 year",
+              "sctid": "CUSTOM:104",
+              "term": "1 month to 1 year"
+            },
+            {
+              "id": "eaf3c63697fbaced446f51ff1b53fa4d",
+              "short_name": "a year or more",
+              "sctid": "CUSTOM:105",
+              "term": "a year or more"
+            }
+          ]
         }
-      },
-      {
-        "expected_triage_level": "EC",
-        "id": "e184ecb7e8603966edb9d305ba1c544f",
-        "name": "appendicitis",
-        "probability": {
-          "female": 0.3,
-          "male": 0.3
+      ]
+    },
+    {
+      "id": "b2003899e659fd3b4b9ccfdcc731d5e8",
+      "short_name": "Dysuria",
+      "sctid": "49650001",
+      "term": "Dysuria (finding)",
+      "attributes": [
+        {
+          "id": "0c1abc9bf3b6583a5c1fc298a8a76414",
+          "short_name": "Time since onset",
+          "sctid": "CUSTOM:1",
+          "term": "Time since onset",
+          "multiselect": false,
+          "value_set": [
+            {
+              "id": "c904ee84d0f1aafa3811ce5c38b8c414",
+              "short_name": "less than a day",
+              "sctid": "CUSTOM:100",
+              "term": "less than a day"
+            },
+            {
+              "id": "501e324332ee4c5af51e9db8af0d50ee",
+              "short_name": "a couple days (1-2 days)",
+              "sctid": "CUSTOM:101",
+              "term": "a couple days (1-2 days)"
+            },
+            {
+              "id": "2fbba60dfb1bc1838e029415d28f532a",
+              "short_name": "3 days - to 1 week",
+              "sctid": "CUSTOM:102",
+              "term": "3 days - to 1 week"
+            },
+            {
+              "id": "5372c6a93544c49e41cb299007f362eb",
+              "short_name": "a few weeks (1 weeks - 1 month)",
+              "sctid": "CUSTOM:103",
+              "term": "a few weeks (1 weeks - 1 month)"
+            },
+            {
+              "id": "ca75ce38b1faeab6aa700682636f1e3e",
+              "short_name": "1 month to 1 year",
+              "sctid": "CUSTOM:104",
+              "term": "1 month to 1 year"
+            },
+            {
+              "id": "03050fa0404ab1adfa6ace5e3d104eb1",
+              "short_name": "a year or more",
+              "sctid": "CUSTOM:105",
+              "term": "a year or more"
+            }
+          ]
         }
-      },
-      {
-        "expected_triage_level": "EC",
-        "id": "ffd0bbadd52f955ed05435212ac19b05",
-        "name": "ectopic pregnancy",
-        "probability": {
-          "female": 0.3,
-          "male": 0.0
+      ]
+    },
+    {
+      "id": "0ef0fec76d1338c74680ae2b685c2d87",
+      "short_name": "Diarrhea",
+      "sctid": "62315008",
+      "term": "Diarrhea (finding)",
+      "attributes": [
+        {
+          "id": "3eb8f6048aaaa0cd9e4d51c23dd8b6d9",
+          "short_name": "Contents of stool",
+          "sctid": "249622004",
+          "term": "Contents of stool (observable entity)",
+          "multiselect": true,
+          "value_set": [
+            {
+              "id": "36b7036cabcc69b045e5379ae9fa1c86",
+              "short_name": "Blood",
+              "sctid": "87612001",
+              "term": "Blood (substance)"
+            },
+            {
+              "id": "89a70698f18fd4d446a26cff69a1df64",
+              "short_name": "Mucus",
+              "sctid": "49909006",
+              "term": "Mucus (substance)"
+            },
+            {
+              "id": "1fccfbb9dee0bef559e164ef97b07f08",
+              "short_name": "Water",
+              "sctid": "11713004",
+              "term": "Water (substance)"
+            }
+          ]
+        },
+        {
+          "id": "a5143d02fd8c7c65f55cc2a9996980cb",
+          "short_name": "Time since onset",
+          "sctid": "CUSTOM:1",
+          "term": "Time since onset",
+          "multiselect": false,
+          "value_set": [
+            {
+              "id": "1149ba56c5336495944b9c5783364cd5",
+              "short_name": "less than a day",
+              "sctid": "CUSTOM:100",
+              "term": "less than a day"
+            },
+            {
+              "id": "9dd1890420b204aaeb5b928ea8a94a64",
+              "short_name": "a couple days (1-2 days)",
+              "sctid": "CUSTOM:101",
+              "term": "a couple days (1-2 days)"
+            },
+            {
+              "id": "a8867544b555a81bf76d51f5f5155f84",
+              "short_name": "3 days - to 1 week",
+              "sctid": "CUSTOM:102",
+              "term": "3 days - to 1 week"
+            },
+            {
+              "id": "0a2e487b24db05db3b9f33a1f19e4b9e",
+              "short_name": "a few weeks (1 weeks - 1 month)",
+              "sctid": "CUSTOM:103",
+              "term": "a few weeks (1 weeks - 1 month)"
+            },
+            {
+              "id": "c1317d29ae343bc0d0ad2c69b8edce58",
+              "short_name": "1 month to 1 year",
+              "sctid": "CUSTOM:104",
+              "term": "1 month to 1 year"
+            },
+            {
+              "id": "44a40dbf3258315ab4bf6539f9efdd7a",
+              "short_name": "a year or more",
+              "sctid": "CUSTOM:105",
+              "term": "a year or more"
+            }
+          ]
         }
-      },
-      {
-        "expected_triage_level": "PC",
-        "id": "2d6a20420b1bf50f84ca352932c9cab8",
-        "name": "IBS",
-        "probability": {
-          "female": 0.9,
-          "male": 0.9
+      ]
+    },
+    {
+      "id": "14026f513eaff27d02b60f2247322d82",
+      "short_name": "Weight loss",
+      "sctid": "89362005",
+      "term": "Weight loss (finding)",
+      "attributes": []
+    }
+  ],
+  "factors": [
+    {
+      "id": "aa4a9df97b79106fafcf9104b43836fd",
+      "short_name": "Menstrual period late",
+      "sctid": "84292000",
+      "term": "Menstrual period late (finding)",
+      "attributes": []
+    }
+  ],
+  "condition_symptom_weights": [
+    {
+      "condition_id": "2827c3412389f50313f873f8a0de44d6",
+      "symptom_id": "5d60ebfd3b9ee2a12b816a66cd0d98e6",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "23334e278d34e6394e763c05e8ba13c8",
+      "symptom_id": "5d60ebfd3b9ee2a12b816a66cd0d98e6",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "84e38911d4dadafc033e196683720b70",
+      "symptom_id": "5d60ebfd3b9ee2a12b816a66cd0d98e6",
+      "weight": 2,
+      "attributes": []
+    },
+    {
+      "condition_id": "817ce20937adbd22595275ddfa572a6e",
+      "symptom_id": "5d60ebfd3b9ee2a12b816a66cd0d98e6",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "7f2657a0f5b61e32b6867bd215b4a41e",
+      "symptom_id": "5d60ebfd3b9ee2a12b816a66cd0d98e6",
+      "weight": 1,
+      "attributes": []
+    },
+    {
+      "condition_id": "af900dbf0fcecf02e5b7f70bbd10ea44",
+      "symptom_id": "5d60ebfd3b9ee2a12b816a66cd0d98e6",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "9d27455f69d907a7dad7bb471f3717a4",
+      "symptom_id": "5d60ebfd3b9ee2a12b816a66cd0d98e6",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "9a40d00e1b3ae580a85fb303778873ca",
+      "symptom_id": "5d60ebfd3b9ee2a12b816a66cd0d98e6",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "715d4aa3c75953768e71eb85c74a79d6",
+      "symptom_id": "5d60ebfd3b9ee2a12b816a66cd0d98e6",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "b94c486b512b29cfcece35fcf417ecfd",
+      "symptom_id": "5d60ebfd3b9ee2a12b816a66cd0d98e6",
+      "weight": 2,
+      "attributes": []
+    },
+    {
+      "condition_id": "e158fc5e03298d772a8b7db69517800e",
+      "symptom_id": "5d60ebfd3b9ee2a12b816a66cd0d98e6",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "2827c3412389f50313f873f8a0de44d6",
+      "symptom_id": "bed900f01bde98f8d8a9d5a10bcca20e",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "88dc7bcb398f2ef4004b3e496650c04a",
+          "values": [
+            {
+              "id": "b70a432f0c9c6eaa9cfd09cd8adda24e",
+              "weight": 0
+            },
+            {
+              "id": "1ee6ba6c501aa93ea0d1e847e68d9eb1",
+              "weight": 0
+            },
+            {
+              "id": "4cde44906dd52cafb8aaa189d510f5d3",
+              "weight": 0
+            },
+            {
+              "id": "287f7ef95a910a7be01d3ee5083f7f43",
+              "weight": 0
+            },
+            {
+              "id": "72ef84b5f256f8bd0ee64e940af200e1",
+              "weight": 0
+            },
+            {
+              "id": "fe43413b1d8a11f8d058f0571cab4b5c",
+              "weight": 0
+            }
+          ]
         }
-      },
-      {
-        "expected_triage_level": "PC",
-        "id": "2b7b88ae49684f658748094e633c2536",
-        "name": "Abdo Pain NOS (Idiopathic)",
-        "probability": {
-          "female": 0.6,
-          "male": 0.6
+      ]
+    },
+    {
+      "condition_id": "23334e278d34e6394e763c05e8ba13c8",
+      "symptom_id": "bed900f01bde98f8d8a9d5a10bcca20e",
+      "weight": 3,
+      "attributes": [
+        {
+          "id": "88dc7bcb398f2ef4004b3e496650c04a",
+          "values": [
+            {
+              "id": "b70a432f0c9c6eaa9cfd09cd8adda24e",
+              "weight": 0
+            },
+            {
+              "id": "1ee6ba6c501aa93ea0d1e847e68d9eb1",
+              "weight": 0
+            },
+            {
+              "id": "4cde44906dd52cafb8aaa189d510f5d3",
+              "weight": 1
+            },
+            {
+              "id": "287f7ef95a910a7be01d3ee5083f7f43",
+              "weight": 2
+            },
+            {
+              "id": "72ef84b5f256f8bd0ee64e940af200e1",
+              "weight": 2
+            },
+            {
+              "id": "fe43413b1d8a11f8d058f0571cab4b5c",
+              "weight": 1
+            }
+          ]
         }
-      },
-      {
-        "expected_triage_level": "PC",
-        "id": "ed9e333b5cf04cb91068bbcde643076e",
-        "name": "GERD",
-        "probability": {
-          "female": 0.6,
-          "male": 0.6
+      ]
+    },
+    {
+      "condition_id": "84e38911d4dadafc033e196683720b70",
+      "symptom_id": "bed900f01bde98f8d8a9d5a10bcca20e",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "88dc7bcb398f2ef4004b3e496650c04a",
+          "values": [
+            {
+              "id": "b70a432f0c9c6eaa9cfd09cd8adda24e",
+              "weight": 0
+            },
+            {
+              "id": "1ee6ba6c501aa93ea0d1e847e68d9eb1",
+              "weight": 0
+            },
+            {
+              "id": "4cde44906dd52cafb8aaa189d510f5d3",
+              "weight": 0
+            },
+            {
+              "id": "287f7ef95a910a7be01d3ee5083f7f43",
+              "weight": 0
+            },
+            {
+              "id": "72ef84b5f256f8bd0ee64e940af200e1",
+              "weight": 0
+            },
+            {
+              "id": "fe43413b1d8a11f8d058f0571cab4b5c",
+              "weight": 0
+            }
+          ]
         }
-      },
-      {
-        "expected_triage_level": "SC",
-        "id": "a4a1fa1b6cb58a3b5ecd8276a42198d8",
-        "name": "viral GE",
-        "probability": {
-          "female": 0.6,
-          "male": 0.6
+      ]
+    },
+    {
+      "condition_id": "817ce20937adbd22595275ddfa572a6e",
+      "symptom_id": "bed900f01bde98f8d8a9d5a10bcca20e",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "88dc7bcb398f2ef4004b3e496650c04a",
+          "values": [
+            {
+              "id": "b70a432f0c9c6eaa9cfd09cd8adda24e",
+              "weight": 0
+            },
+            {
+              "id": "1ee6ba6c501aa93ea0d1e847e68d9eb1",
+              "weight": 0
+            },
+            {
+              "id": "4cde44906dd52cafb8aaa189d510f5d3",
+              "weight": 0
+            },
+            {
+              "id": "287f7ef95a910a7be01d3ee5083f7f43",
+              "weight": 0
+            },
+            {
+              "id": "72ef84b5f256f8bd0ee64e940af200e1",
+              "weight": 0
+            },
+            {
+              "id": "fe43413b1d8a11f8d058f0571cab4b5c",
+              "weight": 0
+            }
+          ]
         }
-      },
-      {
-        "expected_triage_level": "EC",
-        "id": "6df481067214644360ec303283dd6a34",
-        "name": "acute cholecystitis",
-        "probability": {
-          "female": 0.3,
-          "male": 0.3
+      ]
+    },
+    {
+      "condition_id": "7f2657a0f5b61e32b6867bd215b4a41e",
+      "symptom_id": "bed900f01bde98f8d8a9d5a10bcca20e",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "88dc7bcb398f2ef4004b3e496650c04a",
+          "values": [
+            {
+              "id": "b70a432f0c9c6eaa9cfd09cd8adda24e",
+              "weight": 0
+            },
+            {
+              "id": "1ee6ba6c501aa93ea0d1e847e68d9eb1",
+              "weight": 0
+            },
+            {
+              "id": "4cde44906dd52cafb8aaa189d510f5d3",
+              "weight": 0
+            },
+            {
+              "id": "287f7ef95a910a7be01d3ee5083f7f43",
+              "weight": 0
+            },
+            {
+              "id": "72ef84b5f256f8bd0ee64e940af200e1",
+              "weight": 0
+            },
+            {
+              "id": "fe43413b1d8a11f8d058f0571cab4b5c",
+              "weight": 0
+            }
+          ]
         }
-      },
-      {
-        "expected_triage_level": "PC",
-        "id": "2ecf4419d2505b5265383a5d6dbbcf65",
-        "name": "bladder cancer (first presentation)",
-        "probability": {
-          "female": 0.3,
-          "male": 0.3
+      ]
+    },
+    {
+      "condition_id": "af900dbf0fcecf02e5b7f70bbd10ea44",
+      "symptom_id": "bed900f01bde98f8d8a9d5a10bcca20e",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "88dc7bcb398f2ef4004b3e496650c04a",
+          "values": [
+            {
+              "id": "b70a432f0c9c6eaa9cfd09cd8adda24e",
+              "weight": 0
+            },
+            {
+              "id": "1ee6ba6c501aa93ea0d1e847e68d9eb1",
+              "weight": 0
+            },
+            {
+              "id": "4cde44906dd52cafb8aaa189d510f5d3",
+              "weight": 0
+            },
+            {
+              "id": "287f7ef95a910a7be01d3ee5083f7f43",
+              "weight": 0
+            },
+            {
+              "id": "72ef84b5f256f8bd0ee64e940af200e1",
+              "weight": 0
+            },
+            {
+              "id": "fe43413b1d8a11f8d058f0571cab4b5c",
+              "weight": 0
+            }
+          ]
         }
+      ]
+    },
+    {
+      "condition_id": "9d27455f69d907a7dad7bb471f3717a4",
+      "symptom_id": "bed900f01bde98f8d8a9d5a10bcca20e",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "88dc7bcb398f2ef4004b3e496650c04a",
+          "values": [
+            {
+              "id": "b70a432f0c9c6eaa9cfd09cd8adda24e",
+              "weight": 0
+            },
+            {
+              "id": "1ee6ba6c501aa93ea0d1e847e68d9eb1",
+              "weight": 0
+            },
+            {
+              "id": "4cde44906dd52cafb8aaa189d510f5d3",
+              "weight": 0
+            },
+            {
+              "id": "287f7ef95a910a7be01d3ee5083f7f43",
+              "weight": 0
+            },
+            {
+              "id": "72ef84b5f256f8bd0ee64e940af200e1",
+              "weight": 0
+            },
+            {
+              "id": "fe43413b1d8a11f8d058f0571cab4b5c",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "9a40d00e1b3ae580a85fb303778873ca",
+      "symptom_id": "bed900f01bde98f8d8a9d5a10bcca20e",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "88dc7bcb398f2ef4004b3e496650c04a",
+          "values": [
+            {
+              "id": "b70a432f0c9c6eaa9cfd09cd8adda24e",
+              "weight": 0
+            },
+            {
+              "id": "1ee6ba6c501aa93ea0d1e847e68d9eb1",
+              "weight": 0
+            },
+            {
+              "id": "4cde44906dd52cafb8aaa189d510f5d3",
+              "weight": 0
+            },
+            {
+              "id": "287f7ef95a910a7be01d3ee5083f7f43",
+              "weight": 0
+            },
+            {
+              "id": "72ef84b5f256f8bd0ee64e940af200e1",
+              "weight": 0
+            },
+            {
+              "id": "fe43413b1d8a11f8d058f0571cab4b5c",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "715d4aa3c75953768e71eb85c74a79d6",
+      "symptom_id": "bed900f01bde98f8d8a9d5a10bcca20e",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "88dc7bcb398f2ef4004b3e496650c04a",
+          "values": [
+            {
+              "id": "b70a432f0c9c6eaa9cfd09cd8adda24e",
+              "weight": 0
+            },
+            {
+              "id": "1ee6ba6c501aa93ea0d1e847e68d9eb1",
+              "weight": 0
+            },
+            {
+              "id": "4cde44906dd52cafb8aaa189d510f5d3",
+              "weight": 0
+            },
+            {
+              "id": "287f7ef95a910a7be01d3ee5083f7f43",
+              "weight": 0
+            },
+            {
+              "id": "72ef84b5f256f8bd0ee64e940af200e1",
+              "weight": 0
+            },
+            {
+              "id": "fe43413b1d8a11f8d058f0571cab4b5c",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "b94c486b512b29cfcece35fcf417ecfd",
+      "symptom_id": "bed900f01bde98f8d8a9d5a10bcca20e",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "88dc7bcb398f2ef4004b3e496650c04a",
+          "values": [
+            {
+              "id": "b70a432f0c9c6eaa9cfd09cd8adda24e",
+              "weight": 0
+            },
+            {
+              "id": "1ee6ba6c501aa93ea0d1e847e68d9eb1",
+              "weight": 0
+            },
+            {
+              "id": "4cde44906dd52cafb8aaa189d510f5d3",
+              "weight": 0
+            },
+            {
+              "id": "287f7ef95a910a7be01d3ee5083f7f43",
+              "weight": 0
+            },
+            {
+              "id": "72ef84b5f256f8bd0ee64e940af200e1",
+              "weight": 0
+            },
+            {
+              "id": "fe43413b1d8a11f8d058f0571cab4b5c",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "e158fc5e03298d772a8b7db69517800e",
+      "symptom_id": "bed900f01bde98f8d8a9d5a10bcca20e",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "88dc7bcb398f2ef4004b3e496650c04a",
+          "values": [
+            {
+              "id": "b70a432f0c9c6eaa9cfd09cd8adda24e",
+              "weight": 0
+            },
+            {
+              "id": "1ee6ba6c501aa93ea0d1e847e68d9eb1",
+              "weight": 0
+            },
+            {
+              "id": "4cde44906dd52cafb8aaa189d510f5d3",
+              "weight": 0
+            },
+            {
+              "id": "287f7ef95a910a7be01d3ee5083f7f43",
+              "weight": 0
+            },
+            {
+              "id": "72ef84b5f256f8bd0ee64e940af200e1",
+              "weight": 0
+            },
+            {
+              "id": "fe43413b1d8a11f8d058f0571cab4b5c",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "2827c3412389f50313f873f8a0de44d6",
+      "symptom_id": "f531a0d969119b7ab1f8e76424516fed",
+      "weight": 3,
+      "attributes": [
+        {
+          "id": "28fed1c97d4a2c644da4d56f1e56368c",
+          "values": [
+            {
+              "id": "bd1eb6360249ffebc075eedf8f2483a0",
+              "weight": 1
+            },
+            {
+              "id": "6d348cc3aa90f56f84564b358a81c28a",
+              "weight": 1
+            },
+            {
+              "id": "0593d23b912f73beb47f64386194fd88",
+              "weight": 1
+            },
+            {
+              "id": "d436501e79fdb70236cfe7c03d7e9140",
+              "weight": 0
+            },
+            {
+              "id": "f834c45b83b879a4fdb7adb92a65b6e2",
+              "weight": 2
+            },
+            {
+              "id": "fd243e61e9915e6b4b7066ec46981383",
+              "weight": 2
+            },
+            {
+              "id": "da195f5b52f1469507c21cb0059c60a5",
+              "weight": 1
+            },
+            {
+              "id": "0e8f18693874a846d1f943db6a90d009",
+              "weight": 0
+            },
+            {
+              "id": "87b4cd3224fc40db1b3e116fb7237a23",
+              "weight": 0
+            },
+            {
+              "id": "29c2257603fdaa44f9bc3f06d30bfa58",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "4925dd31d0bea68275c91d22f7be0997",
+          "values": [
+            {
+              "id": "19a8876aa386bfdaba38c6912263aa0f",
+              "weight": 2
+            },
+            {
+              "id": "63ee7081ae04864511a5a9fa051bee40",
+              "weight": 1
+            },
+            {
+              "id": "014681fa683ab84b18f86414785cd1bb",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "344f1bb9cd9653862f86649bbe5207b0",
+          "values": [
+            {
+              "id": "19e86e1e3ae79fa2db16b3aa99820d7a",
+              "weight": 0
+            },
+            {
+              "id": "208bed0ef2533bc353baef333a3ef07a",
+              "weight": 2
+            },
+            {
+              "id": "add77620256601bf48335aca5ed17a00",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "f98f04e71d97d246028d51d5b317348c",
+          "values": [
+            {
+              "id": "958ea562391d15e40c0314ec64b75d50",
+              "weight": 0
+            },
+            {
+              "id": "ff8afbdb927e479d4b8ce94aadf792d6",
+              "weight": 1
+            },
+            {
+              "id": "842c2fd0ef7164b22d47ffb0d2fe4dd8",
+              "weight": 2
+            },
+            {
+              "id": "2b3c3e1b6596c0fa4e8a44b1dddff376",
+              "weight": 2
+            },
+            {
+              "id": "95e0c38054abaadf24ad9fc3b5d990eb",
+              "weight": 1
+            },
+            {
+              "id": "bbac8e28e033b153c93348c2cf9538f8",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "23334e278d34e6394e763c05e8ba13c8",
+      "symptom_id": "f531a0d969119b7ab1f8e76424516fed",
+      "weight": 2,
+      "attributes": [
+        {
+          "id": "28fed1c97d4a2c644da4d56f1e56368c",
+          "values": [
+            {
+              "id": "bd1eb6360249ffebc075eedf8f2483a0",
+              "weight": 0
+            },
+            {
+              "id": "6d348cc3aa90f56f84564b358a81c28a",
+              "weight": 1
+            },
+            {
+              "id": "0593d23b912f73beb47f64386194fd88",
+              "weight": 1
+            },
+            {
+              "id": "d436501e79fdb70236cfe7c03d7e9140",
+              "weight": 3
+            },
+            {
+              "id": "f834c45b83b879a4fdb7adb92a65b6e2",
+              "weight": 0
+            },
+            {
+              "id": "fd243e61e9915e6b4b7066ec46981383",
+              "weight": 0
+            },
+            {
+              "id": "da195f5b52f1469507c21cb0059c60a5",
+              "weight": 0
+            },
+            {
+              "id": "0e8f18693874a846d1f943db6a90d009",
+              "weight": 0
+            },
+            {
+              "id": "87b4cd3224fc40db1b3e116fb7237a23",
+              "weight": 0
+            },
+            {
+              "id": "29c2257603fdaa44f9bc3f06d30bfa58",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "4925dd31d0bea68275c91d22f7be0997",
+          "values": [
+            {
+              "id": "19a8876aa386bfdaba38c6912263aa0f",
+              "weight": 0
+            },
+            {
+              "id": "63ee7081ae04864511a5a9fa051bee40",
+              "weight": 2
+            },
+            {
+              "id": "014681fa683ab84b18f86414785cd1bb",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "344f1bb9cd9653862f86649bbe5207b0",
+          "values": [
+            {
+              "id": "19e86e1e3ae79fa2db16b3aa99820d7a",
+              "weight": 2
+            },
+            {
+              "id": "208bed0ef2533bc353baef333a3ef07a",
+              "weight": 2
+            },
+            {
+              "id": "add77620256601bf48335aca5ed17a00",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "f98f04e71d97d246028d51d5b317348c",
+          "values": [
+            {
+              "id": "958ea562391d15e40c0314ec64b75d50",
+              "weight": 0
+            },
+            {
+              "id": "ff8afbdb927e479d4b8ce94aadf792d6",
+              "weight": 0
+            },
+            {
+              "id": "842c2fd0ef7164b22d47ffb0d2fe4dd8",
+              "weight": 1
+            },
+            {
+              "id": "2b3c3e1b6596c0fa4e8a44b1dddff376",
+              "weight": 2
+            },
+            {
+              "id": "95e0c38054abaadf24ad9fc3b5d990eb",
+              "weight": 2
+            },
+            {
+              "id": "bbac8e28e033b153c93348c2cf9538f8",
+              "weight": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "84e38911d4dadafc033e196683720b70",
+      "symptom_id": "f531a0d969119b7ab1f8e76424516fed",
+      "weight": 2,
+      "attributes": [
+        {
+          "id": "28fed1c97d4a2c644da4d56f1e56368c",
+          "values": [
+            {
+              "id": "bd1eb6360249ffebc075eedf8f2483a0",
+              "weight": 0
+            },
+            {
+              "id": "6d348cc3aa90f56f84564b358a81c28a",
+              "weight": 0
+            },
+            {
+              "id": "0593d23b912f73beb47f64386194fd88",
+              "weight": 0
+            },
+            {
+              "id": "d436501e79fdb70236cfe7c03d7e9140",
+              "weight": 0
+            },
+            {
+              "id": "f834c45b83b879a4fdb7adb92a65b6e2",
+              "weight": 2
+            },
+            {
+              "id": "fd243e61e9915e6b4b7066ec46981383",
+              "weight": 3
+            },
+            {
+              "id": "da195f5b52f1469507c21cb0059c60a5",
+              "weight": 3
+            },
+            {
+              "id": "0e8f18693874a846d1f943db6a90d009",
+              "weight": 0
+            },
+            {
+              "id": "87b4cd3224fc40db1b3e116fb7237a23",
+              "weight": 0
+            },
+            {
+              "id": "29c2257603fdaa44f9bc3f06d30bfa58",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "4925dd31d0bea68275c91d22f7be0997",
+          "values": [
+            {
+              "id": "19a8876aa386bfdaba38c6912263aa0f",
+              "weight": 0
+            },
+            {
+              "id": "63ee7081ae04864511a5a9fa051bee40",
+              "weight": 2
+            },
+            {
+              "id": "014681fa683ab84b18f86414785cd1bb",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "344f1bb9cd9653862f86649bbe5207b0",
+          "values": [
+            {
+              "id": "19e86e1e3ae79fa2db16b3aa99820d7a",
+              "weight": 2
+            },
+            {
+              "id": "208bed0ef2533bc353baef333a3ef07a",
+              "weight": 1
+            },
+            {
+              "id": "add77620256601bf48335aca5ed17a00",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "f98f04e71d97d246028d51d5b317348c",
+          "values": [
+            {
+              "id": "958ea562391d15e40c0314ec64b75d50",
+              "weight": 1
+            },
+            {
+              "id": "ff8afbdb927e479d4b8ce94aadf792d6",
+              "weight": 3
+            },
+            {
+              "id": "842c2fd0ef7164b22d47ffb0d2fe4dd8",
+              "weight": 2
+            },
+            {
+              "id": "2b3c3e1b6596c0fa4e8a44b1dddff376",
+              "weight": 0
+            },
+            {
+              "id": "95e0c38054abaadf24ad9fc3b5d990eb",
+              "weight": 0
+            },
+            {
+              "id": "bbac8e28e033b153c93348c2cf9538f8",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "817ce20937adbd22595275ddfa572a6e",
+      "symptom_id": "f531a0d969119b7ab1f8e76424516fed",
+      "weight": 2,
+      "attributes": [
+        {
+          "id": "28fed1c97d4a2c644da4d56f1e56368c",
+          "values": [
+            {
+              "id": "bd1eb6360249ffebc075eedf8f2483a0",
+              "weight": 2
+            },
+            {
+              "id": "6d348cc3aa90f56f84564b358a81c28a",
+              "weight": 1
+            },
+            {
+              "id": "0593d23b912f73beb47f64386194fd88",
+              "weight": 1
+            },
+            {
+              "id": "d436501e79fdb70236cfe7c03d7e9140",
+              "weight": 1
+            },
+            {
+              "id": "f834c45b83b879a4fdb7adb92a65b6e2",
+              "weight": 1
+            },
+            {
+              "id": "fd243e61e9915e6b4b7066ec46981383",
+              "weight": 1
+            },
+            {
+              "id": "da195f5b52f1469507c21cb0059c60a5",
+              "weight": 1
+            },
+            {
+              "id": "0e8f18693874a846d1f943db6a90d009",
+              "weight": 0
+            },
+            {
+              "id": "87b4cd3224fc40db1b3e116fb7237a23",
+              "weight": 0
+            },
+            {
+              "id": "29c2257603fdaa44f9bc3f06d30bfa58",
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "id": "4925dd31d0bea68275c91d22f7be0997",
+          "values": [
+            {
+              "id": "19a8876aa386bfdaba38c6912263aa0f",
+              "weight": 2
+            },
+            {
+              "id": "63ee7081ae04864511a5a9fa051bee40",
+              "weight": 1
+            },
+            {
+              "id": "014681fa683ab84b18f86414785cd1bb",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "344f1bb9cd9653862f86649bbe5207b0",
+          "values": [
+            {
+              "id": "19e86e1e3ae79fa2db16b3aa99820d7a",
+              "weight": 1
+            },
+            {
+              "id": "208bed0ef2533bc353baef333a3ef07a",
+              "weight": 2
+            },
+            {
+              "id": "add77620256601bf48335aca5ed17a00",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "f98f04e71d97d246028d51d5b317348c",
+          "values": [
+            {
+              "id": "958ea562391d15e40c0314ec64b75d50",
+              "weight": 1
+            },
+            {
+              "id": "ff8afbdb927e479d4b8ce94aadf792d6",
+              "weight": 2
+            },
+            {
+              "id": "842c2fd0ef7164b22d47ffb0d2fe4dd8",
+              "weight": 2
+            },
+            {
+              "id": "2b3c3e1b6596c0fa4e8a44b1dddff376",
+              "weight": 1
+            },
+            {
+              "id": "95e0c38054abaadf24ad9fc3b5d990eb",
+              "weight": 0
+            },
+            {
+              "id": "bbac8e28e033b153c93348c2cf9538f8",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "7f2657a0f5b61e32b6867bd215b4a41e",
+      "symptom_id": "f531a0d969119b7ab1f8e76424516fed",
+      "weight": 1,
+      "attributes": [
+        {
+          "id": "28fed1c97d4a2c644da4d56f1e56368c",
+          "values": [
+            {
+              "id": "bd1eb6360249ffebc075eedf8f2483a0",
+              "weight": 0
+            },
+            {
+              "id": "6d348cc3aa90f56f84564b358a81c28a",
+              "weight": 0
+            },
+            {
+              "id": "0593d23b912f73beb47f64386194fd88",
+              "weight": 0
+            },
+            {
+              "id": "d436501e79fdb70236cfe7c03d7e9140",
+              "weight": 0
+            },
+            {
+              "id": "f834c45b83b879a4fdb7adb92a65b6e2",
+              "weight": 0
+            },
+            {
+              "id": "fd243e61e9915e6b4b7066ec46981383",
+              "weight": 0
+            },
+            {
+              "id": "da195f5b52f1469507c21cb0059c60a5",
+              "weight": 2
+            },
+            {
+              "id": "0e8f18693874a846d1f943db6a90d009",
+              "weight": 1
+            },
+            {
+              "id": "87b4cd3224fc40db1b3e116fb7237a23",
+              "weight": 1
+            },
+            {
+              "id": "29c2257603fdaa44f9bc3f06d30bfa58",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "4925dd31d0bea68275c91d22f7be0997",
+          "values": [
+            {
+              "id": "19a8876aa386bfdaba38c6912263aa0f",
+              "weight": 0
+            },
+            {
+              "id": "63ee7081ae04864511a5a9fa051bee40",
+              "weight": 2
+            },
+            {
+              "id": "014681fa683ab84b18f86414785cd1bb",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "344f1bb9cd9653862f86649bbe5207b0",
+          "values": [
+            {
+              "id": "19e86e1e3ae79fa2db16b3aa99820d7a",
+              "weight": 2
+            },
+            {
+              "id": "208bed0ef2533bc353baef333a3ef07a",
+              "weight": 0
+            },
+            {
+              "id": "add77620256601bf48335aca5ed17a00",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "f98f04e71d97d246028d51d5b317348c",
+          "values": [
+            {
+              "id": "958ea562391d15e40c0314ec64b75d50",
+              "weight": 0
+            },
+            {
+              "id": "ff8afbdb927e479d4b8ce94aadf792d6",
+              "weight": 0
+            },
+            {
+              "id": "842c2fd0ef7164b22d47ffb0d2fe4dd8",
+              "weight": 0
+            },
+            {
+              "id": "2b3c3e1b6596c0fa4e8a44b1dddff376",
+              "weight": 1
+            },
+            {
+              "id": "95e0c38054abaadf24ad9fc3b5d990eb",
+              "weight": 2
+            },
+            {
+              "id": "bbac8e28e033b153c93348c2cf9538f8",
+              "weight": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "af900dbf0fcecf02e5b7f70bbd10ea44",
+      "symptom_id": "f531a0d969119b7ab1f8e76424516fed",
+      "weight": 3,
+      "attributes": [
+        {
+          "id": "28fed1c97d4a2c644da4d56f1e56368c",
+          "values": [
+            {
+              "id": "bd1eb6360249ffebc075eedf8f2483a0",
+              "weight": 0
+            },
+            {
+              "id": "6d348cc3aa90f56f84564b358a81c28a",
+              "weight": 2
+            },
+            {
+              "id": "0593d23b912f73beb47f64386194fd88",
+              "weight": 0
+            },
+            {
+              "id": "d436501e79fdb70236cfe7c03d7e9140",
+              "weight": 2
+            },
+            {
+              "id": "f834c45b83b879a4fdb7adb92a65b6e2",
+              "weight": 0
+            },
+            {
+              "id": "fd243e61e9915e6b4b7066ec46981383",
+              "weight": 0
+            },
+            {
+              "id": "da195f5b52f1469507c21cb0059c60a5",
+              "weight": 0
+            },
+            {
+              "id": "0e8f18693874a846d1f943db6a90d009",
+              "weight": 0
+            },
+            {
+              "id": "87b4cd3224fc40db1b3e116fb7237a23",
+              "weight": 0
+            },
+            {
+              "id": "29c2257603fdaa44f9bc3f06d30bfa58",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "4925dd31d0bea68275c91d22f7be0997",
+          "values": [
+            {
+              "id": "19a8876aa386bfdaba38c6912263aa0f",
+              "weight": 1
+            },
+            {
+              "id": "63ee7081ae04864511a5a9fa051bee40",
+              "weight": 1
+            },
+            {
+              "id": "014681fa683ab84b18f86414785cd1bb",
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "id": "344f1bb9cd9653862f86649bbe5207b0",
+          "values": [
+            {
+              "id": "19e86e1e3ae79fa2db16b3aa99820d7a",
+              "weight": 0
+            },
+            {
+              "id": "208bed0ef2533bc353baef333a3ef07a",
+              "weight": 2
+            },
+            {
+              "id": "add77620256601bf48335aca5ed17a00",
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "id": "f98f04e71d97d246028d51d5b317348c",
+          "values": [
+            {
+              "id": "958ea562391d15e40c0314ec64b75d50",
+              "weight": 2
+            },
+            {
+              "id": "ff8afbdb927e479d4b8ce94aadf792d6",
+              "weight": 2
+            },
+            {
+              "id": "842c2fd0ef7164b22d47ffb0d2fe4dd8",
+              "weight": 1
+            },
+            {
+              "id": "2b3c3e1b6596c0fa4e8a44b1dddff376",
+              "weight": 0
+            },
+            {
+              "id": "95e0c38054abaadf24ad9fc3b5d990eb",
+              "weight": 0
+            },
+            {
+              "id": "bbac8e28e033b153c93348c2cf9538f8",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "9d27455f69d907a7dad7bb471f3717a4",
+      "symptom_id": "f531a0d969119b7ab1f8e76424516fed",
+      "weight": 2,
+      "attributes": [
+        {
+          "id": "28fed1c97d4a2c644da4d56f1e56368c",
+          "values": [
+            {
+              "id": "bd1eb6360249ffebc075eedf8f2483a0",
+              "weight": 2
+            },
+            {
+              "id": "6d348cc3aa90f56f84564b358a81c28a",
+              "weight": 0
+            },
+            {
+              "id": "0593d23b912f73beb47f64386194fd88",
+              "weight": 0
+            },
+            {
+              "id": "d436501e79fdb70236cfe7c03d7e9140",
+              "weight": 0
+            },
+            {
+              "id": "f834c45b83b879a4fdb7adb92a65b6e2",
+              "weight": 2
+            },
+            {
+              "id": "fd243e61e9915e6b4b7066ec46981383",
+              "weight": 0
+            },
+            {
+              "id": "da195f5b52f1469507c21cb0059c60a5",
+              "weight": 0
+            },
+            {
+              "id": "0e8f18693874a846d1f943db6a90d009",
+              "weight": 0
+            },
+            {
+              "id": "87b4cd3224fc40db1b3e116fb7237a23",
+              "weight": 0
+            },
+            {
+              "id": "29c2257603fdaa44f9bc3f06d30bfa58",
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "id": "4925dd31d0bea68275c91d22f7be0997",
+          "values": [
+            {
+              "id": "19a8876aa386bfdaba38c6912263aa0f",
+              "weight": 1
+            },
+            {
+              "id": "63ee7081ae04864511a5a9fa051bee40",
+              "weight": 1
+            },
+            {
+              "id": "014681fa683ab84b18f86414785cd1bb",
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "id": "344f1bb9cd9653862f86649bbe5207b0",
+          "values": [
+            {
+              "id": "19e86e1e3ae79fa2db16b3aa99820d7a",
+              "weight": 0
+            },
+            {
+              "id": "208bed0ef2533bc353baef333a3ef07a",
+              "weight": 1
+            },
+            {
+              "id": "add77620256601bf48335aca5ed17a00",
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "id": "f98f04e71d97d246028d51d5b317348c",
+          "values": [
+            {
+              "id": "958ea562391d15e40c0314ec64b75d50",
+              "weight": 2
+            },
+            {
+              "id": "ff8afbdb927e479d4b8ce94aadf792d6",
+              "weight": 2
+            },
+            {
+              "id": "842c2fd0ef7164b22d47ffb0d2fe4dd8",
+              "weight": 1
+            },
+            {
+              "id": "2b3c3e1b6596c0fa4e8a44b1dddff376",
+              "weight": 0
+            },
+            {
+              "id": "95e0c38054abaadf24ad9fc3b5d990eb",
+              "weight": 0
+            },
+            {
+              "id": "bbac8e28e033b153c93348c2cf9538f8",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "9a40d00e1b3ae580a85fb303778873ca",
+      "symptom_id": "f531a0d969119b7ab1f8e76424516fed",
+      "weight": 2,
+      "attributes": [
+        {
+          "id": "28fed1c97d4a2c644da4d56f1e56368c",
+          "values": [
+            {
+              "id": "bd1eb6360249ffebc075eedf8f2483a0",
+              "weight": 1
+            },
+            {
+              "id": "6d348cc3aa90f56f84564b358a81c28a",
+              "weight": 0
+            },
+            {
+              "id": "0593d23b912f73beb47f64386194fd88",
+              "weight": 0
+            },
+            {
+              "id": "d436501e79fdb70236cfe7c03d7e9140",
+              "weight": 0
+            },
+            {
+              "id": "f834c45b83b879a4fdb7adb92a65b6e2",
+              "weight": 2
+            },
+            {
+              "id": "fd243e61e9915e6b4b7066ec46981383",
+              "weight": 2
+            },
+            {
+              "id": "da195f5b52f1469507c21cb0059c60a5",
+              "weight": 1
+            },
+            {
+              "id": "0e8f18693874a846d1f943db6a90d009",
+              "weight": 0
+            },
+            {
+              "id": "87b4cd3224fc40db1b3e116fb7237a23",
+              "weight": 0
+            },
+            {
+              "id": "29c2257603fdaa44f9bc3f06d30bfa58",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "4925dd31d0bea68275c91d22f7be0997",
+          "values": [
+            {
+              "id": "19a8876aa386bfdaba38c6912263aa0f",
+              "weight": 0
+            },
+            {
+              "id": "63ee7081ae04864511a5a9fa051bee40",
+              "weight": 1
+            },
+            {
+              "id": "014681fa683ab84b18f86414785cd1bb",
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "id": "344f1bb9cd9653862f86649bbe5207b0",
+          "values": [
+            {
+              "id": "19e86e1e3ae79fa2db16b3aa99820d7a",
+              "weight": 0
+            },
+            {
+              "id": "208bed0ef2533bc353baef333a3ef07a",
+              "weight": 1
+            },
+            {
+              "id": "add77620256601bf48335aca5ed17a00",
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "id": "f98f04e71d97d246028d51d5b317348c",
+          "values": [
+            {
+              "id": "958ea562391d15e40c0314ec64b75d50",
+              "weight": 1
+            },
+            {
+              "id": "ff8afbdb927e479d4b8ce94aadf792d6",
+              "weight": 2
+            },
+            {
+              "id": "842c2fd0ef7164b22d47ffb0d2fe4dd8",
+              "weight": 2
+            },
+            {
+              "id": "2b3c3e1b6596c0fa4e8a44b1dddff376",
+              "weight": 1
+            },
+            {
+              "id": "95e0c38054abaadf24ad9fc3b5d990eb",
+              "weight": 0
+            },
+            {
+              "id": "bbac8e28e033b153c93348c2cf9538f8",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "715d4aa3c75953768e71eb85c74a79d6",
+      "symptom_id": "f531a0d969119b7ab1f8e76424516fed",
+      "weight": 3,
+      "attributes": [
+        {
+          "id": "28fed1c97d4a2c644da4d56f1e56368c",
+          "values": [
+            {
+              "id": "bd1eb6360249ffebc075eedf8f2483a0",
+              "weight": 3
+            },
+            {
+              "id": "6d348cc3aa90f56f84564b358a81c28a",
+              "weight": 1
+            },
+            {
+              "id": "0593d23b912f73beb47f64386194fd88",
+              "weight": 1
+            },
+            {
+              "id": "d436501e79fdb70236cfe7c03d7e9140",
+              "weight": 1
+            },
+            {
+              "id": "f834c45b83b879a4fdb7adb92a65b6e2",
+              "weight": 1
+            },
+            {
+              "id": "fd243e61e9915e6b4b7066ec46981383",
+              "weight": 2
+            },
+            {
+              "id": "da195f5b52f1469507c21cb0059c60a5",
+              "weight": 0
+            },
+            {
+              "id": "0e8f18693874a846d1f943db6a90d009",
+              "weight": 0
+            },
+            {
+              "id": "87b4cd3224fc40db1b3e116fb7237a23",
+              "weight": 0
+            },
+            {
+              "id": "29c2257603fdaa44f9bc3f06d30bfa58",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "4925dd31d0bea68275c91d22f7be0997",
+          "values": [
+            {
+              "id": "19a8876aa386bfdaba38c6912263aa0f",
+              "weight": 3
+            },
+            {
+              "id": "63ee7081ae04864511a5a9fa051bee40",
+              "weight": 1
+            },
+            {
+              "id": "014681fa683ab84b18f86414785cd1bb",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "344f1bb9cd9653862f86649bbe5207b0",
+          "values": [
+            {
+              "id": "19e86e1e3ae79fa2db16b3aa99820d7a",
+              "weight": 1
+            },
+            {
+              "id": "208bed0ef2533bc353baef333a3ef07a",
+              "weight": 3
+            },
+            {
+              "id": "add77620256601bf48335aca5ed17a00",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "f98f04e71d97d246028d51d5b317348c",
+          "values": [
+            {
+              "id": "958ea562391d15e40c0314ec64b75d50",
+              "weight": 0
+            },
+            {
+              "id": "ff8afbdb927e479d4b8ce94aadf792d6",
+              "weight": 0
+            },
+            {
+              "id": "842c2fd0ef7164b22d47ffb0d2fe4dd8",
+              "weight": 0
+            },
+            {
+              "id": "2b3c3e1b6596c0fa4e8a44b1dddff376",
+              "weight": 1
+            },
+            {
+              "id": "95e0c38054abaadf24ad9fc3b5d990eb",
+              "weight": 2
+            },
+            {
+              "id": "bbac8e28e033b153c93348c2cf9538f8",
+              "weight": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "b94c486b512b29cfcece35fcf417ecfd",
+      "symptom_id": "f531a0d969119b7ab1f8e76424516fed",
+      "weight": 2,
+      "attributes": [
+        {
+          "id": "28fed1c97d4a2c644da4d56f1e56368c",
+          "values": [
+            {
+              "id": "bd1eb6360249ffebc075eedf8f2483a0",
+              "weight": 1
+            },
+            {
+              "id": "6d348cc3aa90f56f84564b358a81c28a",
+              "weight": 0
+            },
+            {
+              "id": "0593d23b912f73beb47f64386194fd88",
+              "weight": 0
+            },
+            {
+              "id": "d436501e79fdb70236cfe7c03d7e9140",
+              "weight": 0
+            },
+            {
+              "id": "f834c45b83b879a4fdb7adb92a65b6e2",
+              "weight": 1
+            },
+            {
+              "id": "fd243e61e9915e6b4b7066ec46981383",
+              "weight": 1
+            },
+            {
+              "id": "da195f5b52f1469507c21cb0059c60a5",
+              "weight": 2
+            },
+            {
+              "id": "0e8f18693874a846d1f943db6a90d009",
+              "weight": 3
+            },
+            {
+              "id": "87b4cd3224fc40db1b3e116fb7237a23",
+              "weight": 3
+            },
+            {
+              "id": "29c2257603fdaa44f9bc3f06d30bfa58",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "4925dd31d0bea68275c91d22f7be0997",
+          "values": [
+            {
+              "id": "19a8876aa386bfdaba38c6912263aa0f",
+              "weight": 0
+            },
+            {
+              "id": "63ee7081ae04864511a5a9fa051bee40",
+              "weight": 0
+            },
+            {
+              "id": "014681fa683ab84b18f86414785cd1bb",
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "id": "344f1bb9cd9653862f86649bbe5207b0",
+          "values": [
+            {
+              "id": "19e86e1e3ae79fa2db16b3aa99820d7a",
+              "weight": 0
+            },
+            {
+              "id": "208bed0ef2533bc353baef333a3ef07a",
+              "weight": 1
+            },
+            {
+              "id": "add77620256601bf48335aca5ed17a00",
+              "weight": 2
+            }
+          ]
+        },
+        {
+          "id": "f98f04e71d97d246028d51d5b317348c",
+          "values": [
+            {
+              "id": "958ea562391d15e40c0314ec64b75d50",
+              "weight": 1
+            },
+            {
+              "id": "ff8afbdb927e479d4b8ce94aadf792d6",
+              "weight": 1
+            },
+            {
+              "id": "842c2fd0ef7164b22d47ffb0d2fe4dd8",
+              "weight": 2
+            },
+            {
+              "id": "2b3c3e1b6596c0fa4e8a44b1dddff376",
+              "weight": 0
+            },
+            {
+              "id": "95e0c38054abaadf24ad9fc3b5d990eb",
+              "weight": 0
+            },
+            {
+              "id": "bbac8e28e033b153c93348c2cf9538f8",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "e158fc5e03298d772a8b7db69517800e",
+      "symptom_id": "f531a0d969119b7ab1f8e76424516fed",
+      "weight": 3,
+      "attributes": [
+        {
+          "id": "28fed1c97d4a2c644da4d56f1e56368c",
+          "values": [
+            {
+              "id": "bd1eb6360249ffebc075eedf8f2483a0",
+              "weight": 2
+            },
+            {
+              "id": "6d348cc3aa90f56f84564b358a81c28a",
+              "weight": 0
+            },
+            {
+              "id": "0593d23b912f73beb47f64386194fd88",
+              "weight": 0
+            },
+            {
+              "id": "d436501e79fdb70236cfe7c03d7e9140",
+              "weight": 0
+            },
+            {
+              "id": "f834c45b83b879a4fdb7adb92a65b6e2",
+              "weight": 0
+            },
+            {
+              "id": "fd243e61e9915e6b4b7066ec46981383",
+              "weight": 0
+            },
+            {
+              "id": "da195f5b52f1469507c21cb0059c60a5",
+              "weight": 0
+            },
+            {
+              "id": "0e8f18693874a846d1f943db6a90d009",
+              "weight": 0
+            },
+            {
+              "id": "87b4cd3224fc40db1b3e116fb7237a23",
+              "weight": 0
+            },
+            {
+              "id": "29c2257603fdaa44f9bc3f06d30bfa58",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "4925dd31d0bea68275c91d22f7be0997",
+          "values": [
+            {
+              "id": "19a8876aa386bfdaba38c6912263aa0f",
+              "weight": 1
+            },
+            {
+              "id": "63ee7081ae04864511a5a9fa051bee40",
+              "weight": 1
+            },
+            {
+              "id": "014681fa683ab84b18f86414785cd1bb",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "344f1bb9cd9653862f86649bbe5207b0",
+          "values": [
+            {
+              "id": "19e86e1e3ae79fa2db16b3aa99820d7a",
+              "weight": 2
+            },
+            {
+              "id": "208bed0ef2533bc353baef333a3ef07a",
+              "weight": 2
+            },
+            {
+              "id": "add77620256601bf48335aca5ed17a00",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "f98f04e71d97d246028d51d5b317348c",
+          "values": [
+            {
+              "id": "958ea562391d15e40c0314ec64b75d50",
+              "weight": 1
+            },
+            {
+              "id": "ff8afbdb927e479d4b8ce94aadf792d6",
+              "weight": 1
+            },
+            {
+              "id": "842c2fd0ef7164b22d47ffb0d2fe4dd8",
+              "weight": 2
+            },
+            {
+              "id": "2b3c3e1b6596c0fa4e8a44b1dddff376",
+              "weight": 2
+            },
+            {
+              "id": "95e0c38054abaadf24ad9fc3b5d990eb",
+              "weight": 1
+            },
+            {
+              "id": "bbac8e28e033b153c93348c2cf9538f8",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "2827c3412389f50313f873f8a0de44d6",
+      "symptom_id": "1eac2373d00170c7eff9aa2ce2c683ce",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "273665c63bb7979768e1233ed6d45854",
+          "values": [
+            {
+              "id": "44c6826876ab99ab53d5af1bbf0b53dc",
+              "weight": 0
+            },
+            {
+              "id": "fa9235e29714d244a05a3d2a0d2ab5f4",
+              "weight": 0
+            },
+            {
+              "id": "8d25c0caf851aacf220e9cff2ea4a1b3",
+              "weight": 0
+            },
+            {
+              "id": "5bbc49ea75b935d72c0b038e125d41a0",
+              "weight": 0
+            },
+            {
+              "id": "5116c05965217919f6266d4a7b1e11e3",
+              "weight": 0
+            },
+            {
+              "id": "8f17cef186e5de3b218efadef565896f",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "23334e278d34e6394e763c05e8ba13c8",
+      "symptom_id": "1eac2373d00170c7eff9aa2ce2c683ce",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "273665c63bb7979768e1233ed6d45854",
+          "values": [
+            {
+              "id": "44c6826876ab99ab53d5af1bbf0b53dc",
+              "weight": 0
+            },
+            {
+              "id": "fa9235e29714d244a05a3d2a0d2ab5f4",
+              "weight": 0
+            },
+            {
+              "id": "8d25c0caf851aacf220e9cff2ea4a1b3",
+              "weight": 0
+            },
+            {
+              "id": "5bbc49ea75b935d72c0b038e125d41a0",
+              "weight": 0
+            },
+            {
+              "id": "5116c05965217919f6266d4a7b1e11e3",
+              "weight": 0
+            },
+            {
+              "id": "8f17cef186e5de3b218efadef565896f",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "84e38911d4dadafc033e196683720b70",
+      "symptom_id": "1eac2373d00170c7eff9aa2ce2c683ce",
+      "weight": 2,
+      "attributes": [
+        {
+          "id": "273665c63bb7979768e1233ed6d45854",
+          "values": [
+            {
+              "id": "44c6826876ab99ab53d5af1bbf0b53dc",
+              "weight": 1
+            },
+            {
+              "id": "fa9235e29714d244a05a3d2a0d2ab5f4",
+              "weight": 2
+            },
+            {
+              "id": "8d25c0caf851aacf220e9cff2ea4a1b3",
+              "weight": 2
+            },
+            {
+              "id": "5bbc49ea75b935d72c0b038e125d41a0",
+              "weight": 1
+            },
+            {
+              "id": "5116c05965217919f6266d4a7b1e11e3",
+              "weight": 0
+            },
+            {
+              "id": "8f17cef186e5de3b218efadef565896f",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "817ce20937adbd22595275ddfa572a6e",
+      "symptom_id": "1eac2373d00170c7eff9aa2ce2c683ce",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "273665c63bb7979768e1233ed6d45854",
+          "values": [
+            {
+              "id": "44c6826876ab99ab53d5af1bbf0b53dc",
+              "weight": 0
+            },
+            {
+              "id": "fa9235e29714d244a05a3d2a0d2ab5f4",
+              "weight": 0
+            },
+            {
+              "id": "8d25c0caf851aacf220e9cff2ea4a1b3",
+              "weight": 0
+            },
+            {
+              "id": "5bbc49ea75b935d72c0b038e125d41a0",
+              "weight": 0
+            },
+            {
+              "id": "5116c05965217919f6266d4a7b1e11e3",
+              "weight": 0
+            },
+            {
+              "id": "8f17cef186e5de3b218efadef565896f",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "7f2657a0f5b61e32b6867bd215b4a41e",
+      "symptom_id": "1eac2373d00170c7eff9aa2ce2c683ce",
+      "weight": 3,
+      "attributes": [
+        {
+          "id": "273665c63bb7979768e1233ed6d45854",
+          "values": [
+            {
+              "id": "44c6826876ab99ab53d5af1bbf0b53dc",
+              "weight": 0
+            },
+            {
+              "id": "fa9235e29714d244a05a3d2a0d2ab5f4",
+              "weight": 0
+            },
+            {
+              "id": "8d25c0caf851aacf220e9cff2ea4a1b3",
+              "weight": 1
+            },
+            {
+              "id": "5bbc49ea75b935d72c0b038e125d41a0",
+              "weight": 2
+            },
+            {
+              "id": "5116c05965217919f6266d4a7b1e11e3",
+              "weight": 3
+            },
+            {
+              "id": "8f17cef186e5de3b218efadef565896f",
+              "weight": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "af900dbf0fcecf02e5b7f70bbd10ea44",
+      "symptom_id": "1eac2373d00170c7eff9aa2ce2c683ce",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "273665c63bb7979768e1233ed6d45854",
+          "values": [
+            {
+              "id": "44c6826876ab99ab53d5af1bbf0b53dc",
+              "weight": 0
+            },
+            {
+              "id": "fa9235e29714d244a05a3d2a0d2ab5f4",
+              "weight": 0
+            },
+            {
+              "id": "8d25c0caf851aacf220e9cff2ea4a1b3",
+              "weight": 0
+            },
+            {
+              "id": "5bbc49ea75b935d72c0b038e125d41a0",
+              "weight": 0
+            },
+            {
+              "id": "5116c05965217919f6266d4a7b1e11e3",
+              "weight": 0
+            },
+            {
+              "id": "8f17cef186e5de3b218efadef565896f",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "9d27455f69d907a7dad7bb471f3717a4",
+      "symptom_id": "1eac2373d00170c7eff9aa2ce2c683ce",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "273665c63bb7979768e1233ed6d45854",
+          "values": [
+            {
+              "id": "44c6826876ab99ab53d5af1bbf0b53dc",
+              "weight": 0
+            },
+            {
+              "id": "fa9235e29714d244a05a3d2a0d2ab5f4",
+              "weight": 0
+            },
+            {
+              "id": "8d25c0caf851aacf220e9cff2ea4a1b3",
+              "weight": 0
+            },
+            {
+              "id": "5bbc49ea75b935d72c0b038e125d41a0",
+              "weight": 0
+            },
+            {
+              "id": "5116c05965217919f6266d4a7b1e11e3",
+              "weight": 0
+            },
+            {
+              "id": "8f17cef186e5de3b218efadef565896f",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "9a40d00e1b3ae580a85fb303778873ca",
+      "symptom_id": "1eac2373d00170c7eff9aa2ce2c683ce",
+      "weight": 2,
+      "attributes": [
+        {
+          "id": "273665c63bb7979768e1233ed6d45854",
+          "values": [
+            {
+              "id": "44c6826876ab99ab53d5af1bbf0b53dc",
+              "weight": 2
+            },
+            {
+              "id": "fa9235e29714d244a05a3d2a0d2ab5f4",
+              "weight": 2
+            },
+            {
+              "id": "8d25c0caf851aacf220e9cff2ea4a1b3",
+              "weight": 1
+            },
+            {
+              "id": "5bbc49ea75b935d72c0b038e125d41a0",
+              "weight": 0
+            },
+            {
+              "id": "5116c05965217919f6266d4a7b1e11e3",
+              "weight": 0
+            },
+            {
+              "id": "8f17cef186e5de3b218efadef565896f",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "715d4aa3c75953768e71eb85c74a79d6",
+      "symptom_id": "1eac2373d00170c7eff9aa2ce2c683ce",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "273665c63bb7979768e1233ed6d45854",
+          "values": [
+            {
+              "id": "44c6826876ab99ab53d5af1bbf0b53dc",
+              "weight": 0
+            },
+            {
+              "id": "fa9235e29714d244a05a3d2a0d2ab5f4",
+              "weight": 0
+            },
+            {
+              "id": "8d25c0caf851aacf220e9cff2ea4a1b3",
+              "weight": 0
+            },
+            {
+              "id": "5bbc49ea75b935d72c0b038e125d41a0",
+              "weight": 0
+            },
+            {
+              "id": "5116c05965217919f6266d4a7b1e11e3",
+              "weight": 0
+            },
+            {
+              "id": "8f17cef186e5de3b218efadef565896f",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "b94c486b512b29cfcece35fcf417ecfd",
+      "symptom_id": "1eac2373d00170c7eff9aa2ce2c683ce",
+      "weight": 1,
+      "attributes": [
+        {
+          "id": "273665c63bb7979768e1233ed6d45854",
+          "values": [
+            {
+              "id": "44c6826876ab99ab53d5af1bbf0b53dc",
+              "weight": 2
+            },
+            {
+              "id": "fa9235e29714d244a05a3d2a0d2ab5f4",
+              "weight": 2
+            },
+            {
+              "id": "8d25c0caf851aacf220e9cff2ea4a1b3",
+              "weight": 2
+            },
+            {
+              "id": "5bbc49ea75b935d72c0b038e125d41a0",
+              "weight": 0
+            },
+            {
+              "id": "5116c05965217919f6266d4a7b1e11e3",
+              "weight": 0
+            },
+            {
+              "id": "8f17cef186e5de3b218efadef565896f",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "e158fc5e03298d772a8b7db69517800e",
+      "symptom_id": "1eac2373d00170c7eff9aa2ce2c683ce",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "273665c63bb7979768e1233ed6d45854",
+          "values": [
+            {
+              "id": "44c6826876ab99ab53d5af1bbf0b53dc",
+              "weight": 0
+            },
+            {
+              "id": "fa9235e29714d244a05a3d2a0d2ab5f4",
+              "weight": 0
+            },
+            {
+              "id": "8d25c0caf851aacf220e9cff2ea4a1b3",
+              "weight": 0
+            },
+            {
+              "id": "5bbc49ea75b935d72c0b038e125d41a0",
+              "weight": 0
+            },
+            {
+              "id": "5116c05965217919f6266d4a7b1e11e3",
+              "weight": 0
+            },
+            {
+              "id": "8f17cef186e5de3b218efadef565896f",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "2827c3412389f50313f873f8a0de44d6",
+      "symptom_id": "3e9a9aad2f3ad7fc49aa1a8b165e146b",
+      "weight": 1,
+      "attributes": []
+    },
+    {
+      "condition_id": "23334e278d34e6394e763c05e8ba13c8",
+      "symptom_id": "3e9a9aad2f3ad7fc49aa1a8b165e146b",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "84e38911d4dadafc033e196683720b70",
+      "symptom_id": "3e9a9aad2f3ad7fc49aa1a8b165e146b",
+      "weight": 1,
+      "attributes": []
+    },
+    {
+      "condition_id": "817ce20937adbd22595275ddfa572a6e",
+      "symptom_id": "3e9a9aad2f3ad7fc49aa1a8b165e146b",
+      "weight": 1,
+      "attributes": []
+    },
+    {
+      "condition_id": "7f2657a0f5b61e32b6867bd215b4a41e",
+      "symptom_id": "3e9a9aad2f3ad7fc49aa1a8b165e146b",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "af900dbf0fcecf02e5b7f70bbd10ea44",
+      "symptom_id": "3e9a9aad2f3ad7fc49aa1a8b165e146b",
+      "weight": 2,
+      "attributes": []
+    },
+    {
+      "condition_id": "9d27455f69d907a7dad7bb471f3717a4",
+      "symptom_id": "3e9a9aad2f3ad7fc49aa1a8b165e146b",
+      "weight": 2,
+      "attributes": []
+    },
+    {
+      "condition_id": "9a40d00e1b3ae580a85fb303778873ca",
+      "symptom_id": "3e9a9aad2f3ad7fc49aa1a8b165e146b",
+      "weight": 1,
+      "attributes": []
+    },
+    {
+      "condition_id": "715d4aa3c75953768e71eb85c74a79d6",
+      "symptom_id": "3e9a9aad2f3ad7fc49aa1a8b165e146b",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "b94c486b512b29cfcece35fcf417ecfd",
+      "symptom_id": "3e9a9aad2f3ad7fc49aa1a8b165e146b",
+      "weight": 2,
+      "attributes": []
+    },
+    {
+      "condition_id": "e158fc5e03298d772a8b7db69517800e",
+      "symptom_id": "3e9a9aad2f3ad7fc49aa1a8b165e146b",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "2827c3412389f50313f873f8a0de44d6",
+      "symptom_id": "356aee0186422335720c9763ac4ca492",
+      "weight": 1,
+      "attributes": [
+        {
+          "id": "ccb58f95ffcbeea12cadd05170cd7793",
+          "values": [
+            {
+              "id": "4a755831dfa10619324cd4edd547ae35",
+              "weight": 0
+            },
+            {
+              "id": "f7d3bd4c0d099c62c2c179afad3abb7d",
+              "weight": 1
+            },
+            {
+              "id": "3992ef54a27cab45e9f6d0c17d5718f5",
+              "weight": 2
+            },
+            {
+              "id": "d4a14cb8b99e75b5a0413284d84c164e",
+              "weight": 2
+            },
+            {
+              "id": "61eea9b0cccce064b0cf79a398ee2500",
+              "weight": 1
+            },
+            {
+              "id": "eaf3c63697fbaced446f51ff1b53fa4d",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "23334e278d34e6394e763c05e8ba13c8",
+      "symptom_id": "356aee0186422335720c9763ac4ca492",
+      "weight": 1,
+      "attributes": [
+        {
+          "id": "ccb58f95ffcbeea12cadd05170cd7793",
+          "values": [
+            {
+              "id": "4a755831dfa10619324cd4edd547ae35",
+              "weight": 0
+            },
+            {
+              "id": "f7d3bd4c0d099c62c2c179afad3abb7d",
+              "weight": 0
+            },
+            {
+              "id": "3992ef54a27cab45e9f6d0c17d5718f5",
+              "weight": 1
+            },
+            {
+              "id": "d4a14cb8b99e75b5a0413284d84c164e",
+              "weight": 2
+            },
+            {
+              "id": "61eea9b0cccce064b0cf79a398ee2500",
+              "weight": 1
+            },
+            {
+              "id": "eaf3c63697fbaced446f51ff1b53fa4d",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "84e38911d4dadafc033e196683720b70",
+      "symptom_id": "356aee0186422335720c9763ac4ca492",
+      "weight": 1,
+      "attributes": [
+        {
+          "id": "ccb58f95ffcbeea12cadd05170cd7793",
+          "values": [
+            {
+              "id": "4a755831dfa10619324cd4edd547ae35",
+              "weight": 2
+            },
+            {
+              "id": "f7d3bd4c0d099c62c2c179afad3abb7d",
+              "weight": 1
+            },
+            {
+              "id": "3992ef54a27cab45e9f6d0c17d5718f5",
+              "weight": 0
+            },
+            {
+              "id": "d4a14cb8b99e75b5a0413284d84c164e",
+              "weight": 0
+            },
+            {
+              "id": "61eea9b0cccce064b0cf79a398ee2500",
+              "weight": 0
+            },
+            {
+              "id": "eaf3c63697fbaced446f51ff1b53fa4d",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "817ce20937adbd22595275ddfa572a6e",
+      "symptom_id": "356aee0186422335720c9763ac4ca492",
+      "weight": 3,
+      "attributes": [
+        {
+          "id": "ccb58f95ffcbeea12cadd05170cd7793",
+          "values": [
+            {
+              "id": "4a755831dfa10619324cd4edd547ae35",
+              "weight": 2
+            },
+            {
+              "id": "f7d3bd4c0d099c62c2c179afad3abb7d",
+              "weight": 2
+            },
+            {
+              "id": "3992ef54a27cab45e9f6d0c17d5718f5",
+              "weight": 1
+            },
+            {
+              "id": "d4a14cb8b99e75b5a0413284d84c164e",
+              "weight": 1
+            },
+            {
+              "id": "61eea9b0cccce064b0cf79a398ee2500",
+              "weight": 0
+            },
+            {
+              "id": "eaf3c63697fbaced446f51ff1b53fa4d",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "7f2657a0f5b61e32b6867bd215b4a41e",
+      "symptom_id": "356aee0186422335720c9763ac4ca492",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "ccb58f95ffcbeea12cadd05170cd7793",
+          "values": [
+            {
+              "id": "4a755831dfa10619324cd4edd547ae35",
+              "weight": 0
+            },
+            {
+              "id": "f7d3bd4c0d099c62c2c179afad3abb7d",
+              "weight": 0
+            },
+            {
+              "id": "3992ef54a27cab45e9f6d0c17d5718f5",
+              "weight": 0
+            },
+            {
+              "id": "d4a14cb8b99e75b5a0413284d84c164e",
+              "weight": 0
+            },
+            {
+              "id": "61eea9b0cccce064b0cf79a398ee2500",
+              "weight": 0
+            },
+            {
+              "id": "eaf3c63697fbaced446f51ff1b53fa4d",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "af900dbf0fcecf02e5b7f70bbd10ea44",
+      "symptom_id": "356aee0186422335720c9763ac4ca492",
+      "weight": 2,
+      "attributes": [
+        {
+          "id": "ccb58f95ffcbeea12cadd05170cd7793",
+          "values": [
+            {
+              "id": "4a755831dfa10619324cd4edd547ae35",
+              "weight": 2
+            },
+            {
+              "id": "f7d3bd4c0d099c62c2c179afad3abb7d",
+              "weight": 2
+            },
+            {
+              "id": "3992ef54a27cab45e9f6d0c17d5718f5",
+              "weight": 1
+            },
+            {
+              "id": "d4a14cb8b99e75b5a0413284d84c164e",
+              "weight": 0
+            },
+            {
+              "id": "61eea9b0cccce064b0cf79a398ee2500",
+              "weight": 0
+            },
+            {
+              "id": "eaf3c63697fbaced446f51ff1b53fa4d",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "9d27455f69d907a7dad7bb471f3717a4",
+      "symptom_id": "356aee0186422335720c9763ac4ca492",
+      "weight": 1,
+      "attributes": [
+        {
+          "id": "ccb58f95ffcbeea12cadd05170cd7793",
+          "values": [
+            {
+              "id": "4a755831dfa10619324cd4edd547ae35",
+              "weight": 2
+            },
+            {
+              "id": "f7d3bd4c0d099c62c2c179afad3abb7d",
+              "weight": 2
+            },
+            {
+              "id": "3992ef54a27cab45e9f6d0c17d5718f5",
+              "weight": 1
+            },
+            {
+              "id": "d4a14cb8b99e75b5a0413284d84c164e",
+              "weight": 0
+            },
+            {
+              "id": "61eea9b0cccce064b0cf79a398ee2500",
+              "weight": 0
+            },
+            {
+              "id": "eaf3c63697fbaced446f51ff1b53fa4d",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "9a40d00e1b3ae580a85fb303778873ca",
+      "symptom_id": "356aee0186422335720c9763ac4ca492",
+      "weight": 1,
+      "attributes": [
+        {
+          "id": "ccb58f95ffcbeea12cadd05170cd7793",
+          "values": [
+            {
+              "id": "4a755831dfa10619324cd4edd547ae35",
+              "weight": 2
+            },
+            {
+              "id": "f7d3bd4c0d099c62c2c179afad3abb7d",
+              "weight": 2
+            },
+            {
+              "id": "3992ef54a27cab45e9f6d0c17d5718f5",
+              "weight": 1
+            },
+            {
+              "id": "d4a14cb8b99e75b5a0413284d84c164e",
+              "weight": 0
+            },
+            {
+              "id": "61eea9b0cccce064b0cf79a398ee2500",
+              "weight": 0
+            },
+            {
+              "id": "eaf3c63697fbaced446f51ff1b53fa4d",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "715d4aa3c75953768e71eb85c74a79d6",
+      "symptom_id": "356aee0186422335720c9763ac4ca492",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "ccb58f95ffcbeea12cadd05170cd7793",
+          "values": [
+            {
+              "id": "4a755831dfa10619324cd4edd547ae35",
+              "weight": 0
+            },
+            {
+              "id": "f7d3bd4c0d099c62c2c179afad3abb7d",
+              "weight": 0
+            },
+            {
+              "id": "3992ef54a27cab45e9f6d0c17d5718f5",
+              "weight": 0
+            },
+            {
+              "id": "d4a14cb8b99e75b5a0413284d84c164e",
+              "weight": 0
+            },
+            {
+              "id": "61eea9b0cccce064b0cf79a398ee2500",
+              "weight": 0
+            },
+            {
+              "id": "eaf3c63697fbaced446f51ff1b53fa4d",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "b94c486b512b29cfcece35fcf417ecfd",
+      "symptom_id": "356aee0186422335720c9763ac4ca492",
+      "weight": 2,
+      "attributes": [
+        {
+          "id": "ccb58f95ffcbeea12cadd05170cd7793",
+          "values": [
+            {
+              "id": "4a755831dfa10619324cd4edd547ae35",
+              "weight": 2
+            },
+            {
+              "id": "f7d3bd4c0d099c62c2c179afad3abb7d",
+              "weight": 2
+            },
+            {
+              "id": "3992ef54a27cab45e9f6d0c17d5718f5",
+              "weight": 1
+            },
+            {
+              "id": "d4a14cb8b99e75b5a0413284d84c164e",
+              "weight": 0
+            },
+            {
+              "id": "61eea9b0cccce064b0cf79a398ee2500",
+              "weight": 0
+            },
+            {
+              "id": "eaf3c63697fbaced446f51ff1b53fa4d",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "e158fc5e03298d772a8b7db69517800e",
+      "symptom_id": "356aee0186422335720c9763ac4ca492",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "ccb58f95ffcbeea12cadd05170cd7793",
+          "values": [
+            {
+              "id": "4a755831dfa10619324cd4edd547ae35",
+              "weight": 0
+            },
+            {
+              "id": "f7d3bd4c0d099c62c2c179afad3abb7d",
+              "weight": 0
+            },
+            {
+              "id": "3992ef54a27cab45e9f6d0c17d5718f5",
+              "weight": 0
+            },
+            {
+              "id": "d4a14cb8b99e75b5a0413284d84c164e",
+              "weight": 0
+            },
+            {
+              "id": "61eea9b0cccce064b0cf79a398ee2500",
+              "weight": 0
+            },
+            {
+              "id": "eaf3c63697fbaced446f51ff1b53fa4d",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "2827c3412389f50313f873f8a0de44d6",
+      "symptom_id": "b2003899e659fd3b4b9ccfdcc731d5e8",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "0c1abc9bf3b6583a5c1fc298a8a76414",
+          "values": [
+            {
+              "id": "c904ee84d0f1aafa3811ce5c38b8c414",
+              "weight": 0
+            },
+            {
+              "id": "501e324332ee4c5af51e9db8af0d50ee",
+              "weight": 0
+            },
+            {
+              "id": "2fbba60dfb1bc1838e029415d28f532a",
+              "weight": 0
+            },
+            {
+              "id": "5372c6a93544c49e41cb299007f362eb",
+              "weight": 0
+            },
+            {
+              "id": "ca75ce38b1faeab6aa700682636f1e3e",
+              "weight": 0
+            },
+            {
+              "id": "03050fa0404ab1adfa6ace5e3d104eb1",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "23334e278d34e6394e763c05e8ba13c8",
+      "symptom_id": "b2003899e659fd3b4b9ccfdcc731d5e8",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "0c1abc9bf3b6583a5c1fc298a8a76414",
+          "values": [
+            {
+              "id": "c904ee84d0f1aafa3811ce5c38b8c414",
+              "weight": 0
+            },
+            {
+              "id": "501e324332ee4c5af51e9db8af0d50ee",
+              "weight": 0
+            },
+            {
+              "id": "2fbba60dfb1bc1838e029415d28f532a",
+              "weight": 0
+            },
+            {
+              "id": "5372c6a93544c49e41cb299007f362eb",
+              "weight": 0
+            },
+            {
+              "id": "ca75ce38b1faeab6aa700682636f1e3e",
+              "weight": 0
+            },
+            {
+              "id": "03050fa0404ab1adfa6ace5e3d104eb1",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "84e38911d4dadafc033e196683720b70",
+      "symptom_id": "b2003899e659fd3b4b9ccfdcc731d5e8",
+      "weight": 2,
+      "attributes": [
+        {
+          "id": "0c1abc9bf3b6583a5c1fc298a8a76414",
+          "values": [
+            {
+              "id": "c904ee84d0f1aafa3811ce5c38b8c414",
+              "weight": 1
+            },
+            {
+              "id": "501e324332ee4c5af51e9db8af0d50ee",
+              "weight": 2
+            },
+            {
+              "id": "2fbba60dfb1bc1838e029415d28f532a",
+              "weight": 2
+            },
+            {
+              "id": "5372c6a93544c49e41cb299007f362eb",
+              "weight": 1
+            },
+            {
+              "id": "ca75ce38b1faeab6aa700682636f1e3e",
+              "weight": 0
+            },
+            {
+              "id": "03050fa0404ab1adfa6ace5e3d104eb1",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "817ce20937adbd22595275ddfa572a6e",
+      "symptom_id": "b2003899e659fd3b4b9ccfdcc731d5e8",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "0c1abc9bf3b6583a5c1fc298a8a76414",
+          "values": [
+            {
+              "id": "c904ee84d0f1aafa3811ce5c38b8c414",
+              "weight": 0
+            },
+            {
+              "id": "501e324332ee4c5af51e9db8af0d50ee",
+              "weight": 0
+            },
+            {
+              "id": "2fbba60dfb1bc1838e029415d28f532a",
+              "weight": 0
+            },
+            {
+              "id": "5372c6a93544c49e41cb299007f362eb",
+              "weight": 0
+            },
+            {
+              "id": "ca75ce38b1faeab6aa700682636f1e3e",
+              "weight": 0
+            },
+            {
+              "id": "03050fa0404ab1adfa6ace5e3d104eb1",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "7f2657a0f5b61e32b6867bd215b4a41e",
+      "symptom_id": "b2003899e659fd3b4b9ccfdcc731d5e8",
+      "weight": 1,
+      "attributes": [
+        {
+          "id": "0c1abc9bf3b6583a5c1fc298a8a76414",
+          "values": [
+            {
+              "id": "c904ee84d0f1aafa3811ce5c38b8c414",
+              "weight": 0
+            },
+            {
+              "id": "501e324332ee4c5af51e9db8af0d50ee",
+              "weight": 0
+            },
+            {
+              "id": "2fbba60dfb1bc1838e029415d28f532a",
+              "weight": 0
+            },
+            {
+              "id": "5372c6a93544c49e41cb299007f362eb",
+              "weight": 2
+            },
+            {
+              "id": "ca75ce38b1faeab6aa700682636f1e3e",
+              "weight": 2
+            },
+            {
+              "id": "03050fa0404ab1adfa6ace5e3d104eb1",
+              "weight": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "af900dbf0fcecf02e5b7f70bbd10ea44",
+      "symptom_id": "b2003899e659fd3b4b9ccfdcc731d5e8",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "0c1abc9bf3b6583a5c1fc298a8a76414",
+          "values": [
+            {
+              "id": "c904ee84d0f1aafa3811ce5c38b8c414",
+              "weight": 0
+            },
+            {
+              "id": "501e324332ee4c5af51e9db8af0d50ee",
+              "weight": 0
+            },
+            {
+              "id": "2fbba60dfb1bc1838e029415d28f532a",
+              "weight": 0
+            },
+            {
+              "id": "5372c6a93544c49e41cb299007f362eb",
+              "weight": 0
+            },
+            {
+              "id": "ca75ce38b1faeab6aa700682636f1e3e",
+              "weight": 0
+            },
+            {
+              "id": "03050fa0404ab1adfa6ace5e3d104eb1",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "9d27455f69d907a7dad7bb471f3717a4",
+      "symptom_id": "b2003899e659fd3b4b9ccfdcc731d5e8",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "0c1abc9bf3b6583a5c1fc298a8a76414",
+          "values": [
+            {
+              "id": "c904ee84d0f1aafa3811ce5c38b8c414",
+              "weight": 0
+            },
+            {
+              "id": "501e324332ee4c5af51e9db8af0d50ee",
+              "weight": 0
+            },
+            {
+              "id": "2fbba60dfb1bc1838e029415d28f532a",
+              "weight": 0
+            },
+            {
+              "id": "5372c6a93544c49e41cb299007f362eb",
+              "weight": 0
+            },
+            {
+              "id": "ca75ce38b1faeab6aa700682636f1e3e",
+              "weight": 0
+            },
+            {
+              "id": "03050fa0404ab1adfa6ace5e3d104eb1",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "9a40d00e1b3ae580a85fb303778873ca",
+      "symptom_id": "b2003899e659fd3b4b9ccfdcc731d5e8",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "0c1abc9bf3b6583a5c1fc298a8a76414",
+          "values": [
+            {
+              "id": "c904ee84d0f1aafa3811ce5c38b8c414",
+              "weight": 0
+            },
+            {
+              "id": "501e324332ee4c5af51e9db8af0d50ee",
+              "weight": 0
+            },
+            {
+              "id": "2fbba60dfb1bc1838e029415d28f532a",
+              "weight": 0
+            },
+            {
+              "id": "5372c6a93544c49e41cb299007f362eb",
+              "weight": 0
+            },
+            {
+              "id": "ca75ce38b1faeab6aa700682636f1e3e",
+              "weight": 0
+            },
+            {
+              "id": "03050fa0404ab1adfa6ace5e3d104eb1",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "715d4aa3c75953768e71eb85c74a79d6",
+      "symptom_id": "b2003899e659fd3b4b9ccfdcc731d5e8",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "0c1abc9bf3b6583a5c1fc298a8a76414",
+          "values": [
+            {
+              "id": "c904ee84d0f1aafa3811ce5c38b8c414",
+              "weight": 0
+            },
+            {
+              "id": "501e324332ee4c5af51e9db8af0d50ee",
+              "weight": 0
+            },
+            {
+              "id": "2fbba60dfb1bc1838e029415d28f532a",
+              "weight": 0
+            },
+            {
+              "id": "5372c6a93544c49e41cb299007f362eb",
+              "weight": 0
+            },
+            {
+              "id": "ca75ce38b1faeab6aa700682636f1e3e",
+              "weight": 0
+            },
+            {
+              "id": "03050fa0404ab1adfa6ace5e3d104eb1",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "b94c486b512b29cfcece35fcf417ecfd",
+      "symptom_id": "b2003899e659fd3b4b9ccfdcc731d5e8",
+      "weight": 2,
+      "attributes": [
+        {
+          "id": "0c1abc9bf3b6583a5c1fc298a8a76414",
+          "values": [
+            {
+              "id": "c904ee84d0f1aafa3811ce5c38b8c414",
+              "weight": 1
+            },
+            {
+              "id": "501e324332ee4c5af51e9db8af0d50ee",
+              "weight": 2
+            },
+            {
+              "id": "2fbba60dfb1bc1838e029415d28f532a",
+              "weight": 2
+            },
+            {
+              "id": "5372c6a93544c49e41cb299007f362eb",
+              "weight": 1
+            },
+            {
+              "id": "ca75ce38b1faeab6aa700682636f1e3e",
+              "weight": 0
+            },
+            {
+              "id": "03050fa0404ab1adfa6ace5e3d104eb1",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "e158fc5e03298d772a8b7db69517800e",
+      "symptom_id": "b2003899e659fd3b4b9ccfdcc731d5e8",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "0c1abc9bf3b6583a5c1fc298a8a76414",
+          "values": [
+            {
+              "id": "c904ee84d0f1aafa3811ce5c38b8c414",
+              "weight": 0
+            },
+            {
+              "id": "501e324332ee4c5af51e9db8af0d50ee",
+              "weight": 0
+            },
+            {
+              "id": "2fbba60dfb1bc1838e029415d28f532a",
+              "weight": 0
+            },
+            {
+              "id": "5372c6a93544c49e41cb299007f362eb",
+              "weight": 0
+            },
+            {
+              "id": "ca75ce38b1faeab6aa700682636f1e3e",
+              "weight": 0
+            },
+            {
+              "id": "03050fa0404ab1adfa6ace5e3d104eb1",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "2827c3412389f50313f873f8a0de44d6",
+      "symptom_id": "0ef0fec76d1338c74680ae2b685c2d87",
+      "weight": 3,
+      "attributes": [
+        {
+          "id": "3eb8f6048aaaa0cd9e4d51c23dd8b6d9",
+          "values": [
+            {
+              "id": "36b7036cabcc69b045e5379ae9fa1c86",
+              "weight": 2
+            },
+            {
+              "id": "89a70698f18fd4d446a26cff69a1df64",
+              "weight": 1
+            },
+            {
+              "id": "1fccfbb9dee0bef559e164ef97b07f08",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "a5143d02fd8c7c65f55cc2a9996980cb",
+          "values": [
+            {
+              "id": "1149ba56c5336495944b9c5783364cd5",
+              "weight": 0
+            },
+            {
+              "id": "9dd1890420b204aaeb5b928ea8a94a64",
+              "weight": 1
+            },
+            {
+              "id": "a8867544b555a81bf76d51f5f5155f84",
+              "weight": 2
+            },
+            {
+              "id": "0a2e487b24db05db3b9f33a1f19e4b9e",
+              "weight": 2
+            },
+            {
+              "id": "c1317d29ae343bc0d0ad2c69b8edce58",
+              "weight": 1
+            },
+            {
+              "id": "44a40dbf3258315ab4bf6539f9efdd7a",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "23334e278d34e6394e763c05e8ba13c8",
+      "symptom_id": "0ef0fec76d1338c74680ae2b685c2d87",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "3eb8f6048aaaa0cd9e4d51c23dd8b6d9",
+          "values": [
+            {
+              "id": "36b7036cabcc69b045e5379ae9fa1c86",
+              "weight": 0
+            },
+            {
+              "id": "89a70698f18fd4d446a26cff69a1df64",
+              "weight": 0
+            },
+            {
+              "id": "1fccfbb9dee0bef559e164ef97b07f08",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "a5143d02fd8c7c65f55cc2a9996980cb",
+          "values": [
+            {
+              "id": "1149ba56c5336495944b9c5783364cd5",
+              "weight": 0
+            },
+            {
+              "id": "9dd1890420b204aaeb5b928ea8a94a64",
+              "weight": 0
+            },
+            {
+              "id": "a8867544b555a81bf76d51f5f5155f84",
+              "weight": 0
+            },
+            {
+              "id": "0a2e487b24db05db3b9f33a1f19e4b9e",
+              "weight": 0
+            },
+            {
+              "id": "c1317d29ae343bc0d0ad2c69b8edce58",
+              "weight": 0
+            },
+            {
+              "id": "44a40dbf3258315ab4bf6539f9efdd7a",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "84e38911d4dadafc033e196683720b70",
+      "symptom_id": "0ef0fec76d1338c74680ae2b685c2d87",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "3eb8f6048aaaa0cd9e4d51c23dd8b6d9",
+          "values": [
+            {
+              "id": "36b7036cabcc69b045e5379ae9fa1c86",
+              "weight": 0
+            },
+            {
+              "id": "89a70698f18fd4d446a26cff69a1df64",
+              "weight": 0
+            },
+            {
+              "id": "1fccfbb9dee0bef559e164ef97b07f08",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "a5143d02fd8c7c65f55cc2a9996980cb",
+          "values": [
+            {
+              "id": "1149ba56c5336495944b9c5783364cd5",
+              "weight": 0
+            },
+            {
+              "id": "9dd1890420b204aaeb5b928ea8a94a64",
+              "weight": 0
+            },
+            {
+              "id": "a8867544b555a81bf76d51f5f5155f84",
+              "weight": 0
+            },
+            {
+              "id": "0a2e487b24db05db3b9f33a1f19e4b9e",
+              "weight": 0
+            },
+            {
+              "id": "c1317d29ae343bc0d0ad2c69b8edce58",
+              "weight": 0
+            },
+            {
+              "id": "44a40dbf3258315ab4bf6539f9efdd7a",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "817ce20937adbd22595275ddfa572a6e",
+      "symptom_id": "0ef0fec76d1338c74680ae2b685c2d87",
+      "weight": 3,
+      "attributes": [
+        {
+          "id": "3eb8f6048aaaa0cd9e4d51c23dd8b6d9",
+          "values": [
+            {
+              "id": "36b7036cabcc69b045e5379ae9fa1c86",
+              "weight": 1
+            },
+            {
+              "id": "89a70698f18fd4d446a26cff69a1df64",
+              "weight": 0
+            },
+            {
+              "id": "1fccfbb9dee0bef559e164ef97b07f08",
+              "weight": 3
+            }
+          ]
+        },
+        {
+          "id": "a5143d02fd8c7c65f55cc2a9996980cb",
+          "values": [
+            {
+              "id": "1149ba56c5336495944b9c5783364cd5",
+              "weight": 2
+            },
+            {
+              "id": "9dd1890420b204aaeb5b928ea8a94a64",
+              "weight": 2
+            },
+            {
+              "id": "a8867544b555a81bf76d51f5f5155f84",
+              "weight": 2
+            },
+            {
+              "id": "0a2e487b24db05db3b9f33a1f19e4b9e",
+              "weight": 1
+            },
+            {
+              "id": "c1317d29ae343bc0d0ad2c69b8edce58",
+              "weight": 0
+            },
+            {
+              "id": "44a40dbf3258315ab4bf6539f9efdd7a",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "7f2657a0f5b61e32b6867bd215b4a41e",
+      "symptom_id": "0ef0fec76d1338c74680ae2b685c2d87",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "3eb8f6048aaaa0cd9e4d51c23dd8b6d9",
+          "values": [
+            {
+              "id": "36b7036cabcc69b045e5379ae9fa1c86",
+              "weight": 0
+            },
+            {
+              "id": "89a70698f18fd4d446a26cff69a1df64",
+              "weight": 0
+            },
+            {
+              "id": "1fccfbb9dee0bef559e164ef97b07f08",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "a5143d02fd8c7c65f55cc2a9996980cb",
+          "values": [
+            {
+              "id": "1149ba56c5336495944b9c5783364cd5",
+              "weight": 0
+            },
+            {
+              "id": "9dd1890420b204aaeb5b928ea8a94a64",
+              "weight": 0
+            },
+            {
+              "id": "a8867544b555a81bf76d51f5f5155f84",
+              "weight": 0
+            },
+            {
+              "id": "0a2e487b24db05db3b9f33a1f19e4b9e",
+              "weight": 0
+            },
+            {
+              "id": "c1317d29ae343bc0d0ad2c69b8edce58",
+              "weight": 0
+            },
+            {
+              "id": "44a40dbf3258315ab4bf6539f9efdd7a",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "af900dbf0fcecf02e5b7f70bbd10ea44",
+      "symptom_id": "0ef0fec76d1338c74680ae2b685c2d87",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "3eb8f6048aaaa0cd9e4d51c23dd8b6d9",
+          "values": [
+            {
+              "id": "36b7036cabcc69b045e5379ae9fa1c86",
+              "weight": 0
+            },
+            {
+              "id": "89a70698f18fd4d446a26cff69a1df64",
+              "weight": 0
+            },
+            {
+              "id": "1fccfbb9dee0bef559e164ef97b07f08",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "a5143d02fd8c7c65f55cc2a9996980cb",
+          "values": [
+            {
+              "id": "1149ba56c5336495944b9c5783364cd5",
+              "weight": 0
+            },
+            {
+              "id": "9dd1890420b204aaeb5b928ea8a94a64",
+              "weight": 0
+            },
+            {
+              "id": "a8867544b555a81bf76d51f5f5155f84",
+              "weight": 0
+            },
+            {
+              "id": "0a2e487b24db05db3b9f33a1f19e4b9e",
+              "weight": 0
+            },
+            {
+              "id": "c1317d29ae343bc0d0ad2c69b8edce58",
+              "weight": 0
+            },
+            {
+              "id": "44a40dbf3258315ab4bf6539f9efdd7a",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "9d27455f69d907a7dad7bb471f3717a4",
+      "symptom_id": "0ef0fec76d1338c74680ae2b685c2d87",
+      "weight": 1,
+      "attributes": [
+        {
+          "id": "3eb8f6048aaaa0cd9e4d51c23dd8b6d9",
+          "values": [
+            {
+              "id": "36b7036cabcc69b045e5379ae9fa1c86",
+              "weight": 0
+            },
+            {
+              "id": "89a70698f18fd4d446a26cff69a1df64",
+              "weight": 0
+            },
+            {
+              "id": "1fccfbb9dee0bef559e164ef97b07f08",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "a5143d02fd8c7c65f55cc2a9996980cb",
+          "values": [
+            {
+              "id": "1149ba56c5336495944b9c5783364cd5",
+              "weight": 2
+            },
+            {
+              "id": "9dd1890420b204aaeb5b928ea8a94a64",
+              "weight": 2
+            },
+            {
+              "id": "a8867544b555a81bf76d51f5f5155f84",
+              "weight": 1
+            },
+            {
+              "id": "0a2e487b24db05db3b9f33a1f19e4b9e",
+              "weight": 0
+            },
+            {
+              "id": "c1317d29ae343bc0d0ad2c69b8edce58",
+              "weight": 0
+            },
+            {
+              "id": "44a40dbf3258315ab4bf6539f9efdd7a",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "9a40d00e1b3ae580a85fb303778873ca",
+      "symptom_id": "0ef0fec76d1338c74680ae2b685c2d87",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "3eb8f6048aaaa0cd9e4d51c23dd8b6d9",
+          "values": [
+            {
+              "id": "36b7036cabcc69b045e5379ae9fa1c86",
+              "weight": 0
+            },
+            {
+              "id": "89a70698f18fd4d446a26cff69a1df64",
+              "weight": 0
+            },
+            {
+              "id": "1fccfbb9dee0bef559e164ef97b07f08",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "a5143d02fd8c7c65f55cc2a9996980cb",
+          "values": [
+            {
+              "id": "1149ba56c5336495944b9c5783364cd5",
+              "weight": 0
+            },
+            {
+              "id": "9dd1890420b204aaeb5b928ea8a94a64",
+              "weight": 0
+            },
+            {
+              "id": "a8867544b555a81bf76d51f5f5155f84",
+              "weight": 0
+            },
+            {
+              "id": "0a2e487b24db05db3b9f33a1f19e4b9e",
+              "weight": 0
+            },
+            {
+              "id": "c1317d29ae343bc0d0ad2c69b8edce58",
+              "weight": 0
+            },
+            {
+              "id": "44a40dbf3258315ab4bf6539f9efdd7a",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "715d4aa3c75953768e71eb85c74a79d6",
+      "symptom_id": "0ef0fec76d1338c74680ae2b685c2d87",
+      "weight": 2,
+      "attributes": [
+        {
+          "id": "3eb8f6048aaaa0cd9e4d51c23dd8b6d9",
+          "values": [
+            {
+              "id": "36b7036cabcc69b045e5379ae9fa1c86",
+              "weight": 0
+            },
+            {
+              "id": "89a70698f18fd4d446a26cff69a1df64",
+              "weight": 2
+            },
+            {
+              "id": "1fccfbb9dee0bef559e164ef97b07f08",
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "id": "a5143d02fd8c7c65f55cc2a9996980cb",
+          "values": [
+            {
+              "id": "1149ba56c5336495944b9c5783364cd5",
+              "weight": 0
+            },
+            {
+              "id": "9dd1890420b204aaeb5b928ea8a94a64",
+              "weight": 0
+            },
+            {
+              "id": "a8867544b555a81bf76d51f5f5155f84",
+              "weight": 0
+            },
+            {
+              "id": "0a2e487b24db05db3b9f33a1f19e4b9e",
+              "weight": 1
+            },
+            {
+              "id": "c1317d29ae343bc0d0ad2c69b8edce58",
+              "weight": 2
+            },
+            {
+              "id": "44a40dbf3258315ab4bf6539f9efdd7a",
+              "weight": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "b94c486b512b29cfcece35fcf417ecfd",
+      "symptom_id": "0ef0fec76d1338c74680ae2b685c2d87",
+      "weight": 0,
+      "attributes": [
+        {
+          "id": "3eb8f6048aaaa0cd9e4d51c23dd8b6d9",
+          "values": [
+            {
+              "id": "36b7036cabcc69b045e5379ae9fa1c86",
+              "weight": 0
+            },
+            {
+              "id": "89a70698f18fd4d446a26cff69a1df64",
+              "weight": 0
+            },
+            {
+              "id": "1fccfbb9dee0bef559e164ef97b07f08",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "a5143d02fd8c7c65f55cc2a9996980cb",
+          "values": [
+            {
+              "id": "1149ba56c5336495944b9c5783364cd5",
+              "weight": 0
+            },
+            {
+              "id": "9dd1890420b204aaeb5b928ea8a94a64",
+              "weight": 0
+            },
+            {
+              "id": "a8867544b555a81bf76d51f5f5155f84",
+              "weight": 0
+            },
+            {
+              "id": "0a2e487b24db05db3b9f33a1f19e4b9e",
+              "weight": 0
+            },
+            {
+              "id": "c1317d29ae343bc0d0ad2c69b8edce58",
+              "weight": 0
+            },
+            {
+              "id": "44a40dbf3258315ab4bf6539f9efdd7a",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "e158fc5e03298d772a8b7db69517800e",
+      "symptom_id": "0ef0fec76d1338c74680ae2b685c2d87",
+      "weight": 1,
+      "attributes": [
+        {
+          "id": "3eb8f6048aaaa0cd9e4d51c23dd8b6d9",
+          "values": [
+            {
+              "id": "36b7036cabcc69b045e5379ae9fa1c86",
+              "weight": 0
+            },
+            {
+              "id": "89a70698f18fd4d446a26cff69a1df64",
+              "weight": 0
+            },
+            {
+              "id": "1fccfbb9dee0bef559e164ef97b07f08",
+              "weight": 0
+            }
+          ]
+        },
+        {
+          "id": "a5143d02fd8c7c65f55cc2a9996980cb",
+          "values": [
+            {
+              "id": "1149ba56c5336495944b9c5783364cd5",
+              "weight": 0
+            },
+            {
+              "id": "9dd1890420b204aaeb5b928ea8a94a64",
+              "weight": 0
+            },
+            {
+              "id": "a8867544b555a81bf76d51f5f5155f84",
+              "weight": 0
+            },
+            {
+              "id": "0a2e487b24db05db3b9f33a1f19e4b9e",
+              "weight": 0
+            },
+            {
+              "id": "c1317d29ae343bc0d0ad2c69b8edce58",
+              "weight": 0
+            },
+            {
+              "id": "44a40dbf3258315ab4bf6539f9efdd7a",
+              "weight": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_id": "2827c3412389f50313f873f8a0de44d6",
+      "symptom_id": "14026f513eaff27d02b60f2247322d82",
+      "weight": 2,
+      "attributes": []
+    },
+    {
+      "condition_id": "23334e278d34e6394e763c05e8ba13c8",
+      "symptom_id": "14026f513eaff27d02b60f2247322d82",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "84e38911d4dadafc033e196683720b70",
+      "symptom_id": "14026f513eaff27d02b60f2247322d82",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "817ce20937adbd22595275ddfa572a6e",
+      "symptom_id": "14026f513eaff27d02b60f2247322d82",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "7f2657a0f5b61e32b6867bd215b4a41e",
+      "symptom_id": "14026f513eaff27d02b60f2247322d82",
+      "weight": 2,
+      "attributes": []
+    },
+    {
+      "condition_id": "af900dbf0fcecf02e5b7f70bbd10ea44",
+      "symptom_id": "14026f513eaff27d02b60f2247322d82",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "9d27455f69d907a7dad7bb471f3717a4",
+      "symptom_id": "14026f513eaff27d02b60f2247322d82",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "9a40d00e1b3ae580a85fb303778873ca",
+      "symptom_id": "14026f513eaff27d02b60f2247322d82",
+      "weight": 1,
+      "attributes": []
+    },
+    {
+      "condition_id": "715d4aa3c75953768e71eb85c74a79d6",
+      "symptom_id": "14026f513eaff27d02b60f2247322d82",
+      "weight": 1,
+      "attributes": []
+    },
+    {
+      "condition_id": "b94c486b512b29cfcece35fcf417ecfd",
+      "symptom_id": "14026f513eaff27d02b60f2247322d82",
+      "weight": 0,
+      "attributes": []
+    },
+    {
+      "condition_id": "e158fc5e03298d772a8b7db69517800e",
+      "symptom_id": "14026f513eaff27d02b60f2247322d82",
+      "weight": 0,
+      "attributes": []
+    }
+  ],
+  "condition_factor_weights": [
+    {
+      "condition_id": "2827c3412389f50313f873f8a0de44d6",
+      "factor_id": "aa4a9df97b79106fafcf9104b43836fd",
+      "weight": 1.0,
+      "attributes": []
+    },
+    {
+      "condition_id": "23334e278d34e6394e763c05e8ba13c8",
+      "factor_id": "aa4a9df97b79106fafcf9104b43836fd",
+      "weight": 1.0,
+      "attributes": []
+    },
+    {
+      "condition_id": "84e38911d4dadafc033e196683720b70",
+      "factor_id": "aa4a9df97b79106fafcf9104b43836fd",
+      "weight": 1.0,
+      "attributes": []
+    },
+    {
+      "condition_id": "817ce20937adbd22595275ddfa572a6e",
+      "factor_id": "aa4a9df97b79106fafcf9104b43836fd",
+      "weight": 1.0,
+      "attributes": []
+    },
+    {
+      "condition_id": "7f2657a0f5b61e32b6867bd215b4a41e",
+      "factor_id": "aa4a9df97b79106fafcf9104b43836fd",
+      "weight": 1.0,
+      "attributes": []
+    },
+    {
+      "condition_id": "af900dbf0fcecf02e5b7f70bbd10ea44",
+      "factor_id": "aa4a9df97b79106fafcf9104b43836fd",
+      "weight": 1.0,
+      "attributes": []
+    },
+    {
+      "condition_id": "9d27455f69d907a7dad7bb471f3717a4",
+      "factor_id": "aa4a9df97b79106fafcf9104b43836fd",
+      "weight": 1.0,
+      "attributes": []
+    },
+    {
+      "condition_id": "9a40d00e1b3ae580a85fb303778873ca",
+      "factor_id": "aa4a9df97b79106fafcf9104b43836fd",
+      "weight": 1.2,
+      "attributes": []
+    },
+    {
+      "condition_id": "715d4aa3c75953768e71eb85c74a79d6",
+      "factor_id": "aa4a9df97b79106fafcf9104b43836fd",
+      "weight": 1.0,
+      "attributes": []
+    },
+    {
+      "condition_id": "b94c486b512b29cfcece35fcf417ecfd",
+      "factor_id": "aa4a9df97b79106fafcf9104b43836fd",
+      "weight": 1.0,
+      "attributes": []
+    },
+    {
+      "condition_id": "e158fc5e03298d772a8b7db69517800e",
+      "factor_id": "aa4a9df97b79106fafcf9104b43836fd",
+      "weight": 1.0,
+      "attributes": []
+    }
+  ],
+  "condition_sex_weights": [
+    {
+      "condition_id": "2827c3412389f50313f873f8a0de44d6",
+      "weights": {
+        "female": 1.0,
+        "male": 1.0
       }
-    ],
-    "symptoms": [
-      {
-        "id": "0c99a4e31fbba26dc64364ea53cfe3c7",
-        "name": "Haematuria"
-      },
-      {
-        "id": "3a52b6cdfb48b741c1e07599eb03fad3",
-        "name": "Factor: missed period"
-      },
-      {
-        "id": "94b2b09c9194b316738dfc56b526e124",
-        "name": "heartburn"
-      },
-      {
-        "id": "6e16a75aff90a62324940175453741f1",
-        "name": "Diarrhoea"
-      },
-      {
-        "id": "bcdc01d83bfb31c85ec47efc0642304e",
-        "name": "Weight Loss"
-      },
-      {
-        "id": "e5bcdaa4cf15318b6f021d4168c702d0",
-        "name": "Increased Urination Freq."
-      },
-      {
-        "id": "5780df68fc82bfb733e0b3d0520d3179",
-        "name": "Fever"
-      },
-      {
-        "id": "7a3094ceceac3afdae15243c11031588",
-        "name": "sharp lower quadrant pain"
-      },
-      {
-        "id": "1e400ff9b77134121117183e3fc9b7a2",
-        "name": "Abdo Pain Cramping Central 2 days"
-      },
-      {
-        "id": "5389fc3aab7ca2618978d6c1aceef39f",
-        "name": "Dysuria"
-      },
-      {
-        "id": "c643bff833aaa9a47e3421a8c8f35445",
-        "name": "Vomiting"
+    },
+    {
+      "condition_id": "23334e278d34e6394e763c05e8ba13c8",
+      "weights": {
+        "female": 1.0,
+        "male": 1.0
       }
-    ]
-  }
+    },
+    {
+      "condition_id": "84e38911d4dadafc033e196683720b70",
+      "weights": {
+        "female": 1.0,
+        "male": 1.0
+      }
+    },
+    {
+      "condition_id": "817ce20937adbd22595275ddfa572a6e",
+      "weights": {
+        "female": 1.0,
+        "male": 1.0
+      }
+    },
+    {
+      "condition_id": "7f2657a0f5b61e32b6867bd215b4a41e",
+      "weights": {
+        "female": 1.0,
+        "male": 1.0
+      }
+    },
+    {
+      "condition_id": "af900dbf0fcecf02e5b7f70bbd10ea44",
+      "weights": {
+        "female": 2.0,
+        "male": 1.0
+      }
+    },
+    {
+      "condition_id": "9d27455f69d907a7dad7bb471f3717a4",
+      "weights": {
+        "female": 1.0,
+        "male": 1.0
+      }
+    },
+    {
+      "condition_id": "9a40d00e1b3ae580a85fb303778873ca",
+      "weights": {
+        "female": 1.0,
+        "male": 0.0
+      }
+    },
+    {
+      "condition_id": "715d4aa3c75953768e71eb85c74a79d6",
+      "weights": {
+        "female": 1.0,
+        "male": 1.0
+      }
+    },
+    {
+      "condition_id": "b94c486b512b29cfcece35fcf417ecfd",
+      "weights": {
+        "female": 1.0,
+        "male": 1.0
+      }
+    },
+    {
+      "condition_id": "e158fc5e03298d772a8b7db69517800e",
+      "weights": {
+        "female": 1.0,
+        "male": 1.0
+      }
+    }
+  ]
+}
