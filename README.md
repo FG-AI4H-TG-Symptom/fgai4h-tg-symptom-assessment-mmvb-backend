@@ -25,7 +25,12 @@ export PYTHONPATH=$PYTHONPATH:./mmvb_backend
 
 ### Pre-commit hooks
 This repository lints and tests code as a part of the CI process.
-[Pre-commit][pre-commit] is a project that you can use to run a suite of tools to check the codebase.
+[Pre-commit](https://pre-commit.com/) is a project that you can use to run a suite of tools to check the codebase.
+
+First [install pre-commit](https://pre-commit.com/#installation). Using homebrew on MacOS:
+```
+brew install pre-commit
+```
 
 To install the hooks that we use run:
 ```
