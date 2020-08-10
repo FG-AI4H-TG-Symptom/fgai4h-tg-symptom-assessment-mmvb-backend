@@ -1,8 +1,7 @@
 from enum import Enum
 
-from django.db import models
-
 from common.models import BaseModel
+from django.db import models
 from django_mysql.models import JSONField
 
 

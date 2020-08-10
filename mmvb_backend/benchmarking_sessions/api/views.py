@@ -1,9 +1,3 @@
-from django.shortcuts import get_object_or_404
-from rest_framework import status
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet
-
 from benchmarking_sessions.api.serializers import (
     BenchmarkingSessionResultsSerializer,
     BenchmarkingSessionSerializer,
@@ -13,7 +7,12 @@ from benchmarking_sessions.models import BenchmarkingSession
 from benchmarking_sessions.tasks import run_benchmark
 from celery.states import PENDING
 from common.utils import CamelCaseAutoSchema
+from django.shortcuts import get_object_or_404
 from metrics.helpers import calculate_metrics
+from rest_framework import status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
 
 # todo: properly document endpoints
