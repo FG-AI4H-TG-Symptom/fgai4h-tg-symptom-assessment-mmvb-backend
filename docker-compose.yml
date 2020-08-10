@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  mmvb_backend:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./:/usr/src/app/
+    ports:
+      - 1337:8000
+    depends_on:
+      - redis
+      - mysql
+    environment:
+      DB_HOST: mysql
+      REDIS_HOST: redis
+      WAIT_HOSTS: mysql:3306, redis:6379
+
+  celery:
+    build: ./
+    command: watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- celery worker -A mmvb_backend -l info
+    volumes:
+      - ./:/usr/src/app/
+    depends_on:
+      - redis
+      - mysql
+    environment:
+      DB_HOST: mysql
+      REDIS_HOST: redis
+      WAIT_HOSTS: mysql:3306, redis:6379
+
+  redis:
+    image: redis:alpine
+    entrypoint: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+
+  mysql:
+    image: mysql
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: 'mmvb'
+      MYSQL_ROOT_PASSWORD: 'rootsecret'
+      MYSQL_USER: 'system'
+      MYSQL_PASSWORD: 'systemsecret'
+
+volumes:
+  mysql:
