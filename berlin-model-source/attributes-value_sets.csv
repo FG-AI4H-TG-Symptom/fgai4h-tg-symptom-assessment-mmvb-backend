@@ -1,0 +1,26 @@
+Clinical finding SCTID,Clinical finding term,Attribute SCTID or custom ID,Attribute term,Multiselect,Value SCTID or custom ID,Value term
+21522001,Abdominal pain (finding),363698007,Finding site (attribute),TRUE,68505006,Structure of left lower quadrant of abdomen (body structure)
+,,,,,48544008,Structure of right lower quadrant of abdomen (body structure)
+,,,,,86367003,Structure of left upper quadrant of abdomen (body structure)
+,,,,,50519007,Structure of right upper quadrant of abdomen (body structure)
+,,,,,11708003,Hypogastric region structure (body structure)
+,,,,,27947004,Epigastric region structure (body structure)
+,,,,,818983003,Structure of abdominopelvic cavity and/or content of abdominopelvic cavity and/or anterior abdominal wall (body structure)
+,,,,,422314007,Structure of central region of abdomen (body structure)
+,,,,,133943005,Left lumbar region (body structure)
+,,,,,133944004,Right lumbar region (body structure)
+ANY,ANY,364625007,Characteristic of pain (observable entity),FALSE,410707003,Sharp sensation quality (qualifier value)
+,,,,,410709000,Cramping sensation quality (qualifier value)
+,,,,,410708008,Dull sensation quality (qualifier value)
+ANY,ANY,406127006,Pain intensity (observable entity),FALSE,255604002,Mild (qualifier value)
+,,,,,6736007,Moderate (severity modifier) (qualifier value)
+,,,,,24484000,Severe (severity modifier) (qualifier value)
+ANY,ANY,CUSTOM:1,Time since onset,FALSE,CUSTOM:100,less than a day
+,,,,,CUSTOM:101,a couple days (1-2 days)
+,,,,,CUSTOM:102,3 days - to 1 week
+,,,,,CUSTOM:103,a few weeks (1 weeks - 1 month)
+,,,,,CUSTOM:104,1 month to 1 year
+,,,,,CUSTOM:105,a year or more
+ANY,ANY,249622004,Contents of stool (observable entity),TRUE,87612001,Blood (substance)
+,,,,,11713004,Water (substance)
+,,,,,49909006,Mucus (substance)

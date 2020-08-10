@@ -75,7 +75,10 @@ class CorrectConditionsTopN(Metric):
             for ai_implementation_id, response in ai_responses.items():
                 completed = response["status"] == COMPLETED
                 result_conditions = response.get("conditions", [])
-                correct_condition = case.data["valuesToPredict"]["condition"]
+
+                correct_condition = case.data["valuesToPredict"][
+                    "correctCondition"
+                ]
 
                 has_result_in_top_n = int(
                     completed
