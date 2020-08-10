@@ -3,14 +3,14 @@
 files: "mmvb_backend/"
 
 repos:
-  - repo: https://github.com/FalconSocial/pre-commit-python-sorter
-    rev: master
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.3.2
+
     hooks:
-      - id: python-import-sorter
-        args: ["--silent-overwrite"]
+      - id: isort
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.5.0
+    rev: v3.2.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -25,6 +25,6 @@ repos:
         args: [--line-length=79, --target-version=py38]
 
   - repo: https://gitlab.com/pycqa/flake8
-    rev: 3.7.9
+    rev: 3.8.3
     hooks:
       - id: flake8

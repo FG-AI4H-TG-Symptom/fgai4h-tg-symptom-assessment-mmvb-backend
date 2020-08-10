@@ -13,7 +13,7 @@ class CaseSetSerializer(ModelSerializer):
 
     class Meta:
         model = CaseSet
-        fields = ["id", "name", "cases"]
+        fields = ["id", "name", "cases", "created_on", "modified_on"]
 
     @transaction.atomic
     def create(self, validated_data):

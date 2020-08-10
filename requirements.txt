@@ -1,3 +1,4 @@
+wheel
 Celery==4.4.2
 Django==3.0.7
 django-filter==2.2.0
@@ -5,17 +6,16 @@ Markdown==3.2.1
 -e git+https://github.com/encode/django-rest-framework.git@8cba4f87ca8e785d1a8c022a7a8ea9649e049c11#egg=djangorestframework
 djangorestframework-camel-case==1.1.2
 django-mysql==3.3.0
-ipdb==0.13.2
+django-cors-headers==3.2.1
+watchdog==0.10.2
 mysqlclient==1.4.6
 Pygments==2.6.1
 PyYAML==5.3.1
 redis==3.4.1
 uritemplate==3.0.1
 Celery==4.4.2
-redis==3.4.1
-stringcase==1.2.0
-numpy==1.16.4
-django-cors-headers==3.2.1
 requests_futures==1.0.0
-watchdog==0.10.2
-argh==0.26.2
+stringcase==1.2.0
+numpy>=1.16.4
+ipdb>=0.13.2
+argh>=0.26.2

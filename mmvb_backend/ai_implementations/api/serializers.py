@@ -8,4 +8,4 @@ class AIImplementationSerializer(ModelSerializer):
 
     class Meta:
         model = AIImplementation
-        fields = ["id", "name", "base_url"]
+        fields = ["id", "name", "base_url", "created_on", "modified_on"]

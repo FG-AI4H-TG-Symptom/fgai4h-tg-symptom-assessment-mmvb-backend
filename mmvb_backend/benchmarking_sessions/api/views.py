@@ -1,3 +1,4 @@
+from celery.states import PENDING
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import action
@@ -11,7 +12,6 @@ from benchmarking_sessions.api.serializers import (
 from benchmarking_sessions.api.utils import strip_values_from_responses
 from benchmarking_sessions.models import BenchmarkingSession
 from benchmarking_sessions.tasks import run_benchmark
-from celery.states import PENDING
 from common.utils import CamelCaseAutoSchema
 from metrics.helpers import calculate_metrics
 
