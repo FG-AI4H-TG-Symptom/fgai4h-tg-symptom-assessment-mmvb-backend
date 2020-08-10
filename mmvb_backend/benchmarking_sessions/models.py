@@ -1,9 +1,9 @@
 from enum import Enum
 
-from django.db import models
-from django_mysql.models import JSONField
 
 from common.models import BaseModel
+from django.db import models
+from django_mysql.models import JSONField
 
 
 class BenchmarkingStepStatus(Enum):

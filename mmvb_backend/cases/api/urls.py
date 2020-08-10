@@ -1,6 +1,3 @@
-from django.conf import settings
-from rest_framework.routers import DefaultRouter
-
 from cases.api.views import (
     CaseSetViewSet,
     CaseViewSet,
@@ -8,6 +5,8 @@ from cases.api.views import (
     ExtendedCaseViewSet,
 )
 from cases.apps import CasesConfig
+from django.conf import settings
+from rest_framework.routers import DefaultRouter
 
 app_name = CasesConfig.name
 

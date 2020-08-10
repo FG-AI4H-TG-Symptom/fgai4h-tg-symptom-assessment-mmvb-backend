@@ -1,9 +1,8 @@
 import warnings
 
+from common.utils import CamelCaseAutoSchema
 from rest_framework.exceptions import APIException
 from rest_framework.status import HTTP_201_CREATED
-
-from common.utils import CamelCaseAutoSchema
 
 
 class CaseSynthesizerSchema(CamelCaseAutoSchema):

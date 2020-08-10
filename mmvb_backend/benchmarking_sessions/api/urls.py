@@ -1,7 +1,6 @@
-from rest_framework.routers import DefaultRouter
-
 from benchmarking_sessions.api.views import BenchmarkingSessionViewSet
 from benchmarking_sessions.apps import BenchmarkingSessionsConfig
+from rest_framework.routers import DefaultRouter
 
 app_name = BenchmarkingSessionsConfig.name
 

@@ -4,7 +4,8 @@ files: "mmvb_backend/"
 
 repos:
   - repo: https://github.com/pre-commit/mirrors-isort
-    rev: v5.2.2
+    rev: v5.3.2
+
     hooks:
       - id: isort
 

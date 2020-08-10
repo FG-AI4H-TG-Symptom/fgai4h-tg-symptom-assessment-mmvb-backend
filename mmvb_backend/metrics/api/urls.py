@@ -1,7 +1,6 @@
-from rest_framework.routers import DefaultRouter
-
 from metrics.api.views import MetricsViewset
 from metrics.apps import MetricsConfig
+from rest_framework.routers import DefaultRouter
 
 app_name = MetricsConfig.name
 
