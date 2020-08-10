@@ -1,3 +1,8 @@
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
+from rest_framework.viewsets import ModelViewSet
+
 from case_synthesizer.api.schemas import (
     CaseSetSynthesizerSchema,
     CaseSynthesizerSchema,
@@ -15,10 +20,6 @@ from cases.api.serializers import (
 )
 from cases.models import Case, CaseSet
 from common.utils import CamelCaseAutoSchema, is_true
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
-from rest_framework.viewsets import ModelViewSet
 
 
 # TODO: properly document endpoints

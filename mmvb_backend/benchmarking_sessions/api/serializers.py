@@ -1,5 +1,6 @@
-from benchmarking_sessions.models import BenchmarkingSession
 from rest_framework.serializers import ModelSerializer
+
+from benchmarking_sessions.models import BenchmarkingSession
 
 
 class BenchmarkingSessionSerializer(ModelSerializer):

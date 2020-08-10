@@ -1,10 +1,11 @@
-from cases.models import Case, CaseSet
 from django.db import transaction
 from rest_framework.serializers import (
     JSONField,
     ModelSerializer,
     PrimaryKeyRelatedField,
 )
+
+from cases.models import Case, CaseSet
 
 
 class CaseSetSerializer(ModelSerializer):
