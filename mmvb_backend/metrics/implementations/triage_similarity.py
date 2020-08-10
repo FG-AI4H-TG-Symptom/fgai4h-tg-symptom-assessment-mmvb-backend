@@ -1,14 +1,13 @@
 from collections import defaultdict
 
-from django.shortcuts import get_object_or_404
-from django.utils.decorators import classproperty
-
 from benchmarking_sessions.models import BenchmarkingStepStatus
 from cases.models import Case
 from common.definitions import (
     EXPECTED_TRIAGE_OPTIONS,
     SOFT_FAIL_TRIAGE_SIMILARITY,
 )
+from django.shortcuts import get_object_or_404
+from django.utils.decorators import classproperty
 from metrics.implementations.base import Metric
 
 

@@ -33,6 +33,19 @@ def sort_array_by_another_array(values, map_for_ordering, reverse=False):
     ]
 
 
+def get_modified_prior(condition, biological_sex, FIXTURES_DATA):
+
+    prior = condition["prior"]
+    sex_factor = next(
+        item["weights"][biological_sex]
+        for item in FIXTURES_DATA["condition_sex_weights"]
+        if item["condition_id"] == condition["id"]
+    )
+    prior *= sex_factor
+
+    return prior
+
+
 def solve_case_random_conditions(case_data, randomisation_type):
     """
     Solves case given on `case_data` using the strategy given on
@@ -43,9 +56,16 @@ def solve_case_random_conditions(case_data, randomisation_type):
     conditions = []
     probabilities = []
     for condition in FIXTURES_DATA["conditions"]:
-        if condition["probability"][biological_sex] > 0.0:
-            conditions.append(drop_all_but_keys(condition, ["id", "name"]))
-            probabilities.append(condition["probability"][biological_sex])
+
+        modified_prior = get_modified_prior(
+            condition, biological_sex, FIXTURES_DATA
+        )
+
+        if modified_prior > 0.0:
+            conditions.append(
+                drop_all_but_keys(condition, ["id", "short_name"])
+            )
+            probabilities.append(modified_prior)
 
     num_of_conditions = random.randint(0, 5)
 

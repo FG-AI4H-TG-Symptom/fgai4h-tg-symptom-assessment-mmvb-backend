@@ -1,8 +1,7 @@
 from collections import defaultdict
 
-from django.utils.decorators import classproperty
-
 from benchmarking_sessions.models import BenchmarkingStepStatus
+from django.utils.decorators import classproperty
 from metrics.implementations.base import Metric
 
 

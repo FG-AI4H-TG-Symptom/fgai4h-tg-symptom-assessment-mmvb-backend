@@ -3,8 +3,6 @@ from json.decoder import JSONDecodeError
 from posixpath import join as urljoin
 from uuid import UUID
 
-from django.conf import settings
-
 from benchmarking_sessions.models import (
     BenchmarkingSession,
     BenchmarkingStepError,
@@ -12,6 +10,7 @@ from benchmarking_sessions.models import (
 )
 from celery import shared_task
 from common.definitions import TRIAGE_OPTIONS
+from django.conf import settings
 from requests import ConnectionError, ReadTimeout
 from requests_futures.sessions import FuturesSession
 
@@ -166,17 +165,11 @@ def run_benchmark(self, benchmarking_session_id):
             request_exception = request.exception(timeout=0)
             if isinstance(request_exception, ConnectionError):
                 reporter.error(
-                    ai_implementation.id,
-                    BenchmarkingStepError.TIMEOUT,
-                    f"Failed to connect to AI {ai_implementation.id}, "
-                    f"it seems to be offline",
+                    ai_implementation.id, BenchmarkingStepError.TIMEOUT,
                 )
             elif isinstance(request_exception, ReadTimeout):
                 reporter.error(
-                    ai_implementation.id,
-                    BenchmarkingStepError.TIMEOUT,
-                    f"Failed to get a response from AI {ai_implementation.id} "
-                    f"in reasonable time",
+                    ai_implementation.id, BenchmarkingStepError.TIMEOUT,
                 )
             else:
                 response = request.result(timeout=0)
@@ -186,16 +179,12 @@ def run_benchmark(self, benchmarking_session_id):
                     reporter.error(
                         ai_implementation.id,
                         BenchmarkingStepError.SERVER_ERROR,
-                        f"Failed to decode json response from "
-                        f"{ai_implementation.id}",
                     )
                 else:
                     if not response.ok:
                         reporter.error(
                             ai_implementation.id,
                             BenchmarkingStepError.SERVER_ERROR,
-                            f"Got a HTTP {response.status_code} from "
-                            f"{ai_implementation.id}",
                         )
                         continue
 
@@ -203,8 +192,6 @@ def run_benchmark(self, benchmarking_session_id):
                         reporter.error(
                             ai_implementation.id,
                             BenchmarkingStepError.SERVER_ERROR,
-                            f"Faulty response from {ai_implementation.id}, "
-                            f"got {ai_response['error']}",
                         )
                         continue
 
@@ -214,8 +201,6 @@ def run_benchmark(self, benchmarking_session_id):
                         reporter.error(
                             ai_implementation.id,
                             BenchmarkingStepError.BAD_RESPONSE,
-                            f"Bad response from {ai_implementation.id}. "
-                            f"Got invalid triage value '{triage_value}'",
                         )
                         continue
 

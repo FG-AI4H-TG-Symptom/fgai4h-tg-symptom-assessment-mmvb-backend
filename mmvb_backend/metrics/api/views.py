@@ -1,9 +1,8 @@
+from metrics.implementations import SUPPORTED_METRICS
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.schemas.openapi import AutoSchema
 from rest_framework.viewsets import ViewSet
-
-from metrics.implementations import SUPPORTED_METRICS
 
 
 class MetricsViewset(ViewSet):
