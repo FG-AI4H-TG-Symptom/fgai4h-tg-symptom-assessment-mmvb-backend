@@ -35,13 +35,13 @@ and add it to your PATH (source `~/.zshrc` or re-open your terminal after this s
 echo 'export PATH="/usr/local/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
 ```
 
-Now, get the image and start up a container
+Now, get the image and start up a container. Use the command from the [Makefile](./Makefile) for a quick setup.
+It uses the provided `DB_ROOT_PWD` as root password.
 ```
-docker pull mysql
-docker run -p 3306:3306 --name fgai4h-tg-symptom-mmvb-mysql -e MYSQL_ROOT_PASSWORD='{your-root-password-here}' -d mysql
+make start_database
 ```
 
-Then connect to MySQL using the root user (supply the password you specified above):
+Then connect to MySQL using the root user (supply the password `DB_ROOT_PWD`, which is `rootsecret` by default):
 ```
 docker exec -it fgai4h-tg-symptom-mmvb-mysql mysql -u root -p
 ```
@@ -76,7 +76,7 @@ The requirements for running the server locally can be installed by
 $ make install_requirements
 ```
 
-To install test requirements, which includes tools for development, run
+To install test requirements, which includes tools for development (currently only pre-commit), run
 ```
 $ make install_test_requirements
 ```
