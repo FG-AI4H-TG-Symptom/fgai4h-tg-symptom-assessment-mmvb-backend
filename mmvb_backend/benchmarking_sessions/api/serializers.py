@@ -1,5 +1,6 @@
-from benchmarking_sessions.models import BenchmarkingSession
 from rest_framework.serializers import ModelSerializer
+
+from benchmarking_sessions.models import BenchmarkingSession
 
 
 class BenchmarkingSessionSerializer(ModelSerializer):
@@ -7,7 +8,14 @@ class BenchmarkingSessionSerializer(ModelSerializer):
 
     class Meta:
         model = BenchmarkingSession
-        fields = ["id", "case_set", "ai_implementations", "status"]
+        fields = [
+            "id",
+            "case_set",
+            "ai_implementations",
+            "status",
+            "created_on",
+            "modified_on",
+        ]
 
 
 class BenchmarkingSessionResultsSerializer(ModelSerializer):

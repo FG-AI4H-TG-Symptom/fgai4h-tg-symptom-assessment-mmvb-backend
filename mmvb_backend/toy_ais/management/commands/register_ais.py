@@ -1,6 +1,7 @@
-from ai_implementations.models import AIImplementation
 from django.conf import settings
 from django.core.management.base import BaseCommand
+
+from ai_implementations.models import AIImplementation
 from toy_ais.implementations import TOY_AIS
 
 

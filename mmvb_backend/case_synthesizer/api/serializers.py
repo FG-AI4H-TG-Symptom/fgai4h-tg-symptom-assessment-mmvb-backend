@@ -1,3 +1,6 @@
+from django.urls import reverse
+from rest_framework.serializers import BaseSerializer, IntegerField, Serializer
+
 from case_synthesizer.validators import (
     MAX_CASES_QUANTITY,
     MAX_CASESETS_QUANTITY,
@@ -5,8 +8,6 @@ from case_synthesizer.validators import (
     MIN_CASESETS_QUANTITY,
     quantity_range,
 )
-from django.urls import reverse
-from rest_framework.serializers import BaseSerializer, IntegerField, Serializer
 
 
 class CaseSynthesizerSerializer(Serializer):

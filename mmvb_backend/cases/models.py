@@ -1,6 +1,7 @@
-from common.models import FlowableModel
 from django.db import models
 from django_mysql.models import JSONField, Model
+
+from common.models import FlowableModel
 
 
 def default_data():

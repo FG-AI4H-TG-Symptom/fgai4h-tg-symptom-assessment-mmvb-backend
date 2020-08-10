@@ -1,9 +1,10 @@
 from collections import defaultdict
 
-from benchmarking_sessions.models import BenchmarkingStepStatus
-from cases.models import Case
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import classproperty
+
+from benchmarking_sessions.models import BenchmarkingStepStatus
+from cases.models import Case
 from metrics.implementations.base import Metric
 
 

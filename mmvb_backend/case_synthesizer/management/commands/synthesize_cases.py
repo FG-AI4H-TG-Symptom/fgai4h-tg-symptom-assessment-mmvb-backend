@@ -1,3 +1,6 @@
+from django.core.management.base import BaseCommand
+from rest_framework.serializers import ValidationError
+
 from case_synthesizer.exceptions import SynthesisError
 from case_synthesizer.generator import generate_cases
 from case_synthesizer.validators import (
@@ -5,8 +8,6 @@ from case_synthesizer.validators import (
     MIN_CASES_QUANTITY,
     quantity_range,
 )
-from django.core.management.base import BaseCommand
-from rest_framework.serializers import ValidationError
 
 
 class Command(BaseCommand):

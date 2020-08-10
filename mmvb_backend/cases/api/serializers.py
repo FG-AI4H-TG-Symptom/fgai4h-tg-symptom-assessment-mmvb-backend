@@ -1,4 +1,3 @@
-from cases.models import Case, CaseSet
 from django.db import transaction
 from rest_framework.serializers import (
     JSONField,
@@ -6,13 +5,15 @@ from rest_framework.serializers import (
     PrimaryKeyRelatedField,
 )
 
+from cases.models import Case, CaseSet
+
 
 class CaseSetSerializer(ModelSerializer):
     """Serializer for Case Set data models"""
 
     class Meta:
         model = CaseSet
-        fields = ["id", "name", "cases"]
+        fields = ["id", "name", "cases", "created_on", "modified_on"]
 
     @transaction.atomic
     def create(self, validated_data):
