@@ -14,7 +14,6 @@ ENV PYTHONPATH=$PYTHONPATH:./mmvb_backend
 RUN apk add --no-cache git py3-numpy
 
 #TODO: Add no-cache-dir to pip install
-#TODO: Fix installing djangorestframework cloning to ./src and "polluting" the host filesystem
 # install dependencies
 RUN pip install --upgrade pip
 COPY ./requirements.txt /usr/src/app/requirements.txt
@@ -23,7 +22,7 @@ RUN apk add --no-cache mariadb-connector-c-dev ;\
     apk add --no-cache --virtual .build-deps \
         build-base \
         mariadb-dev ;\
-    pip install -r requirements.txt;\
+    pip install -r requirements.txt --src /usr/src;\
     apk del .build-deps
 
 # Add wait script to wait for mysql & redis
@@ -35,6 +34,3 @@ COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 
 # copy project
 COPY . /usr/src/app/
-
-# run entrypoint.sh
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
