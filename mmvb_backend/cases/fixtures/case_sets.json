@@ -5,7 +5,9 @@
   "fields": {
     "status": "created",
     "public": false,
-    "name": "Synthesised case set with 10 cases (4e6f19b5a52f4cd59645604d759a03d1)"
+    "name": "Synthesised case set with 10 cases (4e6f19b5a52f4cd59645604d759a03d1)",
+    "created_on": "2020-06-15T11:09:08.476Z",
+    "modified_on": "2020-06-15T11:09:08.498Z"
   }
 },
 {
@@ -14,7 +16,9 @@
   "fields": {
     "status": "created",
     "public": false,
-    "name": "Synthesised case set with 10 cases (517a8a7fd2864fcab845954006ac461a)"
+    "name": "Synthesised case set with 10 cases (517a8a7fd2864fcab845954006ac461a)",
+    "created_on": "2020-06-15T11:09:08.476Z",
+    "modified_on": "2020-06-15T11:09:08.498Z"
   }
 },
 {
@@ -23,7 +27,9 @@
   "fields": {
     "status": "created",
     "public": false,
-    "name": "Synthesised case set with 10 cases (f7c88c3dbb784d63a09fd56c26f7fe23)"
+    "name": "Synthesised case set with 10 cases (f7c88c3dbb784d63a09fd56c26f7fe23)",
+    "created_on": "2020-06-15T11:09:08.476Z",
+    "modified_on": "2020-06-15T11:09:08.498Z"
   }
 }
 ]
