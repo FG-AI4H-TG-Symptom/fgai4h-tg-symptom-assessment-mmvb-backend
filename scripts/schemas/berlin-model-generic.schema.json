@@ -1,0 +1,311 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/FG-AI4H-TG-Symptom/fgai4h-tg-symptom-models-schemas/master/schemas/berlin-model-generic.schema.json",
+  "title": "Berlin Model Cases Schema",
+  "description": "FGAI4H TG Symptom Cases Schema – Berlin (created manually)",
+  "$comment": "This schema is consumed by the Berlin model schema generator, verify changes in this schema are compatible with the generator and the generated schema.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Case set ID"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Case set name"
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/case"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "name",
+    "cases"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "case": {
+      "type": "object",
+      "properties": {
+        "metaData": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 50,
+              "description": "Short human readable case name"
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Human readable case description"
+            },
+            "caseCreator": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Company and/or individual identifier of the case's creator"
+            },
+            "spreadsheetCaseId": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Identifier of this case in the originating spreadsheet"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "additionalProperties": false
+        },
+        "caseData": {
+          "type": "object",
+          "properties": {
+            "profileInformation": {
+              "type": "object",
+              "description": "Patient profile information",
+              "properties": {
+                "age": {
+                  "type": "number",
+                  "description": "Age",
+                  "minimum": 18,
+                  "maximum": 99
+                },
+                "biologicalSex": {
+                  "$ref": "#/definitions/biologicalSex",
+                  "description": "Biological sex"
+                }
+              },
+              "required": [
+                "age",
+                "biologicalSex"
+              ],
+              "additionalProperties": false
+            },
+            "presentingComplaints": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/clinicalFinding"
+              },
+              "minItems": 1,
+              "maxItems": 1
+            },
+            "otherFeatures": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/clinicalFinding"
+              }
+            }
+          },
+          "required": [
+            "profileInformation",
+            "presentingComplaints",
+            "otherFeatures"
+          ],
+          "additionalProperties": false
+        },
+        "valuesToPredict": {
+          "type": "object",
+          "properties": {
+            "expectedTriageLevel": {
+              "$ref": "#/definitions/expectedTriageLevel",
+              "description": "Expected triage level"
+            },
+            "expectedCondition": {
+              "$ref": "#/definitions/condition"
+            },
+            "otherRelevantDifferentials": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/condition"
+              }
+            },
+            "impossibleConditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/condition"
+              }
+            },
+            "correctCondition": {
+              "$ref": "#/definitions/condition"
+            }
+          },
+          "required": [
+            "expectedTriageLevel",
+            "expectedCondition",
+            "otherRelevantDifferentials",
+            "impossibleConditions"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "metaData",
+        "caseData",
+        "valuesToPredict"
+      ],
+      "additionalProperties": false
+    },
+    "biologicalSex": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female"
+      ]
+    },
+    "expectedTriageLevel": {
+      "type": "string",
+      "enum": [
+        "EC",
+        "PC",
+        "SC"
+      ]
+    },
+    "clinicalFinding": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Clinical finding ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of symptom"
+        },
+        "standardOntologyUris": {
+          "type": "array",
+          "description": "URIs referencing this clinical finding in standard ontologies",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "default": []
+        },
+        "state": {
+          "$ref": "#/definitions/clinicalFindingState"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/attribute"
+          },
+          "default": []
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "state",
+        "attributes"
+      ],
+      "additionalProperties": false
+    },
+    "clinicalFindingState": {
+      "type": "string",
+      "enum": [
+        "present",
+        "absent",
+        "unsure"
+      ],
+      "description": "Presence of the clinical finding"
+    },
+    "attribute": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Attribute ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Attribute name"
+        },
+        "standardOntologyUris": {
+          "type": "array",
+          "description": "URIs referencing this value in standard ontologies",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "default": []
+        },
+        "scope": {
+          "type": "string",
+          "description": "ID of clinical finding this attribute is scoped to"
+        },
+        "value": {
+          "$ref": "#/definitions/value"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "value": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Value ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "type": "array",
+          "description": "URIs referencing this value in standard ontologies",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "default": []
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "condition": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Condition ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Condition name"
+        },
+        "standardOntologyUris": {
+          "type": "array",
+          "description": "URIs referencing this condition in standard ontologies",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "default": []
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
