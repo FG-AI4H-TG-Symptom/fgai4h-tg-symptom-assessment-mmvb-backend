@@ -23,17 +23,6 @@ You might need to update your python path for the next steps
 export PYTHONPATH=$PYTHONPATH:./mmvb_backend
 ```
 
-### Pre-commit hooks
-This repository lints and tests code as a part of the CI process.
-[Pre-commit][pre-commit] is a project that you can use to run a suite of tools to check the codebase.
-
-To install the hooks that we use run:
-```
-make precommit_install
-```
-
-This will make sure the linting checks are run when trying to create a new commit, if any of the check fails the commit won't be created, so you will need to fix the issues, stage the changes, and try to commit again.
-
 ### Install and Configure MySQL with Docker
 
 #### Docker
@@ -46,13 +35,13 @@ and add it to your PATH (source `~/.zshrc` or re-open your terminal after this s
 echo 'export PATH="/usr/local/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
 ```
 
-Now, get the image and start up a container
+Now, get the image and start up a container. Use the command from the [Makefile](./Makefile) for a quick setup.
+It uses the provided `DB_ROOT_PWD` as root password.
 ```
-docker pull mysql
-docker run -p 3306:3306 --name fgai4h-tg-symptom-mmvb-mysql -e MYSQL_ROOT_PASSWORD='{your-root-password-here}' -d mysql
+make start_database
 ```
 
-Then connect to MySQL using the root user (supply the password you specified above):
+Then connect to MySQL using the root user (supply the password `DB_ROOT_PWD`, which is `rootsecret` by default):
 ```
 docker exec -it fgai4h-tg-symptom-mmvb-mysql mysql -u root -p
 ```
@@ -87,26 +76,10 @@ The requirements for running the server locally can be installed by
 $ make install_requirements
 ```
 
-To install test requirements, which includes tools for development, run
+To install test requirements, which includes tools for development (currently only pre-commit), run
 ```
 $ make install_test_requirements
 ```
-
-#### Celery
-The project requires [Celery](https://docs.celeryproject.org/en/4.4.2/) (task queue) for some of its features (running benchmarks for example). For being able
-to use Celery we need a message broker, we decided to use [Redis](https://redis.io/).
-
-### Django admin interface
-This is currently not being used for the application but might be useful in the future as the django admin interface is a simple yet very powerful and extensible tool.
-
-#### Create superuser for Django Admin
-
-This step will be useful for the future if/when we start using the admin interface from django. This will be the user with all admin privileges to have to access that interface.
-**Make sure you have activated your virtual environment.**
-```
-$ python manage.py createsuperuser
-```
-then provide an `username`, `email` and `password` (with confirmation).
 
 ## Running the application
 For running the application you need to have configured the mysql database as explained in the previous sessions.
@@ -129,6 +102,39 @@ To check the admin interface, go to [http://localhost:8000/admin/](http://localh
 There is an experimental auto-generated documentation on [http://localhost:8000/api/docs/](http://localhost:8000/api/docs/)
 
 For stopping the whole structure, go to the shell that is running the application and press `ctrl+C`, this should stop the django application, you just need to further run `make stop_app` in order to stop redis, mysql and celery.
+
+
+### Pre-commit hooks
+This repository lints and tests code as a part of the CI process.
+[Pre-commit](https://pre-commit.com/) is a project that you can use to run a suite of tools to check the codebase.
+
+First [install pre-commit](https://pre-commit.com/#installation). Using homebrew on MacOS:
+```
+brew install pre-commit
+```
+
+To install the hooks that we use run:
+```
+make precommit_install
+```
+
+This will make sure the linting checks are run when trying to create a new commit, if any of the check fails the commit won't be created, so you will need to fix the issues, stage the changes, and try to commit again.
+
+#### Celery
+The project requires [Celery](https://docs.celeryproject.org/en/4.4.2/) (task queue) for some of its features (running benchmarks for example). For being able
+to use Celery we need a message broker, we decided to use [Redis](https://redis.io/).
+
+### Django admin interface
+This is currently not being used for the application but might be useful in the future as the django admin interface is a simple yet very powerful and extensible tool.
+
+#### Create superuser for Django Admin
+
+This step will be useful for the future if/when we start using the admin interface from django. This will be the user with all admin privileges to have to access that interface.
+**Make sure you have activated your virtual environment.**
+```
+$ python manage.py createsuperuser
+```
+then provide an `username`, `email` and `password` (with confirmation).
 
 ## Useful django and make commands
 Check the [useful commands](./docs/useful_commands.md) section for a list and brief explanation of the available django and make commands.
