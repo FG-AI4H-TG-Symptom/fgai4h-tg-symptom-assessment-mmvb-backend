@@ -3,6 +3,7 @@ version: '3'
 services:
   mmvb_backend:
     build: .
+    entrypoint: /usr/src/app/entrypoint.sh
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./:/usr/src/app/
@@ -18,7 +19,7 @@ services:
 
   celery:
     build: ./
-    command: watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- celery worker -A mmvb_backend -l info
+    command: sh -c "/wait && watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- celery worker -A mmvb_backend -l info"
     volumes:
       - ./:/usr/src/app/
     depends_on:
