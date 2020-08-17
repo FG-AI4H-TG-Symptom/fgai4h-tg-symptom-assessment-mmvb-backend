@@ -1,5 +1,5 @@
 # pull official base image
-FROM python:3-alpine
+FROM python:3.8-alpine
 
 # set work directory
 WORKDIR /usr/src/app
@@ -7,22 +7,18 @@ WORKDIR /usr/src/app
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV PYTHONPATH=$PYTHONPATH:./mmvb_backend
+ENV PYTHONPATH=$PYTHONPATH:./mmvb_backend:/usr/lib/python3.8/site-packages
 
-#TODO: check if py3-numpy is needed
-# Git for dependencies
-RUN apk add --no-cache git py3-numpy
-
-#TODO: Add no-cache-dir to pip install
 # install dependencies
-RUN pip install --upgrade pip
 COPY ./requirements.txt /usr/src/app/requirements.txt
+
 # Some magic to get mysql and numpy working
-RUN apk add --no-cache mariadb-connector-c-dev ;\
+RUN apk add --no-cache mariadb-connector-c-dev py3-numpy ;\
     apk add --no-cache --virtual .build-deps \
+        git \
         build-base \
         mariadb-dev ;\
-    pip install -r requirements.txt --src /usr/src;\
+    pip install -r requirements.txt --no-cache-dir --src /usr/src;\
     apk del .build-deps
 
 # Add wait script to wait for mysql & redis
