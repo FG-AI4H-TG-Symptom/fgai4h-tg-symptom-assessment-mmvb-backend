@@ -1,14 +1,11 @@
-# This script is an adapted version of 
+# This script is an adapted version of
 # https://github.com/FG-AI4H-TG-Symptom/fgai4h-tg-symptom-models-schemas/blob/master/generators/berlin-model-schema-generator.py
 # To maintain the single source of truth this script is using data.json which is produced
 # during berlin model parsing.
 
 import json
 import os
-import pandas as pd
 import pathlib
-import hashlib
-from typing import Optional
 
 
 real_path = os.path.dirname(os.path.realpath(__file__))
@@ -56,7 +53,7 @@ def concept_template(
 
 def get_conditions():
     data_path = os.path.join(pathlib.Path(real_path).parent, "mmvb_backend/common/fixtures/data.json")
-            
+
     with open(data_path, 'r') as _file:
         data = _file.read()
     data_obj = json.loads(data)
@@ -66,7 +63,7 @@ def get_conditions():
 
 def get_clinical_findings():
     data_path = os.path.join(pathlib.Path(real_path).parent, "mmvb_backend/common/fixtures/data.json")
-            
+
     with open(data_path, 'r') as _file:
         data = _file.read()
     data_obj = json.loads(data)
@@ -80,21 +77,18 @@ def register_conditions(schema_json):
     conditions_refs = []
 
     for condition_ in conditions:
-        
         condition_sctid = condition_['sctid']
         condition_name = condition_['short_name']
         condition_id = condition_['id']
-        
         condition = concept_template("Condition", condition_sctid, condition_name, condition_id)
 
         schema_json["definitions"][condition_id] = condition
 
         conditions_refs.append(
-            {"title": condition_name, "$ref": f"#/definitions/{condition_id}", }
+            {"title": condition_name, "$ref": f"#/definitions/{condition_id}"}
         )
 
         schema_json["definitions"]["condition"] = {"oneOf": conditions_refs}
-
 
 
 def register_clinical_finding(clinical_finding_sctid, clinical_finding_name, clinical_finding_id, schema_json):
@@ -195,17 +189,18 @@ def register_attribute(attribute_, clinical_finding_id, schema_json):
 
 def register_clinical_findings_and_attributes(schema_json):
     clinical_findings_ = get_clinical_findings()
-    
+    attributes = []
+
     clinical_findings_refs = []
     attributes_refs = []
 
     for clinical_finding_ in clinical_findings_:
 
         clinical_finding_sctid = clinical_finding_['sctid']
-        clinical_finding_name  = clinical_finding_['short_name']
-        clinical_finding_id  = clinical_finding_['id']
+        clinical_finding_name = clinical_finding_['short_name']
+        clinical_finding_id = clinical_finding_['id']
 
-        register_clinical_finding (
+        register_clinical_finding(
             clinical_finding_sctid,
             clinical_finding_name,
             clinical_finding_id,
@@ -220,11 +215,12 @@ def register_clinical_findings_and_attributes(schema_json):
 
         for attribute_ in clinical_finding_['attributes']:
             attribute_ref = register_attribute(attribute_, clinical_finding_id, schema_json)
-            attributes_refs.append(attribute_ref)
+            if attribute_ref not in attributes_refs:
+                attributes_refs.append(attribute_ref)
+                attributes.append(attribute_)
 
-
-        for attribute_ in clinical_finding_['attributes']:
-            register_attribute_value_set(attribute_, clinical_finding_id, schema_json)
+    for attribute_ in attributes:
+        register_attribute_value_set(attribute_, schema_json)
 
     schema_json["definitions"]["clinicalFinding"] = {"oneOf": clinical_findings_refs}
     # likely not necessary: attributes are never referenced generically, always explicitly by a linked symptom
@@ -236,11 +232,10 @@ def register_clinical_findings_and_attributes(schema_json):
         if len(clinical_finding_definition['properties']['attributes']['items']['oneOf']) == 0:
             del clinical_finding_definition['properties']['attributes']['items']
 
-            clinical_finding_definition['properties']['attributes']['const'] = [
-            ]
+            clinical_finding_definition['properties']['attributes']['const'] = []
 
 
-def register_attribute_value_set(attribute_, clinical_finding_id, schema_json):
+def register_attribute_value_set(attribute_, schema_json):
 
     values = []
     current_attribute_id = attribute_['id']
@@ -281,9 +276,9 @@ def register_attribute_value_set(attribute_, clinical_finding_id, schema_json):
 
 
 def generate_schema():
-    generic_schema_path   = os.path.join(pathlib.Path(real_path), "schemas/berlin-model-generic.schema.json")
+    generic_schema_path = os.path.join(pathlib.Path(real_path), "schemas/berlin-model-generic.schema.json")
     generated_schema_path = os.path.join(pathlib.Path(real_path), "schemas/berlin-model.schema.json")
-    
+
     with open(
         generic_schema_path, "r"
     ) as base_schema_json_file:
@@ -301,7 +296,6 @@ def generate_schema():
     base_schema_json[
         "$comment"
     ] = "This model is auto-generated! Don't manually make changes you wish to persist."
-
 
     register_conditions(base_schema_json)
     register_clinical_findings_and_attributes(base_schema_json)
