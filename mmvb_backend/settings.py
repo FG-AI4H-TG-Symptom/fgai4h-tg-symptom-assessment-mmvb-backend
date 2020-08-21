@@ -174,7 +174,7 @@ REST_FRAMEWORK = {
 # CELERY configs
 
 CELERY_BROKER_URL = "redis://" + os.environ.get("REDIS_HOST", "localhost")
-CELERY_RESULT_BACKEND = "redis://"
+CELERY_RESULT_BACKEND = "redis://" + os.environ.get("REDIS_HOST", "localhost")
 
 # CORS settings
 
