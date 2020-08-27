@@ -13,6 +13,7 @@ services:
       - redis
       - mysql
     environment:
+      MMVB_SERVER_URL: http://backend
       DB_HOST: mysql
       REDIS_HOST: redis
       WAIT_HOSTS: mysql:3306, redis:6379
@@ -26,9 +27,11 @@ services:
       - redis
       - mysql
     environment:
+      MMVB_SERVER_URL: http://backend
       DB_HOST: mysql
       REDIS_HOST: redis
-      WAIT_HOSTS: mysql:3306, redis:6379
+      WAIT_HOSTS: mysql:3306, redis:6379, backend:8000
+      WAIT_HOSTS_TIMEOUT: 60
 
   redis:
     image: redis:alpine
