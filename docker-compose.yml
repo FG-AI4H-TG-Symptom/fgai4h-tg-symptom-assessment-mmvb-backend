@@ -32,6 +32,8 @@ services:
 
   redis:
     image: redis:alpine
+    sysctls:
+      net.core.somaxconn: '511'
     entrypoint: redis-server --appendonly yes
     ports:
       - "6379:6379"
