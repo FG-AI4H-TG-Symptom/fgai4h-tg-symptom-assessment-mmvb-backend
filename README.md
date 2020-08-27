@@ -4,6 +4,16 @@
 *[in this repository](https://github.com/FG-AI4H-TG-Symptom/fgai4h-tg-symptom-benchmarking-frontend)*
 *and follow the instructions there.*
 
+### Starting quickly using docker-compose
+docker-compose allows to setup and start all services with one configuration file. More info on the setup: [docker-compose](./docs/docker-compose.md)
+
+To run the whole backend including celery, mysql, redis, run:
+```
+docker-compose up --build
+```
+
+For instructions to run without docker-compose, see below.
+
 ## Installation Instructions
 The following instructions have been tested on a macOS, if you are using another development environment the instructions
 might be a little bit different.
