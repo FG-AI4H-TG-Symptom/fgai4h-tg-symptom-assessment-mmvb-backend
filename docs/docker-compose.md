@@ -29,7 +29,7 @@ docker-compose -f docker-compose.yml -f docker-compose.webapp.yml build
 
 Afterwards to start use:
 ```
-docker-compose -f docker-compose.yml -f docker-compose.webapp.yml up
+docker-compose -f docker-compose.yml -f docker-compose.webapp.yml up -d
 ```
 
 
