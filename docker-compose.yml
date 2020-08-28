@@ -18,6 +18,8 @@ services:
       DB_HOST: mysql
       REDIS_HOST: redis
       WAIT_HOSTS: mysql:3306, redis:6379
+      # URL will be added to CORS_WHITELIST
+      WEBAPP_HOST_URL: ${WEBAPP_HOST_URL}
 
   celery:
     restart: unless-stopped
@@ -34,6 +36,8 @@ services:
       REDIS_HOST: redis
       WAIT_HOSTS: mysql:3306, redis:6379, backend:8000
       WAIT_HOSTS_TIMEOUT: 60
+      # URL will be added to CORS_WHITELIST
+      WEBAPP_HOST_URL: ${WEBAPP_HOST_URL}
 
   redis:
     restart: unless-stopped

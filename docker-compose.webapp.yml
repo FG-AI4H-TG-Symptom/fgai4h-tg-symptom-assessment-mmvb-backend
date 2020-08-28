@@ -6,6 +6,6 @@ services:
     build:
       context: https://github.com/FG-AI4H-TG-Symptom/fgai4h-tg-symptom-benchmarking-frontend.git#docker-build-using-docker
       args:
-        - REACT_APP_BACKEND_BASE_URL=http://localhost:8000/api/v1
+        - REACT_APP_BACKEND_BASE_URL=${REACT_APP_BACKEND_BASE_URL}
     ports:
     - 3000:8080
