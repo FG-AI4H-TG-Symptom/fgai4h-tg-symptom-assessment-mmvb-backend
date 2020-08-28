@@ -2,6 +2,7 @@ version: '3'
 
 services:
   backend:
+    restart: unless-stopped
     build: .
     entrypoint: /usr/src/app/entrypoint.sh
     command: python manage.py runserver 0.0.0.0:8000
@@ -19,6 +20,7 @@ services:
       WAIT_HOSTS: mysql:3306, redis:6379
 
   celery:
+    restart: unless-stopped
     build: ./
     command: sh -c "/wait && watchmedo auto-restart --directory=./ --pattern=*.py --recursive -- celery worker -A mmvb_backend -l info"
     volumes:
@@ -34,6 +36,7 @@ services:
       WAIT_HOSTS_TIMEOUT: 60
 
   redis:
+    restart: unless-stopped
     image: redis:alpine
     sysctls:
       net.core.somaxconn: '511'
@@ -42,6 +45,7 @@ services:
       - "6379:6379"
 
   mysql:
+    restart: unless-stopped
     image: mysql
     volumes:
       - mysql:/var/lib/mysql
