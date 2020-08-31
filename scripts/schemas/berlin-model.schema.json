@@ -1,0 +1,2142 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/FG-AI4H-TG-Symptom/fgai4h-tg-symptom-models-schemas/master/schemas/berlin-model.schema.json",
+  "title": "Berlin Model Cases Schema",
+  "description": "FGAI4H TG Symptom Cases Schema \u2013 Berlin (generated)",
+  "$comment": "This model is auto-generated! Don't manually make changes you wish to persist.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Case set ID"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Case set name"
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/case"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "name",
+    "cases"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "case": {
+      "type": "object",
+      "properties": {
+        "metaData": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 50,
+              "description": "Short human readable case name"
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Human readable case description"
+            },
+            "caseCreator": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Company and/or individual identifier of the case's creator"
+            },
+            "spreadsheetCaseId": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Identifier of this case in the originating spreadsheet"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "additionalProperties": false
+        },
+        "caseData": {
+          "type": "object",
+          "properties": {
+            "profileInformation": {
+              "type": "object",
+              "description": "Patient profile information",
+              "properties": {
+                "age": {
+                  "type": "number",
+                  "description": "Age",
+                  "minimum": 18,
+                  "maximum": 99
+                },
+                "biologicalSex": {
+                  "$ref": "#/definitions/biologicalSex",
+                  "description": "Biological sex"
+                }
+              },
+              "required": [
+                "age",
+                "biologicalSex"
+              ],
+              "additionalProperties": false
+            },
+            "presentingComplaints": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/clinicalFinding"
+              },
+              "minItems": 1,
+              "maxItems": 1
+            },
+            "otherFeatures": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/clinicalFinding"
+              }
+            }
+          },
+          "required": [
+            "profileInformation",
+            "presentingComplaints",
+            "otherFeatures"
+          ],
+          "additionalProperties": false
+        },
+        "valuesToPredict": {
+          "type": "object",
+          "properties": {
+            "expectedTriageLevel": {
+              "$ref": "#/definitions/expectedTriageLevel",
+              "description": "Expected triage level"
+            },
+            "expectedCondition": {
+              "$ref": "#/definitions/condition"
+            },
+            "otherRelevantDifferentials": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/condition"
+              }
+            },
+            "impossibleConditions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/condition"
+              }
+            },
+            "correctCondition": {
+              "$ref": "#/definitions/condition"
+            }
+          },
+          "required": [
+            "expectedTriageLevel",
+            "expectedCondition",
+            "otherRelevantDifferentials",
+            "impossibleConditions"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "metaData",
+        "caseData",
+        "valuesToPredict"
+      ],
+      "additionalProperties": false
+    },
+    "biologicalSex": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female"
+      ]
+    },
+    "expectedTriageLevel": {
+      "type": "string",
+      "enum": [
+        "EC",
+        "PC",
+        "SC"
+      ]
+    },
+    "clinicalFinding": {
+      "oneOf": [
+        {
+          "title": "Increased frequency of urination",
+          "$ref": "#/definitions/5d60ebfd3b9ee2a12b816a66cd0d98e6"
+        },
+        {
+          "title": "Heartburn",
+          "$ref": "#/definitions/bed900f01bde98f8d8a9d5a10bcca20e"
+        },
+        {
+          "title": "Abdominal pain",
+          "$ref": "#/definitions/f531a0d969119b7ab1f8e76424516fed"
+        },
+        {
+          "title": "Blood in urine",
+          "$ref": "#/definitions/1eac2373d00170c7eff9aa2ce2c683ce"
+        },
+        {
+          "title": "Fever",
+          "$ref": "#/definitions/3e9a9aad2f3ad7fc49aa1a8b165e146b"
+        },
+        {
+          "title": "Vomiting",
+          "$ref": "#/definitions/356aee0186422335720c9763ac4ca492"
+        },
+        {
+          "title": "Dysuria",
+          "$ref": "#/definitions/b2003899e659fd3b4b9ccfdcc731d5e8"
+        },
+        {
+          "title": "Diarrhea",
+          "$ref": "#/definitions/0ef0fec76d1338c74680ae2b685c2d87"
+        },
+        {
+          "title": "Weight loss",
+          "$ref": "#/definitions/14026f513eaff27d02b60f2247322d82"
+        }
+      ]
+    },
+    "clinicalFindingState": {
+      "type": "string",
+      "enum": [
+        "present",
+        "absent",
+        "unsure"
+      ],
+      "description": "Presence of the clinical finding"
+    },
+    "attribute": {
+      "oneOf": [
+        {
+          "title": "Time since onset",
+          "$ref": "#/definitions/7a0ca5ec6baf2cfb7e516f031a9e5d3c"
+        },
+        {
+          "title": "Finding site",
+          "$ref": "#/definitions/912499c82bb217348cd56c98095fe844"
+        },
+        {
+          "title": "Characteristic of pain",
+          "$ref": "#/definitions/7ede29da24bd64547ef1eb7cd5ae2d8e"
+        },
+        {
+          "title": "Pain intensity",
+          "$ref": "#/definitions/0908b0d8834918b9586a70bca644dcee"
+        },
+        {
+          "title": "Contents of stool",
+          "$ref": "#/definitions/007f56da752f6cda2cfc689947361040"
+        }
+      ]
+    },
+    "value": {
+      "oneOf": [
+        {
+          "title": "Blood",
+          "$ref": "#/definitions/413a0ad1b7bc7a981570c381eec775ce"
+        },
+        {
+          "title": "Mucus",
+          "$ref": "#/definitions/cac61882e362c96310043bd2628d7201"
+        },
+        {
+          "title": "Water",
+          "$ref": "#/definitions/0eb1f3b8c62c0393cfad9b2c1dea44c7"
+        }
+      ]
+    },
+    "condition": {
+      "oneOf": [
+        {
+          "title": "IBD (first presentation non flare)",
+          "$ref": "#/definitions/2827c3412389f50313f873f8a0de44d6"
+        },
+        {
+          "title": "GERD",
+          "$ref": "#/definitions/23334e278d34e6394e763c05e8ba13c8"
+        },
+        {
+          "title": "simple UTI",
+          "$ref": "#/definitions/84e38911d4dadafc033e196683720b70"
+        },
+        {
+          "title": "viral GE",
+          "$ref": "#/definitions/817ce20937adbd22595275ddfa572a6e"
+        },
+        {
+          "title": "bladder cancer (first presentation)",
+          "$ref": "#/definitions/7f2657a0f5b61e32b6867bd215b4a41e"
+        },
+        {
+          "title": "acute cholecystitis",
+          "$ref": "#/definitions/af900dbf0fcecf02e5b7f70bbd10ea44"
+        },
+        {
+          "title": "appendicitis",
+          "$ref": "#/definitions/9d27455f69d907a7dad7bb471f3717a4"
+        },
+        {
+          "title": "ectopic pregnancy",
+          "$ref": "#/definitions/9a40d00e1b3ae580a85fb303778873ca"
+        },
+        {
+          "title": "IBS",
+          "$ref": "#/definitions/715d4aa3c75953768e71eb85c74a79d6"
+        },
+        {
+          "title": "acute pyelonephritis",
+          "$ref": "#/definitions/b94c486b512b29cfcece35fcf417ecfd"
+        },
+        {
+          "title": "Abdo Pain NOS (Idiopathic)",
+          "$ref": "#/definitions/e158fc5e03298d772a8b7db69517800e"
+        }
+      ]
+    },
+    "2827c3412389f50313f873f8a0de44d6": {
+      "type": "object",
+      "title": "IBD (first presentation non flare)",
+      "properties": {
+        "id": {
+          "const": "2827c3412389f50313f873f8a0de44d6",
+          "default": "2827c3412389f50313f873f8a0de44d6",
+          "description": "Condition ID"
+        },
+        "name": {
+          "const": "IBD (first presentation non flare)",
+          "default": "IBD (first presentation non flare)",
+          "description": "Condition name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/24526004"
+          ],
+          "default": [
+            "http://snomed.info/id/24526004"
+          ],
+          "description": "URIs referencing this condition in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "23334e278d34e6394e763c05e8ba13c8": {
+      "type": "object",
+      "title": "GERD",
+      "properties": {
+        "id": {
+          "const": "23334e278d34e6394e763c05e8ba13c8",
+          "default": "23334e278d34e6394e763c05e8ba13c8",
+          "description": "Condition ID"
+        },
+        "name": {
+          "const": "GERD",
+          "default": "GERD",
+          "description": "Condition name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/235595009"
+          ],
+          "default": [
+            "http://snomed.info/id/235595009"
+          ],
+          "description": "URIs referencing this condition in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "84e38911d4dadafc033e196683720b70": {
+      "type": "object",
+      "title": "simple UTI",
+      "properties": {
+        "id": {
+          "const": "84e38911d4dadafc033e196683720b70",
+          "default": "84e38911d4dadafc033e196683720b70",
+          "description": "Condition ID"
+        },
+        "name": {
+          "const": "simple UTI",
+          "default": "simple UTI",
+          "description": "Condition name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/68566005"
+          ],
+          "default": [
+            "http://snomed.info/id/68566005"
+          ],
+          "description": "URIs referencing this condition in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "817ce20937adbd22595275ddfa572a6e": {
+      "type": "object",
+      "title": "viral GE",
+      "properties": {
+        "id": {
+          "const": "817ce20937adbd22595275ddfa572a6e",
+          "default": "817ce20937adbd22595275ddfa572a6e",
+          "description": "Condition ID"
+        },
+        "name": {
+          "const": "viral GE",
+          "default": "viral GE",
+          "description": "Condition name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/111843007"
+          ],
+          "default": [
+            "http://snomed.info/id/111843007"
+          ],
+          "description": "URIs referencing this condition in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "7f2657a0f5b61e32b6867bd215b4a41e": {
+      "type": "object",
+      "title": "bladder cancer (first presentation)",
+      "properties": {
+        "id": {
+          "const": "7f2657a0f5b61e32b6867bd215b4a41e",
+          "default": "7f2657a0f5b61e32b6867bd215b4a41e",
+          "description": "Condition ID"
+        },
+        "name": {
+          "const": "bladder cancer (first presentation)",
+          "default": "bladder cancer (first presentation)",
+          "description": "Condition name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/399326009"
+          ],
+          "default": [
+            "http://snomed.info/id/399326009"
+          ],
+          "description": "URIs referencing this condition in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "af900dbf0fcecf02e5b7f70bbd10ea44": {
+      "type": "object",
+      "title": "acute cholecystitis",
+      "properties": {
+        "id": {
+          "const": "af900dbf0fcecf02e5b7f70bbd10ea44",
+          "default": "af900dbf0fcecf02e5b7f70bbd10ea44",
+          "description": "Condition ID"
+        },
+        "name": {
+          "const": "acute cholecystitis",
+          "default": "acute cholecystitis",
+          "description": "Condition name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/65275009"
+          ],
+          "default": [
+            "http://snomed.info/id/65275009"
+          ],
+          "description": "URIs referencing this condition in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "9d27455f69d907a7dad7bb471f3717a4": {
+      "type": "object",
+      "title": "appendicitis",
+      "properties": {
+        "id": {
+          "const": "9d27455f69d907a7dad7bb471f3717a4",
+          "default": "9d27455f69d907a7dad7bb471f3717a4",
+          "description": "Condition ID"
+        },
+        "name": {
+          "const": "appendicitis",
+          "default": "appendicitis",
+          "description": "Condition name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/74400008"
+          ],
+          "default": [
+            "http://snomed.info/id/74400008"
+          ],
+          "description": "URIs referencing this condition in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "9a40d00e1b3ae580a85fb303778873ca": {
+      "type": "object",
+      "title": "ectopic pregnancy",
+      "properties": {
+        "id": {
+          "const": "9a40d00e1b3ae580a85fb303778873ca",
+          "default": "9a40d00e1b3ae580a85fb303778873ca",
+          "description": "Condition ID"
+        },
+        "name": {
+          "const": "ectopic pregnancy",
+          "default": "ectopic pregnancy",
+          "description": "Condition name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/34801009"
+          ],
+          "default": [
+            "http://snomed.info/id/34801009"
+          ],
+          "description": "URIs referencing this condition in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "715d4aa3c75953768e71eb85c74a79d6": {
+      "type": "object",
+      "title": "IBS",
+      "properties": {
+        "id": {
+          "const": "715d4aa3c75953768e71eb85c74a79d6",
+          "default": "715d4aa3c75953768e71eb85c74a79d6",
+          "description": "Condition ID"
+        },
+        "name": {
+          "const": "IBS",
+          "default": "IBS",
+          "description": "Condition name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/10743008"
+          ],
+          "default": [
+            "http://snomed.info/id/10743008"
+          ],
+          "description": "URIs referencing this condition in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "b94c486b512b29cfcece35fcf417ecfd": {
+      "type": "object",
+      "title": "acute pyelonephritis",
+      "properties": {
+        "id": {
+          "const": "b94c486b512b29cfcece35fcf417ecfd",
+          "default": "b94c486b512b29cfcece35fcf417ecfd",
+          "description": "Condition ID"
+        },
+        "name": {
+          "const": "acute pyelonephritis",
+          "default": "acute pyelonephritis",
+          "description": "Condition name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/36689008"
+          ],
+          "default": [
+            "http://snomed.info/id/36689008"
+          ],
+          "description": "URIs referencing this condition in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "e158fc5e03298d772a8b7db69517800e": {
+      "type": "object",
+      "title": "Abdo Pain NOS (Idiopathic)",
+      "properties": {
+        "id": {
+          "const": "e158fc5e03298d772a8b7db69517800e",
+          "default": "e158fc5e03298d772a8b7db69517800e",
+          "description": "Condition ID"
+        },
+        "name": {
+          "const": "Abdo Pain NOS (Idiopathic)",
+          "default": "Abdo Pain NOS (Idiopathic)",
+          "description": "Condition name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/21522001"
+          ],
+          "default": [
+            "http://snomed.info/id/21522001"
+          ],
+          "description": "URIs referencing this condition in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "5d60ebfd3b9ee2a12b816a66cd0d98e6": {
+      "type": "object",
+      "title": "Increased frequency of urination",
+      "properties": {
+        "id": {
+          "const": "5d60ebfd3b9ee2a12b816a66cd0d98e6",
+          "default": "5d60ebfd3b9ee2a12b816a66cd0d98e6",
+          "description": "Clinical finding ID"
+        },
+        "name": {
+          "const": "Increased frequency of urination",
+          "default": "Increased frequency of urination",
+          "description": "Clinical finding name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/162116003"
+          ],
+          "default": [
+            "http://snomed.info/id/162116003"
+          ],
+          "description": "URIs referencing this clinical finding in standard ontologies"
+        },
+        "state": {
+          "$ref": "#/definitions/clinicalFindingState"
+        },
+        "attributes": {
+          "type": "array",
+          "uniqueItems": true,
+          "const": []
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "state",
+        "attributes"
+      ],
+      "additionalProperties": false
+    },
+    "bed900f01bde98f8d8a9d5a10bcca20e": {
+      "type": "object",
+      "title": "Heartburn",
+      "properties": {
+        "id": {
+          "const": "bed900f01bde98f8d8a9d5a10bcca20e",
+          "default": "bed900f01bde98f8d8a9d5a10bcca20e",
+          "description": "Clinical finding ID"
+        },
+        "name": {
+          "const": "Heartburn",
+          "default": "Heartburn",
+          "description": "Clinical finding name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/16331000"
+          ],
+          "default": [
+            "http://snomed.info/id/16331000"
+          ],
+          "description": "URIs referencing this clinical finding in standard ontologies"
+        },
+        "state": {
+          "$ref": "#/definitions/clinicalFindingState"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "title": "Time since onset",
+                "$ref": "#/definitions/7a0ca5ec6baf2cfb7e516f031a9e5d3c"
+              }
+            ]
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "state",
+        "attributes"
+      ],
+      "additionalProperties": false
+    },
+    "7a0ca5ec6baf2cfb7e516f031a9e5d3c": {
+      "type": "object",
+      "title": "Time since onset",
+      "properties": {
+        "id": {
+          "const": "7a0ca5ec6baf2cfb7e516f031a9e5d3c",
+          "default": "7a0ca5ec6baf2cfb7e516f031a9e5d3c",
+          "description": "Attribute ID"
+        },
+        "name": {
+          "const": "Time since onset",
+          "default": "Time since onset",
+          "description": "Attribute name"
+        },
+        "standardOntologyUris": {
+          "const": [],
+          "default": [],
+          "description": "URIs referencing this attribute in standard ontologies"
+        },
+        "value": {
+          "description": "Possible values for this attribute (exactly one)",
+          "oneOf": [
+            {
+              "title": "less than a day",
+              "$ref": "#/definitions/15fb0cb28034c1adb8ab0703eff7720f"
+            },
+            {
+              "title": "a couple days (1-2 days)",
+              "$ref": "#/definitions/f6b731832f9c37cd8583c6297105603f"
+            },
+            {
+              "title": "3 days - to 1 week",
+              "$ref": "#/definitions/4395912053989fa30a3b041f1fb90a23"
+            },
+            {
+              "title": "a few weeks (1 weeks - 1 month)",
+              "$ref": "#/definitions/5c11d4b071bd042b5123c52d80c07d84"
+            },
+            {
+              "title": "1 month to 1 year",
+              "$ref": "#/definitions/41c86c25696136347b84354a5e120cbf"
+            },
+            {
+              "title": "a year or more",
+              "$ref": "#/definitions/b505858ef0a749e5d6dca106cd31ae52"
+            }
+          ]
+        },
+        "scope": {
+          "const": "0ef0fec76d1338c74680ae2b685c2d87",
+          "default": "0ef0fec76d1338c74680ae2b685c2d87",
+          "description": "ID of clinical finding this attribute is scoped to"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "f531a0d969119b7ab1f8e76424516fed": {
+      "type": "object",
+      "title": "Abdominal pain",
+      "properties": {
+        "id": {
+          "const": "f531a0d969119b7ab1f8e76424516fed",
+          "default": "f531a0d969119b7ab1f8e76424516fed",
+          "description": "Clinical finding ID"
+        },
+        "name": {
+          "const": "Abdominal pain",
+          "default": "Abdominal pain",
+          "description": "Clinical finding name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/21522001"
+          ],
+          "default": [
+            "http://snomed.info/id/21522001"
+          ],
+          "description": "URIs referencing this clinical finding in standard ontologies"
+        },
+        "state": {
+          "$ref": "#/definitions/clinicalFindingState"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "title": "Finding site",
+                "$ref": "#/definitions/912499c82bb217348cd56c98095fe844"
+              },
+              {
+                "title": "Characteristic of pain",
+                "$ref": "#/definitions/7ede29da24bd64547ef1eb7cd5ae2d8e"
+              },
+              {
+                "title": "Pain intensity",
+                "$ref": "#/definitions/0908b0d8834918b9586a70bca644dcee"
+              },
+              {
+                "title": "Time since onset",
+                "$ref": "#/definitions/7a0ca5ec6baf2cfb7e516f031a9e5d3c"
+              }
+            ]
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "state",
+        "attributes"
+      ],
+      "additionalProperties": false
+    },
+    "912499c82bb217348cd56c98095fe844": {
+      "type": "object",
+      "title": "Finding site",
+      "properties": {
+        "id": {
+          "const": "912499c82bb217348cd56c98095fe844",
+          "default": "912499c82bb217348cd56c98095fe844",
+          "description": "Attribute ID"
+        },
+        "name": {
+          "const": "Finding site",
+          "default": "Finding site",
+          "description": "Attribute name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/363698007"
+          ],
+          "default": [
+            "http://snomed.info/id/363698007"
+          ],
+          "description": "URIs referencing this attribute in standard ontologies"
+        },
+        "values": {
+          "type": "array",
+          "description": "Possible values for this attribute (at least one, multi-selection possible)",
+          "items": {
+            "oneOf": [
+              {
+                "title": "Generalised",
+                "$ref": "#/definitions/1aa7de133b931280af20f9c5db5fc8e6"
+              },
+              {
+                "title": "Upper right",
+                "$ref": "#/definitions/e7b0ba68e1d6fd5da9373be3bbf6155f"
+              },
+              {
+                "title": "Upper left",
+                "$ref": "#/definitions/40f7d9c6a9c1f51b0920eef6d0afad59"
+              },
+              {
+                "title": "Epigastric",
+                "$ref": "#/definitions/dd209743df0b8f89310fa6d89d93c8af"
+              },
+              {
+                "title": "Lower right",
+                "$ref": "#/definitions/90de79b7ba2d0c789962d19aaa69d902"
+              },
+              {
+                "title": "Lower left",
+                "$ref": "#/definitions/4d095029a3c3092faf2c0470817c5080"
+              },
+              {
+                "title": "Hypogastric",
+                "$ref": "#/definitions/99b4b398893523cf4d3f66f32b6582a1"
+              },
+              {
+                "title": "Right loin",
+                "$ref": "#/definitions/d48ec3d760438b06df37996563a67b6b"
+              },
+              {
+                "title": "Left loin",
+                "$ref": "#/definitions/eefc70b83609ea58e033bfdcb3502081"
+              },
+              {
+                "title": "Central",
+                "$ref": "#/definitions/a9ec43e1b2d6d86b156abe0f4c21e492"
+              }
+            ]
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "scope": {
+          "const": "f531a0d969119b7ab1f8e76424516fed",
+          "default": "f531a0d969119b7ab1f8e76424516fed",
+          "description": "ID of clinical finding this attribute is scoped to"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "7ede29da24bd64547ef1eb7cd5ae2d8e": {
+      "type": "object",
+      "title": "Characteristic of pain",
+      "properties": {
+        "id": {
+          "const": "7ede29da24bd64547ef1eb7cd5ae2d8e",
+          "default": "7ede29da24bd64547ef1eb7cd5ae2d8e",
+          "description": "Attribute ID"
+        },
+        "name": {
+          "const": "Characteristic of pain",
+          "default": "Characteristic of pain",
+          "description": "Attribute name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/364625007"
+          ],
+          "default": [
+            "http://snomed.info/id/364625007"
+          ],
+          "description": "URIs referencing this attribute in standard ontologies"
+        },
+        "value": {
+          "description": "Possible values for this attribute (exactly one)",
+          "oneOf": [
+            {
+              "title": "Cramping",
+              "$ref": "#/definitions/4403bcc436c90f18e489150ca0e37ab9"
+            },
+            {
+              "title": "Dull",
+              "$ref": "#/definitions/d307bfff5a7c185189e1a364c8ec0878"
+            },
+            {
+              "title": "Sharp",
+              "$ref": "#/definitions/85e41619889e1675f5924245896ad38a"
+            }
+          ]
+        },
+        "scope": {
+          "const": "f531a0d969119b7ab1f8e76424516fed",
+          "default": "f531a0d969119b7ab1f8e76424516fed",
+          "description": "ID of clinical finding this attribute is scoped to"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "0908b0d8834918b9586a70bca644dcee": {
+      "type": "object",
+      "title": "Pain intensity",
+      "properties": {
+        "id": {
+          "const": "0908b0d8834918b9586a70bca644dcee",
+          "default": "0908b0d8834918b9586a70bca644dcee",
+          "description": "Attribute ID"
+        },
+        "name": {
+          "const": "Pain intensity",
+          "default": "Pain intensity",
+          "description": "Attribute name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/406127006"
+          ],
+          "default": [
+            "http://snomed.info/id/406127006"
+          ],
+          "description": "URIs referencing this attribute in standard ontologies"
+        },
+        "value": {
+          "description": "Possible values for this attribute (exactly one)",
+          "oneOf": [
+            {
+              "title": "Mild",
+              "$ref": "#/definitions/dfe94145865b065bd5341aa7e3cbbde3"
+            },
+            {
+              "title": "Moderate",
+              "$ref": "#/definitions/5622e2233ff9944412b2161ae720fff9"
+            },
+            {
+              "title": "Severe",
+              "$ref": "#/definitions/a95ec8ac80d2ea45f314b7224da6a7e6"
+            }
+          ]
+        },
+        "scope": {
+          "const": "f531a0d969119b7ab1f8e76424516fed",
+          "default": "f531a0d969119b7ab1f8e76424516fed",
+          "description": "ID of clinical finding this attribute is scoped to"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "1eac2373d00170c7eff9aa2ce2c683ce": {
+      "type": "object",
+      "title": "Blood in urine",
+      "properties": {
+        "id": {
+          "const": "1eac2373d00170c7eff9aa2ce2c683ce",
+          "default": "1eac2373d00170c7eff9aa2ce2c683ce",
+          "description": "Clinical finding ID"
+        },
+        "name": {
+          "const": "Blood in urine",
+          "default": "Blood in urine",
+          "description": "Clinical finding name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/34436003"
+          ],
+          "default": [
+            "http://snomed.info/id/34436003"
+          ],
+          "description": "URIs referencing this clinical finding in standard ontologies"
+        },
+        "state": {
+          "$ref": "#/definitions/clinicalFindingState"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "title": "Time since onset",
+                "$ref": "#/definitions/7a0ca5ec6baf2cfb7e516f031a9e5d3c"
+              }
+            ]
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "state",
+        "attributes"
+      ],
+      "additionalProperties": false
+    },
+    "3e9a9aad2f3ad7fc49aa1a8b165e146b": {
+      "type": "object",
+      "title": "Fever",
+      "properties": {
+        "id": {
+          "const": "3e9a9aad2f3ad7fc49aa1a8b165e146b",
+          "default": "3e9a9aad2f3ad7fc49aa1a8b165e146b",
+          "description": "Clinical finding ID"
+        },
+        "name": {
+          "const": "Fever",
+          "default": "Fever",
+          "description": "Clinical finding name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/386661006"
+          ],
+          "default": [
+            "http://snomed.info/id/386661006"
+          ],
+          "description": "URIs referencing this clinical finding in standard ontologies"
+        },
+        "state": {
+          "$ref": "#/definitions/clinicalFindingState"
+        },
+        "attributes": {
+          "type": "array",
+          "uniqueItems": true,
+          "const": []
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "state",
+        "attributes"
+      ],
+      "additionalProperties": false
+    },
+    "356aee0186422335720c9763ac4ca492": {
+      "type": "object",
+      "title": "Vomiting",
+      "properties": {
+        "id": {
+          "const": "356aee0186422335720c9763ac4ca492",
+          "default": "356aee0186422335720c9763ac4ca492",
+          "description": "Clinical finding ID"
+        },
+        "name": {
+          "const": "Vomiting",
+          "default": "Vomiting",
+          "description": "Clinical finding name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/422400008"
+          ],
+          "default": [
+            "http://snomed.info/id/422400008"
+          ],
+          "description": "URIs referencing this clinical finding in standard ontologies"
+        },
+        "state": {
+          "$ref": "#/definitions/clinicalFindingState"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "title": "Time since onset",
+                "$ref": "#/definitions/7a0ca5ec6baf2cfb7e516f031a9e5d3c"
+              }
+            ]
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "state",
+        "attributes"
+      ],
+      "additionalProperties": false
+    },
+    "b2003899e659fd3b4b9ccfdcc731d5e8": {
+      "type": "object",
+      "title": "Dysuria",
+      "properties": {
+        "id": {
+          "const": "b2003899e659fd3b4b9ccfdcc731d5e8",
+          "default": "b2003899e659fd3b4b9ccfdcc731d5e8",
+          "description": "Clinical finding ID"
+        },
+        "name": {
+          "const": "Dysuria",
+          "default": "Dysuria",
+          "description": "Clinical finding name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/49650001"
+          ],
+          "default": [
+            "http://snomed.info/id/49650001"
+          ],
+          "description": "URIs referencing this clinical finding in standard ontologies"
+        },
+        "state": {
+          "$ref": "#/definitions/clinicalFindingState"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "title": "Time since onset",
+                "$ref": "#/definitions/7a0ca5ec6baf2cfb7e516f031a9e5d3c"
+              }
+            ]
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "state",
+        "attributes"
+      ],
+      "additionalProperties": false
+    },
+    "0ef0fec76d1338c74680ae2b685c2d87": {
+      "type": "object",
+      "title": "Diarrhea",
+      "properties": {
+        "id": {
+          "const": "0ef0fec76d1338c74680ae2b685c2d87",
+          "default": "0ef0fec76d1338c74680ae2b685c2d87",
+          "description": "Clinical finding ID"
+        },
+        "name": {
+          "const": "Diarrhea",
+          "default": "Diarrhea",
+          "description": "Clinical finding name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/62315008"
+          ],
+          "default": [
+            "http://snomed.info/id/62315008"
+          ],
+          "description": "URIs referencing this clinical finding in standard ontologies"
+        },
+        "state": {
+          "$ref": "#/definitions/clinicalFindingState"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "title": "Contents of stool",
+                "$ref": "#/definitions/007f56da752f6cda2cfc689947361040"
+              },
+              {
+                "title": "Time since onset",
+                "$ref": "#/definitions/7a0ca5ec6baf2cfb7e516f031a9e5d3c"
+              }
+            ]
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "state",
+        "attributes"
+      ],
+      "additionalProperties": false
+    },
+    "007f56da752f6cda2cfc689947361040": {
+      "type": "object",
+      "title": "Contents of stool",
+      "properties": {
+        "id": {
+          "const": "007f56da752f6cda2cfc689947361040",
+          "default": "007f56da752f6cda2cfc689947361040",
+          "description": "Attribute ID"
+        },
+        "name": {
+          "const": "Contents of stool",
+          "default": "Contents of stool",
+          "description": "Attribute name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/249622004"
+          ],
+          "default": [
+            "http://snomed.info/id/249622004"
+          ],
+          "description": "URIs referencing this attribute in standard ontologies"
+        },
+        "values": {
+          "type": "array",
+          "description": "Possible values for this attribute (at least one, multi-selection possible)",
+          "items": {
+            "oneOf": [
+              {
+                "title": "Blood",
+                "$ref": "#/definitions/413a0ad1b7bc7a981570c381eec775ce"
+              },
+              {
+                "title": "Mucus",
+                "$ref": "#/definitions/cac61882e362c96310043bd2628d7201"
+              },
+              {
+                "title": "Water",
+                "$ref": "#/definitions/0eb1f3b8c62c0393cfad9b2c1dea44c7"
+              }
+            ]
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "scope": {
+          "const": "0ef0fec76d1338c74680ae2b685c2d87",
+          "default": "0ef0fec76d1338c74680ae2b685c2d87",
+          "description": "ID of clinical finding this attribute is scoped to"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "14026f513eaff27d02b60f2247322d82": {
+      "type": "object",
+      "title": "Weight loss",
+      "properties": {
+        "id": {
+          "const": "14026f513eaff27d02b60f2247322d82",
+          "default": "14026f513eaff27d02b60f2247322d82",
+          "description": "Clinical finding ID"
+        },
+        "name": {
+          "const": "Weight loss",
+          "default": "Weight loss",
+          "description": "Clinical finding name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/89362005"
+          ],
+          "default": [
+            "http://snomed.info/id/89362005"
+          ],
+          "description": "URIs referencing this clinical finding in standard ontologies"
+        },
+        "state": {
+          "$ref": "#/definitions/clinicalFindingState"
+        },
+        "attributes": {
+          "type": "array",
+          "uniqueItems": true,
+          "const": []
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris",
+        "state",
+        "attributes"
+      ],
+      "additionalProperties": false
+    },
+    "15fb0cb28034c1adb8ab0703eff7720f": {
+      "type": "object",
+      "title": "less than a day",
+      "properties": {
+        "id": {
+          "const": "15fb0cb28034c1adb8ab0703eff7720f",
+          "default": "15fb0cb28034c1adb8ab0703eff7720f",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "less than a day",
+          "default": "less than a day",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [],
+          "default": [],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "f6b731832f9c37cd8583c6297105603f": {
+      "type": "object",
+      "title": "a couple days (1-2 days)",
+      "properties": {
+        "id": {
+          "const": "f6b731832f9c37cd8583c6297105603f",
+          "default": "f6b731832f9c37cd8583c6297105603f",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "a couple days (1-2 days)",
+          "default": "a couple days (1-2 days)",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [],
+          "default": [],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "4395912053989fa30a3b041f1fb90a23": {
+      "type": "object",
+      "title": "3 days - to 1 week",
+      "properties": {
+        "id": {
+          "const": "4395912053989fa30a3b041f1fb90a23",
+          "default": "4395912053989fa30a3b041f1fb90a23",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "3 days - to 1 week",
+          "default": "3 days - to 1 week",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [],
+          "default": [],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "5c11d4b071bd042b5123c52d80c07d84": {
+      "type": "object",
+      "title": "a few weeks (1 weeks - 1 month)",
+      "properties": {
+        "id": {
+          "const": "5c11d4b071bd042b5123c52d80c07d84",
+          "default": "5c11d4b071bd042b5123c52d80c07d84",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "a few weeks (1 weeks - 1 month)",
+          "default": "a few weeks (1 weeks - 1 month)",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [],
+          "default": [],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "41c86c25696136347b84354a5e120cbf": {
+      "type": "object",
+      "title": "1 month to 1 year",
+      "properties": {
+        "id": {
+          "const": "41c86c25696136347b84354a5e120cbf",
+          "default": "41c86c25696136347b84354a5e120cbf",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "1 month to 1 year",
+          "default": "1 month to 1 year",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [],
+          "default": [],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "b505858ef0a749e5d6dca106cd31ae52": {
+      "type": "object",
+      "title": "a year or more",
+      "properties": {
+        "id": {
+          "const": "b505858ef0a749e5d6dca106cd31ae52",
+          "default": "b505858ef0a749e5d6dca106cd31ae52",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "a year or more",
+          "default": "a year or more",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [],
+          "default": [],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "1aa7de133b931280af20f9c5db5fc8e6": {
+      "type": "object",
+      "title": "Generalised",
+      "properties": {
+        "id": {
+          "const": "1aa7de133b931280af20f9c5db5fc8e6",
+          "default": "1aa7de133b931280af20f9c5db5fc8e6",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Generalised",
+          "default": "Generalised",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/818983003"
+          ],
+          "default": [
+            "http://snomed.info/id/818983003"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "e7b0ba68e1d6fd5da9373be3bbf6155f": {
+      "type": "object",
+      "title": "Upper right",
+      "properties": {
+        "id": {
+          "const": "e7b0ba68e1d6fd5da9373be3bbf6155f",
+          "default": "e7b0ba68e1d6fd5da9373be3bbf6155f",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Upper right",
+          "default": "Upper right",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/50519007"
+          ],
+          "default": [
+            "http://snomed.info/id/50519007"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "40f7d9c6a9c1f51b0920eef6d0afad59": {
+      "type": "object",
+      "title": "Upper left",
+      "properties": {
+        "id": {
+          "const": "40f7d9c6a9c1f51b0920eef6d0afad59",
+          "default": "40f7d9c6a9c1f51b0920eef6d0afad59",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Upper left",
+          "default": "Upper left",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/86367003"
+          ],
+          "default": [
+            "http://snomed.info/id/86367003"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "dd209743df0b8f89310fa6d89d93c8af": {
+      "type": "object",
+      "title": "Epigastric",
+      "properties": {
+        "id": {
+          "const": "dd209743df0b8f89310fa6d89d93c8af",
+          "default": "dd209743df0b8f89310fa6d89d93c8af",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Epigastric",
+          "default": "Epigastric",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/27947004"
+          ],
+          "default": [
+            "http://snomed.info/id/27947004"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "90de79b7ba2d0c789962d19aaa69d902": {
+      "type": "object",
+      "title": "Lower right",
+      "properties": {
+        "id": {
+          "const": "90de79b7ba2d0c789962d19aaa69d902",
+          "default": "90de79b7ba2d0c789962d19aaa69d902",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Lower right",
+          "default": "Lower right",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/48544008"
+          ],
+          "default": [
+            "http://snomed.info/id/48544008"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "4d095029a3c3092faf2c0470817c5080": {
+      "type": "object",
+      "title": "Lower left",
+      "properties": {
+        "id": {
+          "const": "4d095029a3c3092faf2c0470817c5080",
+          "default": "4d095029a3c3092faf2c0470817c5080",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Lower left",
+          "default": "Lower left",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/68505006"
+          ],
+          "default": [
+            "http://snomed.info/id/68505006"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "99b4b398893523cf4d3f66f32b6582a1": {
+      "type": "object",
+      "title": "Hypogastric",
+      "properties": {
+        "id": {
+          "const": "99b4b398893523cf4d3f66f32b6582a1",
+          "default": "99b4b398893523cf4d3f66f32b6582a1",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Hypogastric",
+          "default": "Hypogastric",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/11708003"
+          ],
+          "default": [
+            "http://snomed.info/id/11708003"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "d48ec3d760438b06df37996563a67b6b": {
+      "type": "object",
+      "title": "Right loin",
+      "properties": {
+        "id": {
+          "const": "d48ec3d760438b06df37996563a67b6b",
+          "default": "d48ec3d760438b06df37996563a67b6b",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Right loin",
+          "default": "Right loin",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/133944004"
+          ],
+          "default": [
+            "http://snomed.info/id/133944004"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "eefc70b83609ea58e033bfdcb3502081": {
+      "type": "object",
+      "title": "Left loin",
+      "properties": {
+        "id": {
+          "const": "eefc70b83609ea58e033bfdcb3502081",
+          "default": "eefc70b83609ea58e033bfdcb3502081",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Left loin",
+          "default": "Left loin",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/133943005"
+          ],
+          "default": [
+            "http://snomed.info/id/133943005"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "a9ec43e1b2d6d86b156abe0f4c21e492": {
+      "type": "object",
+      "title": "Central",
+      "properties": {
+        "id": {
+          "const": "a9ec43e1b2d6d86b156abe0f4c21e492",
+          "default": "a9ec43e1b2d6d86b156abe0f4c21e492",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Central",
+          "default": "Central",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/422314007"
+          ],
+          "default": [
+            "http://snomed.info/id/422314007"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "4403bcc436c90f18e489150ca0e37ab9": {
+      "type": "object",
+      "title": "Cramping",
+      "properties": {
+        "id": {
+          "const": "4403bcc436c90f18e489150ca0e37ab9",
+          "default": "4403bcc436c90f18e489150ca0e37ab9",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Cramping",
+          "default": "Cramping",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/410709000"
+          ],
+          "default": [
+            "http://snomed.info/id/410709000"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "d307bfff5a7c185189e1a364c8ec0878": {
+      "type": "object",
+      "title": "Dull",
+      "properties": {
+        "id": {
+          "const": "d307bfff5a7c185189e1a364c8ec0878",
+          "default": "d307bfff5a7c185189e1a364c8ec0878",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Dull",
+          "default": "Dull",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/410708008"
+          ],
+          "default": [
+            "http://snomed.info/id/410708008"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "85e41619889e1675f5924245896ad38a": {
+      "type": "object",
+      "title": "Sharp",
+      "properties": {
+        "id": {
+          "const": "85e41619889e1675f5924245896ad38a",
+          "default": "85e41619889e1675f5924245896ad38a",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Sharp",
+          "default": "Sharp",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/410707003"
+          ],
+          "default": [
+            "http://snomed.info/id/410707003"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "dfe94145865b065bd5341aa7e3cbbde3": {
+      "type": "object",
+      "title": "Mild",
+      "properties": {
+        "id": {
+          "const": "dfe94145865b065bd5341aa7e3cbbde3",
+          "default": "dfe94145865b065bd5341aa7e3cbbde3",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Mild",
+          "default": "Mild",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/255604002"
+          ],
+          "default": [
+            "http://snomed.info/id/255604002"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "5622e2233ff9944412b2161ae720fff9": {
+      "type": "object",
+      "title": "Moderate",
+      "properties": {
+        "id": {
+          "const": "5622e2233ff9944412b2161ae720fff9",
+          "default": "5622e2233ff9944412b2161ae720fff9",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Moderate",
+          "default": "Moderate",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/6736007"
+          ],
+          "default": [
+            "http://snomed.info/id/6736007"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "a95ec8ac80d2ea45f314b7224da6a7e6": {
+      "type": "object",
+      "title": "Severe",
+      "properties": {
+        "id": {
+          "const": "a95ec8ac80d2ea45f314b7224da6a7e6",
+          "default": "a95ec8ac80d2ea45f314b7224da6a7e6",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Severe",
+          "default": "Severe",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/24484000"
+          ],
+          "default": [
+            "http://snomed.info/id/24484000"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "413a0ad1b7bc7a981570c381eec775ce": {
+      "type": "object",
+      "title": "Blood",
+      "properties": {
+        "id": {
+          "const": "413a0ad1b7bc7a981570c381eec775ce",
+          "default": "413a0ad1b7bc7a981570c381eec775ce",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Blood",
+          "default": "Blood",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/87612001"
+          ],
+          "default": [
+            "http://snomed.info/id/87612001"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "cac61882e362c96310043bd2628d7201": {
+      "type": "object",
+      "title": "Mucus",
+      "properties": {
+        "id": {
+          "const": "cac61882e362c96310043bd2628d7201",
+          "default": "cac61882e362c96310043bd2628d7201",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Mucus",
+          "default": "Mucus",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/49909006"
+          ],
+          "default": [
+            "http://snomed.info/id/49909006"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    },
+    "0eb1f3b8c62c0393cfad9b2c1dea44c7": {
+      "type": "object",
+      "title": "Water",
+      "properties": {
+        "id": {
+          "const": "0eb1f3b8c62c0393cfad9b2c1dea44c7",
+          "default": "0eb1f3b8c62c0393cfad9b2c1dea44c7",
+          "description": "Value ID"
+        },
+        "name": {
+          "const": "Water",
+          "default": "Water",
+          "description": "Value name"
+        },
+        "standardOntologyUris": {
+          "const": [
+            "http://snomed.info/id/11713004"
+          ],
+          "default": [
+            "http://snomed.info/id/11713004"
+          ],
+          "description": "URIs referencing this value in standard ontologies"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "standardOntologyUris"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
