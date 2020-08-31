@@ -121,6 +121,13 @@ ATTRIBUTE_SCTID_TO_MULTISELECT = {
     for _, row in attributes_source.dropna().iterrows()
 }
 
+ATTRIBUTE_SCTID_TO_SCOPE = {
+    row[ATTRIBUTE_SCTID]: (
+        row[FINDING_SCTID] if row[FINDING_SCTID] != "ANY" else None
+    ) for _, row in attributes_source.dropna().iterrows()
+}
+
+
 CONDITION_NAMES = [column for column in model_source.columns if column not in COLUMNS]
 
 # Map symptom weights and fill empty cells
@@ -178,7 +185,8 @@ def get_symptoms(symptoms_data):
         symptom_id = generate_id("Clinical finding", symptom_sctid)
         for _, attribute_group in attribute_data.groupby(ATTRIBUTE_SCTID):
             attribute_sctid = attribute_group[ATTRIBUTE_SCTID].iloc[0]
-            attribute_id = generate_id("Attribute", attribute_sctid, symptom_id)
+            scope = ATTRIBUTE_SCTID_TO_SCOPE[attribute_sctid]
+            attribute_id = generate_id("Attribute", attribute_sctid, scope)
             attribute = {
                 "id": attribute_id,
                 "short_name": attribute_group[ATTRIBUTE_SHORT_NAME].iloc[0],
@@ -237,7 +245,8 @@ def get_condition_symptom_weights(symptoms_data, conditions):
             attribute_data = symptom_data[symptom_data[ATTRIBUTE_SCTID] != "None"]
             for _, attribute_group in attribute_data.groupby(ATTRIBUTE_SCTID):
                 attribute_sctid = attribute_group[ATTRIBUTE_SCTID].iloc[0]
-                attribute_id = generate_id("Attribute", attribute_sctid, symptom_id)
+                scope = ATTRIBUTE_SCTID_TO_SCOPE[attribute_sctid]
+                attribute_id = generate_id("Attribute", attribute_sctid, scope)
                 attribute_weight = {
                     "id": attribute_id,
                     "values": [
