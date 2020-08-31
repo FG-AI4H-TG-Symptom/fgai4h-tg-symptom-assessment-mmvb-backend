@@ -8,8 +8,33 @@ docker-compose up --build
 
 Backend and celery will still have auto reload, meaning that if you change a *.py file they should restart automatically.
 
+#### Also run the webapp
+Webapp located at [GitHub](https://github.com/FG-AI4H-TG-Symptom/fgai4h-tg-symptom-benchmarking-frontend)
+can also be run using docker-compose.
+This can be used as an easy way to run the whole system.
+For a true production system something like Kubernetes should be used.
+
+First copy the [`.env.example`](../.env.example) to `.env` and adjust it to
+point to where the backend api is hosted.
+This is needed because the webapp Docker image hardcodes the URL when building.
+
+```
+REACT_APP_BACKEND_BASE_URL=https://your-backend-server.com/api/v1
+```
+
+For building or when code changes:
+```
+docker-compose -f docker-compose.yml -f docker-compose.webapp.yml build
+```
+
+Afterwards to start use:
+```
+docker-compose -f docker-compose.yml -f docker-compose.webapp.yml up -d
+```
+
+
 ### Structure of the docker setup
-Our docker-compose.yml file has 4 services:
+Our `docker-compose.yml` file has 4 services:
 * backend
 * celery
 * mysql
@@ -19,6 +44,11 @@ All those services are able to communicate with each other.
 Both the backend and celery use the same Dockerfile of the project be setup.
 
 Backend uses a entrypoint script to run migrate, register_ais and load fixtures before starting the backend server.
+
+Our `docker-compose.web.yml` file has only the webapp as service.
+Specifying both .yml files combines them to one configuration.
+Currently we fetch the GitHub repository of the webapp to build the image,
+since we need to patch in the backend URL.
 
 #### Waiting for mysql and redis to be up and running
 Especially mysql takes some time to start up. We need to wait for it to be available, so the backend and celery do not throw errors.
