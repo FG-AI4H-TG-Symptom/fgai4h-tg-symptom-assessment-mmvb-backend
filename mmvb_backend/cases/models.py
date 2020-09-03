@@ -22,6 +22,8 @@ class CaseSet(FlowableModel):
 class Case(FlowableModel, Model):
     """Case data model representation"""
 
+    name = models.CharField(max_length=200)
+    description = models.TextField()
     case_sets = models.ManyToManyField("CaseSet", related_name="cases")
     data = JSONField(default=default_data)
     # TODO: relate the case to the company which created it

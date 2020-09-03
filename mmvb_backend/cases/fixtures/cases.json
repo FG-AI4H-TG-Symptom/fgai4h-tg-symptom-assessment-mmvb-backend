@@ -10,6 +10,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (5/5)"
         },
         "otherFeatures": [],
@@ -47,6 +48,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (3/10)"
         },
         "otherFeatures": [
@@ -92,6 +94,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (3/10)"
         },
         "otherFeatures": [],
@@ -131,6 +134,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (2/10)"
         },
         "otherFeatures": [],
@@ -170,6 +174,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (1/5)"
         },
         "otherFeatures": [],
@@ -207,6 +212,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (7/10)"
         },
         "otherFeatures": [],
@@ -246,6 +252,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (4/10)"
         },
         "otherFeatures": [
@@ -296,6 +303,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (6/10)"
         },
         "otherFeatures": [
@@ -341,6 +349,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (9/10)"
         },
         "otherFeatures": [],
@@ -380,6 +389,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (1/10)"
         },
         "otherFeatures": [],
@@ -419,6 +429,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (8/10)"
         },
         "otherFeatures": [],
@@ -458,6 +469,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (1/10)"
         },
         "otherFeatures": [],
@@ -497,6 +509,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (9/10)"
         },
         "otherFeatures": [],
@@ -536,6 +549,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (4/5)"
         },
         "otherFeatures": [
@@ -579,6 +593,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (5/10)"
         },
         "otherFeatures": [],
@@ -618,6 +633,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (4/10)"
         },
         "otherFeatures": [],
@@ -657,6 +673,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (2/10)"
         },
         "otherFeatures": [],
@@ -696,6 +713,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (10/10)"
         },
         "otherFeatures": [
@@ -741,6 +759,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (4/10)"
         },
         "otherFeatures": [
@@ -786,6 +805,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (5/10)"
         },
         "otherFeatures": [],
@@ -825,6 +845,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (1/10)"
         },
         "otherFeatures": [],
@@ -864,6 +885,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (5/10)"
         },
         "otherFeatures": [
@@ -909,6 +931,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (2/5)"
         },
         "otherFeatures": [],
@@ -946,6 +969,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (7/10)"
         },
         "otherFeatures": [],
@@ -985,6 +1009,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (3/10)"
         },
         "otherFeatures": [
@@ -1030,6 +1055,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (8/10)"
         },
         "otherFeatures": [],
@@ -1069,6 +1095,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (10/10)"
         },
         "otherFeatures": [
@@ -1119,6 +1146,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (6/10)"
         },
         "otherFeatures": [],
@@ -1158,6 +1186,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (2/10)"
         },
         "otherFeatures": [],
@@ -1197,6 +1226,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (10/10)"
         },
         "otherFeatures": [
@@ -1242,6 +1272,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (8/10)"
         },
         "otherFeatures": [
@@ -1287,6 +1318,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (7/10)"
         },
         "otherFeatures": [],
@@ -1326,6 +1358,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (3/5)"
         },
         "otherFeatures": [
@@ -1369,6 +1402,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (9/10)"
         },
         "otherFeatures": [],
@@ -1408,6 +1442,7 @@
     "data": {
       "caseData": {
         "metaData": {
+          "name": "Case name",
           "description": "Synthetic London-model case (6/10)"
         },
         "otherFeatures": [],
