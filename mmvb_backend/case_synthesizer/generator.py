@@ -208,7 +208,7 @@ def generate_cases(quantity):
     return sorted(cases, key=lambda case: case.id)
 
 
-def generate_casesets(quantity_of_casesets, cases_per_caseset):
+def generate_casesets(quantity_of_casesets, cases_per_caseset, case_set_name):
     """
     Generates a `quantity_of_casesets` each containing an amount of
     `cases_per_caseset` cases
@@ -217,13 +217,10 @@ def generate_casesets(quantity_of_casesets, cases_per_caseset):
 
     for quantity in range(quantity_of_casesets):
         case_id = generate_id()
-        name = (
-            f"Synthesised case set with {cases_per_caseset} "
-            f"cases ({case_id.hex})"
-        )
+
         cases = generate_cases(cases_per_caseset)
 
-        case_set = CaseSet(id=case_id, name=name)
+        case_set = CaseSet(id=case_id, name=case_set_name)
         case_set.save()
         case_set.cases.add(*cases)
         case_sets.append(case_set)

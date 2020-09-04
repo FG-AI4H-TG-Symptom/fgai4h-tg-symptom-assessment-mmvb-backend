@@ -146,8 +146,11 @@ class ExtendedCaseSetViewSet(CaseSetViewSet):
                 "quantity_of_casesets"
             )
 
+            case_set_name = request.data["name"]
+
+            # TODO get rid of quantity of datasets or fix passing the names
             case_sets = generate_casesets(
-                quantity_of_casesets, cases_per_caseset
+                quantity_of_casesets, cases_per_caseset, case_set_name
             )
 
             serialized = CaseSetSerializer(case_sets, many=True)
