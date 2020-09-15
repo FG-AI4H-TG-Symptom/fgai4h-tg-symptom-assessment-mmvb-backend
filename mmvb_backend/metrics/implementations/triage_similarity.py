@@ -101,9 +101,11 @@ class TriageSimilarityBase(Metric):
                     expected_triage = case.data["valuesToPredict"][
                         "expectedTriageLevel"
                     ]
-
+                    ai_response = response.get("value", {})
                     triage_similarity = cls._calculate_triage_similarity(
-                        expected_triage, response.get("triage", ""), soft=soft
+                        expected_triage,
+                        ai_response.get("triage", ""),
+                        soft=soft,
                     )
 
                 cases_metrics.setdefault(case_id, {}).update(
