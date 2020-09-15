@@ -71,7 +71,8 @@ class TriageMatch(Metric):
                 ]
                 triage_matches = int(
                     has_completed
-                    and response.get("triage", "") == expected_triage
+                    and response.get("value", {}).get("triage", "")
+                    == expected_triage
                 )
 
                 cases_metrics.setdefault(case_id, {}).update(
