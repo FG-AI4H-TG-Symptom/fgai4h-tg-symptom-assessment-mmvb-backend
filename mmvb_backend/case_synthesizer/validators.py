@@ -1,7 +1,7 @@
 from rest_framework.serializers import ValidationError
 
 MIN_CASES_QUANTITY = 1
-MAX_CASES_QUANTITY = 200
+MAX_CASES_QUANTITY = 10000
 MIN_CASESETS_QUANTITY = 1
 MAX_CASESETS_QUANTITY = 10
 
