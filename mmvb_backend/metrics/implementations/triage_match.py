@@ -69,9 +69,10 @@ class TriageMatch(Metric):
                 expected_triage = case.data["valuesToPredict"][
                     "expectedTriageLevel"
                 ]
+                ai_response = response.get("value", {})
                 triage_matches = int(
                     has_completed
-                    and response.get("triage", "") == expected_triage
+                    and ai_response.get("triage", "") == expected_triage
                 )
 
                 cases_metrics.setdefault(case_id, {}).update(
