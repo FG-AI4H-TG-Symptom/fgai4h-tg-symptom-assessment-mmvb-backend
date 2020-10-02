@@ -4,8 +4,10 @@ from rest_framework.serializers import (
     ModelSerializer,
     PrimaryKeyRelatedField,
 )
+from stringcase import camelcase
 
 from cases.models import Case, CaseSet
+from common.utils import change_keys
 
 
 class CaseSetSerializer(ModelSerializer):
@@ -70,7 +72,9 @@ class CaseSerializer(ModelSerializer):
         case_sets = None
         if "case_sets" in validated_data:
             case_sets = validated_data.pop("case_sets")
-        case = Case.objects.create(**validated_data)
+
+        camelData = change_keys(validated_data, camelcase)
+        case = Case.objects.create(**camelData)
 
         if case_sets:
             case.case_sets.add(*case_sets)
