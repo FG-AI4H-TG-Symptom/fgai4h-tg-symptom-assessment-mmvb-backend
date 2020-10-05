@@ -91,7 +91,9 @@ class CaseSerializer(ModelSerializer):
         if "case_sets" in validated_data:
             case_sets = validated_data.pop("case_sets")
 
-        Case.objects.filter(pk=instance.pk).update(**validated_data)
+        camelData = change_keys(validated_data, camelcase)
+
+        Case.objects.filter(pk=instance.pk).update(**camelData)
 
         if case_sets:
             to_add = [case_set.id for case_set in case_sets]
