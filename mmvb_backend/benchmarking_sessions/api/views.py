@@ -9,7 +9,10 @@ from benchmarking_sessions.api.serializers import (
     BenchmarkingSessionResultsSerializer,
     BenchmarkingSessionSerializer,
 )
-from benchmarking_sessions.api.utils import strip_values_from_responses
+from benchmarking_sessions.api.utils import (
+    get_stats_table,
+    strip_values_from_responses,
+)
 from benchmarking_sessions.models import BenchmarkingSession
 from benchmarking_sessions.tasks import run_benchmark
 from common.utils import CamelCaseAutoSchema
@@ -49,9 +52,11 @@ class BenchmarkingSessionViewSet(ModelViewSet):
     @action(methods=["get"], detail=True, url_path="status")
     def benchmark_status(self, request, *args, **kwargs):
         """Handler for checking benchmark session status"""
+
         benchmarking_session = get_object_or_404(
             BenchmarkingSession, id=kwargs["pk"]
         )
+
         if benchmarking_session.status != BenchmarkingSession.Status.RUNNING:
             return Response(
                 {"status": benchmarking_session.status},
@@ -59,6 +64,7 @@ class BenchmarkingSessionViewSet(ModelViewSet):
             )
 
         result = run_benchmark.AsyncResult(benchmarking_session.task_id)
+
         if result.status == PENDING or result.info is None:
             # this is an in-between state where the celery task status is not yet reflected in the main DB,
             # so either the task is about to begin or just finished -- in either case it's easiest to pretend it is
@@ -70,10 +76,15 @@ class BenchmarkingSessionViewSet(ModelViewSet):
 
         strip_values_from_responses(result.info["responses"])
 
+        ais = benchmarking_session.ai_implementations.all()
+        ai_ids = [str(ai.id) for ai in ais]
+        statistics = result.info["statistics"]
+        statistics["table"] = get_stats_table(result.info["responses"], ai_ids)
+
         return Response(
             {
-                "status": BenchmarkingSession.Status.RUNNING,
-                "report": result.info,
+                "status": benchmarking_session.status,
+                "statistics": statistics,  # {'currentCaseIndex': 30, 'totalCaseCount': 50}
             },
             status=status.HTTP_200_OK,
         )
@@ -94,6 +105,15 @@ class BenchmarkingSessionViewSet(ModelViewSet):
         benchmarking_session_result["metrics"] = calculate_metrics(
             benchmarking_session_result
         )
+
+        ais = benchmarking_session.ai_implementations.all()
+        ai_ids = [str(ai.id) for ai in ais]
+
+        stats_table = get_stats_table(
+            benchmarking_session_result["responses"], ai_ids
+        )
+        benchmarking_session_result["statsTable"] = stats_table
+        del benchmarking_session_result["responses"]
 
         return Response(
             benchmarking_session_result, status=status.HTTP_200_OK,
