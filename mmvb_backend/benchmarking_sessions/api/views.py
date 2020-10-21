@@ -79,13 +79,11 @@ class BenchmarkingSessionViewSet(ModelViewSet):
         ais = benchmarking_session.ai_implementations.all()
         ai_ids = [str(ai.id) for ai in ais]
         statistics = result.info["statistics"]
+        # at this point statistics looks like this {'currentCaseIndex': 30, 'totalCaseCount': 50}
         statistics["table"] = get_stats_table(result.info["responses"], ai_ids)
 
         return Response(
-            {
-                "status": benchmarking_session.status,
-                "statistics": statistics,  # {'currentCaseIndex': 30, 'totalCaseCount': 50}
-            },
+            {"status": benchmarking_session.status, "statistics": statistics,},
             status=status.HTTP_200_OK,
         )
 
