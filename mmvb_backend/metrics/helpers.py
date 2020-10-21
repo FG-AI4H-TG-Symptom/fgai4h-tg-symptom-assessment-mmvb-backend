@@ -13,6 +13,13 @@ def calculate_metrics(benchmark_session_result, metrics=METRICS_IDS):
             benchmark_session_result
         )
         calculated_metric = metric_implementation.aggregate(calculated_metric)
-        calculated_metrics.append(calculated_metric)
+
+        output = {
+            "id": calculated_metric["id"],
+            "name": calculated_metric["name"],
+            "aggregatedValues": calculated_metric["aggregatedValues"],
+        }
+
+        calculated_metrics.append(output)
 
     return calculated_metrics
