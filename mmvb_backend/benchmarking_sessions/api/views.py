@@ -40,7 +40,7 @@ class BenchmarkingSessionViewSet(ModelViewSet):
         # pushes benchmarking task into celery queue
         task = run_benchmark.delay(benchmarking_session.id)
         benchmarking_session.task_id = task.id
-        benchmarking_session.save()
+        benchmarking_session.save(update_fields=["task_id"])
         return Response(
             {
                 "statusUrl": f"/benchmarking-sessions/{benchmarking_session.id}/status"

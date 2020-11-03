@@ -125,7 +125,7 @@ def run_benchmark(self, benchmarking_session_id):
     )
 
     benchmarking_session.status = BenchmarkingSession.Status.RUNNING
-    benchmarking_session.save()
+    benchmarking_session.save(update_fields=["status"])
 
     case_set = benchmarking_session.case_set
     cases = case_set.cases.all()
@@ -209,4 +209,4 @@ def run_benchmark(self, benchmarking_session_id):
 
     benchmarking_session.responses = reporter.responses
     benchmarking_session.status = BenchmarkingSession.Status.FINISHED
-    benchmarking_session.save()
+    benchmarking_session.save(update_fields=["status", "responses"])
