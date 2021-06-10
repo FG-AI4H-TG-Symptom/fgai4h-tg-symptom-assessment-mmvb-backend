@@ -9,7 +9,7 @@ django-mysql==3.3.0
 django-cors-headers==3.2.1
 watchdog==0.10.2
 mysqlclient==1.4.6
-Pygments==2.6.1
+Pygments==2.7.4
 PyYAML==5.4
 redis==3.4.1
 uritemplate==3.0.1
